@@ -1,0 +1,1 @@
+import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Home(){return <ModulePageShell title="Home" description="Local Koali Space shell"><p>The active Space and module contributions are loaded from the local control state. No subsystem business logic is implemented in this shell.</p></ModulePageShell>}

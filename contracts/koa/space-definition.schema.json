@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/space-definition.schema.json",
+  "title": "Koali Space Definition",
+  "description": "Portable declarative composition selecting and presenting validated interface module manifests for one user context.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "space_id",
+    "title",
+    "version",
+    "default_module_id",
+    "module_instances",
+    "global_topbar",
+    "appearance",
+    "offline_policy",
+    "authority_boundary"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "space_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "default_module_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "module_instances": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/moduleInstance"
+      }
+    },
+    "global_topbar": {
+      "type": "array",
+      "items": {
+        "$ref": "./topbar-widget.schema.json"
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "theme_ref",
+        "density"
+      ],
+      "properties": {
+        "theme_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Reference to a locally admitted interface theme validated against interface-theme.schema.json."
+        },
+        "density": {
+          "enum": [
+            "comfortable",
+            "compact",
+            "touch"
+          ]
+        },
+        "logo_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "accent_token": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allow_module_accent": {
+          "type": "boolean",
+          "default": true
+        },
+        "design_system_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "theme_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "offline_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shell_available",
+        "retain_last_validated_definition",
+        "unavailable_module_behavior",
+        "network_state_indicator"
+      ],
+      "properties": {
+        "shell_available": {
+          "const": true
+        },
+        "retain_last_validated_definition": {
+          "const": true
+        },
+        "unavailable_module_behavior": {
+          "enum": [
+            "omit",
+            "show_unavailable",
+            "show_declared_fallback"
+          ]
+        },
+        "network_state_indicator": {
+          "const": true
+        },
+        "public_cdn_required": {
+          "type": "boolean",
+          "const": false,
+          "default": false
+        },
+        "remote_runtime_assets_required": {
+          "type": "boolean",
+          "const": false,
+          "default": false
+        }
+      }
+    },
+    "assignment_scope": {
+      "enum": [
+        "installation",
+        "organization",
+        "cohort",
+        "role",
+        "user",
+        "device_class"
+      ]
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "presentation_only",
+        "may_grant_capabilities",
+        "contains_business_state",
+        "contains_executable_extension"
+      ],
+      "properties": {
+        "presentation_only": {
+          "const": true
+        },
+        "may_grant_capabilities": {
+          "const": false
+        },
+        "contains_business_state": {
+          "const": false
+        },
+        "contains_executable_extension": {
+          "const": false
+        }
+      }
+    },
+    "example": {
+      "type": "boolean",
+      "const": true
+    },
+    "authority": {
+      "type": "string",
+      "const": "non_authoritative_example"
+    }
+  },
+  "$defs": {
+    "moduleInstance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module_id",
+        "manifest_ref",
+        "enabled",
+        "required",
+        "order"
+      ],
+      "properties": {
+        "module_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+        },
+        "manifest_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "public_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "public_icon_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "home_route_override": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        }
+      }
+    }
+  }
+}

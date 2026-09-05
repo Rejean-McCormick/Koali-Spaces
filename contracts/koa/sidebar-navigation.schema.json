@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/sidebar-navigation.schema.json",
+  "title": "Koali Spaces Sidebar Navigation",
+  "description": "Two-level visible navigation contributed by one active interface module.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "module_id",
+    "items",
+    "visible_depth"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "module_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "visible_depth": {
+      "const": 2
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/leafItem"
+          },
+          {
+            "$ref": "#/$defs/groupItem"
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "baseItem": {
+      "type": "object",
+      "required": [
+        "item_id",
+        "label",
+        "order"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "label_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "icon_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "availability": {
+          "enum": [
+            "always",
+            "conditional",
+            "online_only",
+            "offline_only"
+          ]
+        },
+        "badge_provider_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "leafItem": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseItem"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "item_id",
+            "label",
+            "order",
+            "route_id"
+          ],
+          "properties": {
+            "item_id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "label_key": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+            },
+            "icon_ref": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "order": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "required_capabilities": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "availability": {
+              "enum": [
+                "always",
+                "conditional",
+                "online_only",
+                "offline_only"
+              ]
+            },
+            "badge_provider_ref": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "route_id": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+            }
+          }
+        }
+      ]
+    },
+    "groupItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item_id",
+        "label",
+        "order",
+        "children"
+      ],
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "label_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "icon_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "availability": {
+          "enum": [
+            "always",
+            "conditional",
+            "online_only",
+            "offline_only"
+          ]
+        },
+        "badge_provider_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/leafItem"
+          }
+        }
+      }
+    }
+  }
+}

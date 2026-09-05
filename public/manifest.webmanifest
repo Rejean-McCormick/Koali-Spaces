@@ -1,0 +1,9 @@
+{
+  "name": "Koali Spaces",
+  "short_name": "Koali Spaces",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f1ea",
+  "theme_color": "#1e6864",
+  "icons": []
+}

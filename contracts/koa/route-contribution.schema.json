@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/route-contribution.schema.json",
+  "title": "Koali Spaces Route Contribution",
+  "description": "A single namespaced page route contributed by an interface module to Koali Spaces.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "route_id",
+    "module_id",
+    "path",
+    "page_ref",
+    "availability",
+    "offline_behavior",
+    "capability_policy"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "route_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "module_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^/(?:[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~:@!$&()*+,;=-]+)*)?$"
+    },
+    "page_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable logical page reference owned by the contributing module; it is not an arbitrary remote URL or authorization grant."
+    },
+    "default_label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "label_key": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "availability": {
+      "enum": [
+        "always",
+        "conditional",
+        "online_only",
+        "offline_only"
+      ]
+    },
+    "offline_behavior": {
+      "enum": [
+        "available",
+        "cached_read_only",
+        "degraded",
+        "unavailable"
+      ]
+    },
+    "deep_link_allowed": {
+      "type": "boolean",
+      "default": true
+    },
+    "safe_fallback_route_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^/(?:[A-Za-z0-9._~-]+(?:/[A-Za-z0-9._~:@!$&()*+,;=-]+)*)?$"
+      }
+    },
+    "capability_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required_capabilities",
+        "denied_behavior"
+      ],
+      "properties": {
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "denied_behavior": {
+          "enum": [
+            "hidden",
+            "disabled",
+            "access_denied"
+          ]
+        }
+      }
+    },
+    "surface": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "origin_policy"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "local_shell_page",
+            "local_module_surface",
+            "registered_component_surface"
+          ]
+        },
+        "asset_bundle_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "entrypoint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(?!https?://)(?!//)[A-Za-z0-9._/@+-]+$"
+        },
+        "origin_policy": {
+          "enum": [
+            "same_origin",
+            "registered_local_origin"
+          ]
+        },
+        "offline_entrypoint": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^(?!https?://)(?!//)[A-Za-z0-9._/@+-]+$"
+        }
+      }
+    }
+  }
+}

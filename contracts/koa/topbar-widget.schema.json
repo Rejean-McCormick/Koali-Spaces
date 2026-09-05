@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/topbar-widget.schema.json",
+  "title": "Koali Spaces Top-Bar Widget",
+  "description": "A compact global or module-specific widget rendered in a controlled Koali Spaces top-bar slot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "widget_id",
+    "scope",
+    "slot",
+    "kind",
+    "label",
+    "priority",
+    "offline_behavior",
+    "activation"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "widget_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "module_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "scope": {
+      "enum": [
+        "global",
+        "module"
+      ]
+    },
+    "slot": {
+      "enum": [
+        "primary",
+        "secondary",
+        "status",
+        "overflow"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "action",
+        "status",
+        "counter",
+        "search",
+        "menu",
+        "resume"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "label_key": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "icon_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000
+    },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "offline_behavior": {
+      "enum": [
+        "available",
+        "cached_read_only",
+        "degraded",
+        "unavailable"
+      ]
+    },
+    "compact_only": {
+      "type": "boolean",
+      "default": true
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "route",
+            "command",
+            "status_provider",
+            "none"
+          ]
+        },
+        "route_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        },
+        "command_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status_provider_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "module"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "module_id"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "global"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "module_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}

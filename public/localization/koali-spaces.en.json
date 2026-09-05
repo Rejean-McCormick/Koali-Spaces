@@ -1,0 +1,12 @@
+{
+  "space_home.home": "Home",
+  "space_home.search": "Search",
+  "space_home.tasks": "Tasks",
+  "space_home.system": "System",
+  "space_home.offline": "Offline",
+  "space_home.health": "Interface health",
+  "space_home.settings": "Settings",
+  "global.search": "Search",
+  "global.tasks": "Tasks",
+  "global.network_state": "Network state"
+}

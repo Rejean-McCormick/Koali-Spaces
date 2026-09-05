@@ -1,0 +1,1 @@
+import {describe,it,expect} from 'vitest';import {isSafeLocalHref} from '../src/lib/url-policy';describe('url policy',()=>it('rejects remote origins',()=>{expect(isSafeLocalHref('/local')).toBe(true);expect(isSafeLocalHref('https://x')).toBe(false)}));

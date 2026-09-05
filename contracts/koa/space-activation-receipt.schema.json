@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/space-activation-receipt.schema.json",
+  "title": "Koali Space Activation Receipt",
+  "description": "Evidence that one validated Space definition was atomically activated or rolled back.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_id",
+    "operation",
+    "space_id",
+    "space_version",
+    "space_definition_digest",
+    "module_manifest_digests",
+    "interface_theme_digest",
+    "shell_asset_manifest_digest",
+    "capability_snapshot_digest",
+    "module_asset_manifest_digests",
+    "profile_id",
+    "validation",
+    "result",
+    "recorded_at"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operation": {
+      "enum": [
+        "activate",
+        "rollback",
+        "deactivate"
+      ]
+    },
+    "space_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "space_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "space_definition_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "module_manifest_digests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "module_id",
+          "digest"
+        ],
+        "properties": {
+          "module_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previous_receipt_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "signatures",
+        "routes",
+        "capabilities",
+        "offline",
+        "accessibility",
+        "theme",
+        "assets"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "signatures": {
+          "enum": [
+            "pass",
+            "fail",
+            "not_required"
+          ]
+        },
+        "routes": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "capabilities": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "offline": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "accessibility": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "theme": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "assets": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        }
+      }
+    },
+    "result": {
+      "enum": [
+        "activated",
+        "rolled_back",
+        "deactivated",
+        "rejected"
+      ]
+    },
+    "failure_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "interface_theme_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "shell_asset_manifest_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "module_asset_manifest_digests": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bundle_id",
+          "digest"
+        ],
+        "properties": {
+          "bundle_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "capability_snapshot_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

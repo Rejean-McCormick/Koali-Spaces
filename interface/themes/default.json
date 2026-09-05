@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../../docs/contracts/artifact-contracts/interface-theme.schema.json",
+  "theme_id": "koa_spaces.default",
+  "version": "1.0.0",
+  "design_system_id": "koali.ant5",
+  "description": "Local default Koali Spaces theme aligned with the Koali/Konnaxion reference visual language.",
+  "tokens": {
+    "primary_accent": "#1e6864",
+    "density": "comfortable",
+    "radius_scale": "koali.radius.v1",
+    "spacing_scale": "koali.spacing.v1",
+    "typography_scale": "koali.type.v1",
+    "focus_style": "2px solid currentColor with visible offset",
+    "surface_family": "neutral",
+    "semantic_color_policy": "semantic-status-colors-not-authority"
+  },
+  "icon_policy": {
+    "style": "outline",
+    "local_assets_required": true
+  },
+  "motion_policy": {
+    "reduced_motion_supported": true,
+    "default_motion": "minimal"
+  },
+  "framework_mapping": {
+    "antd.colorPrimary": "#1e6864",
+    "antd.borderRadius": "8",
+    "antd.controlHeight": "40"
+  },
+  "authority_boundary": {
+    "presentation_only": true,
+    "changes_authorization": false,
+    "changes_module_identity": false
+  }
+}

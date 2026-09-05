@@ -1,0 +1,1 @@
+import {describe,it,expect} from 'vitest';import {safeRoute} from '../src/lib/registry';const m:any={home_route_id:'m.home',routes:[{route_id:'m.home',offline_behavior:'available',capability_policy:{required_capabilities:[]},safe_fallback_route_id:null}]};describe('safeRoute',()=>it('keeps local home offline',()=>expect(safeRoute(m,null,[],false).route_id).toBe('m.home')));

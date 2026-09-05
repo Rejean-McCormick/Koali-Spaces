@@ -1,0 +1,1 @@
+import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Offline(){return <ModulePageShell title="Offline" state="offline" description="The local shell remains available without Internet access"><p>Only routes whose owner declares local/offline availability are exposed.</p></ModulePageShell>}

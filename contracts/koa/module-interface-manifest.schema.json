@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/module-interface-manifest.schema.json",
+  "title": "Koali Spaces Module Interface Manifest",
+  "description": "Declarative navigation and interface contribution supplied by one system or capability to Koali Spaces.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_id",
+    "manifest_version",
+    "module_id",
+    "public_name",
+    "home_route_id",
+    "routes",
+    "sidebar",
+    "topbar_widgets",
+    "offline_behavior",
+    "authority_boundary"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "module_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+    },
+    "public_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "icon_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "home_route_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "./route-contribution.schema.json"
+      }
+    },
+    "sidebar": {
+      "$ref": "./sidebar-navigation.schema.json"
+    },
+    "topbar_widgets": {
+      "type": "array",
+      "items": {
+        "$ref": "./topbar-widget.schema.json"
+      }
+    },
+    "localization_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "keyboard_navigation",
+        "screen_reader_labels",
+        "reduced_motion"
+      ],
+      "properties": {
+        "keyboard_navigation": {
+          "const": true
+        },
+        "screen_reader_labels": {
+          "const": true
+        },
+        "reduced_motion": {
+          "enum": [
+            "supported",
+            "not_applicable"
+          ]
+        }
+      }
+    },
+    "offline_behavior": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module_state",
+        "fallback_route_id"
+      ],
+      "properties": {
+        "module_state": {
+          "enum": [
+            "available",
+            "cached_read_only",
+            "degraded",
+            "unavailable"
+          ]
+        },
+        "fallback_route_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+        }
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "presentation_only",
+        "may_grant_capabilities",
+        "direct_domain_writes",
+        "menu_visibility_is_authorization"
+      ],
+      "properties": {
+        "presentation_only": {
+          "const": true
+        },
+        "may_grant_capabilities": {
+          "const": false
+        },
+        "direct_domain_writes": {
+          "const": false
+        },
+        "menu_visibility_is_authorization": {
+          "const": false
+        }
+      }
+    },
+    "shell_compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_shell_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "max_shell_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "design_system_compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "design_system_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "min_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "asset_bundle_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "description": "Optional reference to a locally admitted interface asset manifest for this module surface."
+    },
+    "surface_contract_version": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    }
+  }
+}

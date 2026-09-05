@@ -1,0 +1,47 @@
+{
+  "name": "koali-spaces",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server/main.mjs",
+    "build": "next build && node scripts/build-interface-assets.mjs && node scripts/package-runtime.mjs && node scripts/validate-runtime-package.mjs",
+    "start": "node dist/runtime/server/main.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:contracts": "node scripts/validate-contracts.mjs",
+    "check:local-assets": "node scripts/check-no-remote-assets.mjs",
+    "validate": "pnpm run typecheck && pnpm run test && pnpm run test:runtime && pnpm run validate:contracts && pnpm run check:local-assets",
+    "test:runtime": "node --test tests-runtime/*.test.mjs",
+    "validate:runtime-package": "node scripts/validate-runtime-package.mjs",
+    "check:dependency-lock": "node scripts/check-dependency-lock.mjs"
+  },
+  "dependencies": {
+    "@ant-design/icons": "6.1.0",
+    "antd": "5.26.2",
+    "next": "15.3.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "3.24.4",
+    "@ant-design/pro-components": "2.8.10"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "6.1.4",
+    "@testing-library/react": "14.3.1",
+    "@types/node": "20.17.43",
+    "@types/react": "18.3.0",
+    "@types/react-dom": "18.3.0",
+    "eslint": "9.26.0",
+    "eslint-config-next": "15.3.1",
+    "jsdom": "26.1.0",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4",
+    "@eslint/eslintrc": "3.3.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.20.0"
+}

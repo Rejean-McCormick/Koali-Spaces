@@ -1,0 +1,1 @@
+import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Search(){return <ModulePageShell title="Search" description="Local presentation search surface"><p>Search providers are contributed through admitted local capabilities. Network-only providers degrade independently.</p></ModulePageShell>}

@@ -1,0 +1,1 @@
+import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Health(){return <ModulePageShell title="Interface health"><p>Use the shared top-bar state and the local control endpoint for current readiness.</p></ModulePageShell>}

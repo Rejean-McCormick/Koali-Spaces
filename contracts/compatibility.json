@@ -1,0 +1,8 @@
+{
+  "contract_set": "koali-spaces-reference",
+  "version": "1.0.0",
+  "design_system_id": "koali.ant5",
+  "shell_version": "1.0.0",
+  "module_manifest_version": "1.0.0",
+  "source": "copied from reviewed kOA-Linux artifact contracts in passive pack"
+}

@@ -1,0 +1,12 @@
+{
+  "space_home.home": "Accueil",
+  "space_home.search": "Recherche",
+  "space_home.tasks": "Tâches",
+  "space_home.system": "Système",
+  "space_home.offline": "Hors ligne",
+  "space_home.health": "État de l’interface",
+  "space_home.settings": "Paramètres",
+  "global.search": "Recherche",
+  "global.tasks": "Tâches",
+  "global.network_state": "État du réseau"
+}

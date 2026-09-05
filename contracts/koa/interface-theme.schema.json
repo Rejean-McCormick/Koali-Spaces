@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/interface-theme.schema.json",
+  "title": "Koali Spaces Interface Theme",
+  "description": "Presentation-only semantic design tokens for a locally admitted Koali Spaces theme.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "theme_id",
+    "version",
+    "design_system_id",
+    "tokens",
+    "icon_policy",
+    "motion_policy",
+    "authority_boundary"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "theme_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "design_system_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_accent",
+        "density",
+        "radius_scale",
+        "spacing_scale",
+        "typography_scale",
+        "focus_style"
+      ],
+      "properties": {
+        "primary_accent": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "density": {
+          "enum": [
+            "comfortable",
+            "compact",
+            "touch"
+          ]
+        },
+        "radius_scale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spacing_scale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typography_scale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "focus_style": {
+          "type": "string",
+          "minLength": 1
+        },
+        "surface_family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semantic_color_policy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "icon_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "style"
+      ],
+      "properties": {
+        "style": {
+          "enum": [
+            "outline",
+            "mixed_accessible"
+          ]
+        },
+        "local_assets_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "motion_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reduced_motion_supported"
+      ],
+      "properties": {
+        "reduced_motion_supported": {
+          "const": true
+        },
+        "default_motion": {
+          "enum": [
+            "minimal",
+            "standard"
+          ]
+        }
+      }
+    },
+    "framework_mapping": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "presentation_only",
+        "changes_authorization",
+        "changes_module_identity"
+      ],
+      "properties": {
+        "presentation_only": {
+          "const": true
+        },
+        "changes_authorization": {
+          "const": false
+        },
+        "changes_module_identity": {
+          "const": false
+        }
+      }
+    },
+    "example": {
+      "type": "boolean",
+      "const": true
+    },
+    "authority": {
+      "type": "string",
+      "const": "non_authoritative_example"
+    }
+  }
+}

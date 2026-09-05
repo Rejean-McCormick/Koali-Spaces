@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/interface-asset-manifest.schema.json",
+  "title": "Koali Spaces Interface Asset Manifest",
+  "description": "Manifest for locally installable shell or module presentation assets with explicit offline closure and no authority transfer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bundle_id",
+    "version",
+    "owner_kind",
+    "owner_id",
+    "entrypoints",
+    "assets",
+    "offline_policy",
+    "authority_boundary"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "bundle_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "owner_kind": {
+      "enum": [
+        "koa_spaces_shell",
+        "module"
+      ]
+    },
+    "owner_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
+    "entrypoints": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?!https?://)(?!//)[A-Za-z0-9._/@+-]+$"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "remote_runtime_dependencies": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "type": "string"
+      }
+    },
+    "offline_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "local_assets_complete",
+        "public_cdn_required",
+        "remote_fonts_required",
+        "internet_required_for_shell"
+      ],
+      "properties": {
+        "local_assets_complete": {
+          "const": true
+        },
+        "public_cdn_required": {
+          "const": false
+        },
+        "remote_fonts_required": {
+          "const": false
+        },
+        "internet_required_for_shell": {
+          "const": false
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shell_min_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "design_system_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module_manifest_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      }
+    },
+    "authority_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "presentation_assets_only",
+        "contains_business_authority",
+        "contains_credentials"
+      ],
+      "properties": {
+        "presentation_assets_only": {
+          "const": true
+        },
+        "contains_business_authority": {
+          "const": false
+        },
+        "contains_credentials": {
+          "const": false
+        }
+      }
+    },
+    "example": {
+      "type": "boolean",
+      "const": true
+    },
+    "authority": {
+      "type": "string",
+      "const": "non_authoritative_example"
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "media_type",
+        "sha256",
+        "offline_required"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^(?!https?://)(?!//)[A-Za-z0-9._/@+-]+$"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "offline_required": {
+          "type": "boolean"
+        },
+        "cache_policy": {
+          "enum": [
+            "immutable",
+            "versioned",
+            "no_store"
+          ]
+        }
+      }
+    }
+  }
+}
