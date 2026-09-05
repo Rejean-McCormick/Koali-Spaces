@@ -12,5 +12,5 @@ The runtime exposes presentation HTTP only on loopback and a separate HTTP-over-
 
 ## Naming
 
-The public product and repository name is **Koali Spaces**. kOA names the broader initiative. Legacy `koa_spaces` identifiers are compatibility identifiers at the Koali integration boundary, not product branding.
-New runtime configuration uses `KOALI_SPACES_*` environment variables, while legacy `KOA_SPACES_*` aliases remain accepted for compatibility.
+The public product and repository name is **Koali Spaces**. kOA names the broader initiative. The Koali integration boundary currently uses the protocol identifier `koa_spaces`; it is not public branding.
+Runtime configuration uses only `KOALI_SPACES_*` environment variables.

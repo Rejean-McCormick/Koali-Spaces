@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import { NextResponse } from 'next/server';
 
-const stateRoot = process.env.KOALI_SPACES_STATE_ROOT || process.env.KOA_SPACES_STATE_ROOT;
+const stateRoot = process.env.KOALI_SPACES_STATE_ROOT;
 const file = stateRoot ? `${stateRoot}/active-state.json` : null;
 
 function publicState(value: Record<string, unknown>) {
@@ -116,7 +116,7 @@ export async function GET() {
       // Fall through. Production remains fail-closed; development may use the explicit fallback below.
     }
   }
-  const developmentFallback = (process.env.KOALI_SPACES_DEV_FALLBACK || process.env.KOA_SPACES_DEV_FALLBACK) === '1' || process.env.NODE_ENV !== 'production';
+  const developmentFallback = process.env.KOALI_SPACES_DEV_FALLBACK === '1' || process.env.NODE_ENV !== 'production';
   if (developmentFallback) return NextResponse.json(fallback);
   return NextResponse.json(
     { state: 'unavailable', network_state: 'unknown', active_space_id: null, active_space: null, active_theme: null, modules: [], active_module_id: null, active_route_id: null, capabilities: [], reason: 'no validated runtime Space state available' },
