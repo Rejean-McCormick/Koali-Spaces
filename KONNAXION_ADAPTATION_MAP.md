@@ -11,7 +11,7 @@ Adapted structural patterns:
 - `context/ThemeContext.tsx` + `src/theme/*` → contract-driven `KoaliThemeProvider.tsx`.
 
 Reference stack alignment:
-- Next.js 15.3.1;
+- Next.js 15 family, with Koali Spaces pinned to the maintained 15.5.24 security release rather than copying Konnaxion's older 15.3.1 revision;
 - React / React DOM 18.2.0;
 - Ant Design 5.26.2;
 - `@ant-design/pro-components` 2.8.10;

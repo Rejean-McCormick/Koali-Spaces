@@ -1,0 +1,9 @@
+packages:
+  - '.'
+
+# pnpm 10 supply-chain policy:
+# only these transitive packages are allowed to execute install/build scripts.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - unrs-resolver
