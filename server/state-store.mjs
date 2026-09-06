@@ -12,8 +12,7 @@ const EMPTY_STATE = Object.freeze({
 const clone = (value) => JSON.parse(JSON.stringify(value));
 export const emptyState = () => clone(EMPTY_STATE);
 export function publicState(value) {
-  const { _capability_snapshot: _caps, _shell_asset_manifest: _shell, _module_asset_manifests: _assets, _previous_state: _previous, ...visible } = value;
-  return visible;
+  return Object.fromEntries(Object.entries(value).filter(([key]) => !key.startsWith('_')));
 }
 export function stateForRollback(value) { const copy = clone(value); copy._previous_state = null; return copy; }
 export async function readState() { try { return { ...emptyState(), ...JSON.parse(await fs.readFile(stateFile(), 'utf8')) }; } catch { return emptyState(); } }

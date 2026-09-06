@@ -90,10 +90,18 @@
         },
         "accentTokenRef": {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
         },
         "immersiveAllowed": {
           "type": "boolean"
+        },
+        "defaultMode": {
+          "enum": [
+            "framed",
+            "immersive"
+          ],
+          "default": "framed"
         }
       }
     },
@@ -118,14 +126,42 @@
         "sandboxTokens": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "allow-downloads",
+              "allow-forms",
+              "allow-modals",
+              "allow-orientation-lock",
+              "allow-pointer-lock",
+              "allow-popups",
+              "allow-popups-to-escape-sandbox",
+              "allow-presentation",
+              "allow-same-origin",
+              "allow-scripts",
+              "allow-storage-access-by-user-activation",
+              "allow-top-navigation-by-user-activation"
+            ]
           },
           "uniqueItems": true
         },
         "browserPermissions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "enum": [
+              "autoplay",
+              "camera",
+              "clipboard-read",
+              "clipboard-write",
+              "display-capture",
+              "encrypted-media",
+              "fullscreen",
+              "geolocation",
+              "microphone",
+              "payment",
+              "picture-in-picture",
+              "publickey-credentials-get",
+              "screen-wake-lock",
+              "web-share"
+            ]
           },
           "uniqueItems": true
         },

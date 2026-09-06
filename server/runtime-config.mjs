@@ -9,5 +9,6 @@ export const config = {
   stateRoot: process.env.KOALI_SPACES_STATE_ROOT || '/var/lib/koa/integrations/koa-spaces',
   artifactRoot: process.env.KOALI_SPACES_ARTIFACT_ROOT || '/usr/lib/koa/integrations/koa-spaces',
   appRoot: process.env.KOALI_SPACES_APP_ROOT || defaultAppRoot,
+  surfaceRegistryPath: process.env.KOALI_SPACES_SURFACE_REGISTRY || null,
 };
 export const stateFile = () => path.join(config.stateRoot, 'active-state.json');

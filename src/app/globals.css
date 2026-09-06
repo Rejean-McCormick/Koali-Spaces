@@ -4,3 +4,107 @@
 .koa-skip-link { position: fixed; left: 8px; top: -80px; z-index: 10000; background: #fff; padding: 8px 12px; border: 2px solid currentColor; border-radius: 6px; }
 .koa-skip-link:focus { top: 8px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }
+
+/* Koali Surface Layer v1.1 */
+.koa-frame-immersive {
+  display: block;
+  min-height: 100vh;
+}
+.koa-frame-immersive > .koa-module-selector,
+.koa-frame-immersive > .koa-topbar-region,
+.koa-frame-immersive > .koa-sider {
+  display: none !important;
+}
+.koa-frame-immersive > .koa-content {
+  min-height: 100vh;
+}
+.koa-frame-immersive .koa-main-surface {
+  min-height: 100vh;
+  padding: 0;
+}
+.koali-application-host {
+  --koali-surface-accent: var(--ant-color-primary, #1e6864);
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 96px);
+  background: var(--ant-color-bg-container, #fff);
+  border-inline-start: 4px solid var(--koali-surface-accent);
+  overflow: hidden;
+}
+.koali-application-host.is-immersive {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  border: 0;
+}
+.koali-surface-context-bar {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 8px 4px 12px;
+  border-bottom: 1px solid var(--ant-color-border-secondary, #e5e7eb);
+  background: var(--ant-color-bg-container, #fff);
+}
+.koali-application-frame-wrap {
+  position: relative;
+  min-height: calc(100vh - 144px);
+  height: calc(100vh - 144px);
+}
+.koali-application-host.is-immersive .koali-application-frame-wrap {
+  min-height: 100vh;
+  height: 100vh;
+}
+.koali-application-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+}
+.koali-application-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--ant-color-bg-container, #fff);
+}
+.koali-immersive-exit {
+  position: fixed !important;
+  z-index: 9999 !important;
+  inset-inline-start: max(12px, env(safe-area-inset-left));
+  inset-block-start: max(12px, env(safe-area-inset-top));
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+.koali-surface-status {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.koali-surface-degraded-banner {
+  margin: 8px;
+}
+@media (max-width: 767px) {
+  .koali-application-host {
+    min-height: calc(100vh - 16px);
+  }
+  .koali-application-frame-wrap {
+    min-height: calc(100vh - 60px);
+    height: calc(100vh - 60px);
+  }
+}
+
+.koa-widget-compact-only { display: none !important; }
+@media (max-width: 767px) {
+  .koa-widget-compact-only { display: inline-flex !important; }
+}
+.koali-application-host.is-immersive .koali-surface-context-bar {
+  display: none;
+}

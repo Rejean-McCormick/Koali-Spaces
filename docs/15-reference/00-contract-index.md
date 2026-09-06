@@ -11,5 +11,6 @@
 - `contracts/koa/interface-asset-manifest.schema.json`
 - `contracts/koa/space-activation-receipt.schema.json`
 - `contracts/compatibility.json`
+- `contracts/koali/surface-runtime-registry.schema.json`
 
 Les schemas Surface Layer additionnels sont documentés dans `docs/06-surface-layer/schemas/`.

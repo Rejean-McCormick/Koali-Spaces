@@ -25,7 +25,7 @@ routeId
 kind
 public status
 label/accent token
-immersiveAllowed
+immersiveAllowed + default display mode
 safe embedSrc
 iframeTitle
 sandbox tokens

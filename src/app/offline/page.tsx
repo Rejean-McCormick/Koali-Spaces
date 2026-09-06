@@ -1,1 +1,16 @@
-import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Offline(){return <ModulePageShell title="Offline" state="offline" description="The local shell remains available without Internet access"><p>Only routes whose owner declares local/offline availability are exposed.</p></ModulePageShell>}
+import OfflineOverview from '@/components/global/OfflineOverview';
+import LocalizedPageShell from '@/components/global/LocalizedPageShell';
+
+export default function Offline() {
+  return (
+    <LocalizedPageShell
+      titleKey="space_home.offline"
+      titleFallback="Hors ligne"
+      descriptionKey="page.offline.description"
+      descriptionFallback="Disponibilité locale déclarée par les surfaces admises"
+      state="offline"
+    >
+      <OfflineOverview />
+    </LocalizedPageShell>
+  );
+}

@@ -11,35 +11,43 @@ import { Badge, Button, Space, Typography } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   activeManifest,
-  routeById,
+  routeByIdInState,
+  routeHref,
   visibleTopbarWidgets,
 } from '@/lib/registry';
+import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 import type { TopbarWidget } from '@/types/contracts';
 
 function WidgetAction({ widget }: { widget: TopbarWidget }) {
   const { state } = useShell();
+  const { t } = useLocalization();
   const router = useRouter();
-  const pathname = usePathname();
-  const manifest = activeManifest(state, pathname);
-  const route = widget.activation.kind === 'route' ? routeById(manifest, widget.activation.route_id ?? null) : null;
-  if (widget.kind === 'status') {
-    return <Typography.Text type="secondary">{widget.label}</Typography.Text>;
+  const resolved = widget.activation.kind === 'route'
+    ? routeByIdInState(state, widget.activation.route_id ?? null)
+    : null;
+  const label = t(widget.label_key, widget.label);
+
+  if (widget.kind === 'status' && widget.activation.kind === 'none') {
+    return <Typography.Text className={widget.compact_only ? 'koa-widget-compact-only' : undefined} type="secondary">{label}</Typography.Text>;
   }
-  if (!route) return null;
+  if (widget.activation.kind === 'status_provider' || widget.kind === 'counter') return null;
+  if (!resolved) return null;
   return (
     <Button
+      className={widget.compact_only ? 'koa-widget-compact-only' : undefined}
       type={widget.slot === 'primary' ? 'primary' : 'text'}
       icon={widget.kind === 'search' ? <SearchOutlined /> : undefined}
-      onClick={() => router.push(route.path)}
+      onClick={() => router.push(routeHref(resolved.manifest, resolved.route))}
     >
-      {widget.label}
+      {label}
     </Button>
   );
 }
 
 export default function SharedTopBar({ onMenu }: { onMenu: () => void }) {
   const { state, refresh } = useShell();
+  const { t } = useLocalization();
   const pathname = usePathname();
   const manifest = activeManifest(state, pathname);
   const offline = state.network_state === 'offline';
@@ -51,7 +59,7 @@ export default function SharedTopBar({ onMenu }: { onMenu: () => void }) {
         type="text"
         icon={<MenuOutlined />}
         onClick={onMenu}
-        aria-label="Open module navigation"
+        aria-label={t('shell.open_navigation', 'Ouvrir la navigation du module')}
       />
       <Typography.Text strong>{state.active_space?.title ?? 'Koali Spaces'}</Typography.Text>
       <div className="koa-topbar-widgets">
@@ -68,12 +76,12 @@ export default function SharedTopBar({ onMenu }: { onMenu: () => void }) {
           }
           text={state.state}
         />
-        <span aria-label={offline ? 'Offline' : 'Local network available'}>
+        <span aria-label={offline ? t('network.offline', 'Hors ligne') : t('network.local', 'Réseau local disponible')}>
           {offline ? <DisconnectOutlined /> : <WifiOutlined />}
         </span>
         <Button
           type="text"
-          aria-label="Refresh shell state"
+          aria-label={t('shell.refresh', 'Actualiser l’état du shell')}
           icon={<ReloadOutlined />}
           onClick={() => void refresh()}
         />

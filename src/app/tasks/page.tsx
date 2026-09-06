@@ -1,15 +1,15 @@
-import ModulePageShell from '@/components/shell/ModulePageShell';
+import TasksSurface from '@/components/global/TasksSurface';
+import LocalizedPageShell from '@/components/global/LocalizedPageShell';
 
 export default function Tasks() {
   return (
-    <ModulePageShell
-      title="Tasks"
-      description="Local presentation of pending governed operations and owner-provided work queues"
+    <LocalizedPageShell
+      titleKey="space_home.tasks"
+      titleFallback="Tâches"
+      descriptionKey="page.tasks.description"
+      descriptionFallback="File de travail agrégée fournie par les propriétaires admis"
     >
-      <p>
-        Koali Spaces only presents task state supplied by admitted Koali owners. It does not execute,
-        authorize, or silently complete governed operations.
-      </p>
-    </ModulePageShell>
+      <TasksSurface />
+    </LocalizedPageShell>
   );
 }

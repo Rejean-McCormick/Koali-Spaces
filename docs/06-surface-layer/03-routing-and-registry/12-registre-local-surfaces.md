@@ -25,6 +25,17 @@ interface RuntimeRegistration {
 
 La présentation visuelle est définie séparément dans `SurfacePresentationPolicy`.
 
+Implémentation Koali v1.1 : le registre est lu côté serveur depuis
+`<KOALI_SPACES_STATE_ROOT>/surface-runtime.json`, ou depuis le chemin explicite
+`KOALI_SPACES_SURFACE_REGISTRY`. Le fichier peut contenir des `resolvedTargets`
+pré-résolues par le control side. Une target pré-résolue contient uniquement la base
+d'embed et les contraintes navigateur nécessaires ; elle ne transforme pas
+`transportProfileRef` en catalogue canonique de transport et ne ferme pas
+`OPEN-KS-SURF-001`.
+
+Le navigateur ne lit jamais ce registre directement. Il reçoit uniquement la projection
+`SurfaceDescriptorPublic` produite après résolution et minimisation.
+
 `LOCK-KS-SURF-044` — **Un module interface manifest ne peut pas introduire une origine HTTP arbitraire.**
 
 `LOCK-KS-SURF-045` — **Les origines/targets exécutables sont enregistrées côté runtime opérateur.**

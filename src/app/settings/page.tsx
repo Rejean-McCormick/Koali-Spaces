@@ -1,1 +1,10 @@
-import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Settings(){return <ModulePageShell title="Presentation settings"><p>Only presentation preferences belong here. Authorization and subsystem settings remain with their owners.</p></ModulePageShell>}
+import SettingsOverview from '@/components/global/SettingsOverview';
+import LocalizedPageShell from '@/components/global/LocalizedPageShell';
+
+export default function Settings() {
+  return (
+    <LocalizedPageShell titleKey="page.settings.title" titleFallback="Paramètres de présentation">
+      <SettingsOverview />
+    </LocalizedPageShell>
+  );
+}

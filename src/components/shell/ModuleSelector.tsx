@@ -3,11 +3,20 @@
 import { AppstoreOutlined, DownOutlined } from '@ant-design/icons';
 import { Button, Dropdown } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
-import { activeManifest, admittedModules, publicLabel, safeRoute } from '@/lib/registry';
+import {
+  activeManifest,
+  admittedModules,
+  effectiveHomeRouteId,
+  publicLabel,
+  routeHref,
+  safeRoute,
+} from '@/lib/registry';
+import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 
 export default function ModuleSelector() {
   const { state } = useShell();
+  const { t } = useLocalization();
   const router = useRouter();
   const pathname = usePathname();
   const modules = admittedModules(state);
@@ -25,11 +34,12 @@ export default function ModuleSelector() {
           if (!manifest) return;
           const route = safeRoute(
             manifest,
-            manifest.home_route_id,
+            effectiveHomeRouteId(state.active_space, manifest),
             state.capabilities,
             state.network_state !== 'offline',
+            state.active_space,
           );
-          router.push(route.path);
+          router.push(routeHref(manifest, route));
         },
       }}
       trigger={['click']}
@@ -38,7 +48,7 @@ export default function ModuleSelector() {
         type="text"
         icon={<AppstoreOutlined />}
         style={{ height: 48, fontWeight: 600 }}
-        aria-label="Select active module"
+        aria-label={t('shell.module_selector', 'Sélectionner le module actif')}
       >
         {active ? publicLabel(state.active_space, active) : 'Koali Spaces'} <DownOutlined />
       </Button>

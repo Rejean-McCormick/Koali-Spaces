@@ -13,10 +13,12 @@
     "test:watch": "vitest",
     "validate:contracts": "node scripts/validate-contracts.mjs",
     "check:local-assets": "node scripts/check-no-remote-assets.mjs",
-    "validate": "pnpm run typecheck && pnpm run test && pnpm run test:runtime && pnpm run validate:contracts && pnpm run check:local-assets",
+    "validate": "pnpm run typecheck && pnpm run test && pnpm run test:runtime && pnpm run validate:contracts && pnpm run validate:surface-spec && pnpm run check:local-assets",
     "test:runtime": "node --test tests-runtime/*.test.mjs",
     "validate:runtime-package": "node scripts/validate-runtime-package.mjs",
-    "check:dependency-lock": "node scripts/check-dependency-lock.mjs"
+    "check:dependency-lock": "node scripts/check-dependency-lock.mjs",
+    "validate:surface-spec": "node scripts/validate-surface-spec.mjs",
+    "smoke:runtime": "node scripts/smoke-runtime.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "5.6.1",

@@ -1,17 +1,11 @@
 # Dependency lock status
 
-A genuine `pnpm-lock.yaml` was first generated in the real Koali Spaces repository with pnpm 10.20.0 during qualification.
+The current reviewed dependency set is already locked in the real Koali Spaces repository with pnpm 10.20.0.
 
-The first generated lock reported by the qualification console had SHA256:
+The qualified lock reported before this Surface Layer patch is:
 
-`64e1d507901fd09ec304192f0ee4a3ef9bd0b4e9aec1c5ff1c868f5c8a684e5f`
+`pnpm-lock.yaml` SHA256: `2de582a0ed4ce160fe3eecc39b7b9b165f2b15d3a2683e0ed4b5492c20097de8`
 
-That lock corresponds to the earlier dependency set. This hotfix updates the reviewed `package.json` (including the maintained Next.js 15 security line), so the real repository must regenerate the lock once with **PREPARE / LOCK** or **QUALIFY ALL** in Build Console v1.2.
+This Surface Layer implementation pack changes `package.json` scripts only. It does **not** add, remove or change dependency versions, so the existing dependency lock should remain compatible with `pnpm install --frozen-lockfile`.
 
-After regeneration:
-1. the console verifies `pnpm run check:dependency-lock`;
-2. it immediately verifies `pnpm install --frozen-lockfile`;
-3. validation and production build must pass;
-4. only then should the resulting `pnpm-lock.yaml` be committed.
-
-No lockfile is fabricated or shipped by this passive overlay.
+After applying the pack, run the normal qualification gate. Do not regenerate the lock merely because package scripts changed; regenerate it only if pnpm reports a real dependency/importer mismatch or if dependency fields are deliberately changed.

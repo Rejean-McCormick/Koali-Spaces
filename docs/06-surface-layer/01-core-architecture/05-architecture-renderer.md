@@ -78,6 +78,7 @@ interface SurfaceDescriptorPublic {
     label: string;
     accentTokenRef?: string;
     immersiveAllowed: boolean;
+    defaultMode?: "framed" | "immersive";
   };
   target?: {
     embedSrc: string;

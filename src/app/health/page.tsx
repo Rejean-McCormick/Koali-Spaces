@@ -1,1 +1,15 @@
-import ModulePageShell from '@/components/shell/ModulePageShell'; export default function Health(){return <ModulePageShell title="Interface health"><p>Use the shared top-bar state and the local control endpoint for current readiness.</p></ModulePageShell>}
+import HealthOverview from '@/components/global/HealthOverview';
+import LocalizedPageShell from '@/components/global/LocalizedPageShell';
+
+export default function Health() {
+  return (
+    <LocalizedPageShell
+      titleKey="space_home.health"
+      titleFallback="État de l’interface"
+      descriptionKey="page.health.description"
+      descriptionFallback="Santé de la couche de présentation Koali"
+    >
+      <HealthOverview />
+    </LocalizedPageShell>
+  );
+}

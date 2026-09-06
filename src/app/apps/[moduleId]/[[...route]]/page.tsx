@@ -1,4 +1,8 @@
-import ModulePageShell from '@/components/shell/ModulePageShell';
+import SurfaceRenderer from '@/components/surfaces/SurfaceRenderer';
+import { SurfaceResolutionErrorView } from '@/components/surfaces/SurfaceStatusView';
+import { readServerShellState } from '@/lib/shell-state.server';
+import { resolveSurfaceFromState } from '@/lib/surfaces/resolve-surface.server';
+import { readSurfaceRuntimeRegistry } from '@/lib/surfaces/runtime-registry.server';
 
 type ModuleSurfaceProps = {
   params: Promise<{
@@ -7,17 +11,18 @@ type ModuleSurfaceProps = {
   }>;
 };
 
+export const dynamic = 'force-dynamic';
+
 export default async function ModuleSurface({ params }: ModuleSurfaceProps) {
   const { moduleId, route } = await params;
+  const [state, registry] = await Promise.all([
+    readServerShellState(),
+    readSurfaceRuntimeRegistry(),
+  ]);
+  const result = resolveSurfaceFromState({ state, registry, moduleId, routeSegments: route });
 
-  return (
-    <ModulePageShell title={moduleId} description="Admitted module surface">
-      <p>
-        Logical route: {route?.join('/') || 'home'}. The owner-provided local
-        surface is resolved through its admitted module and asset manifests.
-        Koali Spaces does not recreate the business implementation owned by the
-        module.
-      </p>
-    </ModulePageShell>
-  );
+  if (!result.ok) {
+    return <SurfaceResolutionErrorView code={result.error.code} message={result.error.message} />;
+  }
+  return <SurfaceRenderer descriptor={result.descriptor} />;
 }

@@ -53,5 +53,79 @@ test('remote runtime dependency is rejected', () => { const value = assets(); va
 test('Koali capability projection is accepted without granting authority', () => assert.doesNotThrow(() => assertCapabilitySnapshot({ source: 'koa', capabilities: ['media.read'], may_grant_capabilities: false })));
 test('self-granting capability snapshot is rejected', () => assert.throws(() => assertCapabilitySnapshot({ source: 'koa_spaces', capabilities: ['root'], may_grant_capabilities: true })));
 test('activation requires every enabled required module', () => { const value = activationPayload(); value.space_definition.module_instances.push({ module_id: 'required_extra', manifest_ref: 'required.json', enabled: true, required: true, order: 10 }); assert.throws(() => assertActivationPayload(value), /required module required_extra is missing/); });
-test('activation rejects a manifest for a disabled module', () => { const value = activationPayload(); const extra = structuredClone(homeManifest()); extra.manifest_id = 'disabled.interface'; extra.module_id = 'disabled'; extra.home_route_id = 'disabled.home'; extra.routes[0] = { ...extra.routes[0], route_id: 'disabled.home', module_id: 'disabled', path: '/disabled' }; extra.sidebar = { module_id: 'disabled', visible_depth: 2, items: [{ item_id: 'disabled', label: 'Disabled', order: 0, route_id: 'disabled.home' }] }; value.space_definition.module_instances.push({ module_id: 'disabled', manifest_ref: 'disabled.json', enabled: false, required: false, order: 10 }); value.module_manifests.push(extra); assert.throws(() => assertActivationPayload(value), /not enabled by the active Space/); });
+test('activation rejects a manifest for a disabled module', () => { const value = activationPayload(); const extra = structuredClone(homeManifest()); extra.manifest_id = 'disabled.interface'; extra.module_id = 'disabled'; extra.home_route_id = 'disabled.home'; extra.routes[0] = { ...extra.routes[0], route_id: 'disabled.home', module_id: 'disabled', path: '/disabled' }; extra.offline_behavior = { module_state: 'available', fallback_route_id: 'disabled.home' }; extra.sidebar = { module_id: 'disabled', visible_depth: 2, items: [{ item_id: 'disabled', label: 'Disabled', order: 0, route_id: 'disabled.home' }] }; value.space_definition.module_instances.push({ module_id: 'disabled', manifest_ref: 'disabled.json', enabled: false, required: false, order: 10 }); value.module_manifests.push(extra); assert.throws(() => assertActivationPayload(value), /not enabled by the active Space/); });
 test('baseline activation payload is accepted', () => assert.doesNotThrow(() => assertActivationPayload(activationPayload())));
+
+test('hosted application may own / because its route is namespaced under /apps/<moduleId>', () => {
+  const value = activationPayload();
+  const owner = structuredClone(homeManifest());
+  owner.manifest_id = 'demo.interface';
+  owner.module_id = 'demo';
+  owner.public_name = 'Demo';
+  owner.home_route_id = 'demo.home';
+  owner.routes = [{
+    route_id: 'demo.home', module_id: 'demo', path: '/', page_ref: 'demo://home', default_label: 'Demo',
+    availability: 'always', offline_behavior: 'degraded', deep_link_allowed: true, safe_fallback_route_id: null, aliases: [],
+    capability_policy: { required_capabilities: [], denied_behavior: 'access_denied' },
+    surface: { kind: 'local_module_surface', origin_policy: 'registered_local_origin' },
+  }];
+  owner.sidebar = { module_id: 'demo', visible_depth: 2, items: [{ item_id: 'demo.home', label: 'Demo', order: 0, route_id: 'demo.home' }] };
+  owner.offline_behavior = { module_state: 'degraded', fallback_route_id: 'demo.home' };
+  value.space_definition.module_instances.push({ module_id: 'demo', manifest_ref: 'demo.json', enabled: true, required: true, order: 10 });
+  value.module_manifests.push(owner);
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('two hosted applications may both own the same internal path', () => {
+  const value = activationPayload();
+  for (const moduleId of ['demo', 'orgo']) {
+    const owner = structuredClone(homeManifest());
+    owner.manifest_id = `${moduleId}.interface`;
+    owner.module_id = moduleId;
+    owner.public_name = moduleId;
+    owner.home_route_id = `${moduleId}.home`;
+    owner.routes = [{
+      route_id: `${moduleId}.home`, module_id: moduleId, path: '/', page_ref: `${moduleId}://home`, default_label: moduleId,
+      availability: 'always', offline_behavior: 'degraded', deep_link_allowed: true, safe_fallback_route_id: null, aliases: [],
+      capability_policy: { required_capabilities: [], denied_behavior: 'access_denied' },
+      surface: { kind: 'local_module_surface', origin_policy: 'registered_local_origin' },
+    }];
+    owner.sidebar = { module_id: moduleId, visible_depth: 2, items: [{ item_id: `${moduleId}.home`, label: moduleId, order: 0, route_id: `${moduleId}.home` }] };
+    owner.offline_behavior = { module_state: 'degraded', fallback_route_id: `${moduleId}.home` };
+    value.space_definition.module_instances.push({ module_id: moduleId, manifest_ref: `${moduleId}.json`, enabled: true, required: true, order: value.space_definition.module_instances.length * 10 });
+    value.module_manifests.push(owner);
+  }
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('activation rejects encoded or schema-invalid route paths before they reach browser URL resolution', () => {
+  const value = activationPayload();
+  value.module_manifests[0].routes[0].path = '/%2e%2e/secret';
+  assert.throws(() => assertActivationPayload(value), /route path is invalid/);
+});
+
+test('activation rejects route ids that are not namespaced by their stable module id', () => {
+  const value = activationPayload();
+  value.module_manifests[0].routes[0].route_id = 'foreign.home';
+  value.module_manifests[0].home_route_id = 'foreign.home';
+  value.module_manifests[0].sidebar.items[0].route_id = 'foreign.home';
+  assert.throws(() => assertActivationPayload(value), /not namespaced/);
+});
+
+test('activation validates home_route_override instead of silently ignoring a bad reference', () => {
+  const value = activationPayload();
+  value.space_definition.module_instances[0].home_route_override = 'space_home.missing';
+  assert.throws(() => assertActivationPayload(value), /home_route_override does not resolve/);
+});
+
+test('local_shell_page cannot be claimed by an owner module', () => {
+  const value = activationPayload();
+  const owner = structuredClone(homeManifest());
+  owner.manifest_id = 'demo.interface'; owner.module_id = 'demo'; owner.home_route_id = 'demo.home';
+  owner.routes[0] = { ...owner.routes[0], route_id: 'demo.home', module_id: 'demo', surface: { kind: 'local_shell_page', origin_policy: 'same_origin' } };
+  owner.sidebar = { module_id: 'demo', visible_depth: 2, items: [{ item_id: 'demo.home', label: 'Demo', order: 0, route_id: 'demo.home' }] };
+  owner.offline_behavior = { module_state: 'available', fallback_route_id: 'demo.home' };
+  value.space_definition.module_instances.push({ module_id: 'demo', manifest_ref: 'demo.json', enabled: true, required: true, order: 10 });
+  value.module_manifests.push(owner);
+  assert.throws(() => assertActivationPayload(value), /local_shell_page is reserved/);
+});

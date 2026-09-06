@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koali.local/surface-runtime-registry.schema.json",
+  "title": "Koali Spaces Surface Runtime Registry",
+  "description": "Koali-owned local runtime projection used by the Surface Resolution Service. This registry is not a kOA authorization artifact and does not grant capabilities.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeRegistrations",
+    "presentationPolicies",
+    "resolvedTargets"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "runtimeRegistrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "registrationId",
+          "moduleId",
+          "adapter",
+          "runtimeRef",
+          "offlineClass",
+          "embedPolicy"
+        ],
+        "properties": {
+          "registrationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "moduleId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+          },
+          "adapter": {
+            "enum": [
+              "web_app",
+              "registered_component",
+              "shell_page"
+            ]
+          },
+          "artifactRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "runtimeRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "healthRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lifecycleProfileRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "transportProfileRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "offlineClass": {
+            "enum": [
+              "local_required",
+              "local_optional",
+              "network_optional"
+            ]
+          },
+          "embedPolicy": {
+            "enum": [
+              "required",
+              "supported",
+              "not_supported"
+            ]
+          }
+        }
+      }
+    },
+    "presentationPolicies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "moduleId",
+          "allowedModes",
+          "defaultMode",
+          "chromeProfile"
+        ],
+        "properties": {
+          "moduleId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+          },
+          "labelKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accentTokenRef": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+          },
+          "allowedModes": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "framed",
+                "immersive"
+              ]
+            }
+          },
+          "defaultMode": {
+            "enum": [
+              "framed",
+              "immersive"
+            ]
+          },
+          "chromeProfile": {
+            "const": "minimal"
+          }
+        }
+      }
+    },
+    "resolvedTargets": {
+      "type": "array",
+      "description": "Pre-resolved safe presentation targets. Their presence does not close OPEN-KS-SURF-001 or define the canonical transport catalogue.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "transportProfileRef",
+          "moduleId",
+          "embedBase",
+          "sandboxTokens",
+          "browserPermissions"
+        ],
+        "properties": {
+          "transportProfileRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "moduleId": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$"
+          },
+          "embedBase": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Must resolve at runtime to a relative same-origin path, loopback origin, or Koali-local origin. Arbitrary Internet origins are rejected semantically."
+          },
+          "iframeTitle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sandboxTokens": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "allow-downloads",
+                "allow-forms",
+                "allow-modals",
+                "allow-orientation-lock",
+                "allow-pointer-lock",
+                "allow-popups",
+                "allow-popups-to-escape-sandbox",
+                "allow-presentation",
+                "allow-same-origin",
+                "allow-scripts",
+                "allow-storage-access-by-user-activation",
+                "allow-top-navigation-by-user-activation"
+              ]
+            },
+            "minItems": 0
+          },
+          "browserPermissions": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "autoplay",
+                "camera",
+                "clipboard-read",
+                "clipboard-write",
+                "display-capture",
+                "encrypted-media",
+                "fullscreen",
+                "geolocation",
+                "microphone",
+                "payment",
+                "picture-in-picture",
+                "publickey-credentials-get",
+                "screen-wake-lock",
+                "web-share"
+              ]
+            },
+            "minItems": 0
+          },
+          "bridgeProtocolRef": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "runtimeObservations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "runtimeRef",
+          "state"
+        ],
+        "properties": {
+          "runtimeRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "inactive",
+              "starting",
+              "ready",
+              "degraded",
+              "failed",
+              "missing"
+            ]
+          },
+          "observedAt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "healthObservations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "healthRef",
+          "state"
+        ],
+        "properties": {
+          "healthRef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "ready",
+              "degraded",
+              "failed",
+              "unknown"
+            ]
+          },
+          "observedAt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

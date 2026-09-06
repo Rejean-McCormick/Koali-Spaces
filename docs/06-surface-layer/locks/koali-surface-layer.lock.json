@@ -164,7 +164,7 @@
       "lock_class": "architecture",
       "tier": "foundational",
       "source_document": "01-core-architecture/05-architecture-renderer.md",
-      "source_line": 92,
+      "source_line": 93,
       "change_requires_adr": true
     },
     {
@@ -173,7 +173,7 @@
       "lock_class": "architecture",
       "tier": "foundational",
       "source_document": "01-core-architecture/05-architecture-renderer.md",
-      "source_line": 94,
+      "source_line": 95,
       "change_requires_adr": true
     },
     {
@@ -182,7 +182,7 @@
       "lock_class": "architecture",
       "tier": "foundational",
       "source_document": "01-core-architecture/05-architecture-renderer.md",
-      "source_line": 96,
+      "source_line": 97,
       "change_requires_adr": true
     },
     {
@@ -425,7 +425,7 @@
       "lock_class": "routing_registry",
       "tier": "foundational",
       "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
-      "source_line": 28,
+      "source_line": 39,
       "change_requires_adr": true
     },
     {
@@ -434,7 +434,7 @@
       "lock_class": "routing_registry",
       "tier": "foundational",
       "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
-      "source_line": 30,
+      "source_line": 41,
       "change_requires_adr": true
     },
     {
@@ -443,7 +443,7 @@
       "lock_class": "routing_registry",
       "tier": "foundational",
       "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
-      "source_line": 32,
+      "source_line": 43,
       "change_requires_adr": true
     },
     {
@@ -452,7 +452,7 @@
       "lock_class": "routing_registry",
       "tier": "foundational",
       "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
-      "source_line": 34,
+      "source_line": 45,
       "change_requires_adr": true
     },
     {
@@ -461,7 +461,7 @@
       "lock_class": "routing_registry",
       "tier": "foundational",
       "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
-      "source_line": 36,
+      "source_line": 47,
       "change_requires_adr": true
     },
     {

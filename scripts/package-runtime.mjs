@@ -11,6 +11,6 @@ copy('server', path.join(out, 'server'));
 copy('contracts', path.join(out, 'contracts'));
 copy('interface', path.join(out, 'interface'));
 copy('dist/interface-assets', path.join(out, 'interface-assets'));
-const required = [path.join(out, '.next'), path.join(out, 'node_modules/next'), path.join(out, 'server/main.mjs'), path.join(out, 'public/manifest.webmanifest'), path.join(out, 'interface-assets/koali-spaces-shell.interface-assets.json')];
+const required = [path.join(out, '.next'), path.join(out, 'node_modules/next'), path.join(out, 'server.js'), path.join(out, 'server/main.mjs'), path.join(out, 'public/manifest.webmanifest'), path.join(out, 'interface-assets/koali-spaces-shell.interface-assets.json')];
 const missing = required.filter((p) => !fs.existsSync(p)); if (missing.length) { console.error('runtime package incomplete:', missing); process.exit(2); }
 console.log('packaged local production runtime at', out);

@@ -1,3 +1,5 @@
+import type { SurfaceKind } from '@/lib/surfaces/types';
+
 export type InterfaceState =
   | 'loading'
   | 'ready'
@@ -9,7 +11,16 @@ export type InterfaceState =
   | 'empty';
 
 export type OfflineBehavior = 'available' | 'cached_read_only' | 'degraded' | 'unavailable';
-export type CapabilityPolicy = { required_capabilities: string[]; denied_behavior: string };
+export type RouteAvailability = 'always' | 'conditional' | 'online_only' | 'offline_only';
+export type DeniedBehavior = 'hidden' | 'disabled' | 'access_denied';
+export type CapabilityPolicy = { required_capabilities: string[]; denied_behavior: DeniedBehavior };
+export type RouteSurface = {
+  kind: SurfaceKind;
+  asset_bundle_ref?: string | null;
+  entrypoint?: string | null;
+  origin_policy: 'same_origin' | 'registered_local_origin';
+  offline_entrypoint?: string | null;
+};
 export type RouteContribution = {
   route_id: string;
   module_id: string;
@@ -17,12 +28,13 @@ export type RouteContribution = {
   page_ref: string;
   default_label: string;
   label_key?: string;
-  availability: string;
+  availability: RouteAvailability;
   offline_behavior: OfflineBehavior;
-  deep_link_allowed: boolean;
+  deep_link_allowed?: boolean;
   safe_fallback_route_id: string | null;
-  aliases: string[];
+  aliases?: string[];
   capability_policy: CapabilityPolicy;
+  surface?: RouteSurface | null;
 };
 export type SidebarLeaf = {
   item_id: string;
@@ -31,7 +43,7 @@ export type SidebarLeaf = {
   icon_ref?: string | null;
   order: number;
   required_capabilities?: string[];
-  availability?: string;
+  availability?: RouteAvailability;
   badge_provider_ref?: string | null;
   route_id: string;
 };
@@ -43,11 +55,14 @@ export type TopbarWidget = {
   slot: 'primary' | 'secondary' | 'status' | 'overflow';
   kind: 'action' | 'status' | 'counter' | 'search' | 'menu' | 'resume';
   label: string;
+  label_key?: string;
+  icon_ref?: string | null;
   priority: number;
   required_capabilities?: string[];
   offline_behavior: OfflineBehavior;
+  compact_only?: boolean;
   activation: {
-    kind: string;
+    kind: 'route' | 'command' | 'status_provider' | 'none';
     route_id?: string | null;
     command_ref?: string | null;
     status_provider_ref?: string | null;

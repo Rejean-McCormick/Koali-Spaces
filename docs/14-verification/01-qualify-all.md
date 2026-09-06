@@ -2,8 +2,22 @@
 
 **Classe : Gate de release**
 
-Gate actuel : dependency lock -> validation -> production build -> Git read-only handoff.
+Gate attendu après ce pack :
 
-Cible : ajouter un runtime smoke après build : lancer `pnpm start` sur port de test, attendre readiness, vérifier au moins `/`, `/tasks`, `/settings`, `/health`, puis arrêter proprement.
+```text
+dependency lock
+-> typecheck
+-> unit tests
+-> runtime boundary tests
+-> contract validation
+-> Surface Layer spec validation
+-> local asset closure
+-> production build
+-> runtime package validation
+-> packaged runtime smoke
+-> Git read-only handoff
+```
 
-Avec Surface Layer : ajouter spec validation, surface unit tests et un child fixture d’intégration.
+`pnpm run validate` inclut la validation de la Surface Layer. Après `pnpm run build`, exécuter `pnpm run smoke:runtime`.
+
+Le smoke vérifie au moins `/`, `/tasks`, `/settings`, `/health` sur le runtime packagé. Un onboarding d’application ajoute ses propres tests d’embed/conformance au gate sans remplacer ce smoke shell.
