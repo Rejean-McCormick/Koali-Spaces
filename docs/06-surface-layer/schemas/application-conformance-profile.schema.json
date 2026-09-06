@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://initkoa.org/schemas/koali/application-conformance-profile.v1.1.schema.json",
+  "title": "Koali ApplicationConformanceProfile v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileId",
+    "moduleId",
+    "owner",
+    "runtimeRegistrationRef",
+    "uiOwnership",
+    "routing",
+    "authBoundary",
+    "browser",
+    "offline",
+    "lifecycle",
+    "health"
+  ],
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moduleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourcePinRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtimeRegistrationRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uiOwnership": {
+      "enum": [
+        "owner_application"
+      ]
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initialDeepLink",
+        "internalRouterOwner"
+      ],
+      "properties": {
+        "initialDeepLink": {
+          "type": "boolean"
+        },
+        "internalRouterOwner": {
+          "enum": [
+            "owner_application"
+          ]
+        },
+        "bridgeProtocolRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "authBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerRetainsAuthorization",
+        "koaliCredentialInjection"
+      ],
+      "properties": {
+        "ownerRetainsAuthorization": {
+          "const": true
+        },
+        "koaliCredentialInjection": {
+          "const": false
+        },
+        "authProfileRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "browser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "permissions",
+        "sandboxReviewRequired",
+        "topNavigationPolicy",
+        "popupPolicy",
+        "downloadPolicy",
+        "storageIsolationReviewed",
+        "serviceWorkerScopeReviewed"
+      ],
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "sandboxReviewRequired": {
+          "const": true
+        },
+        "topNavigationPolicy": {
+          "enum": [
+            "deny",
+            "explicit_allowlisted"
+          ]
+        },
+        "popupPolicy": {
+          "enum": [
+            "deny",
+            "explicit_allowlisted"
+          ]
+        },
+        "downloadPolicy": {
+          "enum": [
+            "deny",
+            "explicit_allowlisted"
+          ]
+        },
+        "storageIsolationReviewed": {
+          "type": "boolean"
+        },
+        "serviceWorkerScopeReviewed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "offline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "class"
+      ],
+      "properties": {
+        "class": {
+          "enum": [
+            "local_required",
+            "local_optional",
+            "network_optional"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerOrBroker",
+        "directRendererProcessControl"
+      ],
+      "properties": {
+        "ownerOrBroker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "directRendererProcessControl": {
+          "const": false
+        }
+      }
+    },
+    "health": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "readinessRefRequired",
+        "healthIsAuthorization"
+      ],
+      "properties": {
+        "readinessRefRequired": {
+          "type": "boolean"
+        },
+        "healthIsAuthorization": {
+          "const": false
+        }
+      }
+    },
+    "knownLimitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

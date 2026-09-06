@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://initkoa.org/schemas/koali/runtime-registration.v1.1.schema.json",
+  "title": "Koali RuntimeRegistration v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registrationId",
+    "moduleId",
+    "adapter",
+    "runtimeRef",
+    "offlineClass",
+    "embedPolicy"
+  ],
+  "properties": {
+    "registrationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moduleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adapter": {
+      "enum": [
+        "web_app",
+        "registered_component",
+        "shell_page"
+      ]
+    },
+    "artifactRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtimeRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "healthRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lifecycleProfileRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transportProfileRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "offlineClass": {
+      "enum": [
+        "local_required",
+        "local_optional",
+        "network_optional"
+      ]
+    },
+    "embedPolicy": {
+      "enum": [
+        "required",
+        "supported",
+        "not_supported"
+      ]
+    }
+  }
+}

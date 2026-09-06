@@ -1,0 +1,1422 @@
+{
+  "schema_version": 2,
+  "lock_set_id": "KOALI-SURFACE-LAYER-LOCK-001",
+  "version": "1.1.0",
+  "status": "canonical-development-lock",
+  "owner": "Koali Spaces",
+  "scope": "koali_spaces_surface_layer",
+  "canonical_lock_source": "markdown_lock_declarations",
+  "registry_role": "generated_projection",
+  "lock_count": 154,
+  "lock_id_min": "LOCK-KS-SURF-001",
+  "lock_id_max": "LOCK-KS-SURF-154",
+  "open_decisions": [
+    "OPEN-KS-SURF-001",
+    "OPEN-KS-SURF-002",
+    "OPEN-KS-SURF-003",
+    "OPEN-KS-SURF-004",
+    "OPEN-KS-SURF-005",
+    "OPEN-KS-SURF-006"
+  ],
+  "excluded_projects": [
+    "ame-artificielle",
+    "votingmachine"
+  ],
+  "surface_kinds": [
+    "local_shell_page",
+    "registered_component_surface",
+    "local_module_surface"
+  ],
+  "display_modes": [
+    "framed",
+    "immersive"
+  ],
+  "locks": [
+    {
+      "id": "LOCK-KS-SURF-001",
+      "rule": "Les index générés ne sont jamais une autorité de comportement. Ils peuvent aider à trouver une source mais ne peuvent pas remplacer le contrat propriétaire.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/01-base-documentaire-et-ordre-autorite.md",
+      "source_line": 38,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-002",
+      "rule": "Un conflit non résolu ne peut pas être “corrigé” par l'IA. Il doit produire une erreur documentaire, une question d'architecture ou un ADR.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/01-base-documentaire-et-ordre-autorite.md",
+      "source_line": 40,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-003",
+      "rule": "Koali Spaces est une couche de présentation non autoritative.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 27,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-004",
+      "rule": "La présentation n'accorde jamais une autorité. Être visible dans un menu, être rendu dans une surface ou être actif dans un Space ne constitue pas une autorisation métier.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 29,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-005",
+      "rule": "Koali Spaces ne possède pas les données métier représentées par les modules.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 31,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-006",
+      "rule": "Koali Spaces ne possède pas le workflow interne, l'état métier, les permissions métier ou la validation spécifique d'un module.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 33,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-007",
+      "rule": "Les écritures directes inter-sous-systèmes restent interdites. Toute mutation passe par l'interface autorisée du propriétaire.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 35,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-008",
+      "rule": "Un module hosté ne devient pas un sous-module interne de Koali par le seul fait d'être visible dans Koali.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/02-these-architecturale.md",
+      "source_line": 37,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-009",
+      "rule": "No business UI cloning. Lorsqu'une application possède une UI runtime exploitable, Koali MUST l'héberger ou lancer cette UI ; il MUST NOT recréer ses écrans métier pour “mieux intégrer” le produit.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/03-anti-reimplementation.md",
+      "source_line": 19,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-010",
+      "rule": "No backend duplication. La Surface Layer MUST NOT recopier API, modèles, workflow, stockage, service métier ou logique d'autorisation d'une application hostée.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/03-anti-reimplementation.md",
+      "source_line": 21,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-011",
+      "rule": "No internal navigation stripping. Koali MUST NOT retirer, masquer par CSS injecté, réécrire ou remplacer la navigation interne d'une application propriétaire dans le but de la faire ressembler à Koali.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/03-anti-reimplementation.md",
+      "source_line": 23,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-012",
+      "rule": "La taxonomie de premier niveau est fermée à ces trois valeurs pour v1. Ajouter un quatrième type exige un ADR.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/04-taxonomie-surfaces.md",
+      "source_line": 55,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-013",
+      "rule": "Un `local_module_surface` représente une application propriétaire, pas un ensemble de composants Koali.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/04-taxonomie-surfaces.md",
+      "source_line": 57,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-014",
+      "rule": "Un `registered_component_surface` ne peut pas devenir un chargeur de code distant ou arbitraire.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/04-taxonomie-surfaces.md",
+      "source_line": 59,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-015",
+      "rule": "SurfaceRenderer est un dispatcher de présentation. Il ne fait pas de requêtes métier spécifiques à Konnaxion, Orgo, UCKK, etc.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/05-architecture-renderer.md",
+      "source_line": 92,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-016",
+      "rule": "Les manifests bruts ne sont pas passés directement aux composants d'affichage comme source de confiance. Ils sont validés, résolus et projetés dans une structure runtime bornée.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/05-architecture-renderer.md",
+      "source_line": 94,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-017",
+      "rule": "La résolution d'autorisation reste distincte de la résolution d'affichage. Une capability projetée peut décider qu'une route n'est pas présentable ; le renderer ne peut pas créer une permission.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/05-architecture-renderer.md",
+      "source_line": 96,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-018",
+      "rule": "ApplicationHost n'est pas un BFF métier. Toute projection additionnelle doit rester non autoritative, bornée et explicitement déclarée.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/06-application-host.md",
+      "source_line": 30,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-019",
+      "rule": "ApplicationHost n'inspecte pas le DOM interne de l'application hostée.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/06-application-host.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-020",
+      "rule": "ApplicationHost n'injecte pas de JavaScript dans l'application hostée.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/06-application-host.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-021",
+      "rule": "ApplicationHost ne dépend pas d'un CDN ou d'un asset runtime distant pour fonctionner.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/06-application-host.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-022",
+      "rule": "Immersive n'est pas Browser Fullscreen. Il s'agit d'un état de layout Koali.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 47,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-023",
+      "rule": "Le Browser Fullscreen API n'est pas requis en v1. Il ne doit pas être ajouté implicitement sous le nom “immersive”.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 49,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-024",
+      "rule": "Le mode immersive ne recharge pas volontairement l'application. Le changement doit être un changement de layout. Si une technologie force un reload, celui-ci doit être documenté comme limitation.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 51,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-025",
+      "rule": "Le retour à Koali ne doit pas dépendre uniquement de la touche Escape. Une commande visuelle parent-owned reste disponible.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 53,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-026",
+      "rule": "L'application ne reçoit aucune nouvelle autorité en mode immersive.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 55,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-027",
+      "rule": "Le mode est de la préférence d'expérience, pas une permission.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/07-modes-affichage.md",
+      "source_line": 57,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-028",
+      "rule": "Koali ne modifie pas la route interne d'un module uniquement pour entrer/sortir du mode immersive.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/08-etat-mode-navigation.md",
+      "source_line": 18,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-029",
+      "rule": "Changer de module sort du mode immersive du module précédent. Le nouveau module reprend son mode par défaut ou sa préférence propre, jamais un mode hérité accidentellement d'un autre module.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/08-etat-mode-navigation.md",
+      "source_line": 20,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-030",
+      "rule": "L'accent de contexte est strictement visuel. Il ne signale ni autorité, ni sécurité, ni validation, ni statut de confiance.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/09-cadre-visuel-accent.md",
+      "source_line": 24,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-031",
+      "rule": "L'accent de contexte ne remplace pas les couleurs sémantiques de statut.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/09-cadre-visuel-accent.md",
+      "source_line": 26,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-032",
+      "rule": "Koali ne crée pas un deuxième thème interne pour les applications hostées.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/09-cadre-visuel-accent.md",
+      "source_line": 28,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-033",
+      "rule": "L'application propriétaire reste propriétaire de son design system.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/09-cadre-visuel-accent.md",
+      "source_line": 30,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-034",
+      "rule": "La couleur ne doit jamais être l'unique moyen d'identifier le contexte. Le nom du module doit rester exposé de manière accessible.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/09-cadre-visuel-accent.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-035",
+      "rule": "La sidebar Koali est une contribution de présentation, pas l'autorité des routes internes du module.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/10-navigation-outer-inner.md",
+      "source_line": 10,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-036",
+      "rule": "Le module selector choisit un contexte de surface ; il n'accorde pas une permission applicative.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/10-navigation-outer-inner.md",
+      "source_line": 12,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-037",
+      "rule": "Koali ne déduit pas automatiquement toute la navigation interne d'une application par scraping ou introspection DOM.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/10-navigation-outer-inner.md",
+      "source_line": 14,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-038",
+      "rule": "Une navigation Koali vers une sous-route de module n'est valide que si cette route est déclarée/admise par le contrat de présentation applicable.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/10-navigation-outer-inner.md",
+      "source_line": 16,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-039",
+      "rule": "Le module ID est stable et technique. Un alias public ne change pas l'identité technique.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/11-routing-deep-links.md",
+      "source_line": 28,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-040",
+      "rule": "Les routes d'un module sont namespaced dans Koali. Une route de module ne peut pas capturer `/settings`, `/health`, `/tasks`, `/search` ou d'autres routes shell réservées.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/11-routing-deep-links.md",
+      "source_line": 30,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-041",
+      "rule": "Aucune route ne peut résoudre `..`, un changement de schéma URL, un host externe ou une origine non enregistrée.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/11-routing-deep-links.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-042",
+      "rule": "Le mapping de route ne peut pas construire une URL à partir d'une chaîne arbitraire non validée provenant du navigateur.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/11-routing-deep-links.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-043",
+      "rule": "Les query parameters doivent être passés selon une politique explicite. Les paramètres Koali internes ne doivent pas être transmis au module par défaut.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/11-routing-deep-links.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-044",
+      "rule": "Un module interface manifest ne peut pas introduire une origine HTTP arbitraire.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
+      "source_line": 28,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-045",
+      "rule": "Les origines/targets exécutables sont enregistrées côté runtime opérateur.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
+      "source_line": 30,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-046",
+      "rule": "Aucun secret ne doit être stocké dans une Space definition, un module interface manifest ou un registre de présentation consommable par le navigateur.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-047",
+      "rule": "Le registre est local et allowlisté. L'absence d'enregistrement rend la surface indisponible ; Koali ne fait pas de découverte réseau opportuniste.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-048",
+      "rule": "Une surface non enregistrée ne déclenche pas un fallback vers Internet.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/12-registre-local-surfaces.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-049",
+      "rule": "Une IA ou un développeur ne peut pas présenter une stratégie de transport comme canonique sans ADR de transport accepté.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/13-transport-embed.md",
+      "source_line": 35,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-050",
+      "rule": "Il est interdit de contourner la sécurité d'une application en supprimant silencieusement `X-Frame-Options`, CSP ou `frame-ancestors`. Toute compatibilité d'embed doit être obtenue par configuration propriétaire ou architecture de transport explicitement approuvée.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/13-transport-embed.md",
+      "source_line": 37,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-051",
+      "rule": "Koali ne partage pas automatiquement ses credentials avec l'application hostée.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/14-securite-embed.md",
+      "source_line": 18,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-052",
+      "rule": "Koali ne lit pas les cookies privés du module pour fabriquer une identité.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/14-securite-embed.md",
+      "source_line": 20,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-053",
+      "rule": "Koali ne réécrit pas les décisions d'autorisation du module.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/14-securite-embed.md",
+      "source_line": 22,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-054",
+      "rule": "Toute permission navigateur accordée à une iframe doit être déclarée et minimale. Caméra, micro, clipboard, geolocation, fullscreen et autres permissions ne sont pas autorisées par défaut.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/14-securite-embed.md",
+      "source_line": 24,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-055",
+      "rule": "Une redirection de la surface vers une origine non allowlistée doit être bloquée ou sortir explicitement du host dans un nouveau contexte contrôlé.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/14-securite-embed.md",
+      "source_line": 26,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-056",
+      "rule": "Le renderer ne fabrique pas de SSO.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/15-authentification-sso.md",
+      "source_line": 16,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-057",
+      "rule": "OIDC, LTI ou tout token exchange exige un contrat d'intégration séparé.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/15-authentification-sso.md",
+      "source_line": 18,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-058",
+      "rule": "Une session Koali ne doit pas être supposée équivalente à une session Konnaxion, Orgo, UCKK, SemantiK Architect ou autre.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/15-authentification-sso.md",
+      "source_line": 20,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-059",
+      "rule": "Aucun asset distant requis pour le shell ou le renderer.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/16-offline-local-first.md",
+      "source_line": 14,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-060",
+      "rule": "Pas de substitution externe silencieuse lorsqu'un runtime local manque.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/16-offline-local-first.md",
+      "source_line": 16,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-061",
+      "rule": "Un module `unavailable` reste indisponible ; le renderer ne fabrique pas son contenu.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/16-offline-local-first.md",
+      "source_line": 18,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-062",
+      "rule": "L'état offline/degraded est une information de disponibilité, pas une autorité métier.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/16-offline-local-first.md",
+      "source_line": 20,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-063",
+      "rule": "Pas d'activation partielle d'une configuration de Space ou d'interface.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/17-lifecycle-activation.md",
+      "source_line": 28,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-064",
+      "rule": "Un manifest incompatible n'est pas “best-effort patched” au runtime. Il est rejeté ou reste inactif.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/17-lifecycle-activation.md",
+      "source_line": 30,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-065",
+      "rule": "Le retrait de Koali Spaces n'efface ni ne réécrit l'état métier des applications propriétaires.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/17-lifecycle-activation.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-066",
+      "rule": "La désactivation d'une surface est un événement de présentation ; elle ne désactive pas automatiquement l'autorité ou les données du système propriétaire.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/17-lifecycle-activation.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-067",
+      "rule": "Un état de panne ne peut pas être converti en succès autoritatif.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "source_line": 55,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-068",
+      "rule": "L'état `blocked` doit rester distinct de `unavailable`. Le premier représente une décision de politique/contrat ; le second une indisponibilité technique.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "source_line": 57,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-069",
+      "rule": "Les messages d'erreur du host ne doivent pas prétendre connaître l'état métier interne de l'application.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "source_line": 59,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-070",
+      "rule": "Health ≠ authorization ≠ business validity.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/19-health-readiness.md",
+      "source_line": 15,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-071",
+      "rule": "Le health check ne doit pas exposer de secret au navigateur.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/19-health-readiness.md",
+      "source_line": 17,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-072",
+      "rule": "Aucun protocole `postMessage` générique ne donne accès aux données ou commandes métier.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/20-parent-child-communication.md",
+      "source_line": 15,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-073",
+      "rule": "Tout message doit avoir un type allowlisté, une version, une origine validée et une validation de payload.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/20-parent-child-communication.md",
+      "source_line": 17,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-074",
+      "rule": "Le mode immersif doit rester quittable au clavier sans dépendre du contenu de l'iframe.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/21-accessibilite.md",
+      "source_line": 17,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-075",
+      "rule": "Koali ne peut pas déclarer l'application hostée conforme WCAG simplement parce que le host l'est.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/21-accessibilite.md",
+      "source_line": 19,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-076",
+      "rule": "La télémétrie Koali ne collecte pas le contenu métier de l'application hostée.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/22-telemetrie-audit.md",
+      "source_line": 27,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-077",
+      "rule": "Aucun contenu d'iframe n'est capturé pour le logging général.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/22-telemetrie-audit.md",
+      "source_line": 29,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-078",
+      "rule": "Les événements de présentation ne deviennent pas une preuve d'exécution d'une action métier.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/22-telemetrie-audit.md",
+      "source_line": 31,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-079",
+      "rule": "Ame-Artificielle est hors scope de cette intégration.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/23-modele-integration.md",
+      "source_line": 98,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-080",
+      "rule": "VotingMachine / VM Engine est hors scope de cette intégration.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/23-modele-integration.md",
+      "source_line": 100,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-081",
+      "rule": "L'existence d'un context pack ne signifie pas automatiquement qu'il existe une application Web hostable.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/23-modele-integration.md",
+      "source_line": 102,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-082",
+      "rule": "Koali ne fabrique pas un runtime pour combler un manque documentaire.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/23-modele-integration.md",
+      "source_line": 104,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-083",
+      "rule": "Afficher UCKK dans Koali ne transforme pas UCKK en sous-système interne kOA-Linux.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/24-uckk.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-084",
+      "rule": "Aucun partage implicite de DB, identité, stockage, accès ou lifecycle entre Koali et UCKK.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/24-uckk.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-085",
+      "rule": "Pas de background bidirectional synchronization introduit par la Surface Layer.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/24-uckk.md",
+      "source_line": 9,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-086",
+      "rule": "Les opérations de contenu UCKK restent `publish_to_uckk` ou `import_from_uckk` lorsqu'elles concernent les flux de données ; l'embed UI n'est pas une troisième voie de synchronisation.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/24-uckk.md",
+      "source_line": 11,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-087",
+      "rule": "Koali n'adopte pas les modèles Konnaxion comme ses propres modèles.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/25-konnaxion.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-088",
+      "rule": "Koali n'adopte pas les routes Konnaxion comme routes shell globales ; elles restent sous le namespace de module.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/25-konnaxion.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-089",
+      "rule": "Koali ne remplace pas le shell interne Konnaxion.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/25-konnaxion.md",
+      "source_line": 9,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-090",
+      "rule": "Les surfaces et modules Konnaxion gardent leur service-layer/API access interne.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/25-konnaxion.md",
+      "source_line": 11,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-091",
+      "rule": "Koali Tasks n'est pas automatiquement Orgo Task. Une intégration éventuelle exige un contrat explicite.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/26-orgo.md",
+      "source_line": 3,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-092",
+      "rule": "Koali n'écrit pas directement les tables Case/Task Orgo.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/26-orgo.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-093",
+      "rule": "Afficher les queues, views et dashboards Orgo dans Koali ne transfère pas leur ownership.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/26-orgo.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-094",
+      "rule": "Koali ne transforme pas l'API outils Architect en shell arbitraire.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/27-semantik-architect.md",
+      "source_line": 3,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-095",
+      "rule": "Les allowlists, path confinement, argument policies, timeouts et gating Architect restent propriétaires d'Architect.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/27-semantik-architect.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-096",
+      "rule": "L'intégration UI ne modifie pas le chemin de génération déterministe d'Architect.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/27-semantik-architect.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-097",
+      "rule": "Render ≠ compile ≠ validate ≠ recognize authority.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/28-kristal.md",
+      "source_line": 3,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-098",
+      "rule": "La Surface Layer ne crée aucune nouvelle assertion canonique.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/28-kristal.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-099",
+      "rule": "Une vue Koali d'un Kristal/Runtime Pack doit préserver les labels de statut, de certainty, d'autorité et de reader policy pertinents ; elle ne peut pas les masquer pour simplifier l'UI.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/28-kristal.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-100",
+      "rule": "XKaliber measurement ≠ K-Port admissibility ≠ EkoH score.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/29-kport-xkaliber-ekoh.md",
+      "source_line": 3,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-101",
+      "rule": "Koali n'agrège pas ces états en un “score utilisateur” local.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/29-kport-xkaliber-ekoh.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-102",
+      "rule": "Une surface ne peut pas reconstruire des scores privés ou weights cachés à partir d'inputs visibles.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/29-kport-xkaliber-ekoh.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-103",
+      "rule": "Une surface MediKristal MUST afficher son statut de recherche/prototypage tant que le projet n'est pas validé pour usage clinique direct.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/30-medikristal.md",
+      "source_line": 3,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-104",
+      "rule": "Koali ne présente pas un résultat MediKristal comme décision clinique autonome.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/30-medikristal.md",
+      "source_line": 5,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-105",
+      "rule": "L'interface ne masque pas provenance, version, applicability ou protocol identity lorsque ces éléments sont requis par le résultat.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/30-medikristal.md",
+      "source_line": 7,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-106",
+      "rule": "Les extensions de runtime Koali doivent être placées sous une propriété/namespace Koali, pas déguisées en modification canonique kOA.",
+      "lock_class": "implementation",
+      "tier": "implementation",
+      "source_document": "06-implementation/31-fichiers-cibles-repo.md",
+      "source_line": 60,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-107",
+      "rule": "`runtime_ref` n'est pas une capability et n'accorde pas d'autorisation.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/32-manifest-vs-registration.md",
+      "source_line": 41,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-108",
+      "rule": "Un module manifest et une local surface registration doivent correspondre au même `module_id` stable avant activation.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/32-manifest-vs-registration.md",
+      "source_line": 43,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-109",
+      "rule": "L'algorithme fail-closed sur les références inconnues.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/33-surface-resolution-algorithm.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-110",
+      "rule": "Aucun “closest match”, fuzzy matching ou guess de module ID pour exécuter une surface.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/33-surface-resolution-algorithm.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-111",
+      "rule": "Les aliases publics doivent être résolus vers un ID stable avant toute décision de target.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/33-surface-resolution-algorithm.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-112",
+      "rule": "Pas d'import dynamique arbitraire à partir d'un nom fourni par une définition de Space ou un manifest.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/34-component-registry-ferme.md",
+      "source_line": 19,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-113",
+      "rule": "Chaque composant exécutable est présent dans la build locale et enregistré explicitement.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/34-component-registry-ferme.md",
+      "source_line": 21,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-114",
+      "rule": "Un redirect doit être soumis à la même politique que la destination initiale.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/35-url-policy.md",
+      "source_line": 19,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-115",
+      "rule": "Une route relative ne peut pas changer l'origine enregistrée du module.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/35-url-policy.md",
+      "source_line": 21,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-116",
+      "rule": "Le shell ne doit pas déléguer à l'iframe la responsabilité de masquer le shell Koali.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/36-shell-integration.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-117",
+      "rule": "Le layout mobile doit obéir aux mêmes modes conceptuels que desktop.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/36-shell-integration.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-118",
+      "rule": "Pas de dimensions codées pour une seule application.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/37-responsive-behavior.md",
+      "source_line": 17,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-119",
+      "rule": "Pas de retry loop non bornée.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/38-loading-retry-timeouts.md",
+      "source_line": 20,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-120",
+      "rule": "Pas de fallback provider pendant un retry.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/38-loading-retry-timeouts.md",
+      "source_line": 22,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-121",
+      "rule": "Les erreurs de surface ne doivent pas être remplacées par une page business fictive.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/39-erreurs-visibles.md",
+      "source_line": 19,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-122",
+      "rule": "Une erreur de sécurité/politique ne propose pas “ouvrir quand même”.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/39-erreurs-visibles.md",
+      "source_line": 21,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-123",
+      "rule": "La Surface Layer n'est pas acceptée avec seulement des tests de snapshot visuel. Les invariants de sécurité, authority et resolution doivent être testés.",
+      "lock_class": "verification",
+      "tier": "verification",
+      "source_document": "07-verification/40-tests-minimums.md",
+      "source_line": 65,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-124",
+      "rule": "Chaque nouveau type de target ou permission browser exige un test négatif.",
+      "lock_class": "verification",
+      "tier": "verification",
+      "source_document": "07-verification/40-tests-minimums.md",
+      "source_line": 67,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-125",
+      "rule": "Le baseline de développement verrouillé doit être enregistré sur un commit propre.",
+      "lock_class": "verification",
+      "tier": "verification",
+      "source_document": "07-verification/41-qualification-gate.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-126",
+      "rule": "Ne pas commencer par reconstruire les pages métier des applications propriétaires ; terminer d'abord le host générique et ses frontières.",
+      "lock_class": "implementation",
+      "tier": "implementation",
+      "source_document": "06-implementation/42-sequence-implementation.md",
+      "source_line": 80,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-127",
+      "rule": "Ne pas spécialiser `ApplicationHost` avec des branches métier Konnaxion/Orgo/UCKK ; les variations passent par contracts, registrations et policies déclarés.",
+      "lock_class": "implementation",
+      "tier": "implementation",
+      "source_document": "06-implementation/42-sequence-implementation.md",
+      "source_line": 82,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-128",
+      "rule": "Une IA doit citer les lock IDs affectés dans tout plan ou patch non trivial de Surface Layer.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/44-anti-ai-drift-protocol.md",
+      "source_line": 61,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-129",
+      "rule": "Si une demande utilisateur contredit un lock, l'IA doit signaler le conflit avant de modifier le code, sauf si l'utilisateur demande explicitement de changer le lock et l'ADR.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/44-anti-ai-drift-protocol.md",
+      "source_line": 63,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-130",
+      "rule": "Une IA ne peut pas créer un nouvel enum, surface kind, authority owner, SSO scheme ou transport standard en le présentant comme déjà canonique.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/44-anti-ai-drift-protocol.md",
+      "source_line": 65,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-131",
+      "rule": "Les déclarations `LOCK-KS-SURF-*` des chapitres Markdown sont la source normative unique des règles de Surface Layer ; le registre JSON est une projection générée et ne peut pas diverger.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/02-source-unique-et-projections-generees.md",
+      "source_line": 23,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-132",
+      "rule": "Toute source externe utilisée pour fixer une frontière ou une intégration de Surface Layer doit être pinnée dans `sources/SOURCES.lock.json` avant de devenir une base normative de développement.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/02-source-unique-et-projections-generees.md",
+      "source_line": 29,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-133",
+      "rule": "Une nouvelle version d’un context pack ne modifie jamais silencieusement un lock existant ; elle déclenche une analyse d’impact et, si la règle change, le change control/ADR applicable.",
+      "lock_class": "governance",
+      "tier": "foundational",
+      "source_document": "00-governance/02-source-unique-et-projections-generees.md",
+      "source_line": 31,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-134",
+      "rule": "La résolution de `runtimeRef`, origine opérateur, endpoint de health, lifecycle ou transport appartient au control side serveur ; le navigateur ne réalise pas cette résolution.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/07-control-plane-render-plane.md",
+      "source_line": 37,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-135",
+      "rule": "`ApplicationHost` consomme uniquement un `SurfaceDescriptorPublic` déjà résolu et ne consulte jamais directement le registre runtime opérateur.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/07-control-plane-render-plane.md",
+      "source_line": 39,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-136",
+      "rule": "Le descriptor navigateur ne doit contenir ni secret, ni credential, ni chemin opérateur privé, ni endpoint privilégié, ni information de contrôle inutile au rendu.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/07-control-plane-render-plane.md",
+      "source_line": 41,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-137",
+      "rule": "Access, runtime, connectivity et render sont des axes distincts ; le code ne doit pas les réduire à un enum unique qui perd les combinaisons valides.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "source_line": 61,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-138",
+      "rule": "`access=blocked` interdit le montage de la surface même si `runtime=ready` et le health check réussit.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "source_line": 63,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-139",
+      "rule": "La sélection ou navigation vers une surface ne lance jamais directement un processus privilégié depuis le renderer ou `ApplicationHost`.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/23-lifecycle-broker-boundary.md",
+      "source_line": 33,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-140",
+      "rule": "Toute demande start/stop/restart/activate d'un runtime passe par un owner ou broker lifecycle déclaré ; la Surface Layer n'appelle pas directement Docker, systemd, un shell ou un service manager.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/23-lifecycle-broker-boundary.md",
+      "source_line": 35,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-141",
+      "rule": "Artifact admis, manifest actif, runtime actif, runtime ready et surface montée sont des états distincts et ne doivent pas être confondus.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/23-lifecycle-broker-boundary.md",
+      "source_line": 37,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-142",
+      "rule": "Le transport est sélectionné par application via une référence de profil fermée côté runtime ; le renderer ne suppose pas qu'un seul mécanisme d'embed convient à toutes les applications.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/13-transport-embed.md",
+      "source_line": 39,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-143",
+      "rule": "L'admission d'une application ne la rend pas équivalente à l'origine de confiance Koali et ne lui accorde aucun accès implicite au parent.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/24-embed-threat-model.md",
+      "source_line": 37,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-144",
+      "rule": "Chaque application hostée doit avoir une politique explicite et minimale pour top-navigation, popups, downloads, browser permissions, storage et service-worker scope ; l'absence de politique ne signifie pas autorisation.",
+      "lock_class": "runtime_security",
+      "tier": "foundational",
+      "source_document": "04-runtime-and-security/24-embed-threat-model.md",
+      "source_line": 39,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-145",
+      "rule": "Les informations de runtime/lifecycle/transport et les préférences de présentation Koali sont des structures distinctes ; une couleur ou un mode d'affichage ne peut pas devenir une propriété d'autorité runtime.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/13-registration-vs-presentation.md",
+      "source_line": 33,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-146",
+      "rule": "Après le deep link initial, le router interne de l'application propriétaire reste son autorité de navigation sauf bridge versionné explicitement négocié.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/14-route-ownership-sync.md",
+      "source_line": 25,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-147",
+      "rule": "Koali ne synchronise pas silencieusement son URL avec le router enfant par inspection DOM, interception non déclarée ou heuristique de navigation.",
+      "lock_class": "routing_registry",
+      "tier": "foundational",
+      "source_document": "03-routing-and-registry/14-route-ownership-sync.md",
+      "source_line": 27,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-148",
+      "rule": "Le chrome ajouté par Koali autour d'une application propriétaire en framed mode reste minimal et ne duplique pas sa navigation interne.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/38-chrome-minimal-et-focus.md",
+      "source_line": 25,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-149",
+      "rule": "L'entrée/sortie immersive doit préserver un focus clavier cohérent ; à la sortie, le focus revient au contrôle parent qui a initié le mode, et le contrôle de retour Koali reste opérable au-dessus de la surface enfant.",
+      "lock_class": "experience",
+      "tier": "experience",
+      "source_document": "02-host-experience/38-chrome-minimal-et-focus.md",
+      "source_line": 29,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-150",
+      "rule": "L'exclusion de VotingMachine / VM Engine n'autorise pas à supprimer, renommer ou absorber les sémantiques Smart Vote déjà possédées par d'autres sous-systèmes.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/31-exclusions-et-coexistence.md",
+      "source_line": 32,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-151",
+      "rule": "L'exclusion d'Ame-Artificielle n'interdit pas un outil AI optionnel déjà défini par une application propriétaire admise ; Koali ne peut cependant pas l'inventer, l'élever en autorité ou le rendre implicitement requis.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/31-exclusions-et-coexistence.md",
+      "source_line": 34,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-152",
+      "rule": "Dès que la v1.1 est intégrée au repository, `validate:surface-spec` doit faire partie de `QUALIFY ALL` et bloquer une baseline lorsque les locks, sources, index ou hashes divergent.",
+      "lock_class": "verification",
+      "tier": "verification",
+      "source_document": "07-verification/42-spec-validation.md",
+      "source_line": 26,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-153",
+      "rule": "Toute `local_module_surface` onboardée pour une baseline de production doit posséder un Application Conformance Profile validé ; une URL fonctionnelle seule ne constitue pas une intégration conforme.",
+      "lock_class": "integration",
+      "tier": "integration",
+      "source_document": "05-integrations/32-onboarding-conformance-profile.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    },
+    {
+      "id": "LOCK-KS-SURF-154",
+      "rule": "Une target navigateur peut exposer uniquement l'adresse nécessaire au rendu admis ; elle ne peut pas exposer l'endpoint de contrôle/lifecycle ni des détails internes sans nécessité de présentation explicite.",
+      "lock_class": "architecture",
+      "tier": "foundational",
+      "source_document": "01-core-architecture/08-public-descriptor-data-minimization.md",
+      "source_line": 36,
+      "change_requires_adr": true
+    }
+  ]
+}

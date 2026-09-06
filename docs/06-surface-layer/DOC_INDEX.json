@@ -1,0 +1,106 @@
+{
+  "spec_id": "KOALI-SURFACE-LAYER-LOCK-001",
+  "version": "1.1.0",
+  "canonical_entrypoint": "README.md",
+  "ai_entrypoint": "AI_READ_ORDER.md",
+  "canonical_lock_source": "markdown_lock_declarations",
+  "lock_registry": "locks/koali-surface-layer.lock.json",
+  "source_registry": "sources/SOURCES.lock.json",
+  "schemas_dir": "schemas",
+  "directories": {
+    "00-governance": [
+      "00-governance/00-statut-force-normative.md",
+      "00-governance/01-base-documentaire-et-ordre-autorite.md",
+      "00-governance/02-source-unique-et-projections-generees.md",
+      "00-governance/44-anti-ai-drift-protocol.md",
+      "00-governance/45-change-control-et-adr.md",
+      "00-governance/46-decisions-ouvertes.md"
+    ],
+    "01-core-architecture": [
+      "01-core-architecture/02-these-architecturale.md",
+      "01-core-architecture/03-anti-reimplementation.md",
+      "01-core-architecture/04-taxonomie-surfaces.md",
+      "01-core-architecture/05-architecture-renderer.md",
+      "01-core-architecture/06-application-host.md",
+      "01-core-architecture/07-control-plane-render-plane.md",
+      "01-core-architecture/08-public-descriptor-data-minimization.md"
+    ],
+    "02-host-experience": [
+      "02-host-experience/07-modes-affichage.md",
+      "02-host-experience/08-etat-mode-navigation.md",
+      "02-host-experience/09-cadre-visuel-accent.md",
+      "02-host-experience/10-navigation-outer-inner.md",
+      "02-host-experience/21-accessibilite.md",
+      "02-host-experience/36-shell-integration.md",
+      "02-host-experience/37-responsive-behavior.md",
+      "02-host-experience/38-chrome-minimal-et-focus.md"
+    ],
+    "03-routing-and-registry": [
+      "03-routing-and-registry/11-routing-deep-links.md",
+      "03-routing-and-registry/12-registre-local-surfaces.md",
+      "03-routing-and-registry/13-registration-vs-presentation.md",
+      "03-routing-and-registry/14-route-ownership-sync.md",
+      "03-routing-and-registry/32-manifest-vs-registration.md",
+      "03-routing-and-registry/33-surface-resolution-algorithm.md",
+      "03-routing-and-registry/34-component-registry-ferme.md",
+      "03-routing-and-registry/35-url-policy.md"
+    ],
+    "04-runtime-and-security": [
+      "04-runtime-and-security/13-transport-embed.md",
+      "04-runtime-and-security/14-securite-embed.md",
+      "04-runtime-and-security/15-authentification-sso.md",
+      "04-runtime-and-security/16-offline-local-first.md",
+      "04-runtime-and-security/17-lifecycle-activation.md",
+      "04-runtime-and-security/18-etats-runtime-renderer.md",
+      "04-runtime-and-security/19-health-readiness.md",
+      "04-runtime-and-security/20-parent-child-communication.md",
+      "04-runtime-and-security/22-telemetrie-audit.md",
+      "04-runtime-and-security/23-lifecycle-broker-boundary.md",
+      "04-runtime-and-security/24-embed-threat-model.md",
+      "04-runtime-and-security/38-loading-retry-timeouts.md",
+      "04-runtime-and-security/39-erreurs-visibles.md"
+    ],
+    "05-integrations": [
+      "05-integrations/23-modele-integration.md",
+      "05-integrations/24-uckk.md",
+      "05-integrations/25-konnaxion.md",
+      "05-integrations/26-orgo.md",
+      "05-integrations/27-semantik-architect.md",
+      "05-integrations/28-kristal.md",
+      "05-integrations/29-kport-xkaliber-ekoh.md",
+      "05-integrations/30-medikristal.md",
+      "05-integrations/31-exclusions-et-coexistence.md",
+      "05-integrations/32-onboarding-conformance-profile.md",
+      "05-integrations/33-konnaxion-capsule-manager.md",
+      "05-integrations/34-kristal-farms.md"
+    ],
+    "06-implementation": [
+      "06-implementation/31-fichiers-cibles-repo.md",
+      "06-implementation/42-sequence-implementation.md",
+      "06-implementation/43-definition-of-done-onboarding.md"
+    ],
+    "07-verification": [
+      "07-verification/40-tests-minimums.md",
+      "07-verification/41-qualification-gate.md",
+      "07-verification/42-spec-validation.md",
+      "07-verification/47-matrice-non-confusion.md",
+      "07-verification/48-architecture-finale-resumee.md"
+    ],
+    "08-reference": [
+      "08-reference/annexe-a-registre-locks.md",
+      "08-reference/annexe-b-references-sources.md",
+      "08-reference/annexe-c-snapshot-koali-spaces.md",
+      "08-reference/annexe-d-terminologie-v1.1.md"
+    ],
+    "_root": [
+      "AI_READ_ORDER.md",
+      "CHANGELOG.md",
+      "MIGRATION_v1.0_to_v1.1.md",
+      "README.md"
+    ],
+    "adr": [
+      "adr/0000-template.md",
+      "adr/README.md"
+    ]
+  }
+}

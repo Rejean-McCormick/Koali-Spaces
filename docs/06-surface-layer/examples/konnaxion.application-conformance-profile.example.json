@@ -1,0 +1,42 @@
+{
+  "profileId": "koali.surface-conformance.konnaxion.v1",
+  "moduleId": "konnaxion",
+  "owner": "Konnaxion",
+  "sourcePinRef": "sources/SOURCES.lock.json#/sources/konnaxion",
+  "runtimeRegistrationRef": "runtime:konnaxion:primary",
+  "uiOwnership": "owner_application",
+  "routing": {
+    "initialDeepLink": true,
+    "internalRouterOwner": "owner_application"
+  },
+  "authBoundary": {
+    "ownerRetainsAuthorization": true,
+    "koaliCredentialInjection": false
+  },
+  "browser": {
+    "permissions": [],
+    "sandboxReviewRequired": true,
+    "topNavigationPolicy": "deny",
+    "popupPolicy": "explicit_allowlisted",
+    "downloadPolicy": "explicit_allowlisted",
+    "storageIsolationReviewed": false,
+    "serviceWorkerScopeReviewed": false
+  },
+  "offline": {
+    "class": "network_optional",
+    "notes": "Final offline behavior must be confirmed against the deployed Konnaxion runtime profile."
+  },
+  "lifecycle": {
+    "ownerOrBroker": "declared-kOA-lifecycle-owner",
+    "directRendererProcessControl": false
+  },
+  "health": {
+    "readinessRefRequired": true,
+    "healthIsAuthorization": false
+  },
+  "knownLimitations": [
+    "Transport profile remains OPEN-KS-SURF-001 until ADR.",
+    "SSO remains OPEN-KS-SURF-002 until ADR."
+  ],
+  "evidenceRefs": []
+}

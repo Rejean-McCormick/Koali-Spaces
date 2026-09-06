@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "source_set_id": "KOALI-SURFACE-SOURCES-001",
+  "spec_version": "1.1.0",
+  "generated_from_context_pack_index": {
+    "generated_at": "2026-09-01T13:53:07-04:00",
+    "policy_version": "2026-09-01.11"
+  },
+  "sources": [
+    {
+      "source_id": "koa-linux",
+      "role": "authority_base",
+      "scope": "included",
+      "repository": "Rejean-McCormick/kOA-Linux",
+      "context_pack": "koa-linux-context-pack.txt",
+      "source_commit": "254eb115659f7b7f7951417b1b448a00e1a04cab",
+      "context_pack_sha256": "b8febdf094971d51957fad155ff6e30046572c80e9b506adc0038b15937ee776",
+      "generated_at": "2026-09-01T13:52:46-04:00"
+    },
+    {
+      "source_id": "konnaxion",
+      "role": "owner_application",
+      "scope": "included",
+      "repository": "Rejean-McCormick/Konnaxion",
+      "context_pack": "konnaxion-context-pack.txt",
+      "source_commit": "60f4806e669ade724e6dcf2a77351cdddc2d0e32",
+      "context_pack_sha256": "f90f9c4977e69732017568cc2275a1070d6f8fde02d4941d4f6c06ea5dcb05a9",
+      "generated_at": "2026-09-01T13:52:45-04:00"
+    },
+    {
+      "source_id": "orgo",
+      "role": "owner_application",
+      "scope": "included",
+      "repository": "Rejean-McCormick/Orgo",
+      "context_pack": "orgo-context-pack.txt",
+      "source_commit": "2b13ac5c28e04aff107ade9bf76d476467c56ad0",
+      "context_pack_sha256": "d85787c3748ff0b56fc183b480ae3e0620b1ea8d461fa185dc95a6b04de798d8",
+      "generated_at": "2026-09-01T13:52:52-04:00"
+    },
+    {
+      "source_id": "uckk-moodle",
+      "role": "owner_application_external_platform",
+      "scope": "included",
+      "repository": "Rejean-McCormick/UCKK-Moodle",
+      "context_pack": "uckk-moodle-context-pack.txt",
+      "source_commit": "094ebff9abac8d407a5362898775eef902d2ccd1",
+      "context_pack_sha256": "e83eb548bec5af30839e591da3c69bebeb2ea6137678e38fd8b465a749316df8",
+      "generated_at": "2026-09-01T13:52:47-04:00"
+    },
+    {
+      "source_id": "semantik-architect",
+      "role": "owner_application",
+      "scope": "included",
+      "repository": "Rejean-McCormick/SemantiK_Architect",
+      "context_pack": "semantik-architect-context-pack.txt",
+      "source_commit": "cf1cf76cc2a95c50b933d49e1afaff7c28117ffd",
+      "context_pack_sha256": "194e662a60445d8b13a24be446bf6c71ee4dd8afdd1a0f2dc5f6adb0d2431228",
+      "generated_at": "2026-09-01T13:52:48-04:00"
+    },
+    {
+      "source_id": "kristal-framework",
+      "role": "knowledge_framework",
+      "scope": "included",
+      "repository": "Rejean-McCormick/kristal-framework",
+      "context_pack": "kristal-framework-context-pack.txt",
+      "source_commit": "bad7346b387ad61fa141ecba0031c5859c6b15d0",
+      "context_pack_sha256": "2c7c4a841193c4de73e1bc2122ab2d7b1ca5f354206043fbc990f529ca2224f6",
+      "generated_at": "2026-09-01T13:52:58-04:00"
+    },
+    {
+      "source_id": "k-port",
+      "role": "owner_domain_surface",
+      "scope": "included",
+      "repository": "Rejean-McCormick/K-Port",
+      "context_pack": "k-port-context-pack.txt",
+      "source_commit": "114ad695213a83ad2c38aa09f3ff4b4a7d46d9cb",
+      "context_pack_sha256": "f4b4680f3fce12a18bdbe9e0763c91e9682ddd74019913003c5cc671d7339679",
+      "generated_at": "2026-09-01T13:53:01-04:00"
+    },
+    {
+      "source_id": "xkaliber",
+      "role": "owner_domain_surface",
+      "scope": "included",
+      "repository": "Rejean-McCormick/XKaliber",
+      "context_pack": "xkaliber-context-pack.txt",
+      "source_commit": "c41cde7fb7e16d7bb228fa1ab0b338c095bcc3a5",
+      "context_pack_sha256": "1ddbc9f6f0de108dd35275d7152e299873ce9110cf19d9dcaef7772552731289",
+      "generated_at": "2026-09-01T13:52:46-04:00"
+    },
+    {
+      "source_id": "medikristal",
+      "role": "knowledge_application_candidate",
+      "scope": "included",
+      "repository": "Rejean-McCormick/MediKristal",
+      "context_pack": "medikristal-context-pack.txt",
+      "source_commit": "245f5a3007d538aea65e0fba0020ee8178079353",
+      "context_pack_sha256": "598d9993e55908d37a0142cd4aa85c7ba35577c29d496e0fa3f297071478f94a",
+      "generated_at": "2026-09-01T13:52:54-04:00"
+    },
+    {
+      "source_id": "kristal-farms",
+      "role": "owner_application",
+      "scope": "included",
+      "repository": "Rejean-McCormick/Kristal_Farms",
+      "context_pack": "kristal-farms-context-pack.txt",
+      "source_commit": "047ea74e30d2596597805b80a09214966f78cad7",
+      "context_pack_sha256": "abd163d101bcb97c82353661dee9f4f3f7fbb781f91944281684c3305574c860",
+      "generated_at": "2026-09-01T13:52:57-04:00"
+    },
+    {
+      "source_id": "konnaxion-capsule-manager",
+      "role": "operator_application",
+      "scope": "included",
+      "repository": "Rejean-McCormick/Konnaxion_Capsule_Manager",
+      "context_pack": "konnaxion-capsule-manager-context-pack.txt",
+      "source_commit": "453bbb50e3bca6eae3a12af0271acd330de8ff73",
+      "context_pack_sha256": "44c8a81d8ac65c2629544b18543d03a725ec2999a24629ed77ee0974a6a0b513",
+      "generated_at": "2026-09-01T13:52:59-04:00"
+    },
+    {
+      "source_id": "ame-artificielle",
+      "role": "excluded_project",
+      "scope": "excluded",
+      "repository": "Rejean-McCormick/Ame-Artificielle",
+      "context_pack": "ame-artificielle-context-pack.txt",
+      "source_commit": "43b8d27236ecfe19ab4d811bbee9aa1987db662a",
+      "context_pack_sha256": "d6e04a7a970f958acd8f31286bf77baeba29b20f9366554f63bf383da867d45e",
+      "generated_at": "2026-09-01T13:52:54-04:00"
+    },
+    {
+      "source_id": "votingmachine",
+      "role": "excluded_project",
+      "scope": "excluded",
+      "repository": "Rejean-McCormick/VotingMachine",
+      "context_pack": "votingmachine-context-pack.txt",
+      "source_commit": "8aa367410822d2013ce0df377fad651aa26bd23e",
+      "context_pack_sha256": "982c79d0eace2083fb4e5af6ce1726e11ec391e4cb5d549c37fd0d6cae18464f",
+      "generated_at": "2026-09-01T13:53:07-04:00"
+    }
+  ]
+}

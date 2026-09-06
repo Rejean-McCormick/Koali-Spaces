@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://initkoa.org/schemas/koali/surface-presentation-policy.v1.1.schema.json",
+  "title": "Koali SurfacePresentationPolicy v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "moduleId",
+    "allowedModes",
+    "defaultMode",
+    "chromeProfile"
+  ],
+  "properties": {
+    "moduleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "labelKey": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accentTokenRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowedModes": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "framed",
+          "immersive"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "defaultMode": {
+      "enum": [
+        "framed",
+        "immersive"
+      ]
+    },
+    "chromeProfile": {
+      "enum": [
+        "minimal"
+      ]
+    }
+  }
+}

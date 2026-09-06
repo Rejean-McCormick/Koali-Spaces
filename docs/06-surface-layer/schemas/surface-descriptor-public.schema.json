@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://initkoa.org/schemas/koali/surface-descriptor-public.v1.1.schema.json",
+  "title": "Koali SurfaceDescriptorPublic v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "surfaceId",
+    "moduleId",
+    "routeId",
+    "kind",
+    "status",
+    "presentation"
+  ],
+  "properties": {
+    "surfaceId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moduleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "routeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "local_shell_page",
+        "registered_component_surface",
+        "local_module_surface"
+      ]
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "access",
+        "runtime",
+        "connectivity",
+        "render"
+      ],
+      "properties": {
+        "access": {
+          "enum": [
+            "allowed",
+            "blocked"
+          ]
+        },
+        "runtime": {
+          "enum": [
+            "inactive",
+            "starting",
+            "ready",
+            "degraded",
+            "failed",
+            "missing"
+          ]
+        },
+        "connectivity": {
+          "enum": [
+            "online",
+            "offline",
+            "unknown"
+          ]
+        },
+        "render": {
+          "enum": [
+            "idle",
+            "resolving",
+            "loading",
+            "ready",
+            "error"
+          ]
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "immersiveAllowed"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "accentTokenRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "immersiveAllowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "embedSrc",
+        "iframeTitle",
+        "sandboxTokens",
+        "browserPermissions"
+      ],
+      "properties": {
+        "embedSrc": {
+          "type": "string",
+          "minLength": 1
+        },
+        "iframeTitle": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sandboxTokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "browserPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "bridgeProtocolRef": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
