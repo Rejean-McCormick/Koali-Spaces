@@ -1,3 +1,4 @@
+import { ACCENT_BY_ID, ACCENT_IDS, accentIdForColor } from './appearance-registry.mjs';
 const STATES = new Set(['available', 'cached_read_only', 'degraded', 'unavailable']);
 const AVAILABILITY = new Set(['always', 'conditional', 'online_only', 'offline_only']);
 const DENIED_BEHAVIORS = new Set(['hidden', 'disabled', 'access_denied']);
@@ -6,6 +7,10 @@ const ORIGIN_POLICIES = new Set(['same_origin', 'registered_local_origin']);
 const MODULE_ID = /^[a-z][a-z0-9]*(?:[_-][a-z0-9]+)*$/;
 const ROUTE_ID = /^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$/;
 const ROUTE_PATH = /^\/(?:[A-Za-z0-9._~-]+(?:\/[A-Za-z0-9._~:@!$&()*+,;=-]+)*)?$/;
+
+const APPEARANCE_MODES = new Set(['system', 'light', 'dark']);
+const APPEARANCE_DENSITIES = new Set(['comfortable', 'compact', 'touch']);
+const SURFACE_STYLES = new Set(['minimal', 'outlined', 'elevated']);
 
 function object(value, label) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error(`${label} must be an object`);
@@ -30,6 +35,54 @@ function logicalRef(value, label) {
 function assertRoutePath(value, label) {
   if (typeof value !== 'string' || !ROUTE_PATH.test(value)) throw new Error(`${label} is invalid`);
   return value;
+}
+
+
+function assertAllowedList(value, label, allowed) {
+  if (value == null) return null;
+  if (!Array.isArray(value) || value.length === 0) throw new Error(`${label} must be a non-empty array when present`);
+  if (new Set(value).size !== value.length) throw new Error(`${label} contains duplicates`);
+  if (value.some((item) => typeof item !== 'string' || !allowed.has(item))) throw new Error(`${label} contains an unsupported value`);
+  return new Set(value);
+}
+
+function assertAppearancePolicy(space) {
+  const appearance = object(space.appearance, 'Space appearance');
+  if (appearance.density != null && !APPEARANCE_DENSITIES.has(appearance.density)) throw new Error('Space appearance density is invalid');
+  if (appearance.allow_module_accent != null && typeof appearance.allow_module_accent !== 'boolean') throw new Error('Space appearance allow_module_accent is invalid');
+
+  if (space.appearance_policy == null) return;
+  const policy = object(space.appearance_policy, 'Space appearance_policy');
+  const policyKeys = new Set([
+    'default_mode', 'default_accent', 'default_density', 'default_surface_style',
+    'allowed_modes', 'allowed_accents', 'allowed_densities', 'allowed_surface_styles',
+    'allow_module_accent',
+  ]);
+  for (const key of Object.keys(policy)) {
+    if (!policyKeys.has(key)) throw new Error(`Space appearance_policy contains unsupported field ${key}`);
+  }
+  const modes = assertAllowedList(policy.allowed_modes, 'Space allowed_modes', APPEARANCE_MODES);
+  const densities = assertAllowedList(policy.allowed_densities, 'Space allowed_densities', APPEARANCE_DENSITIES);
+  const styles = assertAllowedList(policy.allowed_surface_styles, 'Space allowed_surface_styles', SURFACE_STYLES);
+
+  let accents = null;
+  if (policy.allowed_accents != null) {
+    if (!Array.isArray(policy.allowed_accents) || policy.allowed_accents.length === 0) throw new Error('Space allowed_accents must be a non-empty array when present');
+    if (new Set(policy.allowed_accents).size !== policy.allowed_accents.length) throw new Error('Space allowed_accents contains duplicates');
+    if (policy.allowed_accents.some((item) => typeof item !== 'string' || !ACCENT_IDS.has(item))) throw new Error('Space allowed_accents contains an unsupported accent id');
+    accents = new Set(policy.allowed_accents);
+  }
+
+  if (policy.default_mode != null && !APPEARANCE_MODES.has(policy.default_mode)) throw new Error('Space default_mode is invalid');
+  if (policy.default_density != null && !APPEARANCE_DENSITIES.has(policy.default_density)) throw new Error('Space default_density is invalid');
+  if (policy.default_surface_style != null && !SURFACE_STYLES.has(policy.default_surface_style)) throw new Error('Space default_surface_style is invalid');
+  if (policy.default_accent != null && !ACCENT_IDS.has(policy.default_accent)) throw new Error('Space default_accent is invalid');
+  if (policy.allow_module_accent != null && typeof policy.allow_module_accent !== 'boolean') throw new Error('Space appearance policy allow_module_accent is invalid');
+
+  if (modes && policy.default_mode != null && !modes.has(policy.default_mode)) throw new Error('Space default_mode is not allowed by appearance policy');
+  if (densities && policy.default_density != null && !densities.has(policy.default_density)) throw new Error('Space default_density is not allowed by appearance policy');
+  if (styles && policy.default_surface_style != null && !styles.has(policy.default_surface_style)) throw new Error('Space default_surface_style is not allowed by appearance policy');
+  if (accents && policy.default_accent != null && !accents.has(policy.default_accent)) throw new Error('Space default_accent is not allowed by appearance policy');
 }
 
 function routeNamespaceKey(manifest, route, pathValue) {
@@ -61,14 +114,20 @@ function assertSidebar(manifest, routeIds) {
   if (sidebar.module_id !== manifest.module_id) throw new Error('sidebar module identity mismatch');
   if (sidebar.visible_depth !== 2) throw new Error('sidebar visible_depth must be 2');
   if (!Array.isArray(sidebar.items)) throw new Error('sidebar items must be an array');
+  const checkPresentationRefs = (item) => {
+    logicalRef(item.icon_ref, 'sidebar icon_ref');
+    logicalRef(item.badge_provider_ref, 'sidebar badge_provider_ref');
+  };
   const checkLeaf = (item) => {
     object(item, 'sidebar item');
+    checkPresentationRefs(item);
     if (!item.route_id || !routeIds.has(item.route_id)) throw new Error(`sidebar route does not resolve: ${item.route_id ?? 'missing'}`);
     if (item.availability != null && !AVAILABILITY.has(item.availability)) throw new Error('sidebar availability is invalid');
   };
   for (const item of sidebar.items) {
     object(item, 'sidebar item');
     if (Array.isArray(item.children)) {
+      checkPresentationRefs(item);
       if (item.children.length === 0) throw new Error('sidebar group must not be empty');
       for (const child of item.children) checkLeaf(child);
     } else {
@@ -77,14 +136,95 @@ function assertSidebar(manifest, routeIds) {
   }
 }
 
+function sidebarItemIds(sidebar) {
+  const ids = new Set();
+  for (const item of sidebar.items ?? []) {
+    if (typeof item.item_id === 'string') ids.add(item.item_id);
+    for (const child of item.children ?? []) {
+      if (typeof child.item_id === 'string') ids.add(child.item_id);
+    }
+  }
+  return ids;
+}
+
+function assertProductSurfaces(manifest, routeIds) {
+  const portability = manifest.ui_portability;
+  if (portability != null) {
+    object(portability, 'module ui_portability');
+    if (portability.integrated_supported !== true || typeof portability.standalone_supported !== 'boolean') {
+      throw new Error('module ui_portability is invalid');
+    }
+    logicalRef(portability.standalone_entrypoint_ref, 'standalone entrypoint ref');
+  }
+
+  if (manifest.surface_profiles == null) {
+    if (manifest.default_surface_id != null) throw new Error('default_surface_id requires surface_profiles');
+    return;
+  }
+  if (!Array.isArray(manifest.surface_profiles) || manifest.surface_profiles.length === 0) {
+    throw new Error('surface_profiles must be a non-empty array when present');
+  }
+  const navigationIds = sidebarItemIds(manifest.sidebar);
+  const widgetIds = new Set(manifest.topbar_widgets.map((widget) => widget.widget_id));
+  const surfaceIds = new Set();
+  for (const surface of manifest.surface_profiles) {
+    object(surface, 'product surface profile');
+    if (!MODULE_ID.test(surface.surface_id ?? '')) throw new Error('surface profile identity is invalid');
+    if (surfaceIds.has(surface.surface_id)) throw new Error(`duplicate surface profile ${surface.surface_id}`);
+    surfaceIds.add(surface.surface_id);
+    if (typeof surface.label !== 'string' || !surface.label) throw new Error('surface profile label is required');
+    if (!routeIds.has(surface.home_route_id)) throw new Error(`surface home route does not resolve: ${surface.home_route_id ?? 'missing'}`);
+    if (surface.required_capabilities != null && (!Array.isArray(surface.required_capabilities) || surface.required_capabilities.some((item) => typeof item !== 'string' || !item))) {
+      throw new Error('surface required capabilities are invalid');
+    }
+    for (const itemId of surface.navigation_item_ids ?? []) {
+      if (!navigationIds.has(itemId)) throw new Error(`surface navigation item does not resolve: ${itemId}`);
+    }
+    for (const widgetId of surface.topbar_widget_ids ?? []) {
+      if (!widgetIds.has(widgetId)) throw new Error(`surface topbar widget does not resolve: ${widgetId}`);
+    }
+    if (surface.command_refs != null && (!Array.isArray(surface.command_refs) || surface.command_refs.some((item) => typeof item !== 'string' || !item))) {
+      throw new Error('surface command refs are invalid');
+    }
+    logicalRef(surface.inspector_ref, 'surface inspector ref');
+    if (surface.density != null && !['comfortable', 'compact', 'touch'].includes(surface.density)) throw new Error('surface density is invalid');
+  }
+  if (manifest.default_surface_id != null && !surfaceIds.has(manifest.default_surface_id)) {
+    throw new Error('default_surface_id does not resolve');
+  }
+}
+
+function assertTopbarWidget(widget, routeIds, label) {
+  object(widget, `${label} topbar widget`);
+  if (widget.projection_ref != null && !ROUTE_ID.test(widget.projection_ref)) {
+    throw new Error(`${label} topbar projection_ref is invalid`);
+  }
+  if ((widget.kind === 'counter' || widget.kind === 'resume') && !widget.projection_ref) {
+    throw new Error(`${label} ${widget.kind} widget requires projection_ref`);
+  }
+  const activation = object(widget.activation, `${label} topbar activation`);
+  if (!['route', 'command', 'none'].includes(activation.kind)) {
+    throw new Error(`${label} topbar activation kind is invalid`);
+  }
+  if (activation.kind === 'route') {
+    if (!activation.route_id || !routeIds.has(activation.route_id)) {
+      throw new Error(`${label} topbar route does not resolve: ${activation.route_id ?? 'missing'}`);
+    }
+    if (activation.command_ref != null) throw new Error(`${label} route activation must not contain command_ref`);
+  } else if (activation.kind === 'command') {
+    logicalRef(activation.command_ref, `${label} topbar command_ref`);
+    if (!activation.command_ref) throw new Error(`${label} command activation requires command_ref`);
+    if (activation.route_id != null) throw new Error(`${label} command activation must not contain route_id`);
+  } else if (activation.route_id != null || activation.command_ref != null) {
+    throw new Error(`${label} none activation must not contain route_id or command_ref`);
+  }
+}
+
 function assertModuleTopbar(manifest, routeIds) {
   if (!Array.isArray(manifest.topbar_widgets)) throw new Error('topbar_widgets must be an array');
   for (const widget of manifest.topbar_widgets) {
-    object(widget, 'topbar widget');
-    if (widget.scope === 'module' && widget.module_id !== manifest.module_id) throw new Error('module topbar widget identity mismatch');
-    if (widget.activation?.kind === 'route' && (!widget.activation.route_id || !routeIds.has(widget.activation.route_id))) {
-      throw new Error(`module topbar route does not resolve: ${widget.activation?.route_id ?? 'missing'}`);
-    }
+    if (widget.scope !== 'module' || widget.module_id !== manifest.module_id) throw new Error('module topbar widget identity mismatch');
+    assertTopbarWidget(widget, routeIds, 'module');
   }
 }
 
@@ -103,6 +243,15 @@ export function assertCapabilitySnapshot(value) {
 export function assertTheme(theme) {
   object(theme, 'interface_theme');
   if (theme.design_system_id !== 'koali.ant5') throw new Error('unsupported design system');
+  const tokens = object(theme.tokens, 'theme tokens');
+  if (typeof tokens.primary_accent !== 'string' || !/^#[0-9A-Fa-f]{6}$/.test(tokens.primary_accent)) throw new Error('theme primary_accent is invalid');
+  if (tokens.primary_accent_id != null) {
+    if (typeof tokens.primary_accent_id !== 'string' || !ACCENT_IDS.has(tokens.primary_accent_id)) throw new Error('theme primary_accent_id is not in the canonical accent palette');
+    if (ACCENT_BY_ID[tokens.primary_accent_id].color.toLowerCase() !== tokens.primary_accent.toLowerCase()) throw new Error('theme primary_accent_id does not match primary_accent color');
+  } else if (accentIdForColor(tokens.primary_accent) == null) {
+    throw new Error('theme primary_accent must resolve to the canonical accent palette when primary_accent_id is absent');
+  }
+  if (!APPEARANCE_DENSITIES.has(tokens.density)) throw new Error('theme density is invalid');
   const boundary = object(theme.authority_boundary, 'theme authority_boundary');
   if (boundary.presentation_only !== true || boundary.changes_authorization !== false || boundary.changes_module_identity !== false) throw new Error('theme crosses presentation authority boundary');
   if (object(theme.motion_policy, 'theme motion_policy').reduced_motion_supported !== true) throw new Error('theme must support reduced motion');
@@ -176,6 +325,7 @@ export function assertModuleManifest(manifest, routeNamespaces = new Set()) {
   }
   assertSidebar(manifest, routeIds);
   assertModuleTopbar(manifest, routeIds);
+  assertProductSurfaces(manifest, routeIds);
   return routeIds;
 }
 
@@ -185,11 +335,13 @@ export function assertActivationPayload(payload) {
     if (!(key in payload)) throw new Error(`missing ${key}`);
   }
   const space = object(payload.space_definition, 'space_definition');
+  if ('presentation_preferences' in space || 'user_presentation_preferences' in space) throw new Error('personal presentation preferences are outside Space activation authority');
   if (!MODULE_ID.test(space.space_id ?? '') || !MODULE_ID.test(space.default_module_id ?? '')) throw new Error('Space identity is invalid');
   const boundary = object(space.authority_boundary, 'Space authority_boundary');
   if (boundary.presentation_only !== true || boundary.may_grant_capabilities !== false || boundary.contains_business_state !== false || boundary.contains_executable_extension !== false) throw new Error('Space crosses authority boundary');
   const offline = object(space.offline_policy, 'Space offline_policy');
   if (offline.shell_available !== true || offline.retain_last_validated_definition !== true || offline.network_state_indicator !== true || offline.public_cdn_required !== false || offline.remote_runtime_assets_required !== false) throw new Error('Space is not offline-closed');
+  assertAppearancePolicy(space);
   assertTheme(payload.interface_theme);
   if (space.appearance?.design_system_id && space.appearance.design_system_id !== payload.interface_theme.design_system_id) throw new Error('Space/theme design system mismatch');
   assertAssetManifest(payload.shell_asset_manifest, 'koa_spaces_shell', 'koa_spaces');
@@ -240,11 +392,8 @@ export function assertActivationPayload(payload) {
 
   if (!Array.isArray(space.global_topbar)) throw new Error('global_topbar must be an array');
   for (const widget of space.global_topbar) {
-    object(widget, 'global topbar widget');
     if (widget.scope !== 'global' || widget.module_id != null) throw new Error('global topbar widget scope is invalid');
-    if (widget.activation?.kind === 'route' && (!widget.activation.route_id || !routeIdsGlobal.has(widget.activation.route_id))) {
-      throw new Error(`global topbar route does not resolve: ${widget.activation?.route_id ?? 'missing'}`);
-    }
+    assertTopbarWidget(widget, routeIdsGlobal, 'global');
   }
 
   const suppliedAssetBundles = new Set();

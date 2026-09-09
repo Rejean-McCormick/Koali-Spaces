@@ -28,7 +28,7 @@ function homeManifest() {
 function theme() {
   return {
     theme_id: 'koa_spaces.default', version: '1.0.0', design_system_id: 'koali.ant5',
-    tokens: { primary_accent: '#1e6864', density: 'comfortable', radius_scale: 'v1', spacing_scale: 'v1', typography_scale: 'v1', focus_style: 'visible' },
+    tokens: { primary_accent: '#1e6864', primary_accent_id: 'forest', density: 'comfortable', radius_scale: 'v1', spacing_scale: 'v1', typography_scale: 'v1', focus_style: 'visible' },
     icon_policy: { style: 'outline', local_assets_required: true }, motion_policy: { reduced_motion_supported: true, default_motion: 'minimal' },
     authority_boundary: { presentation_only: true, changes_authorization: false, changes_module_identity: false },
   };
@@ -128,4 +128,105 @@ test('local_shell_page cannot be claimed by an owner module', () => {
   value.space_definition.module_instances.push({ module_id: 'demo', manifest_ref: 'demo.json', enabled: true, required: true, order: 10 });
   value.module_manifests.push(owner);
   assert.throws(() => assertActivationPayload(value), /local_shell_page is reserved/);
+});
+
+
+test('activation accepts standalone-compatible product surface profiles', () => {
+  const value = activationPayload();
+  const manifest = value.module_manifests[0];
+  manifest.default_surface_id = 'control';
+  manifest.ui_portability = { integrated_supported: true, standalone_supported: true, standalone_entrypoint_ref: 'space-home://standalone' };
+  manifest.surface_profiles = [{
+    surface_id: 'control', label: 'Control', home_route_id: 'space_home.home',
+    navigation_item_ids: ['home'], topbar_widget_ids: [], command_refs: [], inspector_ref: null,
+  }];
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('activation rejects surface profiles that reference foreign navigation or routes', () => {
+  const value = activationPayload();
+  const manifest = value.module_manifests[0];
+  manifest.default_surface_id = 'control';
+  manifest.surface_profiles = [{ surface_id: 'control', label: 'Control', home_route_id: 'space_home.missing', navigation_item_ids: ['foreign'] }];
+  assert.throws(() => assertActivationPayload(value), /surface home route does not resolve|surface navigation item does not resolve/);
+});
+
+test('activation accepts a bounded Space appearance policy', () => {
+  const value = activationPayload();
+  value.space_definition.appearance_policy = {
+    default_mode: 'system',
+    default_accent: 'forest',
+    default_density: 'comfortable',
+    default_surface_style: 'outlined',
+    allowed_modes: ['system', 'light', 'dark'],
+    allowed_accents: ['forest', 'ocean', 'slate', 'earth', 'plum'],
+    allowed_densities: ['compact', 'comfortable', 'touch'],
+    allowed_surface_styles: ['minimal', 'outlined', 'elevated'],
+    allow_module_accent: true,
+  };
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('activation rejects an appearance default outside the Space allowed set', () => {
+  const value = activationPayload();
+  value.space_definition.appearance_policy = {
+    default_mode: 'dark',
+    allowed_modes: ['light'],
+  };
+  assert.throws(() => assertActivationPayload(value), /default_mode is not allowed/);
+});
+
+
+test('activation accepts theme-owned density when the deprecated Space density field is omitted', () => {
+  const value = activationPayload();
+  delete value.space_definition.appearance.density;
+  value.interface_theme.tokens.density = 'touch';
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('activation rejects an appearance accent that is not in the canonical local palette', () => {
+  const value = activationPayload();
+  value.space_definition.appearance_policy = { default_accent: 'unknown-accent' };
+  assert.throws(() => assertActivationPayload(value), /default_accent is invalid/);
+});
+
+test('activation rejects a theme accent identity that disagrees with its canonical color', () => {
+  const value = activationPayload();
+  value.interface_theme.tokens.primary_accent_id = 'ocean';
+  assert.throws(() => assertActivationPayload(value), /does not match primary_accent color/);
+});
+
+test('activation rejects personal presentation preferences embedded in Space authority', () => {
+  const value = activationPayload();
+  value.space_definition.presentation_preferences = { mode: 'dark', accent: 'plum', density: 'compact', surface_style: 'elevated' };
+  assert.throws(() => assertActivationPayload(value), /outside Space activation authority/);
+});
+
+test('topbar projection binding is independent from route activation', () => {
+  const value = activationPayload();
+  value.module_manifests[0].topbar_widgets = [{
+    widget_id: 'space_home.attention', module_id: 'space_home', scope: 'module', slot: 'status', kind: 'counter',
+    label: 'Attention', priority: 10, offline_behavior: 'cached_read_only', projection_ref: 'space_home.attention',
+    activation: { kind: 'route', route_id: 'space_home.home' },
+  }];
+  assert.doesNotThrow(() => assertActivationPayload(value));
+});
+
+test('counter and resume widgets require an explicit projection_ref', () => {
+  const value = activationPayload();
+  value.module_manifests[0].topbar_widgets = [{
+    widget_id: 'space_home.attention', module_id: 'space_home', scope: 'module', slot: 'status', kind: 'counter',
+    label: 'Attention', priority: 10, offline_behavior: 'cached_read_only', activation: { kind: 'route', route_id: 'space_home.home' },
+  }];
+  assert.throws(() => assertActivationPayload(value), /requires projection_ref/);
+});
+
+test('legacy status_provider activation is rejected instead of being treated as click behavior', () => {
+  const value = activationPayload();
+  value.module_manifests[0].topbar_widgets = [{
+    widget_id: 'space_home.status', module_id: 'space_home', scope: 'module', slot: 'status', kind: 'status',
+    label: 'Status', priority: 10, offline_behavior: 'cached_read_only', projection_ref: 'space_home.status',
+    activation: { kind: 'status_provider', status_provider_ref: 'space_home.status' },
+  }];
+  assert.throws(() => assertActivationPayload(value), /activation kind is invalid/);
 });

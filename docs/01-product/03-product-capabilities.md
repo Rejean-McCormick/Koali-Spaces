@@ -16,7 +16,8 @@
 - Surface Renderer/Application Host ;
 - Search/Tasks/Status aggregation via providers ;
 - interface health ;
-- presentation settings.
+- presentation settings ;
+- compatibilité standalone/intégrée déclarée par manifest.
 
 ## Capabilities projetées
 

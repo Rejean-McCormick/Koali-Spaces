@@ -10,59 +10,70 @@ import {
   routeSelectedForPath,
   visibleSidebarItems,
 } from '@/lib/registry';
+import { hrefWithKoaliSurface, surfaceSelectionIsAddressable } from '@/lib/shell-navigation-state';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 
 export default function ActiveModuleSidebar({
   mobileOpen,
   onMobileClose,
+  activeSurfaceId,
 }: {
   mobileOpen: boolean;
   onMobileClose: () => void;
+  activeSurfaceId: string | null;
 }) {
   const { state } = useShell();
   const { t } = useLocalization();
   const router = useRouter();
   const pathname = usePathname();
   const manifest = activeManifest(state, pathname);
+  const addressableSurface = manifest ? surfaceSelectionIsAddressable(manifest, state) : false;
   const routeMap = new Map(
-    manifest?.routes.map((route) => [route.route_id, routeHref(manifest, route)]) ?? [],
+    manifest?.routes.map((route) => [
+      route.route_id,
+      hrefWithKoaliSurface(routeHref(manifest, route), addressableSurface ? activeSurfaceId : null),
+    ]) ?? [],
   );
+  const visibleItems = manifest
+    ? visibleSidebarItems(manifest, state, activeSurfaceId).sort((a, b) => a.order - b.order)
+    : [];
   const items: MenuProps['items'] = manifest
-    ? visibleSidebarItems(manifest, state)
-        .sort((a, b) => a.order - b.order)
-        .map((item) =>
-          'children' in item
-            ? {
-                key: item.item_id,
+    ? visibleItems.map((item) =>
+        'children' in item
+          ? {
+              key: item.item_id,
+              label: t(item.label_key, item.label),
+              children: [...item.children]
+                .sort((a, b) => a.order - b.order)
+                .map((child) => {
+                  const route = manifest.routes.find((candidate) => candidate.route_id === child.route_id);
+                  const denied = route ? !routeCapabilityAllowed(route, state.capabilities) : true;
+                  return {
+                    key: child.route_id,
+                    label: t(child.label_key, child.label),
+                    disabled: Boolean(denied && route?.capability_policy.denied_behavior === 'disabled'),
+                  };
+                }),
+            }
+          : (() => {
+              const route = manifest.routes.find((candidate) => candidate.route_id === item.route_id);
+              const denied = route ? !routeCapabilityAllowed(route, state.capabilities) : true;
+              return {
+                key: item.route_id,
                 label: t(item.label_key, item.label),
-                children: [...item.children]
-                  .sort((a, b) => a.order - b.order)
-                  .map((child) => {
-                    const route = manifest.routes.find((candidate) => candidate.route_id === child.route_id);
-                    const denied = route ? !routeCapabilityAllowed(route, state.capabilities) : true;
-                    return {
-                      key: child.route_id,
-                      label: t(child.label_key, child.label),
-                      disabled: Boolean(denied && route?.capability_policy.denied_behavior === 'disabled'),
-                    };
-                  }),
-              }
-            : (() => {
-                const route = manifest.routes.find((candidate) => candidate.route_id === item.route_id);
-                const denied = route ? !routeCapabilityAllowed(route, state.capabilities) : true;
-                return {
-                  key: item.route_id,
-                  label: t(item.label_key, item.label),
-                  disabled: Boolean(denied && route?.capability_policy.denied_behavior === 'disabled'),
-                };
-              })(),
-        )
+                disabled: Boolean(denied && route?.capability_policy.denied_behavior === 'disabled'),
+              };
+            })(),
+      )
     : [];
   const selectedKeys =
     manifest?.routes
       .filter((route) => routeSelectedForPath(manifest, route, pathname))
       .map((route) => route.route_id) ?? [];
+
+  if (!manifest || visibleItems.length === 0) return null;
+
   const menu = (
     <Menu
       mode="inline"
@@ -79,7 +90,7 @@ export default function ActiveModuleSidebar({
   );
   return (
     <>
-      <aside className="koa-sider" aria-label={t('shell.module_navigation', 'Navigation du module')}>
+      <aside className="koa-sider" aria-label={t('shell.module_navigation', 'Navigation du produit')}>
         {menu}
       </aside>
       <Drawer
@@ -89,7 +100,7 @@ export default function ActiveModuleSidebar({
         closable
         width={300}
         styles={{ body: { padding: 0 } }}
-        title={manifest?.public_name ?? t('shell.navigation', 'Navigation')}
+        title={manifest.public_name}
       >
         {menu}
       </Drawer>

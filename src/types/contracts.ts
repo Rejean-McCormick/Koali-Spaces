@@ -48,6 +48,23 @@ export type SidebarLeaf = {
   route_id: string;
 };
 export type SidebarGroup = Omit<SidebarLeaf, 'route_id'> & { children: SidebarLeaf[] };
+export type ProductSurfaceProfile = {
+  surface_id: string;
+  label: string;
+  label_key?: string;
+  home_route_id: string;
+  required_capabilities?: string[];
+  navigation_item_ids?: string[];
+  topbar_widget_ids?: string[];
+  command_refs?: string[];
+  inspector_ref?: string | null;
+  density?: 'comfortable' | 'compact' | 'touch';
+};
+export type ProductUiPortability = {
+  integrated_supported: true;
+  standalone_supported: boolean;
+  standalone_entrypoint_ref?: string | null;
+};
 export type TopbarWidget = {
   widget_id: string;
   module_id: string | null;
@@ -61,11 +78,11 @@ export type TopbarWidget = {
   required_capabilities?: string[];
   offline_behavior: OfflineBehavior;
   compact_only?: boolean;
+  projection_ref?: string | null;
   activation: {
-    kind: 'route' | 'command' | 'status_provider' | 'none';
+    kind: 'route' | 'command' | 'none';
     route_id?: string | null;
     command_ref?: string | null;
-    status_provider_ref?: string | null;
   };
 };
 export type ModuleManifest = {
@@ -80,6 +97,9 @@ export type ModuleManifest = {
   routes: RouteContribution[];
   sidebar: { module_id: string; visible_depth: 2; items: (SidebarLeaf | SidebarGroup)[] };
   topbar_widgets: TopbarWidget[];
+  default_surface_id?: string | null;
+  surface_profiles?: ProductSurfaceProfile[];
+  ui_portability?: ProductUiPortability;
   localization_refs?: string[];
   accessibility?: Record<string, unknown>;
   offline_behavior: { module_state: OfflineBehavior; fallback_route_id: string | null };
@@ -98,6 +118,18 @@ export type ModuleInstance = {
   public_icon_ref?: string | null;
   home_route_override?: string | null;
 };
+export type SpaceAppearancePolicy = {
+  default_mode?: 'system' | 'light' | 'dark';
+  default_accent?: string;
+  default_density?: 'comfortable' | 'compact' | 'touch';
+  default_surface_style?: 'minimal' | 'outlined' | 'elevated';
+  allowed_modes?: ('system' | 'light' | 'dark')[];
+  allowed_accents?: string[];
+  allowed_densities?: ('comfortable' | 'compact' | 'touch')[];
+  allowed_surface_styles?: ('minimal' | 'outlined' | 'elevated')[];
+  allow_module_accent?: boolean;
+};
+
 export type SpaceDefinition = {
   space_id: string;
   title: string;
@@ -107,13 +139,14 @@ export type SpaceDefinition = {
   global_topbar: TopbarWidget[];
   appearance: {
     theme_ref: string;
-    density: 'comfortable' | 'compact' | 'touch';
+    density?: 'comfortable' | 'compact' | 'touch';
     logo_ref?: string | null;
     accent_token?: string | null;
     allow_module_accent?: boolean;
     design_system_id?: string | null;
     theme_version?: string | null;
   };
+  appearance_policy?: SpaceAppearancePolicy;
   offline_policy: {
     shell_available: true;
     retain_last_validated_definition: true;
@@ -130,6 +163,7 @@ export type InterfaceTheme = {
   design_system_id: string;
   tokens: {
     primary_accent: string;
+    primary_accent_id?: string;
     density: string;
     radius_scale: string;
     spacing_scale: string;

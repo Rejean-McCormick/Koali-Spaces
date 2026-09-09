@@ -3,23 +3,28 @@
 import {
   DisconnectOutlined,
   MenuOutlined,
-  ReloadOutlined,
   SearchOutlined,
-  WifiOutlined,
+  WarningOutlined,
 } from '@ant-design/icons';
-import { Badge, Button, Space, Typography } from 'antd';
+import { Button, Space, Typography } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
+import type { RefObject } from 'react';
 import {
   activeManifest,
+  admittedSurfaceProfiles,
+  defaultSurfaceProfile,
   routeByIdInState,
   routeHref,
+  publicLabel,
   visibleTopbarWidgets,
 } from '@/lib/registry';
+import { hrefWithKoaliSurface } from '@/lib/shell-navigation-state';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 import type { TopbarWidget } from '@/types/contracts';
+import ProductSurfaceSelector from './ProductSurfaceSelector';
 
-function WidgetAction({ widget }: { widget: TopbarWidget }) {
+function WidgetAction({ widget, activeSurfaceId, activeModuleId }: { widget: TopbarWidget; activeSurfaceId: string | null; activeModuleId: string | null }) {
   const { state } = useShell();
   const { t } = useLocalization();
   const router = useRouter();
@@ -28,63 +33,96 @@ function WidgetAction({ widget }: { widget: TopbarWidget }) {
     : null;
   const label = t(widget.label_key, widget.label);
 
+  // Projection-bound widgets become renderable once the GlobalProjectionRuntime
+  // supplies their typed value. KS-2 deliberately keeps missing projection data
+  // invisible rather than presenting a misleading static value.
+  if (widget.projection_ref) return null;
   if (widget.kind === 'status' && widget.activation.kind === 'none') {
     return <Typography.Text className={widget.compact_only ? 'koa-widget-compact-only' : undefined} type="secondary">{label}</Typography.Text>;
   }
-  if (widget.activation.kind === 'status_provider' || widget.kind === 'counter') return null;
   if (!resolved) return null;
+  const targetSurfaces = admittedSurfaceProfiles(resolved.manifest, state);
+  const targetSurfaceId = targetSurfaces.length > 1
+    ? resolved.manifest.module_id === activeModuleId
+      ? activeSurfaceId
+      : defaultSurfaceProfile(resolved.manifest, state)?.surface_id ?? null
+    : null;
   return (
     <Button
       className={widget.compact_only ? 'koa-widget-compact-only' : undefined}
       type={widget.slot === 'primary' ? 'primary' : 'text'}
       icon={widget.kind === 'search' ? <SearchOutlined /> : undefined}
-      onClick={() => router.push(routeHref(resolved.manifest, resolved.route))}
+      onClick={() => router.push(hrefWithKoaliSurface(routeHref(resolved.manifest, resolved.route), targetSurfaceId))}
     >
       {label}
     </Button>
   );
 }
 
-export default function SharedTopBar({ onMenu }: { onMenu: () => void }) {
-  const { state, refresh } = useShell();
+function ShellAttentionIndicator() {
+  const { state } = useShell();
+  const { t } = useLocalization();
+  const router = useRouter();
+  const offline = state.network_state === 'offline' || state.state === 'offline';
+  const attention = offline || ['degraded', 'unavailable', 'error'].includes(state.state);
+  if (!attention) return null;
+
+  const label = offline
+    ? t('network.offline', 'Hors ligne')
+    : t('shell.attention_required', 'État dégradé');
+  return (
+    <Button
+      type="text"
+      size="small"
+      className="koa-shell-attention"
+      icon={offline ? <DisconnectOutlined /> : <WarningOutlined />}
+      onClick={() => router.push('/health')}
+      aria-label={t('shell.open_health', 'Ouvrir l’état de l’interface')}
+    >
+      {label}
+    </Button>
+  );
+}
+
+export default function SharedTopBar({
+  onMenu,
+  activeSurfaceId,
+  hasSidebar,
+  menuButtonRef,
+}: {
+  onMenu: () => void;
+  activeSurfaceId: string | null;
+  hasSidebar: boolean;
+  menuButtonRef: RefObject<HTMLButtonElement>;
+}) {
+  const { state } = useShell();
   const { t } = useLocalization();
   const pathname = usePathname();
   const manifest = activeManifest(state, pathname);
-  const offline = state.network_state === 'offline';
-  const widgets = visibleTopbarWidgets(state.active_space, manifest, state);
+  const widgets = visibleTopbarWidgets(state.active_space, manifest, state, activeSurfaceId);
   return (
     <header className="koa-topbar">
-      <Button
-        className="koa-mobile-menu"
-        type="text"
-        icon={<MenuOutlined />}
-        onClick={onMenu}
-        aria-label={t('shell.open_navigation', 'Ouvrir la navigation du module')}
-      />
-      <Typography.Text strong>{state.active_space?.title ?? 'Koali Spaces'}</Typography.Text>
-      <div className="koa-topbar-widgets">
-        {widgets.map((widget) => <WidgetAction key={widget.widget_id} widget={widget} />)}
-      </div>
-      <Space size="middle">
-        <Badge
-          status={
-            state.state === 'ready'
-              ? 'success'
-              : state.state === 'degraded' || state.state === 'offline'
-                ? 'warning'
-                : 'default'
-          }
-          text={state.state}
-        />
-        <span aria-label={offline ? t('network.offline', 'Hors ligne') : t('network.local', 'Réseau local disponible')}>
-          {offline ? <DisconnectOutlined /> : <WifiOutlined />}
-        </span>
+      {hasSidebar ? (
         <Button
+          ref={menuButtonRef}
+          className="koa-mobile-menu"
           type="text"
-          aria-label={t('shell.refresh', 'Actualiser l’état du shell')}
-          icon={<ReloadOutlined />}
-          onClick={() => void refresh()}
+          icon={<MenuOutlined />}
+          onClick={onMenu}
+          aria-label={t('shell.open_navigation', 'Ouvrir la navigation du module')}
         />
+      ) : null}
+      <div className="koa-context-title">
+        <Typography.Text strong>
+          {manifest ? publicLabel(state.active_space, manifest) : state.active_space?.title ?? 'Koali Spaces'}
+        </Typography.Text>
+        <ProductSurfaceSelector activeSurfaceId={activeSurfaceId} />
+      </div>
+      <div className="koa-topbar-widgets">
+        {widgets.map((widget) => <WidgetAction key={widget.widget_id} widget={widget} activeSurfaceId={activeSurfaceId} activeModuleId={manifest?.module_id ?? null} />)}
+      </div>
+      <Space size="small">
+        <ShellAttentionIndicator />
       </Space>
     </header>
   );

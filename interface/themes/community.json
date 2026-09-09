@@ -6,6 +6,7 @@
   "description": "Local community Koali Spaces theme aligned with the Koali/Konnaxion reference visual language.",
   "tokens": {
     "primary_accent": "#1e6864",
+    "primary_accent_id": "forest",
     "density": "comfortable",
     "radius_scale": "koali.radius.v1",
     "spacing_scale": "koali.spacing.v1",

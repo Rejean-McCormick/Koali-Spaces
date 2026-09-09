@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.koa.local/artifact-contracts/presentation-preferences.schema.json",
+  "title": "Koali Presentation Preferences",
+  "description": "Device-local personal presentation choices. This artifact is explicitly outside Space activation authority and must not affect activation digests, capabilities, ACP evidence, or owner manifests.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mode",
+    "accent",
+    "density",
+    "surface_style"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "mode": {
+      "enum": [
+        "system",
+        "light",
+        "dark"
+      ]
+    },
+    "accent": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "Accent id from the canonical local accent palette. Semantic membership is enforced by the presentation preference sanitizer."
+    },
+    "density": {
+      "enum": [
+        "comfortable",
+        "compact",
+        "touch"
+      ]
+    },
+    "surface_style": {
+      "enum": [
+        "minimal",
+        "outlined",
+        "elevated"
+      ]
+    }
+  }
+}

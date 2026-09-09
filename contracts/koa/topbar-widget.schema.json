@@ -94,6 +94,13 @@
       "type": "boolean",
       "default": true
     },
+    "projection_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
+    },
     "activation": {
       "type": "object",
       "additionalProperties": false,
@@ -105,7 +112,6 @@
           "enum": [
             "route",
             "command",
-            "status_provider",
             "none"
           ]
         },
@@ -117,12 +123,6 @@
           "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
         },
         "command_ref": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "status_provider_ref": {
           "type": [
             "string",
             "null"
@@ -158,6 +158,56 @@
         "properties": {
           "module_id": {
             "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": ["counter", "resume"]
+          }
+        }
+      },
+      "then": {
+        "required": ["projection_ref"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "activation": {
+            "properties": {
+              "kind": {"const": "route"}
+            },
+            "required": ["kind"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "activation": {
+            "required": ["kind", "route_id"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "activation": {
+            "properties": {
+              "kind": {"const": "command"}
+            },
+            "required": ["kind"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "activation": {
+            "required": ["kind", "command_ref"]
           }
         }
       }

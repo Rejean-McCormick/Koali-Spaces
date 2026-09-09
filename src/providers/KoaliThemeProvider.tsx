@@ -1,46 +1,99 @@
 'use client';
 
 import { App as AntdApp, ConfigProvider, theme as antdTheme } from 'antd';
-import type { PropsWithChildren } from 'react';
-import type { InterfaceTheme, SpaceDefinition } from '@/types/contracts';
+import { useInsertionEffect, type PropsWithChildren } from 'react';
+import type { EffectiveAppearance } from '@/lib/presentation-preferences';
+import type { InterfaceTheme } from '@/types/contracts';
 
-type Density = SpaceDefinition['appearance']['density'];
-
-function componentSizeForDensity(density: Density | undefined) {
+function componentSizeForDensity(density: EffectiveAppearance['density']) {
   if (density === 'compact') return 'small' as const;
   if (density === 'touch') return 'large' as const;
   return 'middle' as const;
 }
 
+function cssValue(value: string | number) {
+  return typeof value === 'number' ? `${value}px` : value;
+}
+
+function KoaliSemanticTokenBridge({ appearance }: { appearance: EffectiveAppearance }) {
+  const { token } = antdTheme.useToken();
+
+  useInsertionEffect(() => {
+    const root = document.documentElement;
+    const variables: Record<string, string> = {
+      '--koali-color-bg-layout': token.colorBgLayout,
+      '--koali-color-bg-container': token.colorBgContainer,
+      '--koali-color-bg-subtle': token.colorFillQuaternary,
+      '--koali-color-text': token.colorText,
+      '--koali-color-text-secondary': token.colorTextSecondary,
+      '--koali-color-border': token.colorBorder,
+      '--koali-color-border-secondary': token.colorBorderSecondary,
+      '--koali-shadow-floating': token.boxShadowSecondary,
+      '--koali-shadow-surface': token.boxShadowSecondary,
+      '--koali-surface-radius': cssValue(token.borderRadius),
+    };
+
+    root.dataset.koaliColorScheme = appearance.resolvedMode;
+    root.dataset.koaliSurfaceStyle = appearance.surfaceStyle;
+    root.dataset.koaliDensity = appearance.density;
+    root.dataset.koaliAccent = appearance.accent;
+    root.style.setProperty('--koali-accent', appearance.accentColor);
+    for (const [name, value] of Object.entries(variables)) root.style.setProperty(name, value);
+
+    return () => {
+      delete root.dataset.koaliColorScheme;
+      delete root.dataset.koaliSurfaceStyle;
+      delete root.dataset.koaliDensity;
+      delete root.dataset.koaliAccent;
+      root.style.removeProperty('--koali-accent');
+      for (const name of Object.keys(variables)) root.style.removeProperty(name);
+    };
+  }, [
+    appearance.accent,
+    appearance.accentColor,
+    appearance.density,
+    appearance.resolvedMode,
+    appearance.surfaceStyle,
+    token.borderRadius,
+    token.boxShadowSecondary,
+    token.colorBgContainer,
+    token.colorBgLayout,
+    token.colorBorder,
+    token.colorBorderSecondary,
+    token.colorFillQuaternary,
+    token.colorText,
+    token.colorTextSecondary,
+  ]);
+
+  return null;
+}
+
 export default function KoaliThemeProvider({
   theme,
-  density,
+  appearance,
   children,
-}: PropsWithChildren<{ theme: InterfaceTheme | null; density?: Density }>) {
-  const primary = theme?.tokens.primary_accent ?? '#1e6864';
+}: PropsWithChildren<{ theme: InterfaceTheme | null; appearance: EffectiveAppearance }>) {
+  const borderRadius = Number(theme?.framework_mapping?.['antd.borderRadius'] ?? 8);
+  const safeBorderRadius = Number.isFinite(borderRadius) ? borderRadius : 8;
+
   return (
     <ConfigProvider
-      componentSize={componentSizeForDensity(density)}
+      componentSize={componentSizeForDensity(appearance.density)}
       theme={{
-        algorithm: antdTheme.defaultAlgorithm,
+        algorithm:
+          appearance.resolvedMode === 'dark'
+            ? antdTheme.darkAlgorithm
+            : antdTheme.defaultAlgorithm,
         cssVar: true,
         hashed: false,
         token: {
-          colorPrimary: primary,
-          colorInfo: primary,
-          borderRadius: 8,
-          colorBgLayout: '#f5f1ea',
-          colorBgContainer: '#ffffff',
-          colorText: '#1e2524',
-          colorTextSecondary: '#66706e',
-          colorBorder: '#d9dfdd',
-        },
-        components: {
-          Layout: { siderBg: '#ffffff' },
-          Menu: { itemBg: '#ffffff', itemSelectedBg: '#e7f0ef', itemSelectedColor: primary },
+          colorPrimary: appearance.accentColor,
+          colorInfo: appearance.accentColor,
+          borderRadius: safeBorderRadius,
         },
       }}
     >
+      <KoaliSemanticTokenBridge appearance={appearance} />
       <AntdApp>{children}</AntdApp>
     </ConfigProvider>
   );

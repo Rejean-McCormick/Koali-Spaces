@@ -1,36 +1,205 @@
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#f5f1ea}body{min-height:100vh}.koa-frame{min-height:100vh;display:grid;grid-template-columns:256px 1fr;grid-template-rows:64px 1fr;grid-template-areas:"selector topbar" "sider content"}.koa-module-selector{grid-area:selector;background:#fff;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;padding:0 12px}.koa-topbar-region{grid-area:topbar;background:#fff;border-bottom:1px solid #e5e7eb}.koa-topbar{height:64px;display:flex;align-items:center;gap:12px;padding:0 16px}.koa-sider{grid-area:sider;background:#fff;border-right:1px solid #e5e7eb;overflow:auto}.koa-content{grid-area:content;min-width:0}.koa-main-surface{min-height:calc(100vh - 64px);padding:16px}.koa-mobile-menu{display:none}@media(max-width:767px){.koa-frame{display:block}.koa-module-selector{display:none}.koa-sider{display:none}.koa-mobile-menu{display:inline-flex}.koa-main-surface{padding:8px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+:root {
+  color-scheme: light;
+  --koali-accent: #1e6864;
 
+  /* Boot-only fallbacks. KoaliThemeProvider replaces the semantic aliases
+     with the active Ant Design tokens before normal client paint. */
+  --koali-boot-bg-layout: #f5f1ea;
+  --koali-boot-bg-container: #ffffff;
+  --koali-boot-bg-subtle: #f8faf9;
+  --koali-boot-text: #1e2524;
+  --koali-boot-text-secondary: #66706e;
+  --koali-boot-border: #d9dfdd;
+  --koali-boot-border-secondary: #e5e7eb;
+  --koali-boot-shadow-floating: 0 2px 12px rgba(0, 0, 0, 0.18);
+  --koali-boot-shadow-surface: 0 2px 10px rgba(31, 41, 55, 0.10);
+
+  --koali-color-bg-layout: var(--koali-boot-bg-layout);
+  --koali-color-bg-container: var(--koali-boot-bg-container);
+  --koali-color-bg-subtle: var(--koali-boot-bg-subtle);
+  --koali-color-text: var(--koali-boot-text);
+  --koali-color-text-secondary: var(--koali-boot-text-secondary);
+  --koali-color-border: var(--koali-boot-border);
+  --koali-color-border-secondary: var(--koali-boot-border-secondary);
+  --koali-shadow-floating: var(--koali-boot-shadow-floating);
+  --koali-shadow-surface: var(--koali-boot-shadow-surface);
+
+  --koali-shell-height: 64px;
+  --koali-page-padding: 16px;
+  --koali-surface-border-width: 1px;
+  --koali-surface-shadow: none;
+  --koali-surface-bg: var(--koali-color-bg-container);
+  --koali-surface-radius: 8px;
+  --koali-motion-duration: 120ms;
+}
+
+:root[data-koali-color-scheme='dark'] {
+  color-scheme: dark;
+  --koali-boot-bg-layout: #101413;
+  --koali-boot-bg-container: #181d1c;
+  --koali-boot-bg-subtle: #141918;
+  --koali-boot-text: #f0f4f3;
+  --koali-boot-text-secondary: #aab4b2;
+  --koali-boot-border: #36403e;
+  --koali-boot-border-secondary: #293230;
+  --koali-boot-shadow-floating: 0 4px 18px rgba(0, 0, 0, 0.42);
+  --koali-boot-shadow-surface: 0 4px 16px rgba(0, 0, 0, 0.26);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-koali-color-scheme]) {
+    color-scheme: dark;
+    --koali-boot-bg-layout: #101413;
+    --koali-boot-bg-container: #181d1c;
+    --koali-boot-bg-subtle: #141918;
+    --koali-boot-text: #f0f4f3;
+    --koali-boot-text-secondary: #aab4b2;
+    --koali-boot-border: #36403e;
+    --koali-boot-border-secondary: #293230;
+    --koali-boot-shadow-floating: 0 4px 18px rgba(0, 0, 0, 0.42);
+    --koali-boot-shadow-surface: 0 4px 16px rgba(0, 0, 0, 0.26);
+  }
+}
+
+:root[data-koali-density='compact'] {
+  --koali-shell-height: 56px;
+  --koali-page-padding: 12px;
+}
+
+:root[data-koali-density='comfortable'] {
+  --koali-shell-height: 64px;
+  --koali-page-padding: 16px;
+}
+
+:root[data-koali-density='touch'] {
+  --koali-shell-height: 72px;
+  --koali-page-padding: 20px;
+}
+
+:root[data-koali-surface-style='minimal'] {
+  --koali-surface-border-width: 0px;
+  --koali-surface-shadow: none;
+  --koali-surface-bg: transparent;
+}
+
+:root[data-koali-surface-style='outlined'] {
+  --koali-surface-border-width: 1px;
+  --koali-surface-shadow: none;
+  --koali-surface-bg: var(--koali-color-bg-container);
+}
+
+:root[data-koali-surface-style='elevated'] {
+  --koali-surface-border-width: 1px;
+  --koali-surface-shadow: var(--koali-shadow-surface);
+  --koali-surface-bg: var(--koali-color-bg-container);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--koali-color-bg-layout); color: var(--koali-color-text); }
+body { min-height: 100vh; }
+
+.koa-frame {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  grid-template-rows: var(--koali-shell-height) 1fr;
+  grid-template-areas: "selector topbar" "sider content";
+  background: var(--koali-color-bg-layout);
+}
+
+.koa-frame-no-sidebar {
+  grid-template-areas: "selector topbar" "content content";
+}
+
+.koa-module-selector {
+  grid-area: selector;
+  background: var(--koali-color-bg-container);
+  border-right: 1px solid var(--koali-color-border-secondary);
+  border-bottom: 1px solid var(--koali-color-border-secondary);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.koa-topbar-region {
+  grid-area: topbar;
+  background: var(--koali-color-bg-container);
+  border-bottom: 1px solid var(--koali-color-border-secondary);
+}
+
+.koa-topbar {
+  height: var(--koali-shell-height);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.koa-sider {
+  grid-area: sider;
+  background: var(--koali-color-bg-container);
+  border-right: 1px solid var(--koali-color-border-secondary);
+  overflow: auto;
+}
+
+.koa-content { grid-area: content; min-width: 0; }
+.koa-module-identity { height: 48px; display: flex; align-items: center; gap: 8px; padding: 0 12px; min-width: 0; }
+.koa-module-selector-button { height: 48px; font-weight: 600; }
+.koa-shell-attention { color: var(--koali-color-text-secondary); }
+.koa-main-surface { min-height: calc(100vh - var(--koali-shell-height)); padding: var(--koali-page-padding); }
+.koa-mobile-menu { display: none; }
 .koa-topbar-widgets { display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden; }
-.koa-skip-link { position: fixed; left: 8px; top: -80px; z-index: 10000; background: #fff; padding: 8px 12px; border: 2px solid currentColor; border-radius: 6px; }
+
+.koa-skip-link {
+  position: fixed;
+  left: 8px;
+  top: -80px;
+  z-index: 10000;
+  background: var(--koali-color-bg-container);
+  color: var(--koali-color-text);
+  padding: 8px 12px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+}
 .koa-skip-link:focus { top: 8px; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }
+
+.ant-card,
+.koali-settings-panel {
+  border-width: var(--koali-surface-border-width);
+  border-style: solid;
+  border-color: var(--koali-color-border-secondary);
+  border-radius: var(--koali-surface-radius);
+  background: var(--koali-surface-bg);
+  box-shadow: var(--koali-surface-shadow);
+  transition:
+    border-color var(--koali-motion-duration) ease,
+    background-color var(--koali-motion-duration) ease,
+    box-shadow var(--koali-motion-duration) ease;
+}
+
+.koali-settings-panel { padding: var(--koali-page-padding); }
 
 /* Koali Surface Layer v1.1 */
-.koa-frame-immersive {
-  display: block;
-  min-height: 100vh;
-}
+.koa-frame-immersive { display: block; min-height: 100vh; }
 .koa-frame-immersive > .koa-module-selector,
 .koa-frame-immersive > .koa-topbar-region,
-.koa-frame-immersive > .koa-sider {
-  display: none !important;
-}
-.koa-frame-immersive > .koa-content {
-  min-height: 100vh;
-}
-.koa-frame-immersive .koa-main-surface {
-  min-height: 100vh;
-  padding: 0;
-}
+.koa-frame-immersive > .koa-sider { display: none !important; }
+.koa-frame-immersive > .koa-content { min-height: 100vh; }
+.koa-frame-immersive .koa-main-surface { min-height: 100vh; padding: 0; }
+
 .koali-application-host {
-  --koali-surface-accent: var(--ant-color-primary, #1e6864);
+  --koali-surface-accent: var(--koali-accent, var(--ant-color-primary, #1e6864));
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 96px);
-  background: var(--ant-color-bg-container, #fff);
+  min-height: calc(100vh - var(--koali-shell-height) - (2 * var(--koali-page-padding)));
+  background: var(--koali-color-bg-container);
+  border: var(--koali-surface-border-width) solid var(--koali-color-border-secondary);
   border-inline-start: 4px solid var(--koali-surface-accent);
+  border-radius: var(--koali-surface-radius);
+  box-shadow: var(--koali-surface-shadow);
   overflow: hidden;
 }
+
 .koali-application-host.is-immersive {
   position: fixed;
   inset: 0;
@@ -39,7 +208,10 @@
   height: 100vh;
   min-height: 100vh;
   border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
+
 .koali-surface-context-bar {
   min-height: 44px;
   display: flex;
@@ -47,25 +219,29 @@
   justify-content: space-between;
   gap: 12px;
   padding: 4px 8px 4px 12px;
-  border-bottom: 1px solid var(--ant-color-border-secondary, #e5e7eb);
-  background: var(--ant-color-bg-container, #fff);
+  border-bottom: 1px solid var(--koali-color-border-secondary);
+  background: var(--koali-color-bg-container);
 }
+
 .koali-application-frame-wrap {
   position: relative;
-  min-height: calc(100vh - 144px);
-  height: calc(100vh - 144px);
+  min-height: calc(100vh - var(--koali-shell-height) - 80px);
+  height: calc(100vh - var(--koali-shell-height) - 80px);
 }
+
 .koali-application-host.is-immersive .koali-application-frame-wrap {
   min-height: 100vh;
   height: 100vh;
 }
+
 .koali-application-frame {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
-  background: #fff;
+  background: var(--koali-color-bg-container);
 }
+
 .koali-application-loading {
   position: absolute;
   inset: 0;
@@ -74,37 +250,40 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: var(--ant-color-bg-container, #fff);
+  background: var(--koali-color-bg-container);
 }
+
 .koali-immersive-exit {
   position: fixed !important;
   z-index: 9999 !important;
   inset-inline-start: max(12px, env(safe-area-inset-left));
   inset-block-start: max(12px, env(safe-area-inset-top));
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
-}
-.koali-surface-status {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 24px;
-}
-.koali-surface-degraded-banner {
-  margin: 8px;
-}
-@media (max-width: 767px) {
-  .koali-application-host {
-    min-height: calc(100vh - 16px);
-  }
-  .koali-application-frame-wrap {
-    min-height: calc(100vh - 60px);
-    height: calc(100vh - 60px);
-  }
+  box-shadow: var(--koali-shadow-floating);
 }
 
+.koali-surface-status { max-width: 960px; margin: 0 auto; padding: 24px; }
+.koali-surface-degraded-banner { margin: 8px; }
 .koa-widget-compact-only { display: none !important; }
+.koali-application-host.is-immersive .koali-surface-context-bar { display: none; }
+.koa-context-title { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.koa-surface-selector { font-weight: 500; color: var(--koali-color-text-secondary); }
+
 @media (max-width: 767px) {
+  .koa-frame { display: block; }
+  .koa-module-selector { display: none; }
+  .koa-sider { display: none; }
+  .koa-mobile-menu { display: inline-flex; }
+  .koa-main-surface { padding: 8px; }
+  .koali-application-host { min-height: calc(100vh - 16px); }
+  .koali-application-frame-wrap { min-height: calc(100vh - 60px); height: calc(100vh - 60px); }
   .koa-widget-compact-only { display: inline-flex !important; }
 }
-.koali-application-host.is-immersive .koali-surface-context-bar {
-  display: none;
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

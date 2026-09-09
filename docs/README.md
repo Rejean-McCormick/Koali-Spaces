@@ -8,18 +8,19 @@ Cette arborescence documente Koali Spaces comme produit autonome et comme sous-s
 
 ## Ce que Koali Spaces est
 
-Koali Spaces est la couche d’expérience locale qui :
+Koali Spaces est la couche d’expérience locale et le composition host intégré optionnel qui :
 
 - rend le shell global Koali ;
 - active un **Space** validé ;
-- compose les modules d’interface déclarés ;
-- affiche le module selector, la top bar, la navigation latérale et la surface principale ;
+- compose les produits/modules d’interface déclarés sans devenir leur runtime standalone obligatoire ;
+- affiche le product selector, la surface active, la context header, la navigation et le workspace principal ;
+- projette des `surface_profiles` (Control, My Work, Operations, etc.) à partir des mêmes routes/pages produit ;
 - filtre la présentation à partir de projections de capabilities sans accorder d’autorité ;
 - fournit des surfaces globales telles que Accueil, Recherche, Tâches, Hors ligne, Santé et Paramètres ;
 - héberge des applications propriétaires de leur propre UI au moyen de la Surface Layer ;
 - reste local-first et offline-capable lorsque les propriétaires déclarent cette capacité.
 
-Koali Spaces ne possède pas les données métier, permissions, workflows ou identités des applications qu’il présente.
+Koali Spaces ne possède pas les données métier, permissions, workflows ou identités des applications qu’il présente. Un produit peut être retiré du registre intégré sans imposer de modification aux autres produits et peut rester fonctionnel standalone lorsqu’il déclare ce mode.
 
 ## Ordre de lecture général
 

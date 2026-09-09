@@ -58,8 +58,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "theme_ref",
-        "density"
+        "theme_ref"
       ],
       "properties": {
         "theme_ref": {
@@ -72,7 +71,8 @@
             "comfortable",
             "compact",
             "touch"
-          ]
+          ],
+          "description": "Deprecated compatibility default. New definitions may omit it and inherit density from the active InterfaceTheme unless appearance_policy.default_density overrides it."
         },
         "logo_ref": {
           "type": [
@@ -185,6 +185,88 @@
     "authority": {
       "type": "string",
       "const": "non_authoritative_example"
+    },
+    "appearance_policy": {
+      "type": "object",
+      "description": "Space-owned presentation defaults and allowed choices. This constrains presentation but never stores the current personal user selection.",
+      "additionalProperties": false,
+      "properties": {
+        "default_mode": {
+          "enum": [
+            "system",
+            "light",
+            "dark"
+          ]
+        },
+        "default_accent": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$",
+          "description": "Accent id resolved against the canonical local accent palette."
+        },
+        "default_density": {
+          "enum": [
+            "comfortable",
+            "compact",
+            "touch"
+          ]
+        },
+        "default_surface_style": {
+          "enum": [
+            "minimal",
+            "outlined",
+            "elevated"
+          ]
+        },
+        "allowed_modes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "system",
+              "light",
+              "dark"
+            ]
+          }
+        },
+        "allowed_accents": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]*$"
+          },
+          "description": "Allowed accent ids. Membership in the canonical local accent palette is enforced by runtime validation."
+        },
+        "allowed_densities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "comfortable",
+              "compact",
+              "touch"
+            ]
+          }
+        },
+        "allowed_surface_styles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "minimal",
+              "outlined",
+              "elevated"
+            ]
+          }
+        },
+        "allow_module_accent": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "$defs": {

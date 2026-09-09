@@ -80,6 +80,11 @@
         "semantic_color_policy": {
           "type": "string",
           "minLength": 1
+        },
+        "primary_accent_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$",
+          "description": "Optional stable accent identity from the canonical local accent palette. When present, validation requires its color to match primary_accent."
         }
       }
     },

@@ -6,11 +6,12 @@
 
 Le repository contient :
 
-- shell global responsive ;
+- shell global responsive avec sidebar/Drawer conditionnels ;
 - module selector ;
 - sidebar dynamique ;
-- shared top bar ;
-- thèmes Ant Design 5 ;
+- shared top bar bornée sans bruit technique permanent en état sain ;
+- Appearance Authority séparant policy/defaults du Space et préférences utilisateur locales ;
+- thèmes Ant Design 5 light/dark/system avec accents, densité et style de surface ;
 - localisation locale fr-CA / en ;
 - state projection via `/api/shell-state` ;
 - control server Linux ;
@@ -24,6 +25,8 @@ Le repository contient :
 - runtime registration projection Koali séparée avec catalogues fermés des permissions iframe ;
 - Home/Health/Offline/Settings fonctionnels au niveau présentation ;
 - Search/Tasks branchés sur un provider registry fermé sans provider owner par défaut ;
+- sélection de surface produit adressable/restaurable via `ks_surface` ;
+- contrat topbar avec `projection_ref` distinct de `activation` ;
 - validation d’activation renforcée : namespace de route, fallback/home override, chemins stricts et propriété des shell pages ;
 - tests Surface Layer unit/runtime/security ;
 - smoke du runtime packagé disponible après build.

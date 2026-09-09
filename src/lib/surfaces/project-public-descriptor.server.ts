@@ -1,3 +1,4 @@
+import { spaceAllowsModuleAccent } from '@/lib/presentation-preferences';
 import type { ModuleManifest, SpaceDefinition } from '@/types/contracts';
 import { joinEmbedTarget } from './url-policy';
 import { presentationLabel } from './presentation-policy';
@@ -16,7 +17,7 @@ export function projectPublicDescriptor(
     status: internal.status,
     presentation: {
       label: presentationLabel(space, manifest),
-      accentTokenRef: space?.appearance.allow_module_accent === false ? undefined : internal.presentation.accentTokenRef,
+      accentTokenRef: spaceAllowsModuleAccent(space) ? internal.presentation.accentTokenRef : undefined,
       immersiveAllowed: internal.presentation.allowedModes.includes('immersive'),
       defaultMode: internal.presentation.defaultMode,
     },

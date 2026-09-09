@@ -2,7 +2,7 @@
 
 Reference implementation of the independently versioned Koali Spaces experience layer. The kOA integration protocol identifier remains `koa_spaces`; the public product name is **Koali Spaces**.
 
-Koali Spaces composes validated Space definitions and module interface manifests into a responsive Ant Design shell. It owns presentation and experience composition only: it does not acquire owner business data, workflow, authorization, identity, or internal application UI authority.
+Koali Spaces composes validated Space definitions and product/module interface manifests into a responsive Ant Design shell. It is an optional **integrated composition host**, not the mandatory runtime of product user interfaces. A product can remain independently runnable while contributing routes, surface profiles, navigation, widgets, commands and contextual-inspector references to Koali Spaces. Koali Spaces owns presentation and experience composition only: it does not acquire owner business data, workflow, authorization, identity, or internal application UI authority.
 
 ## Surface Layer
 
@@ -21,9 +21,17 @@ The repository now contains the Koali Spaces Surface Layer v1.1 specification wi
 - global Home/Health/Offline/Settings surfaces and closed Search/Tasks provider registries;
 - strict activation checks for route namespaces, fallback references, `home_route_override`, shell-page ownership and schema-safe paths;
 - immersive focus restoration with the activation control kept mounted;
-- semantic module accent tokens mapped through safe CSS-variable indirection.
+- semantic module accent tokens mapped through safe CSS-variable indirection;
+- declarative product `surface_profiles` that project existing routes/navigation/widgets without duplicating product pages;
+- explicit UI portability metadata for standalone + integrated product operation;
+- dynamic product discovery from admitted manifests rather than a hard-coded product catalogue;
+- Appearance Authority with Space policy/defaults separated from device-local user preferences;
+- system/light/dark mode, canonical local accents, density and surface style;
+- adaptive shell chrome that omits empty sidebar/Drawer and keeps the healthy topbar quiet;
+- addressable/restorable product surface state through reserved `ks_surface` navigation metadata;
+- topbar projection binding (`projection_ref`) separated from route/command activation.
 
-The final transport catalogue, global SSO, optional parent/child bridge, module accent palette, Browser Fullscreen behavior and display-mode persistence remain explicit `OPEN-KS-SURF-*` decisions in `docs/06-surface-layer/`. Code must not silently close them.
+The final transport catalogue, global SSO, optional parent/child bridge, Browser Fullscreen behavior and display-mode persistence remain explicit `OPEN-KS-SURF-*` decisions in `docs/06-surface-layer/`. Code must not silently close them.
 
 ## Stack and runtime
 
@@ -56,3 +64,10 @@ Additional absolute iframe origins must also be present in the build-time `KOALI
 ## Naming
 
 Use **Koali Spaces** for product/UI/repository naming. Use `koa_spaces` only where the existing kOA protocol/contract identifier requires it. Runtime configuration uses `KOALI_SPACES_*` environment variables.
+
+
+## Product UI portability
+
+Koali Spaces intentionally supports removable products. The integrated shell discovers only modules/products that are enabled by the active Space and backed by admitted manifests. A product such as Orgo or Konnaxion can expose a standalone application entry point and also publish an integrated manifest. Removing one product removes its manifest contribution; it must not require source edits to unrelated product interfaces.
+
+The current contract remains backward compatible: manifests without `surface_profiles` are treated as one synthetic `control` surface using their existing home route, sidebar and topbar widgets.

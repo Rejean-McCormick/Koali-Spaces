@@ -1,0 +1,12 @@
+{
+  "$schema": "../../contracts/koa/accent-palette.schema.json",
+  "schema_version": 1,
+  "default_accent": "forest",
+  "accents": [
+    { "id": "forest", "label": "Koali", "color": "#1e6864" },
+    { "id": "ocean", "label": "Ocean", "color": "#2563eb" },
+    { "id": "slate", "label": "Slate", "color": "#475569" },
+    { "id": "earth", "label": "Earth", "color": "#b45309" },
+    { "id": "plum", "label": "Plum", "color": "#7c3aed" }
+  ]
+}

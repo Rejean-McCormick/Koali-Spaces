@@ -1,5 +1,6 @@
 import type {
   ModuleManifest,
+  ProductSurfaceProfile,
   RouteContribution,
   ShellState,
   SidebarGroup,
@@ -22,13 +23,52 @@ export function admittedModules(state: ShellState) {
     .filter(
       (manifest) =>
         enabled.has(manifest.module_id) &&
-        permits(manifest.required_capabilities, state.capabilities),
+        permits(manifest.required_capabilities, state.capabilities) &&
+        (!(manifest.surface_profiles?.length) ||
+          manifest.surface_profiles.some((surface) =>
+            permits(surface.required_capabilities, state.capabilities),
+          )),
     )
     .sort(
       (left, right) =>
         (enabled.get(left.module_id)?.order ?? 0) -
         (enabled.get(right.module_id)?.order ?? 0),
     );
+}
+
+export function admittedSurfaceProfiles(
+  manifest: ModuleManifest,
+  state: Pick<ShellState, 'capabilities'>,
+): ProductSurfaceProfile[] {
+  const declared = manifest.surface_profiles ?? [];
+  if (!declared.length) {
+    return [{
+      surface_id: 'control',
+      label: manifest.public_name,
+      home_route_id: manifest.home_route_id,
+    }];
+  }
+  return declared.filter((surface) => permits(surface.required_capabilities, state.capabilities));
+}
+
+export function surfaceProfileById(
+  manifest: ModuleManifest,
+  surfaceId: string | null | undefined,
+) {
+  if (!surfaceId) return null;
+  return manifest.surface_profiles?.find((surface) => surface.surface_id === surfaceId) ?? null;
+}
+
+export function defaultSurfaceProfile(
+  manifest: ModuleManifest,
+  state: Pick<ShellState, 'capabilities'>,
+) {
+  const admitted = admittedSurfaceProfiles(manifest, state);
+  return (
+    admitted.find((surface) => surface.surface_id === manifest.default_surface_id) ??
+    admitted[0] ??
+    null
+  );
 }
 
 export function moduleIdFromKoaliPath(pathname: string) {
@@ -126,10 +166,12 @@ export function routeIsAvailable(
 export function effectiveHomeRouteId(
   space: SpaceDefinition | null,
   manifest: ModuleManifest,
+  surfaceId?: string | null,
 ) {
+  const surfaceHome = surfaceProfileById(manifest, surfaceId)?.home_route_id;
   return (
     space?.module_instances.find((instance) => instance.module_id === manifest.module_id)
-      ?.home_route_override ?? manifest.home_route_id
+      ?.home_route_override ?? surfaceHome ?? manifest.home_route_id
   );
 }
 
@@ -139,8 +181,9 @@ export function safeRoute(
   available: Iterable<string>,
   online: boolean,
   space: SpaceDefinition | null = null,
+  surfaceId?: string | null,
 ): RouteContribution {
-  const homeRouteId = effectiveHomeRouteId(space, manifest);
+  const homeRouteId = effectiveHomeRouteId(space, manifest, surfaceId);
   const start =
     manifest.routes.find((route) => route.route_id === requested) ??
     manifest.routes.find((route) => route.route_id === homeRouteId);
@@ -188,9 +231,16 @@ export function routeSelectedForPath(
 export function visibleSidebarItems(
   manifest: ModuleManifest,
   state: ShellState,
+  surfaceId?: string | null,
 ): (SidebarLeaf | SidebarGroup)[] {
   const online = state.network_state !== 'offline';
-  const leafVisible = (item: SidebarLeaf) => {
+  const surface = surfaceProfileById(manifest, surfaceId);
+  if (manifest.surface_profiles?.length && !surface) return [];
+  const constrainedNavigation = surface?.navigation_item_ids
+    ? new Set(surface.navigation_item_ids)
+    : null;
+  const leafVisible = (item: SidebarLeaf, groupSelected = false) => {
+    if (constrainedNavigation && !groupSelected && !constrainedNavigation.has(item.item_id)) return false;
     const route = routeById(manifest, item.route_id);
     if (!permits(item.required_capabilities, state.capabilities) || !route) return false;
     if (!declaredAvailabilityAllows(item.availability, online)) return false;
@@ -203,7 +253,8 @@ export function visibleSidebarItems(
     if ('children' in item) {
       if (!permits(item.required_capabilities, state.capabilities)) continue;
       if (!declaredAvailabilityAllows(item.availability, online)) continue;
-      const children = item.children.filter(leafVisible);
+      const groupSelected = constrainedNavigation?.has(item.item_id) ?? false;
+      const children = item.children.filter((child) => leafVisible(child, groupSelected));
       if (children.length) result.push({ ...item, children });
       continue;
     }
@@ -216,9 +267,20 @@ export function visibleTopbarWidgets(
   space: SpaceDefinition | null,
   manifest: ModuleManifest | null,
   state: ShellState,
+  surfaceId?: string | null,
 ): TopbarWidget[] {
   const online = state.network_state !== 'offline';
-  const widgets = [...(space?.global_topbar ?? []), ...(manifest?.topbar_widgets ?? [])];
+  const surface = manifest ? surfaceProfileById(manifest, surfaceId) : null;
+  const explicitSurfaceUnavailable = Boolean(manifest?.surface_profiles?.length && !surface);
+  const allowedModuleWidgets = surface?.topbar_widget_ids
+    ? new Set(surface.topbar_widget_ids)
+    : null;
+  const moduleWidgets = explicitSurfaceUnavailable
+    ? []
+    : (manifest?.topbar_widgets ?? []).filter(
+        (widget) => !allowedModuleWidgets || allowedModuleWidgets.has(widget.widget_id),
+      );
+  const widgets = [...(space?.global_topbar ?? []), ...moduleWidgets];
   const seen = new Set<string>();
   return widgets
     .filter((widget) => {

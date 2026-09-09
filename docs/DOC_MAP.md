@@ -8,8 +8,8 @@ docs/
 ├── 00-governance/      autorité, nom, invariants, ADR
 ├── 01-product/         définition produit et expérience
 ├── 02-architecture/    architecture interne et frontières
-├── 03-space-model/     Space, manifests, routes, activation
-├── 04-shell/           chrome global et navigation
+├── 03-space-model/     Space, manifests, product surfaces, routes, activation
+├── 04-shell/           product/surface shell, navigation, context header
 ├── 05-design-system/   thème, accessibilité, localisation
 ├── 06-surface-layer/   Surface Layer v1.1 complète
 │   ├── AI_READ_ORDER.md
