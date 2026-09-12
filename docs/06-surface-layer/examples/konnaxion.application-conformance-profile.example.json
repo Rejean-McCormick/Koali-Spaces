@@ -11,7 +11,8 @@
   },
   "authBoundary": {
     "ownerRetainsAuthorization": true,
-    "koaliCredentialInjection": false
+    "koaliCredentialInjection": false,
+    "authProfileRef": "koa-common-oidc-v1"
   },
   "browser": {
     "permissions": [],
@@ -35,8 +36,7 @@
     "healthIsAuthorization": false
   },
   "knownLimitations": [
-    "Transport profile remains OPEN-KS-SURF-001 until ADR.",
-    "SSO remains OPEN-KS-SURF-002 until ADR."
+    "Transport profile remains OPEN-KS-SURF-001 until ADR."
   ],
   "evidenceRefs": []
 }

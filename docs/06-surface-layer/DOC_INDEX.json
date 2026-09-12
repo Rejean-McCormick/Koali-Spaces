@@ -100,6 +100,7 @@
     ],
     "adr": [
       "adr/0000-template.md",
+      "adr/0001-common-oidc-sso-profile.md",
       "adr/README.md"
     ]
   }

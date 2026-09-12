@@ -31,7 +31,7 @@ The repository now contains the Koali Spaces Surface Layer v1.1 specification wi
 - addressable/restorable product surface state through reserved `ks_surface` navigation metadata;
 - topbar projection binding (`projection_ref`) separated from route/command activation.
 
-The final transport catalogue, global SSO, optional parent/child bridge, Browser Fullscreen behavior and display-mode persistence remain explicit `OPEN-KS-SURF-*` decisions in `docs/06-surface-layer/`. Code must not silently close them.
+The final transport catalogue, optional parent/child bridge, Browser Fullscreen behavior and display-mode persistence remain explicit `OPEN-KS-SURF-*` decisions in `docs/06-surface-layer/`. Global SSO is closed by `ADR-KS-SURF-0001` as the `koa-common-oidc-v1` integration profile; Koali Spaces still does not become an IdP or inject owner credentials.
 
 ## Stack and runtime
 

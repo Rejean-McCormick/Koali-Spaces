@@ -38,7 +38,7 @@ Le repository contient :
 3. créer le premier Application Conformance Profile production ;
 4. onboarder une application pilote (Konnaxion recommandé après fixture) ;
 5. ajouter les providers owner Search/Tasks/Status/Counter/Resume ;
-6. décider le SSO seulement via ADR séparé ;
+6. qualifier `koa-common-oidc-v1` application par application, sans credential injection ;
 7. onboarder les autres applications une par une.
 
 Cette distinction empêche de présenter une cible documentaire comme déjà implémentée.

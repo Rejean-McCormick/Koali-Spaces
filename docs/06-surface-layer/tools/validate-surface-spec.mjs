@@ -68,7 +68,7 @@ if(registry){
   const openInDocs=[...new Set(markdown.flatMap(p=>(fs.readFileSync(p,'utf8').match(/OPEN-KS-SURF-\d{3}/g)||[])))].sort();
   const openReg=[...(registry.open_decisions||[])].sort();
   if(JSON.stringify(openInDocs)!==JSON.stringify(openReg)) fail(`OPEN decision registry mismatch`);
-  const expectedOpen=['OPEN-KS-SURF-001','OPEN-KS-SURF-002','OPEN-KS-SURF-003','OPEN-KS-SURF-004','OPEN-KS-SURF-005','OPEN-KS-SURF-006'];
+  const expectedOpen=['OPEN-KS-SURF-001','OPEN-KS-SURF-003','OPEN-KS-SURF-004','OPEN-KS-SURF-005','OPEN-KS-SURF-006'];
   if(JSON.stringify(openReg)!==JSON.stringify(expectedOpen)) fail(`expected OPEN decision set 001..006`);
 }
 
