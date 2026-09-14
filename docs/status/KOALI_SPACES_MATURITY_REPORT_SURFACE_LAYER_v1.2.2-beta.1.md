@@ -10,6 +10,11 @@
 **Overall hosting maturity:** **M3 / 5**  
 **Recommended Git tag:** `surface-layer-v1.2.2-beta.1`
 
+> **Historical baseline notice — status advanced after this report.** This document records the state observed on **2026-09-06** and should remain a historical Beta-baseline report. On **2026-09-08**, the kOA-Linux integrated-runtime assessment subsequently verified the first real Konnaxion pilot through the supported Koali workflow: adapter tests `15/15 PASS`, Konnaxion backend `148/148 PASS`, Koali Spaces UI `29/29 PASS`, Konnaxion API/Web/Spaces readiness `HTTP 200`, Konnaxion admitted in the active Space, `/apps/konnaxion` resolving `HTTP 200`, and browser navigation Koali ⇄ Konnaxion verified.
+>
+> Therefore, statements in this 2026-09-06 snapshot such as **“first real owner app pending”**, **“Real App Onboarding M1”**, and **“NEXT GATE: KONNAXION PILOT”** are historically correct for the report date but are no longer the current integration status. This report does **not** by itself certify the stable promotion gate; the later assessment still identified follow-up work around health-state projection, repeatable stop/start navigation and Home-only fallback.
+
+
 ---
 
 ## 1. Executive status
@@ -402,25 +407,27 @@ surface-layer-v1.2.2
 
 requires, at minimum:
 
+> **Notation:** the entries below are promotion requirements, not observed results from this 2026-09-06 report. `REQUIRED` means the condition must be demonstrated before stable promotion. Actual evidence must be recorded in a later qualification report.
+
 ```text
-generic Surface Layer qualification       PASS
-real Konnaxion runtime registration       PASS
-real transport profile                    PASS
-health/readiness mapping                  PASS
-root route                                PASS
-deep links                                PASS
-owner-router preservation                 PASS
-framed mode                               PASS
-immersive mode                            PASS
-reload/recovery                           PASS
-security/origin isolation                 PASS
-CSP/frame compatibility                   PASS
-authentication boundary                   PASS
-o owner-authority leakage into Koali      PASS
-production build                          PASS
-packaged runtime closure                  PASS
-packaged runtime smoke                    PASS
-end-to-end onboarding tests               PASS
+generic Surface Layer qualification       REQUIRED
+real Konnaxion runtime registration       REQUIRED
+real transport profile                    REQUIRED
+health/readiness mapping                  REQUIRED
+root route                                REQUIRED
+deep links                                REQUIRED
+owner-router preservation                 REQUIRED
+framed mode                               REQUIRED
+immersive mode                            REQUIRED
+reload/recovery                           REQUIRED
+security/origin isolation                 REQUIRED
+CSP/frame compatibility                   REQUIRED
+authentication boundary                   REQUIRED
+no owner-authority leakage into Koali      REQUIRED
+production build                          REQUIRED
+packaged runtime closure                  REQUIRED
+packaged runtime smoke                    REQUIRED
+end-to-end onboarding tests               REQUIRED
 ```
 
 A stable tag must not be created merely because the generic fixture tests pass.
