@@ -1,0 +1,2511 @@
+
+============================================================
+ SYSTEM
+============================================================
+Timestamp: 2026-09-18T16:04:29.6899084-04:00
+PowerShell: 7.6.6
+Windows: Microsoft Windows NT 10.0.26200.0
+Koali root: C:\mycode\kOA-Linux\koali-spaces
+
+============================================================
+ NODE / PNPM / PYTHON / DOCKER
+============================================================
+v22.11.0
+10.30.3
+Python 3.14.3
+ -V:3.14[-64] *   C:\Users\rejea\AppData\Local\Python\pythoncore-3.14-64\python.exe
+ -V:Astral\CPython3.11.15 C:\Users\rejea\AppData\Roaming\uv\python\cpython-3.11.15-windows-x86_64-none\python.exe
+ -V:Astral\CPython3.12.13 C:\Users\rejea\AppData\Roaming\uv\python\cpython-3.12.13-windows-x86_64-none\python.exe
+ -V:Astral\CPython3.13.12 C:\Users\rejea\AppData\Roaming\uv\python\cpython-3.13.12-windows-x86_64-none\python.exe
+Client:
+ Version:           29.7.2
+ API version:       1.55
+ Go version:        go1.26.5
+ Git commit:        a7dcaa6
+ Built:             Wed Aug  5 18:31:33 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.90.0 (238679)
+ Engine:
+  Version:          29.7.2
+  API version:      1.55 (minimum version 1.40)
+  Go version:       go1.26.5
+  Git commit:       6a43e3d
+  Built:            Wed Aug  5 18:28:36 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.3.3
+  GitCommit:        aad11006b869517fcd3009450b6f82da282e1a9b
+ runc:
+  Version:          1.4.3
+  GitCommit:        v1.4.3-0-gbb14dabe
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+============================================================
+ KOALI PORT LISTENERS
+============================================================
+
+LocalAddress LocalPort OwningProcess
+------------ --------- -------------
+127.0.0.1         4173         14824
+127.0.0.1         4301         41632
+127.0.0.1         4302          1988
+127.0.0.1         4303         45596
+127.0.0.1         4304         30416
+127.0.0.1         8301          7064
+127.0.0.1         8501         24720
+
+
+============================================================
+ PROCESS OWNERS
+============================================================
+
+ProcessId      : 14824
+Name           : node.exe
+ExecutablePath : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe
+CommandLine    : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe C:\mycode\kOA-Linux\koali-spaces\server\main.mjs
+
+
+ProcessId      : 41632
+Name           : node.exe
+ExecutablePath : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe
+CommandLine    : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe C:\mycode\Konnaxion\Konnaxion\frontend\node_modules\.pnpm\next@15.3.1_@babel+core@7.2_33d04ac6b32ce151a44f8e16cf21584a\node_modules\next\dist\server\lib\start-server.js
+
+
+ProcessId      : 1988
+Name           : node.exe
+ExecutablePath : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe
+CommandLine    : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe C:\mycode\Orgo\Orgo\node_modules\next\dist\server\lib\start-server.js
+
+
+ProcessId      : 45596
+Name           : com.docker.backend.exe
+ExecutablePath : C:\Program Files\Docker\Docker\resources\com.docker.backend.exe
+CommandLine    : "C:\Program Files\Docker\Docker\resources\com.docker.backend.exe" services
+
+
+ProcessId      : 30416
+Name           : node.exe
+ExecutablePath : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe
+CommandLine    : C:\Users\rejea\AppData\Local\Volta\tools\image\node\22.11.0\node.exe C:\mycode\SemantiK_Architect\SemantiK_Architect\architect_frontend\node_modules\next\dist\server\lib\start-server.js
+
+
+ProcessId      : 7064
+Name           : python.exe
+ExecutablePath : C:\Users\rejea\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\python.exe
+CommandLine    : "C:\Users\rejea\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\python.exe"  -m uvicorn config.asgi:application --host 127.0.0.1 --port 8301 --reload
+
+
+ProcessId      : 24720
+Name           : python.exe
+ExecutablePath : C:\Users\rejea\AppData\Local\Python\pythoncore-3.14-64\python.exe
+CommandLine    : "C:\mycode\kOA_Local_Mediatheque\koa_mediatheque\.venv\Scripts\python.exe"  "C:\mycode\kOA_Local_Mediatheque\koa_mediatheque\.venv\Scripts\streamlit.exe" run C:\mycode\kOA_Local_Mediatheque\koa_mediatheque\06_GUI\koa_mediatheque_gui\app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true
+
+
+============================================================
+ KOALI SHELL STATE - RAW
+============================================================
+{
+  "state": "degraded",
+  "network_state": "unknown",
+  "active_space_id": "default_space",
+  "active_space": {
+    "space_id": "default_space",
+    "title": "Default Space",
+    "version": "1.0.0",
+    "default_module_id": "space_home",
+    "module_instances": [
+      {
+        "module_id": "space_home",
+        "manifest_ref": "global-widgets.json",
+        "enabled": true,
+        "required": true,
+        "order": 0,
+        "public_label": "Home"
+      }
+    ],
+    "global_topbar": [],
+    "appearance": {
+      "theme_ref": "themes/default.json",
+      "density": "comfortable",
+      "design_system_id": "koali.ant5",
+      "theme_version": "1.0.0"
+    },
+    "appearance_policy": {
+      "default_mode": "system",
+      "default_accent": "forest",
+      "default_density": "comfortable",
+      "default_surface_style": "outlined",
+      "allowed_modes": [
+        "system",
+        "light",
+        "dark"
+      ],
+      "allowed_accents": [
+        "forest",
+        "ocean",
+        "slate",
+        "earth",
+        "plum"
+      ],
+      "allowed_densities": [
+        "compact",
+        "comfortable",
+        "touch"
+      ],
+      "allowed_surface_styles": [
+        "minimal",
+        "outlined",
+        "elevated"
+      ],
+      "allow_module_accent": true
+    },
+    "offline_policy": {
+      "shell_available": true,
+      "retain_last_validated_definition": true,
+      "unavailable_module_behavior": "show_declared_fallback",
+      "network_state_indicator": true,
+      "public_cdn_required": false,
+      "remote_runtime_assets_required": false
+    },
+    "authority_boundary": {
+      "presentation_only": true,
+      "may_grant_capabilities": false,
+      "contains_business_state": false,
+      "contains_executable_extension": false
+    }
+  },
+  "active_theme": {
+    "theme_id": "koa_spaces.default",
+    "version": "1.0.0",
+    "design_system_id": "koali.ant5",
+    "tokens": {
+      "primary_accent": "#1e6864",
+      "primary_accent_id": "forest",
+      "density": "comfortable",
+      "radius_scale": "v1",
+      "spacing_scale": "v1",
+      "typography_scale": "v1",
+      "focus_style": "visible",
+      "surface_family": "neutral"
+    }
+  },
+  "modules": [
+    {
+      "manifest_id": "koa-spaces.global-widgets",
+      "manifest_version": "1.0.0",
+      "module_id": "space_home",
+      "public_name": "Home",
+      "home_route_id": "space_home.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "space_home.home",
+          "module_id": "space_home",
+          "path": "/",
+          "page_ref": "koa-spaces://page/home",
+          "default_label": "Home",
+          "label_key": "space_home.home",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "home"
+          }
+        },
+        {
+          "route_id": "space_home.search",
+          "module_id": "space_home",
+          "path": "/search",
+          "page_ref": "koa-spaces://page/search",
+          "default_label": "Search",
+          "label_key": "space_home.search",
+          "availability": "always",
+          "offline_behavior": "cached_read_only",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "search"
+          }
+        },
+        {
+          "route_id": "space_home.tasks",
+          "module_id": "space_home",
+          "path": "/tasks",
+          "page_ref": "koa-spaces://page/tasks",
+          "default_label": "Tasks",
+          "label_key": "space_home.tasks",
+          "availability": "always",
+          "offline_behavior": "cached_read_only",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "tasks"
+          }
+        },
+        {
+          "route_id": "space_home.offline",
+          "module_id": "space_home",
+          "path": "/offline",
+          "page_ref": "koa-spaces://page/offline",
+          "default_label": "Offline",
+          "label_key": "space_home.offline",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "offline"
+          }
+        },
+        {
+          "route_id": "space_home.health",
+          "module_id": "space_home",
+          "path": "/health",
+          "page_ref": "koa-spaces://page/health",
+          "default_label": "Interface health",
+          "label_key": "space_home.health",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "health"
+          }
+        },
+        {
+          "route_id": "space_home.settings",
+          "module_id": "space_home",
+          "path": "/settings",
+          "page_ref": "koa-spaces://page/settings",
+          "default_label": "Settings",
+          "label_key": "space_home.settings",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "settings"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "space_home",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "space_home.home",
+            "label": "Home",
+            "label_key": "space_home.home",
+            "order": 0,
+            "route_id": "space_home.home"
+          },
+          {
+            "item_id": "space_home.search",
+            "label": "Search",
+            "label_key": "space_home.search",
+            "order": 10,
+            "route_id": "space_home.search"
+          },
+          {
+            "item_id": "space_home.tasks",
+            "label": "Tasks",
+            "label_key": "space_home.tasks",
+            "order": 20,
+            "route_id": "space_home.tasks"
+          },
+          {
+            "item_id": "space_home.system",
+            "label": "System",
+            "label_key": "space_home.system",
+            "order": 30,
+            "children": [
+              {
+                "item_id": "space_home.offline",
+                "label": "Offline",
+                "label_key": "space_home.offline",
+                "order": 0,
+                "route_id": "space_home.offline"
+              },
+              {
+                "item_id": "space_home.health",
+                "label": "Interface health",
+                "label_key": "space_home.health",
+                "order": 10,
+                "route_id": "space_home.health"
+              },
+              {
+                "item_id": "space_home.settings",
+                "label": "Settings",
+                "label_key": "space_home.settings",
+                "order": 20,
+                "route_id": "space_home.settings"
+              }
+            ]
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "Control",
+          "home_route_id": "space_home.home",
+          "navigation_item_ids": [
+            "space_home.home",
+            "space_home.search",
+            "space_home.tasks",
+            "space_home.system"
+          ],
+          "topbar_widget_ids": [
+            "global.search",
+            "global.tasks"
+          ],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": false
+      },
+      "topbar_widgets": [
+        {
+          "widget_id": "global.search",
+          "module_id": null,
+          "scope": "global",
+          "slot": "primary",
+          "kind": "search",
+          "label": "Search",
+          "label_key": "global.search",
+          "priority": 10,
+          "required_capabilities": [],
+          "offline_behavior": "cached_read_only",
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.search"
+          }
+        },
+        {
+          "widget_id": "global.tasks",
+          "module_id": null,
+          "scope": "global",
+          "slot": "secondary",
+          "kind": "action",
+          "label": "Tasks",
+          "label_key": "global.tasks",
+          "priority": 15,
+          "required_capabilities": [],
+          "offline_behavior": "cached_read_only",
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.tasks"
+          }
+        }
+      ],
+      "localization_refs": [
+        "/localization/koali-spaces.fr-CA.json",
+        "/localization/koali-spaces.en.json"
+      ],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": "space_home.home"
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    }
+  ],
+  "active_module_id": "space_home",
+  "active_route_id": "space_home.home",
+  "capabilities": [],
+  "reason": "development fallback; no authoritative runtime state"
+}
+
+============================================================
+ KOALI SHELL STATE - SUMMARY
+============================================================
+state              = degraded
+network_state      = unknown
+active_space_id    = default_space
+active_module_id   = space_home
+active_route_id    = space_home.home
+reason             = development fallback; no authoritative runtime state
+capabilities count = 0
+
+Active Space module_instances:
+
+module_id  enabled required order manifest_ref
+---------  ------- -------- ----- ------------
+space_home    True     True     0 global-widgets.json
+
+
+Resolved modules:
+
+module_id  public_name manifest_id
+---------  ----------- -----------
+space_home Home        koa-spaces.global-widgets
+
+
+============================================================
+ .KOALI-DEV TREE
+============================================================
+
+FullName                                                                                     Length LastWriteTime
+--------                                                                                     ------ -------------
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\diagnostics\koali-diagnostic-20260918-160428.txt      0 2026-09-18 16:04:29
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\launcher\logs\launcher-20260918-155855.log            0 2026-09-18 15:58:55
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\launcher\session.json                               461 2026-09-18 15:59:08
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\state\ecosystem-status.json                        8853 2026-09-18 16:04:30
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\state\surface-runtime.json                         6079 2026-09-18 16:04:30
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\workspace.json                                      815 2026-09-18 15:59:08
+
+
+============================================================
+ .KOALI-DEV JSON CONTENTS
+============================================================
+
+----- C:\mycode\kOA-Linux\koali-spaces\.koali-dev\workspace.json -----
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-18T19:59:08.677Z",
+  "products": {
+    "konnaxion": {
+      "base": "C:\\mycode\\Konnaxion\\Konnaxion",
+      "worlds": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
+    },
+    "orgo": {
+      "base": "C:\\mycode\\Orgo\\Orgo",
+      "worlds": "C:\\mycode\\Orgo\\Orgo_Worlds"
+    },
+    "semantik_architect": {
+      "base": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+    },
+    "koa_mediatheque": {
+      "base": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+    }
+  },
+  "sources": {
+    "kristal_framework": "C:\\mycode\\Kristal\\kristal-framework",
+    "koa_linux": "C:\\mycode\\kOA-Linux\\koa-linux",
+    "koali_control_panel": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel",
+    "koa_digital_ecosystem": "C:\\mycode\\kOA\\kOA_Digital_Ecosystem"
+  }
+}
+
+----- C:\mycode\kOA-Linux\koali-spaces\.koali-dev\launcher\session.json -----
+{
+  "schemaVersion": 1,
+  "launcherPid": 30856,
+  "rootPid": 22048,
+  "rootCreationDate": "2026-09-18T15:59:07.522344-04:00",
+  "repoRoot": "C:\\mycode\\kOA-Linux\\koali-spaces",
+  "command": [
+    "cmd.exe",
+    "/d",
+    "/s",
+    "/c",
+    "pnpm dev"
+  ],
+  "status": "running",
+  "startedAt": "2026-09-18T15:59:08.307324-04:00",
+  "logFile": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-dev\\launcher\\logs\\launcher-20260918-155855.log"
+}
+
+----- C:\mycode\kOA-Linux\koali-spaces\.koali-dev\state\ecosystem-status.json -----
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-18T20:04:30.549Z",
+  "discovery": {
+    "discoveredAt": "2026-09-18T19:59:08.675Z",
+    "products": [
+      {
+        "id": "konnaxion",
+        "moduleId": "konnaxion",
+        "publicName": "Konnaxion",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\Konnaxion\\Konnaxion",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\Konnaxion\\Konnaxion"
+          },
+          {
+            "id": "worlds",
+            "path": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Konnaxion",
+        "integrationFile": "C:\\mycode\\Konnaxion\\Konnaxion\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4301"
+      },
+      {
+        "id": "orgo",
+        "moduleId": "orgo",
+        "publicName": "Orgo",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\Orgo\\Orgo",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\Orgo\\Orgo"
+          },
+          {
+            "id": "worlds",
+            "path": "C:\\mycode\\Orgo\\Orgo_Worlds"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Orgo",
+        "integrationFile": "C:\\mycode\\Orgo\\Orgo\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4302"
+      },
+      {
+        "id": "semantik_architect",
+        "moduleId": "semantik_architect",
+        "publicName": "SemantiK Architect",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "SemantiK Architect",
+        "integrationFile": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4304"
+      },
+      {
+        "id": "koa_mediatheque",
+        "moduleId": "koa_mediatheque",
+        "publicName": "Médiathèque kOA",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Médiathèque kOA",
+        "integrationFile": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:8501"
+      }
+    ],
+    "sources": [
+      {
+        "id": "kristal_framework",
+        "publicName": "Kristal Framework",
+        "found": true,
+        "repoPath": "C:\\mycode\\Kristal\\kristal-framework"
+      },
+      {
+        "id": "koa_linux",
+        "publicName": "kOA Linux",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA-Linux\\koa-linux"
+      },
+      {
+        "id": "koali_control_panel",
+        "publicName": "Koali Control Panel",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel"
+      },
+      {
+        "id": "koa_digital_ecosystem",
+        "publicName": "kOA Digital Ecosystem",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA\\kOA_Digital_Ecosystem"
+      }
+    ]
+  },
+  "runtimes": {
+    "konnaxion": {
+      "state": "degraded",
+      "reason": "web: HTTP 404",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:8301/health/ready/",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4301/healthz",
+          "required": true,
+          "state": "degraded",
+          "reason": "HTTP 404"
+        }
+      ]
+    },
+    "orgo": {
+      "state": "ready",
+      "reason": "2 required probe(s) ready",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:4303/health/ready",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4302/",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    },
+    "semantik_architect": {
+      "state": "degraded",
+      "reason": "api: fetch failed; web: HTTP 404",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:8304/health/ready",
+          "required": true,
+          "state": "unreachable",
+          "reason": "fetch failed"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4304/",
+          "required": true,
+          "state": "degraded",
+          "reason": "HTTP 404"
+        }
+      ]
+    },
+    "koa_mediatheque": {
+      "state": "ready",
+      "reason": "1 required probe(s) ready",
+      "probes": [
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:8501/_stcore/health",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    }
+  },
+  "processes": {
+    "konnaxion": {
+      "state": "starting",
+      "pids": [
+        20332,
+        31916
+      ],
+      "commands": [
+        {
+          "id": "api",
+          "probeId": "api",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "koali/start-api.ps1",
+            "-Port",
+            "8301"
+          ],
+          "cwd": "C:\\mycode\\Konnaxion\\Konnaxion"
+        },
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "pnpm",
+          "args": [
+            "exec",
+            "next",
+            "dev",
+            "--turbo",
+            "--hostname",
+            "127.0.0.1",
+            "--port",
+            "4301"
+          ],
+          "cwd": "C:\\mycode\\Konnaxion\\Konnaxion\\frontend"
+        }
+      ],
+      "skipped": []
+    },
+    "orgo": {
+      "state": "starting",
+      "pids": [
+        38284,
+        22444
+      ],
+      "commands": [
+        {
+          "id": "api-stack",
+          "probeId": "api",
+          "command": "docker",
+          "args": [
+            "compose",
+            "up",
+            "--build",
+            "--remove-orphans",
+            "api"
+          ],
+          "cwd": "C:\\mycode\\Orgo\\Orgo"
+        },
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "npm",
+          "args": [
+            "exec",
+            "--yes=false",
+            "--",
+            "next",
+            "dev",
+            "-H",
+            "127.0.0.1",
+            "-p",
+            "4302"
+          ],
+          "cwd": "C:\\mycode\\Orgo\\Orgo\\apps\\web"
+        }
+      ],
+      "skipped": []
+    },
+    "semantik_architect": {
+      "state": "failed",
+      "pids": [
+        5708,
+        44736
+      ],
+      "commands": [
+        {
+          "id": "api",
+          "probeId": "api",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "koali/start-api.ps1",
+            "-Port",
+            "8304"
+          ],
+          "cwd": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+        },
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--hostname",
+            "127.0.0.1",
+            "--port",
+            "4304"
+          ],
+          "cwd": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect\\architect_frontend"
+        }
+      ],
+      "skipped": [],
+      "reason": "api exited (1)"
+    },
+    "koa_mediatheque": {
+      "state": "starting",
+      "pids": [
+        30688
+      ],
+      "commands": [
+        {
+          "id": "web-windows",
+          "probeId": "web",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "Start-KoaGui.ps1",
+            "-HostName",
+            "127.0.0.1",
+            "-Port",
+            "8501"
+          ],
+          "cwd": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+        }
+      ],
+      "skipped": []
+    }
+  }
+}
+
+----- C:\mycode\kOA-Linux\koali-spaces\.koali-dev\state\surface-runtime.json -----
+{
+  "schemaVersion": 1,
+  "runtimeRegistrations": [
+    {
+      "registrationId": "konnaxion.web",
+      "moduleId": "konnaxion",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.konnaxion.web",
+      "healthRef": "health.konnaxion.web",
+      "lifecycleProfileRef": "lifecycle.konnaxion.linked-repo",
+      "transportProfileRef": "transport.konnaxion.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "orgo.web",
+      "moduleId": "orgo",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.orgo.web",
+      "healthRef": "health.orgo.web",
+      "lifecycleProfileRef": "lifecycle.orgo.linked-repo",
+      "transportProfileRef": "transport.orgo.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "semantik_architect.web",
+      "moduleId": "semantik_architect",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.semantik_architect.web",
+      "healthRef": "health.semantik_architect.web",
+      "lifecycleProfileRef": "lifecycle.semantik_architect.linked-repo",
+      "transportProfileRef": "transport.semantik_architect.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "koa_mediatheque.web",
+      "moduleId": "koa_mediatheque",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.koa_mediatheque.web",
+      "healthRef": "health.koa_mediatheque.web",
+      "lifecycleProfileRef": "lifecycle.koa_mediatheque.linked-repo",
+      "transportProfileRef": "transport.koa_mediatheque.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    }
+  ],
+  "presentationPolicies": [
+    {
+      "moduleId": "konnaxion",
+      "accentTokenRef": "module.konnaxion",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "orgo",
+      "accentTokenRef": "module.orgo",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "semantik_architect",
+      "accentTokenRef": "module.semantik_architect",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "koa_mediatheque",
+      "accentTokenRef": "module.koa_mediatheque",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    }
+  ],
+  "resolvedTargets": [
+    {
+      "transportProfileRef": "transport.konnaxion.local",
+      "moduleId": "konnaxion",
+      "embedBase": "http://127.0.0.1:4301",
+      "iframeTitle": "Konnaxion",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.orgo.local",
+      "moduleId": "orgo",
+      "embedBase": "http://127.0.0.1:4302",
+      "iframeTitle": "Orgo",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.semantik_architect.local",
+      "moduleId": "semantik_architect",
+      "embedBase": "http://127.0.0.1:4304",
+      "iframeTitle": "SemantiK Architect",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.koa_mediatheque.local",
+      "moduleId": "koa_mediatheque",
+      "embedBase": "http://127.0.0.1:8501",
+      "iframeTitle": "Médiathèque kOA",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    }
+  ],
+  "runtimeObservations": [
+    {
+      "runtimeRef": "runtime.konnaxion.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "web: HTTP 404"
+    },
+    {
+      "runtimeRef": "runtime.orgo.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "runtimeRef": "runtime.semantik_architect.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "api: fetch failed; web: HTTP 404"
+    },
+    {
+      "runtimeRef": "runtime.koa_mediatheque.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "1 required probe(s) ready"
+    }
+  ],
+  "healthObservations": [
+    {
+      "healthRef": "health.konnaxion.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "web: HTTP 404"
+    },
+    {
+      "healthRef": "health.orgo.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "healthRef": "health.semantik_architect.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "api: fetch failed; web: HTTP 404"
+    },
+    {
+      "healthRef": "health.koa_mediatheque.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T20:04:30.546Z",
+      "reason": "1 required probe(s) ready"
+    }
+  ]
+}
+
+============================================================
+ OWNER CONTRACTS
+============================================================
+
+----- C:\mycode\Konnaxion\Konnaxion\koali.integration.json -----
+{
+  "schemaVersion": 1,
+  "productId": "konnaxion",
+  "owner": "Konnaxion",
+  "variables": {
+    "webPort": {
+      "type": "port",
+      "env": "KOALI_KONNAXION_PORT",
+      "default": 4301
+    },
+    "apiPort": {
+      "type": "port",
+      "env": "KOALI_KONNAXION_BACKEND_PORT",
+      "default": 8301
+    }
+  },
+  "surface": {
+    "embedBase": "http://127.0.0.1:${webPort}"
+  },
+  "processes": [
+    {
+      "id": "api",
+      "cwd": ".",
+      "command": {
+        "win32": "pwsh.exe",
+        "default": "pwsh"
+      },
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "koali/start-api.ps1",
+        "-Port",
+        "${apiPort}"
+      ],
+      "probeId": "api"
+    },
+    {
+      "id": "web",
+      "cwd": "frontend",
+      "command": "pnpm",
+      "shell": {
+        "win32": true,
+        "default": false
+      },
+      "args": [
+        "exec",
+        "next",
+        "dev",
+        "--turbo",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "${webPort}"
+      ],
+      "env": {
+        "PORT": "${webPort}",
+        "NEXT_PUBLIC_API_BASE": "http://127.0.0.1:${apiPort}/api",
+        "NEXT_PUBLIC_BACKEND_BASE": "http://127.0.0.1:${apiPort}",
+        "NEXT_PUBLIC_KONNAXION_API_ORIGIN": "http://127.0.0.1:${apiPort}",
+        "API_PROXY_BASE": "http://127.0.0.1:${apiPort}/api"
+      },
+      "probeId": "web"
+    }
+  ],
+  "probes": [
+    {
+      "id": "api",
+      "url": "http://127.0.0.1:${apiPort}/health/ready/",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 2500
+    },
+    {
+      "id": "web",
+      "url": "http://127.0.0.1:${webPort}/healthz",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 2500
+    }
+  ]
+}
+
+----- C:\mycode\Orgo\Orgo\koali.integration.json -----
+{
+  "schemaVersion": 1,
+  "productId": "orgo",
+  "owner": "Orgo",
+  "variables": {
+    "webPort": {
+      "type": "port",
+      "env": "KOALI_ORGO_PORT",
+      "default": 4302
+    },
+    "apiPort": {
+      "type": "port",
+      "env": "KOALI_ORGO_BACKEND_PORT",
+      "default": 4303
+    },
+    "postgresPassword": {
+      "env": "ORGO_POSTGRES_PASSWORD",
+      "default": "orgo-koali-local-dev"
+    }
+  },
+  "surface": {
+    "embedBase": "http://127.0.0.1:${webPort}"
+  },
+  "processes": [
+    {
+      "id": "api-stack",
+      "cwd": ".",
+      "command": "docker",
+      "args": [
+        "compose",
+        "up",
+        "--build",
+        "--remove-orphans",
+        "api"
+      ],
+      "env": {
+        "ORGO_API_HOST_PORT": "${apiPort}",
+        "POSTGRES_PASSWORD": "${postgresPassword}",
+        "ORGO_LOCAL_AUTO_LOGIN": "true"
+      },
+      "probeId": "api"
+    },
+    {
+      "id": "web",
+      "cwd": "apps/web",
+      "command": "npm",
+      "shell": {
+        "win32": true,
+        "default": false
+      },
+      "args": [
+        "exec",
+        "--yes=false",
+        "--",
+        "next",
+        "dev",
+        "-H",
+        "127.0.0.1",
+        "-p",
+        "${webPort}"
+      ],
+      "env": {
+        "PORT": "${webPort}",
+        "ORGO_API_URL": "http://127.0.0.1:${apiPort}"
+      },
+      "probeId": "web"
+    }
+  ],
+  "probes": [
+    {
+      "id": "api",
+      "url": "http://127.0.0.1:${apiPort}/health/ready",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 3000
+    },
+    {
+      "id": "web",
+      "url": "http://127.0.0.1:${webPort}/",
+      "required": true,
+      "statuses": [
+        200,
+        307,
+        308
+      ],
+      "timeoutMs": 2500
+    }
+  ]
+}
+
+----- C:\mycode\SemantiK_Architect\SemantiK_Architect\koali.integration.json -----
+{
+  "schemaVersion": 1,
+  "productId": "semantik_architect",
+  "owner": "SemantiK Architect",
+  "variables": {
+    "webPort": {
+      "type": "port",
+      "env": "KOALI_SEMANTIK_ARCHITECT_PORT",
+      "default": 4304
+    },
+    "apiPort": {
+      "type": "port",
+      "env": "KOALI_SEMANTIK_ARCHITECT_BACKEND_PORT",
+      "default": 8304
+    }
+  },
+  "surface": {
+    "embedBase": "http://127.0.0.1:${webPort}"
+  },
+  "processes": [
+    {
+      "id": "api",
+      "cwd": ".",
+      "command": {
+        "win32": "pwsh.exe",
+        "default": "pwsh"
+      },
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "koali/start-api.ps1",
+        "-Port",
+        "${apiPort}"
+      ],
+      "env": {
+        "PGF_PATH": "${repo}/runtime/semantik_architect.pgf"
+      },
+      "probeId": "api"
+    },
+    {
+      "id": "web",
+      "cwd": "architect_frontend",
+      "command": "npm",
+      "shell": {
+        "win32": true,
+        "default": false
+      },
+      "args": [
+        "run",
+        "dev",
+        "--",
+        "--hostname",
+        "127.0.0.1",
+        "--port",
+        "${webPort}"
+      ],
+      "env": {
+        "PORT": "${webPort}",
+        "NEXT_PUBLIC_ARCHITECT_API_BASE_URL": "http://127.0.0.1:${apiPort}/api/v1"
+      },
+      "probeId": "web"
+    }
+  ],
+  "probes": [
+    {
+      "id": "api",
+      "url": "http://127.0.0.1:${apiPort}/health/ready",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 3000
+    },
+    {
+      "id": "web",
+      "url": "http://127.0.0.1:${webPort}/",
+      "required": true,
+      "statuses": [
+        200,
+        307,
+        308
+      ],
+      "timeoutMs": 2500
+    }
+  ]
+}
+
+----- C:\mycode\kOA_Local_Mediatheque\koa_mediatheque\koali.integration.json -----
+{
+  "schemaVersion": 1,
+  "productId": "koa_mediatheque",
+  "owner": "Médiathèque kOA",
+  "variables": {
+    "webPort": {
+      "type": "port",
+      "env": "KOALI_KOA_MEDIATHEQUE_PORT",
+      "default": 8501
+    }
+  },
+  "surface": {
+    "embedBase": "http://127.0.0.1:${webPort}"
+  },
+  "processes": [
+    {
+      "id": "web-windows",
+      "platforms": [
+        "win32"
+      ],
+      "cwd": ".",
+      "command": {
+        "env": "KOALI_PWSH",
+        "default": "pwsh.exe"
+      },
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "Start-KoaGui.ps1",
+        "-HostName",
+        "127.0.0.1",
+        "-Port",
+        "${webPort}"
+      ],
+      "probeId": "web"
+    },
+    {
+      "id": "web-posix",
+      "platforms": [
+        "linux",
+        "darwin"
+      ],
+      "cwd": ".",
+      "command": {
+        "env": "KOALI_PYTHON",
+        "default": "python3"
+      },
+      "args": [
+        "-m",
+        "streamlit",
+        "run",
+        "06_GUI/koa_mediatheque_gui/app.py",
+        "--server.address",
+        "127.0.0.1",
+        "--server.port",
+        "${webPort}",
+        "--server.headless",
+        "true"
+      ],
+      "probeId": "web"
+    }
+  ],
+  "probes": [
+    {
+      "id": "web",
+      "url": "http://127.0.0.1:${webPort}/_stcore/health",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 1800
+    }
+  ]
+}
+
+============================================================
+ ORGO DOCKER
+============================================================
+NAME              IMAGE                                                                     COMMAND                  SERVICE    CREATED             STATUS                       PORTS
+orgo-api-1        sha256:d8a45d79eb1cce51c17f8a3f35022d9122b94c940a2728a99373551bf06d7437   "docker-entrypoint.sÔÇª"   api        About an hour ago   Up 5 minutes (healthy)       127.0.0.1:4303->4000/tcp
+orgo-migrate-1    sha256:0324021e458e634cc6c38ca4746290c28216663ebffbfd980a8d95eee8ce5b7d   "docker-entrypoint.sÔÇª"   migrate    About an hour ago   Exited (0) 5 minutes ago     
+orgo-postgres-1   postgres:16                                                               "docker-entrypoint.sÔÇª"   postgres   About an hour ago   Up About an hour (healthy)   5432/tcp
+orgo-web-1        orgo-web                                                                  "docker-entrypoint.sÔÇª"   web        26 hours ago        Up 2 hours                   127.0.0.1:3000->3000/tcp
+orgo-worker-1     sha256:2ceddf39abb0249683dde7b71d35e8bf6dba84a71ce1e050844b7e33ed8e9cec   "docker-entrypoint.sÔÇª"   worker     30 hours ago        Up 2 hours                   4000/tcp
+
+----- migrate logs -----
+migrate-1  | 
+migrate-1  | > orgo@0.1.0 db:migrate
+migrate-1  | > npm run db:migrate -w api
+migrate-1  | 
+migrate-1  | 
+migrate-1  | > api@0.1.0 db:migrate
+migrate-1  | > prisma migrate deploy
+migrate-1  | 
+migrate-1  | Prisma schema loaded from prisma/schema.prisma
+migrate-1  | Datasource "db": PostgreSQL database "orgo", schemas "insights, public" at "postgres:5432"
+migrate-1  | 
+migrate-1  | Error: P1000: Authentication failed against database server at `postgres`, the provided database credentials for `orgo` are not valid.
+migrate-1  | 
+migrate-1  | Please make sure to provide valid database credentials for the database server at `postgres`.
+migrate-1  | npm error Lifecycle script `db:migrate` failed with error:
+migrate-1  | npm error code 1
+migrate-1  | npm error path /app/apps/api
+migrate-1  | npm error workspace api@0.1.0
+migrate-1  | npm error location /app/apps/api
+migrate-1  | npm error command failed
+migrate-1  | npm error command sh -c prisma migrate deploy
+migrate-1  | npm notice
+migrate-1  | npm notice New major version of npm available! 10.9.8 -> 12.0.2
+migrate-1  | npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+migrate-1  | npm notice To update run: npm install -g npm@12.0.2
+migrate-1  | npm notice
+migrate-1  | 
+migrate-1  | > orgo@0.1.0 db:migrate
+migrate-1  | > npm run db:migrate -w api
+migrate-1  | 
+migrate-1  | 
+migrate-1  | > api@0.1.0 db:migrate
+migrate-1  | > prisma migrate deploy
+migrate-1  | 
+migrate-1  | Prisma schema loaded from prisma/schema.prisma
+migrate-1  | Datasource "db": PostgreSQL database "orgo", schemas "insights, public" at "postgres:5432"
+migrate-1  | 
+migrate-1  | 1 migration found in prisma/migrations
+migrate-1  | 
+migrate-1  | 
+migrate-1  | No pending migrations to apply.
+migrate-1  | 
+migrate-1  | > orgo@0.1.0 db:migrate
+migrate-1  | > npm run db:migrate -w api
+migrate-1  | 
+migrate-1  | 
+migrate-1  | > api@0.1.0 db:migrate
+migrate-1  | > prisma migrate deploy
+migrate-1  | 
+migrate-1  | Prisma schema loaded from prisma/schema.prisma
+migrate-1  | Datasource "db": PostgreSQL database "orgo", schemas "insights, public" at "postgres:5432"
+migrate-1  | 
+migrate-1  | 1 migration found in prisma/migrations
+migrate-1  | 
+migrate-1  | 
+migrate-1  | No pending migrations to apply.
+migrate-1  | 
+migrate-1  | > orgo@0.1.0 db:migrate
+migrate-1  | > npm run db:migrate -w api
+migrate-1  | 
+migrate-1  | 
+migrate-1  | > api@0.1.0 db:migrate
+migrate-1  | > prisma migrate deploy
+migrate-1  | 
+migrate-1  | Prisma schema loaded from prisma/schema.prisma
+migrate-1  | Datasource "db": PostgreSQL database "orgo", schemas "insights, public" at "postgres:5432"
+migrate-1  | 
+migrate-1  | 1 migration found in prisma/migrations
+migrate-1  | 
+migrate-1  | 
+migrate-1  | No pending migrations to apply.
+
+----- api logs -----
+api-1  | {"event":"http.request","trace_id":"76123c5e240e0eff077477c2c6afe467","method":"GET","route":"/health/ready","status":200,"duration_ms":1.497028}
+api-1  | {"event":"http.request","trace_id":"b221413aa04214b3c422ec22c109bcea","method":"GET","route":"/health/ready","status":200,"duration_ms":1.545953}
+api-1  | {"event":"http.request","trace_id":"b74609a30dcdd7abcfb18fc894e90f69","method":"GET","route":"/health/ready","status":200,"duration_ms":1.396156}
+api-1  | {"event":"http.request","trace_id":"21a8f1c9bd627d7eb40bfc96ded44b11","method":"GET","route":"/health/ready","status":200,"duration_ms":3.525497}
+api-1  | {"event":"http.request","trace_id":"ef0a487179b65db00b752f9d94944c72","method":"GET","route":"/health/ready","status":200,"duration_ms":2.123698}
+api-1  | {"event":"http.request","trace_id":"46766af770676c5cac7eaf93e11d1334","method":"GET","route":"/health/ready","status":200,"duration_ms":2.937996}
+api-1  | {"event":"http.request","trace_id":"1a77a31577d2b4188e7bfe25cc7b4723","method":"GET","route":"/health/ready","status":200,"duration_ms":2.974085}
+api-1  | {"event":"http.request","trace_id":"a4fac5ffaa8359a6938119c605e709ac","method":"GET","route":"/health/ready","status":200,"duration_ms":1.722464}
+api-1  | {"event":"http.request","trace_id":"2e243a07d68b4f3ee429ea53cc8d12b1","method":"GET","route":"/health/ready","status":200,"duration_ms":1.600607}
+api-1  | {"event":"http.request","trace_id":"3553ba42e5d33bf1a49e494010eb9c69","method":"GET","route":"/health/ready","status":200,"duration_ms":2.341275}
+api-1  | {"event":"http.request","trace_id":"99fc0d89e4c43ed613e002112a9b4485","method":"GET","route":"/health/ready","status":200,"duration_ms":1.682043}
+api-1  | {"event":"http.request","trace_id":"e07d5bd652640bfdca3dfb43c1bc3094","method":"GET","route":"/health/ready","status":200,"duration_ms":1.625149}
+api-1  | {"event":"http.request","trace_id":"2cafbf6ad501776b7dfe360bd7594b73","method":"GET","route":"/health/ready","status":200,"duration_ms":2.355443}
+api-1  | {"event":"http.request","trace_id":"283b71fee94fdeff30146099e9fab34a","method":"GET","route":"/health/ready","status":200,"duration_ms":2.049556}
+api-1  | {"event":"http.request","trace_id":"95a3fb2236f85f26f9790e53034982a2","method":"GET","route":"/health/ready","status":200,"duration_ms":1.591487}
+api-1  | {"event":"http.request","trace_id":"66506f484f3f1a1eb252633e7b068e78","method":"GET","route":"/health/ready","status":200,"duration_ms":1.693573}
+api-1  | {"event":"http.request","trace_id":"94eda63d2a452eccc36c361875564130","method":"GET","route":"/health/ready","status":200,"duration_ms":1.811625}
+api-1  | {"event":"http.request","trace_id":"46c0edca94648d84c7f67c620cbd4034","method":"GET","route":"/health/ready","status":200,"duration_ms":1.528105}
+api-1  | {"event":"http.request","trace_id":"6158dde68006cc20859f0958c2549777","method":"GET","route":"/health/ready","status":200,"duration_ms":1.604955}
+api-1  | {"event":"http.request","trace_id":"d335dd918c8d14f8c557738b21dc95c6","method":"GET","route":"/health/ready","status":200,"duration_ms":2.415319}
+api-1  | {"event":"http.request","trace_id":"b263a831c0c9e0b9f75c9c8f48074da6","method":"GET","route":"/health/ready","status":200,"duration_ms":1.612167}
+api-1  | {"event":"http.request","trace_id":"95557e168aed5e46d625c29a780fcdc5","method":"GET","route":"/health/ready","status":200,"duration_ms":1.84453}
+api-1  | {"event":"http.request","trace_id":"4b8056ef672765b28bd4f11c079048b1","method":"GET","route":"/health/ready","status":200,"duration_ms":1.525901}
+api-1  | {"event":"http.request","trace_id":"49db0174ee130c037bf5c895e1a807af","method":"GET","route":"/health/ready","status":200,"duration_ms":2.312643}
+api-1  | {"event":"http.request","trace_id":"502c828ceabd220f300c3084570ed124","method":"GET","route":"/health/ready","status":200,"duration_ms":1.846105}
+api-1  | {"event":"http.request","trace_id":"2da31a0d4ef9821a166291f2f5049912","method":"GET","route":"/health/ready","status":200,"duration_ms":1.845012}
+api-1  | {"event":"http.request","trace_id":"059a6ef9ccf71bcba96ae11ade831eee","method":"GET","route":"/health/ready","status":200,"duration_ms":2.012609}
+api-1  | {"event":"http.request","trace_id":"d8959721e6fbe6e5505744720992b307","method":"GET","route":"/health/ready","status":200,"duration_ms":1.794994}
+api-1  | {"event":"http.request","trace_id":"5f69692ea7d63ede0ef3f1f87391ed99","method":"GET","route":"/health/ready","status":200,"duration_ms":1.961251}
+api-1  | {"event":"http.request","trace_id":"295a77243f4240371551c5420c0d01f8","method":"GET","route":"/health/ready","status":200,"duration_ms":2.002548}
+api-1  | {"event":"http.request","trace_id":"37ae9dc61360c14438debfcb9ca72749","method":"GET","route":"/health/ready","status":200,"duration_ms":1.554876}
+api-1  | {"event":"http.request","trace_id":"5c2a07c44961b2a85a6746698eb7b56d","method":"GET","route":"/health/ready","status":200,"duration_ms":1.854118}
+api-1  | {"event":"http.request","trace_id":"d344d7f4c4d61555e7ef76b2aa15480c","method":"GET","route":"/health/ready","status":200,"duration_ms":1.539221}
+api-1  | {"event":"http.request","trace_id":"8376bdea30ba1e1d7f9f352eedd7591f","method":"GET","route":"/health/ready","status":200,"duration_ms":1.95362}
+api-1  | {"event":"http.request","trace_id":"69fe5cc30226cc60b2c450d366dc2eb5","method":"GET","route":"/health/ready","status":200,"duration_ms":1.853904}
+api-1  | {"event":"http.request","trace_id":"649ded4a762dfb29fd0efdc3f6598601","method":"GET","route":"/health/ready","status":200,"duration_ms":1.478954}
+api-1  | {"event":"http.request","trace_id":"35a6da1a4482bc136318525cf23e5c68","method":"GET","route":"/health/ready","status":200,"duration_ms":1.543233}
+api-1  | {"event":"http.request","trace_id":"171821f9a07e4e015ab7f8f8922afd96","method":"GET","route":"/health/ready","status":200,"duration_ms":1.517694}
+api-1  | {"event":"http.request","trace_id":"1eb8699e7f9fb96214aa1446a85d9149","method":"GET","route":"/health/ready","status":200,"duration_ms":1.548093}
+api-1  | {"event":"http.request","trace_id":"e2c1a83514daf981c26bfa69d9160c47","method":"GET","route":"/health/ready","status":200,"duration_ms":1.904448}
+api-1  | {"event":"http.request","trace_id":"27de4f37817a4ea46a5db695a9dcebf3","method":"GET","route":"/health/ready","status":200,"duration_ms":1.621871}
+api-1  | {"event":"http.request","trace_id":"bffa340d67a72c2a689c70c74647aa7d","method":"GET","route":"/health/ready","status":200,"duration_ms":1.852552}
+api-1  | {"event":"http.request","trace_id":"2356b75b846520a7231b34808af3077f","method":"GET","route":"/health/ready","status":200,"duration_ms":1.280433}
+api-1  | {"event":"http.request","trace_id":"938d1cb3305e9e5ceff66d79aa333eff","method":"GET","route":"/health/ready","status":200,"duration_ms":1.493317}
+api-1  | {"event":"http.request","trace_id":"d1eeb25b0de4d9c7c6ac0ecdb9f6db77","method":"GET","route":"/health/ready","status":200,"duration_ms":1.763948}
+api-1  | {"event":"http.request","trace_id":"f76550ecebe10c11105d27480e185547","method":"GET","route":"/health/ready","status":200,"duration_ms":1.583005}
+api-1  | {"event":"http.request","trace_id":"2dc2c55694ef3527641a577e7c94076f","method":"GET","route":"/health/ready","status":200,"duration_ms":2.002048}
+api-1  | {"event":"http.request","trace_id":"af69f5dc65091c992820dcdb44ee6f9c","method":"GET","route":"/health/ready","status":200,"duration_ms":1.504621}
+api-1  | {"event":"http.request","trace_id":"580b64785f090889b3806fcacd3eaa52","method":"GET","route":"/health/ready","status":200,"duration_ms":1.817603}
+api-1  | {"event":"http.request","trace_id":"680663036ba714b1451e32a247fe7eb3","method":"GET","route":"/health/ready","status":200,"duration_ms":1.960146}
+api-1  | {"event":"http.request","trace_id":"aa4cf03b2645f6dfaa9bd932ed28b641","method":"GET","route":"/health/ready","status":200,"duration_ms":1.810355}
+api-1  | {"event":"http.request","trace_id":"069a649e4ac650220f58daff8d45f9d2","method":"GET","route":"/health/ready","status":200,"duration_ms":1.734737}
+api-1  | {"event":"http.request","trace_id":"b40ea1fb216958aff9a24536b2beed68","method":"GET","route":"/health/ready","status":200,"duration_ms":1.566659}
+api-1  | {"event":"http.request","trace_id":"b3b23bd8b9b826ecbc1b017bd9606514","method":"GET","route":"/health/ready","status":200,"duration_ms":1.575478}
+api-1  | {"event":"http.request","trace_id":"c988b9c6626fa8a31b2236fd53b4be55","method":"GET","route":"/health/ready","status":200,"duration_ms":1.802614}
+api-1  | {"event":"http.request","trace_id":"a131e08f8fb9cee6d0b1469560940dd3","method":"GET","route":"/health/ready","status":200,"duration_ms":1.900281}
+api-1  | {"event":"http.request","trace_id":"8027aeefb9ff7da1adf75883acb5fa68","method":"GET","route":"/health/ready","status":200,"duration_ms":2.08463}
+api-1  | {"event":"http.request","trace_id":"de96eae3bba3bd55cb8cbbf136829cb9","method":"GET","route":"/health/ready","status":200,"duration_ms":2.05403}
+api-1  | {"event":"http.request","trace_id":"07dc153d7907ffbd2fc40d221e90249a","method":"GET","route":"/health/ready","status":200,"duration_ms":1.614032}
+api-1  | {"event":"http.request","trace_id":"30367e84e24ce750da600eeecd4cdeb4","method":"GET","route":"/health/ready","status":200,"duration_ms":1.736344}
+api-1  | {"event":"http.request","trace_id":"57908a33e6c7fd80d0d3736c239a6a7f","method":"GET","route":"/health/ready","status":200,"duration_ms":1.886323}
+api-1  | {"event":"http.request","trace_id":"db9842f1f642679ced7045c8148660c1","method":"GET","route":"/health/ready","status":200,"duration_ms":1.684729}
+api-1  | {"event":"http.request","trace_id":"daf357ff6139412a8afb222046a34f65","method":"GET","route":"/health/ready","status":200,"duration_ms":1.798378}
+api-1  | {"event":"http.request","trace_id":"371aeffbf99cafb51c204dd0abaefc43","method":"GET","route":"/health/ready","status":200,"duration_ms":1.49775}
+api-1  | {"event":"http.request","trace_id":"47529ca444bb264515ff84c3f8f4dee1","method":"GET","route":"/health/ready","status":200,"duration_ms":1.817568}
+api-1  | {"event":"http.request","trace_id":"8161213a3d117cdfac070a104833ce93","method":"GET","route":"/health/ready","status":200,"duration_ms":2.056585}
+api-1  | {"event":"http.request","trace_id":"6d31741a74a69867591f8270fa033161","method":"GET","route":"/health/ready","status":200,"duration_ms":1.839091}
+api-1  | {"event":"http.request","trace_id":"65a0094740e7fb519f9069a2d548dec6","method":"GET","route":"/health/ready","status":200,"duration_ms":1.509651}
+api-1  | {"event":"http.request","trace_id":"6a368b427e4b037e468ea936d2a78dd1","method":"GET","route":"/health/ready","status":200,"duration_ms":1.614843}
+api-1  | {"event":"http.request","trace_id":"bd7ea5dbaecd1c68d8f7b7c401e394b9","method":"GET","route":"/health/ready","status":200,"duration_ms":1.784375}
+api-1  | {"event":"http.request","trace_id":"f28c8d9896b964a834ec5a9b3b41998c","method":"GET","route":"/health/ready","status":200,"duration_ms":1.579234}
+api-1  | {"event":"http.request","trace_id":"3b37778ea45634b6e414f4b1c5958fac","method":"GET","route":"/health/ready","status":200,"duration_ms":1.868393}
+api-1  | {"event":"http.request","trace_id":"4e63e12645a913eebac0854566045051","method":"GET","route":"/health/ready","status":200,"duration_ms":1.585838}
+api-1  | {"event":"http.request","trace_id":"d0d4f2515f0a9df47a1813adfa73e54a","method":"GET","route":"/health/ready","status":200,"duration_ms":1.535745}
+api-1  | {"event":"http.request","trace_id":"89dd40764b52dcb94e26fab15da37cfc","method":"GET","route":"/health/ready","status":200,"duration_ms":1.59865}
+api-1  | {"event":"http.request","trace_id":"a8d60cf55f47f7e634c55abea9c48938","method":"GET","route":"/health/ready","status":200,"duration_ms":1.736482}
+api-1  | {"event":"http.request","trace_id":"8b9ad17e501ca7dd2983ee45a8351b28","method":"GET","route":"/health/ready","status":200,"duration_ms":1.566745}
+api-1  | {"event":"http.request","trace_id":"5f1b9938f0dfa14b5a908cfa8feb0d25","method":"GET","route":"/health/ready","status":200,"duration_ms":1.390164}
+api-1  | {"event":"http.request","trace_id":"20a4cfff3fff7f38f3db8906300a2327","method":"GET","route":"/health/ready","status":200,"duration_ms":1.426267}
+api-1  | {"event":"http.request","trace_id":"12e4bf910572ba66a741dc7a4868b329","method":"GET","route":"/health/ready","status":200,"duration_ms":2.206432}
+
+============================================================
+ PROBE: Koali presentation
+============================================================
+URL: http://127.0.0.1:4173/
+HTTP: 200
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html><html lang="fr-CA"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/app/layout.css?v=1789761874394" data-precedence="next_static/css/app/layout.css"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack.js?v=1789761874394"/><script src="/_next/static/chunks/main-app.js?v=1789761874394" async=""></script><script src="/_next/static/chunks/app-pages-internals.js" async=""></script><script src="/_next/static/chunks/app/layout.js" async=""></script><script src="/_next/static/chunks/app/error.js" async=""></script><script src="/_next/static/chunks/app/not-found.js" async=""></script><script src="/_next/static/chunks/app/page.js" async=""></script><title>Koali Spaces</title><meta name="description" content="Local-first Koali experience layer"/><script id="koali-appearance-boot">
+(function () {
+  try {
+    var c = {"storageKey":"koali.presentation.preferences.v1","modes":["system","light","dark"],"densities":["compact","comfortable","touch"],"surfaceStyles":["minimal","outlined","elevated"],"accents":{"forest":"#1e6864","ocean":"#2563eb","slate":"#475569","earth":"#b45309","plum":"#7c3aed"}};
+    var root = document.documentElement;
+    var parsed = null;
+    try {
+      var raw = window.localStorage.getItem(c.storageKey);
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch (_) {}
+    var pref = parsed && parsed.schema_version === 1 ? parsed : null;
+    var mode = pref && c.modes.indexOf(pref.mode) >= 0 ? pref.mode : 'system';
+    var dark = mode === 'dark' || (mode === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    root.dataset.koaliColorScheme = dark ? 'dark' : 'light';
+    if (pref && c.densities.indexOf(pref.density) >= 0) root.dataset.koaliDensity = pref.density;
+    var surfaceStyle = pref && (pref.surface_style || pref.surfaceStyle);
+    if (surfaceStyle && c.surfaceStyl
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: Koali shell state
+============================================================
+URL: http://127.0.0.1:4173/api/shell-state
+HTTP: 200
+Content-Type: application/json
+{"state":"degraded","network_state":"unknown","active_space_id":"default_space","active_space":{"space_id":"default_space","title":"Default Space","version":"1.0.0","default_module_id":"space_home","module_instances":[{"module_id":"space_home","manifest_ref":"global-widgets.json","enabled":true,"required":true,"order":0,"public_label":"Home"}],"global_topbar":[],"appearance":{"theme_ref":"themes/default.json","density":"comfortable","design_system_id":"koali.ant5","theme_version":"1.0.0"},"appearance_policy":{"default_mode":"system","default_accent":"forest","default_density":"comfortable","default_surface_style":"outlined","allowed_modes":["system","light","dark"],"allowed_accents":["forest","ocean","slate","earth","plum"],"allowed_densities":["compact","comfortable","touch"],"allowed_surface_styles":["minimal","outlined","elevated"],"allow_module_accent":true},"offline_policy":{"shell_available":true,"retain_last_validated_definition":true,"unavailable_module_behavior":"show_declared_fallback","network_state_indicator":true,"public_cdn_required":false,"remote_runtime_assets_required":false},"authority_boundary":{"presentation_only":true,"may_grant_capabilities":false,"contains_business_state":false,"contains_executable_extension":false}},"active_theme":{"theme_id":"koa_spaces.default","version":"1.0.0","design_system_id":"koali.ant5","tokens":{"primary_accent":"#1e6864","primary_accent_id":"forest","density":"comfortable","radius_scale":"v1","spacing_scale":"v1","typography_scale":"v1","focus_style":"visible","surface_family":"neutral"}},"modules":[{"manifest_id":"koa-spaces.global-widgets","manifest_version":"1.0.0","module_id":"space_home","public_name":"Home","home_route_id":"space_home.home","required_capabilities":[],"routes":[{"route_id":"space_home.home","module_id":"space_home","path":"/","page_ref":"koa-spaces://page/home","default_label":"Home","label_key":"space_home.home","availability":"always","offline_behavior":"available","deep_link_allowed":true,"
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: Konnaxion web root
+============================================================
+URL: http://127.0.0.1:4301/
+HTTP: 200
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html><html lang="fr"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" as="image" href="/LogoK.svg"/><link rel="stylesheet" href="/_next/static/chunks/styles_tailwind_a431aba9.css" data-precedence="next_static/chunks/styles_tailwind_a431aba9.css"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_8873a9ea._.js"/><script src="/_next/static/chunks/af7d4_next_dist_compiled_dcfe9415._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_client_0191978f._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_42a6a07f._.js" async=""></script><script src="/_next/static/chunks/61dca_%40swc_helpers_cjs_e27e0aca._.js" async=""></script><script src="/_next/static/chunks/_e69f0d32._.js" async=""></script><script src="/_next/static/chunks/_bc23d07d._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_d8e16630._.js" async=""></script><script src="/_next/static/chunks/edf3a_antd_268789f6._.js" async=""></script><script src="/_next/static/chunks/33f0b_rc-motion_es_265a01aa._.js" async=""></script><script src="/_next/static/chunks/31095_%40ant-design_cssinjs_es_fdf4b13d._.js" async=""></script><script src="/_next/static/chunks/b1d0d_rc-field-form_es_b68940f8._.js" async=""></script><script src="/_next/static/chunks/45bd4_%40rc-component_async-validator_es_23f13f7d._.js" async=""></script><script src="/_next/static/chunks/node_modules__pnpm_983e8669._.js" async=""></script><script src="/_next/static/chunks/_942dc1e2._.js" async=""></script><script src="/_next/static/chunks/app_layout_tsx_b914175a._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_0140adf9._.js" async=""></script><script src="/_next/static/chunks/app_page_tsx_9ff4c3e4._.js" async=""></script><title>Home</title><meta name="description" content="Konnaxion entry point – choose your sp
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: Konnaxion WRONG historical healthz probe
+============================================================
+URL: http://127.0.0.1:4301/healthz
+HTTP: 404
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html><html lang="fr"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/chunks/styles_tailwind_a431aba9.css" data-precedence="next_static/chunks/styles_tailwind_a431aba9.css"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/%5Bturbopack%5D_browser_dev_hmr-client_hmr-client_ts_8873a9ea._.js"/><script src="/_next/static/chunks/af7d4_next_dist_compiled_dcfe9415._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_client_0191978f._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_42a6a07f._.js" async=""></script><script src="/_next/static/chunks/61dca_%40swc_helpers_cjs_e27e0aca._.js" async=""></script><script src="/_next/static/chunks/_e69f0d32._.js" async=""></script><script src="/_next/static/chunks/_bc23d07d._.js" async=""></script><script src="/_next/static/chunks/af7d4_next_dist_d8e16630._.js" async=""></script><script src="/_next/static/chunks/edf3a_antd_268789f6._.js" async=""></script><script src="/_next/static/chunks/33f0b_rc-motion_es_265a01aa._.js" async=""></script><script src="/_next/static/chunks/31095_%40ant-design_cssinjs_es_fdf4b13d._.js" async=""></script><script src="/_next/static/chunks/b1d0d_rc-field-form_es_b68940f8._.js" async=""></script><script src="/_next/static/chunks/45bd4_%40rc-component_async-validator_es_23f13f7d._.js" async=""></script><script src="/_next/static/chunks/node_modules__pnpm_983e8669._.js" async=""></script><script src="/_next/static/chunks/_942dc1e2._.js" async=""></script><script src="/_next/static/chunks/app_layout_tsx_b914175a._.js" async=""></script><meta name="robots" content="noindex"/><title>404: This page could not be found.</title><title>Konnaxion</title><meta name="description" content="Konnaxion · EkoH, ethiKos, keenKonnect, KonnectED, Kreative – orchestration and collaboration suites."/><link rel="shortcut icon" href="/LogoK.svg"/><link rel
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: Konnaxion API readiness
+============================================================
+URL: http://127.0.0.1:8301/health/ready/
+HTTP: 200
+Content-Type: application/json
+{"status": "ready", "database": "up"}
+
+============================================================
+ PROBE: Orgo web
+============================================================
+URL: http://127.0.0.1:4302/
+HTTP: 200
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html><html><head><meta charSet="utf-8" data-next-head=""/><meta name="viewport" content="width=device-width" data-next-head=""/><title data-next-head="">Orgo · Organize and Go</title><link rel="icon" href="/logo_k.svg" type="image/svg+xml" data-next-head=""/><meta name="description" content="Organize signals into Workrooms, decisions, plans, Actions, evidence, and verified outcomes." data-next-head=""/><link rel="preload" href="/_next/static/chunks/apps_web_src_styles_1p8yszo.css" as="style"/><style data-next-hide-fouc="true">body{display:none}</style><noscript data-next-hide-fouc="true"><style>body{display:block}</style></noscript><link rel="stylesheet" href="/_next/static/chunks/apps_web_src_styles_1p8yszo.css" data-n-g=""/><noscript data-n-css=""></noscript><script src="/_next/static/chunks/node_modules_next_dist_compiled_199if1i._.js" defer=""></script><script src="/_next/static/chunks/node_modules_next_dist_shared_lib_0c-iiom._.js" defer=""></script><script src="/_next/static/chunks/node_modules_next_dist_client_16lnmlo._.js" defer=""></script><script src="/_next/static/chunks/node_modules_next_dist_0fjfz2c._.js" defer=""></script><script src="/_next/static/chunks/node_modules_react-dom_0kla17-._.js" defer=""></script><script src="/_next/static/chunks/node_modules_1z0m79v._.js" defer=""></script><script src="/_next/static/chunks/%5Broot-of-the-server%5D__1iem_jx._.js" defer=""></script><script src="/_next/static/chunks/apps_web_pages__app_0du2_q-._.js" defer=""></script><script src="/_next/static/chunks/turbopack-apps_web_pages__app_0vm76tm._.js" defer=""></script><script src="/_next/static/chunks/%5Broot-of-the-server%5D__1c093am._.js" defer=""></script><script src="/_next/static/chunks/node_modules_next_dist_shared_lib_1-1urvf._.js" defer=""></script><script src="/_next/static/chunks/node_modules_next_1m6k6q8._.js" defer=""></script><script src="/_next/static/chunks/apps_web_pages_%5B%5B___path%5D%5D_0du2_q-._.js" defer=""></script><script src="/_ne
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: Orgo API port 4000 readiness
+============================================================
+URL: http://127.0.0.1:4000/health/ready
+ERROR: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée. (127.0.0.1:4000)
+
+============================================================
+ PROBE: Orgo API intended 4303 readiness
+============================================================
+URL: http://127.0.0.1:4303/health/ready
+HTTP: 200
+Content-Type: application/json; charset=utf-8
+{"ok":true,"data":{"status":"ready"},"error":null}
+
+============================================================
+ PROBE: SemantiK web
+============================================================
+URL: http://127.0.0.1:4304/
+HTTP: 404
+Content-Type: text/html; charset=utf-8
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/semantik_architect/_next/static/css/app/layout.css?v=1789761878869" data-precedence="next_static/css/app/layout.css"/><link rel="preload" as="script" fetchPriority="low" href="/semantik_architect/_next/static/chunks/webpack.js?v=1789761878869"/><script src="/semantik_architect/_next/static/chunks/main-app.js?v=1789761878869" async=""></script><script src="/semantik_architect/_next/static/chunks/app-pages-internals.js" async=""></script><script src="/semantik_architect/_next/static/chunks/app/layout.js" async=""></script><meta name="robots" content="noindex"/><title>404: This page could not be found.</title><title>Semantik Architect</title><meta name="description" content="Semantic frame editor and NLG playground for Semantik Architect (entities, events, narratives, and more)."/><script src="/semantik_architect/_next/static/chunks/polyfills.js" noModule=""></script></head><body class="__className_7ab09a min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col font-sans selection:bg-blue-500/30"><nav class="aw-navbar"><div class="max-w-7xl mx-auto flex items-center justify-between"><div class="flex items-center gap-2"><span class="aw-navbar-title">Semantik Architect</span></div><div class="flex gap-1 overflow-x-auto pb-1 sm:pb-0"><a class="aw-nav-link aw-nav-link-active" href="/semantik_architect">Status</a><a class="aw-nav-link" href="/semantik_architect/editor">Generate</a></div></div></nav><main class="flex-1 p-6 w-full max-w-7xl mx-auto"><div style="font-family:system-ui,&quot;Segoe UI&quot;,Roboto,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;;height:100vh;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center"><div><style>body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid
+... [BODY TRUNCATED]
+
+============================================================
+ PROBE: SemantiK API readiness
+============================================================
+URL: http://127.0.0.1:8304/health/ready
+ERROR: Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée. (127.0.0.1:8304)
+
+============================================================
+ PROBE: Médiathèque Streamlit health
+============================================================
+URL: http://127.0.0.1:8501/_stcore/health
+HTTP: 200
+Content-Type: text/plain; charset=utf-8
+ok
+
+============================================================
+ KOALI SOURCE - CRITICAL SHELL PATH
+============================================================
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\app\api\shell-state\route.ts
+============================================================
+import { NextResponse } from 'next/server';
+import { readServerShellState } from '@/lib/shell-state.server';
+
+export async function GET() {
+  const state = await readServerShellState();
+  return NextResponse.json(state, { status: state.state === 'unavailable' ? 503 : 200 });
+}
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-state.server.ts
+============================================================
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { developmentShellState } from './development-shell-state';
+import type { ShellState } from '@/types/contracts';
+
+function unavailableState(reason: string): ShellState {
+  return {
+    state: 'unavailable',
+    network_state: 'unknown',
+    active_space_id: null,
+    active_space: null,
+    active_theme: null,
+    modules: [],
+    active_module_id: null,
+    active_route_id: null,
+    capabilities: [],
+    reason,
+  };
+}
+
+export function activeStatePath() {
+  const stateRoot = process.env.KOALI_SPACES_STATE_ROOT;
+  return stateRoot ? path.join(stateRoot, 'active-state.json') : null;
+}
+
+export function publicShellState(value: Record<string, unknown>) {
+  return Object.fromEntries(Object.entries(value).filter(([key]) => !key.startsWith('_')));
+}
+
+export async function readServerShellState(): Promise<ShellState> {
+  const file = activeStatePath();
+  if (file) {
+    try {
+      const value = JSON.parse(await fs.readFile(file, 'utf8')) as Record<string, unknown>;
+      return publicShellState(value) as unknown as ShellState;
+    } catch {
+      // Production fails closed below; explicit development mode may use the fallback.
+    }
+  }
+  const developmentFallback = process.env.KOALI_SPACES_DEV_FALLBACK === '1' || process.env.NODE_ENV !== 'production';
+  return developmentFallback ? developmentShellState : unavailableState('no validated runtime Space state available');
+}
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\lib\development-shell-state.ts
+============================================================
+import type { ModuleManifest, OfflineBehavior, RouteContribution, ShellState } from '@/types/contracts';
+
+const route = (
+  routeId: string,
+  path: string,
+  label: string,
+  offlineBehavior: Extract<OfflineBehavior, 'available' | 'cached_read_only'>,
+): RouteContribution => ({
+  route_id: routeId,
+  module_id: 'space_home',
+  path,
+  page_ref: `koa-spaces://page/${routeId.split('.').at(-1)}`,
+  default_label: label,
+  label_key: routeId,
+  availability: 'always',
+  offline_behavior: offlineBehavior,
+  deep_link_allowed: true,
+  safe_fallback_route_id: routeId === 'space_home.home' ? null : 'space_home.home',
+  aliases: [],
+  capability_policy: { required_capabilities: [], denied_behavior: 'access_denied' },
+  surface: {
+    kind: 'local_shell_page',
+    origin_policy: 'same_origin',
+    entrypoint: routeId.split('.').at(-1) ?? 'home',
+  },
+});
+
+const developmentManifest: ModuleManifest = {
+  manifest_id: 'koa-spaces.global-widgets',
+  manifest_version: '1.0.0',
+  module_id: 'space_home',
+  public_name: 'Home',
+  home_route_id: 'space_home.home',
+  required_capabilities: [],
+  routes: [
+    route('space_home.home', '/', 'Home', 'available'),
+    route('space_home.search', '/search', 'Search', 'cached_read_only'),
+    route('space_home.tasks', '/tasks', 'Tasks', 'cached_read_only'),
+    route('space_home.offline', '/offline', 'Offline', 'available'),
+    route('space_home.health', '/health', 'Interface health', 'available'),
+    route('space_home.settings', '/settings', 'Settings', 'available'),
+  ],
+  sidebar: {
+    module_id: 'space_home',
+    visible_depth: 2 as const,
+    items: [
+      { item_id: 'space_home.home', label: 'Home', label_key: 'space_home.home', order: 0, route_id: 'space_home.home' },
+      { item_id: 'space_home.search', label: 'Search', label_key: 'space_home.search', order: 10, route_id: 'space_home.search' },
+      { item_id: 'space_home.tasks', label: 'Tasks', label_key: 'space_home.tasks', order: 20, route_id: 'space_home.tasks' },
+      {
+        item_id: 'space_home.system', label: 'System', label_key: 'space_home.system', order: 30,
+        children: [
+          { item_id: 'space_home.offline', label: 'Offline', label_key: 'space_home.offline', order: 0, route_id: 'space_home.offline' },
+          { item_id: 'space_home.health', label: 'Interface health', label_key: 'space_home.health', order: 10, route_id: 'space_home.health' },
+          { item_id: 'space_home.settings', label: 'Settings', label_key: 'space_home.settings', order: 20, route_id: 'space_home.settings' },
+        ],
+      },
+    ],
+  },
+  default_surface_id: 'control',
+  surface_profiles: [{
+    surface_id: 'control',
+    label: 'Control',
+    home_route_id: 'space_home.home',
+    navigation_item_ids: ['space_home.home', 'space_home.search', 'space_home.tasks', 'space_home.system'],
+    topbar_widget_ids: ['global.search', 'global.tasks'],
+    command_refs: [],
+    inspector_ref: null,
+  }],
+  ui_portability: { integrated_supported: true, standalone_supported: false },
+  topbar_widgets: [
+    {
+      widget_id: 'global.search', module_id: null, scope: 'global' as const, slot: 'primary' as const, kind: 'search' as const, label: 'Search', label_key: 'global.search', priority: 10,
+      required_capabilities: [], offline_behavior: 'cached_read_only' as const, activation: { kind: 'route' as const, route_id: 'space_home.search' },
+    },
+    {
+      widget_id: 'global.tasks', module_id: null, scope: 'global' as const, slot: 'secondary' as const, kind: 'action' as const, label: 'Tasks', label_key: 'global.tasks', priority: 15,
+      required_capabilities: [], offline_behavior: 'cached_read_only' as const, activation: { kind: 'route' as const, route_id: 'space_home.tasks' },
+    },
+  ],
+  localization_refs: ['/localization/koali-spaces.fr-CA.json', '/localization/koali-spaces.en.json'],
+  offline_behavior: { module_state: 'available' as const, fallback_route_id: 'space_home.home' },
+  authority_boundary: {
+    presentation_only: true,
+    may_grant_capabilities: false,
+    direct_domain_writes: false,
+    menu_visibility_is_authorization: false,
+  },
+};
+
+export const developmentShellState: ShellState = {
+  state: 'degraded',
+  network_state: 'unknown',
+  active_space_id: 'default_space',
+  active_space: {
+    space_id: 'default_space',
+    title: 'Default Space',
+    version: '1.0.0',
+    default_module_id: 'space_home',
+    module_instances: [
+      { module_id: 'space_home', manifest_ref: 'global-widgets.json', enabled: true, required: true, order: 0, public_label: 'Home' },
+    ],
+    global_topbar: [],
+    appearance: { theme_ref: 'themes/default.json', density: 'comfortable', design_system_id: 'koali.ant5', theme_version: '1.0.0' },
+    appearance_policy: {
+      default_mode: 'system',
+      default_accent: 'forest',
+      default_density: 'comfortable',
+      default_surface_style: 'outlined',
+      allowed_modes: ['system', 'light', 'dark'],
+      allowed_accents: ['forest', 'ocean', 'slate', 'earth', 'plum'],
+      allowed_densities: ['compact', 'comfortable', 'touch'],
+      allowed_surface_styles: ['minimal', 'outlined', 'elevated'],
+      allow_module_accent: true,
+    },
+    offline_policy: { shell_available: true, retain_last_validated_definition: true, unavailable_module_behavior: 'show_declared_fallback', network_state_indicator: true, public_cdn_required: false, remote_runtime_assets_required: false },
+    authority_boundary: { presentation_only: true, may_grant_capabilities: false, contains_business_state: false, contains_executable_extension: false },
+  },
+  active_theme: {
+    theme_id: 'koa_spaces.default',
+    version: '1.0.0',
+    design_system_id: 'koali.ant5',
+    tokens: { primary_accent: '#1e6864', primary_accent_id: 'forest', density: 'comfortable', radius_scale: 'v1', spacing_scale: 'v1', typography_scale: 'v1', focus_style: 'visible', surface_family: 'neutral' },
+  },
+  modules: [developmentManifest],
+  active_module_id: 'space_home',
+  active_route_id: 'space_home.home',
+  capabilities: [],
+  reason: 'development fallback; no authoritative runtime state',
+};
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\providers\ShellProvider.tsx
+============================================================
+'use client';
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from 'react';
+import { loadShellState } from '@/lib/shell-api';
+import type { ShellState } from '@/types/contracts';
+
+const initial: ShellState = {
+  state: 'loading',
+  network_state: 'unknown',
+  active_space_id: null,
+  active_space: null,
+  active_theme: null,
+  modules: [],
+  active_module_id: null,
+  active_route_id: null,
+  capabilities: [],
+  reason: null,
+};
+const ShellContext = createContext<{ state: ShellState; refresh: () => Promise<void> }>({
+  state: initial,
+  refresh: async () => undefined,
+});
+
+export function ShellProvider({ children }: PropsWithChildren) {
+  const [state, setState] = useState(initial);
+  const refresh = useCallback(async () => setState(await loadShellState()), []);
+  useEffect(() => {
+    void refresh();
+    const id = window.setInterval(() => void refresh(), 5000);
+    return () => window.clearInterval(id);
+  }, [refresh]);
+  return <ShellContext.Provider value={{ state, refresh }}>{children}</ShellContext.Provider>;
+}
+
+export const useShell = () => useContext(ShellContext);
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\components\global\HomeOverview.tsx
+============================================================
+'use client';
+
+import { Alert, Card, Col, Row, Space, Tag, Typography } from 'antd';
+import { useRouter } from 'next/navigation';
+import { admittedModules, effectiveHomeRouteId, publicLabel, routeHref, safeRoute } from '@/lib/registry';
+import { useLocalization } from '@/providers/LocalizationProvider';
+import { useShell } from '@/providers/ShellProvider';
+
+export default function HomeOverview() {
+  const { state } = useShell();
+  const { t } = useLocalization();
+  const router = useRouter();
+  const modules = admittedModules(state);
+  const online = state.network_state !== 'offline';
+
+  return (
+    <Space direction="vertical" size="large" style={{ width: '100%' }}>
+      {state.reason ? <Alert type={state.state === 'ready' ? 'info' : 'warning'} showIcon message={state.reason} /> : null}
+      <div>
+        <Typography.Title level={4}>{t('home.available_modules', 'Modules disponibles')}</Typography.Title>
+        <Row gutter={[16, 16]}>
+          {modules.map((manifest) => {
+            const route = safeRoute(
+              manifest,
+              effectiveHomeRouteId(state.active_space, manifest),
+              state.capabilities,
+              online,
+              state.active_space,
+            );
+            return (
+              <Col xs={24} sm={12} lg={8} key={manifest.module_id}>
+                <Card
+                  hoverable
+                  title={publicLabel(state.active_space, manifest)}
+                  extra={<Tag>{manifest.offline_behavior.module_state}</Tag>}
+                  onClick={() => router.push(routeHref(manifest, route))}
+                >
+                  {manifest.description ?? t('home.surface_description', 'Surface d’interface admise dans le Space actif.')}
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </div>
+      <Space wrap>
+        <Tag color={state.state === 'ready' ? 'success' : 'warning'}>{t('home.shell', 'Shell')}: {state.state}</Tag>
+        <Tag>{t('home.network', 'Réseau')}: {state.network_state}</Tag>
+        <Tag>{t('home.capabilities', 'Capabilities projetées')}: {state.capabilities.length}</Tag>
+      </Space>
+    </Space>
+  );
+}
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\components\shell\GlobalShell.tsx
+============================================================
+'use client';
+
+import { useEffect, useMemo, useRef, useState, type PropsWithChildren } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { activeManifest, moduleIdFromKoaliPath, visibleSidebarItems } from '@/lib/registry';
+import {
+  canonicalCurrentHref,
+  KOALI_SURFACE_QUERY_PARAM,
+  requestedSurfaceId,
+  resolvedSurfaceProfile,
+  surfaceSelectionIsAddressable,
+} from '@/lib/shell-navigation-state';
+import { useShell } from '@/providers/ShellProvider';
+import { useSurfaceMode } from '@/providers/SurfaceModeProvider';
+import ActiveModuleSidebar from './ActiveModuleSidebar';
+import MainPageSurface from './MainPageSurface';
+import ModuleSelector from './ModuleSelector';
+import SharedTopBar from './SharedTopBar';
+import SkipLinks from './SkipLinks';
+
+export default function GlobalShell({ children }: PropsWithChildren) {
+  const [drawer, setDrawer] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const outerModuleId = moduleIdFromKoaliPath(pathname);
+  const { state } = useShell();
+  const { moduleId, mode, setSurface } = useSurfaceMode();
+  const manifest = activeManifest(state, pathname);
+  const requestedSurface = requestedSurfaceId(searchParams);
+  const activeSurface = manifest
+    ? resolvedSurfaceProfile(manifest, state, requestedSurface)
+    : null;
+  const activeSurfaceId = activeSurface?.surface_id ?? null;
+  const addressableSurface = manifest
+    ? surfaceSelectionIsAddressable(manifest, state)
+    : false;
+  const sidebarItems = useMemo(
+    () => manifest ? visibleSidebarItems(manifest, state, activeSurfaceId) : [],
+    [manifest, state, activeSurfaceId],
+  );
+  const hasSidebar = sidebarItems.length > 0;
+
+  useEffect(() => {
+    if (!outerModuleId) setSurface('__koali_shell__', 'framed');
+  }, [outerModuleId, setSurface]);
+
+  const immersive = Boolean(outerModuleId && moduleId === outerModuleId && mode === 'immersive');
+
+  useEffect(() => {
+    if (immersive || !hasSidebar) setDrawer(false);
+  }, [immersive, hasSidebar]);
+
+  useEffect(() => {
+    if (!manifest) return;
+    const currentRaw = searchParams.get(KOALI_SURFACE_QUERY_PARAM);
+    const desired = addressableSurface ? activeSurfaceId : null;
+    if (currentRaw === desired) return;
+    router.replace(
+      canonicalCurrentHref(pathname, searchParams.toString(), desired),
+      { scroll: false },
+    );
+  }, [
+    activeSurfaceId,
+    addressableSurface,
+    manifest,
+    pathname,
+    router,
+    searchParams,
+  ]);
+
+  const closeDrawer = () => {
+    const restoreFocus = drawer;
+    setDrawer(false);
+    if (restoreFocus) window.setTimeout(() => menuButtonRef.current?.focus(), 0);
+  };
+
+  return (
+    <div
+      className={`koa-frame ${immersive ? 'koa-frame-immersive' : ''} ${hasSidebar ? 'koa-frame-with-sidebar' : 'koa-frame-no-sidebar'}`}
+      data-sidebar={hasSidebar ? 'visible' : 'omitted'}
+    >
+      {!immersive ? <SkipLinks /> : null}
+      <div className="koa-module-selector"><ModuleSelector /></div>
+      <div className="koa-topbar-region">
+        <SharedTopBar
+          onMenu={() => setDrawer(true)}
+          activeSurfaceId={activeSurfaceId}
+          hasSidebar={hasSidebar}
+          menuButtonRef={menuButtonRef}
+        />
+      </div>
+      <ActiveModuleSidebar
+        mobileOpen={drawer}
+        onMobileClose={closeDrawer}
+        activeSurfaceId={activeSurfaceId}
+      />
+      <div className="koa-content"><MainPageSurface>{children}</MainPageSurface></div>
+    </div>
+  );
+}
+
+
+============================================================
+ FILE: C:\mycode\kOA-Linux\koali-spaces\src\components\shell\ModuleSelector.tsx
+============================================================
+'use client';
+
+import { AppstoreOutlined, DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Typography } from 'antd';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  activeManifest,
+  admittedModules,
+  admittedSurfaceProfiles,
+  defaultSurfaceProfile,
+  effectiveHomeRouteId,
+  publicLabel,
+  routeHref,
+  safeRoute,
+} from '@/lib/registry';
+import { hrefWithKoaliSurface } from '@/lib/shell-navigation-state';
+import { useLocalization } from '@/providers/LocalizationProvider';
+import { useShell } from '@/providers/ShellProvider';
+
+export default function ModuleSelector() {
+  const { state } = useShell();
+  const { t } = useLocalization();
+  const router = useRouter();
+  const pathname = usePathname();
+  const modules = admittedModules(state);
+  const active = activeManifest(state, pathname) ?? modules[0] ?? null;
+
+  if (modules.length <= 1) {
+    return (
+      <div className="koa-module-identity" aria-label={t('shell.active_module', 'Module actif')}>
+        <AppstoreOutlined aria-hidden />
+        <Typography.Text strong>{active ? publicLabel(state.active_space, active) : 'Koali Spaces'}</Typography.Text>
+      </div>
+    );
+  }
+
+  const items = modules.map((manifest) => ({
+    key: manifest.module_id,
+    label: publicLabel(state.active_space, manifest),
+  }));
+  return (
+    <Dropdown
+      menu={{
+        items,
+        onClick: ({ key }) => {
+          const manifest = modules.find((candidate) => candidate.module_id === key);
+          if (!manifest) return;
+          const surfaces = admittedSurfaceProfiles(manifest, state);
+          const surface = defaultSurfaceProfile(manifest, state);
+          const route = safeRoute(
+            manifest,
+            effectiveHomeRouteId(state.active_space, manifest, surface?.surface_id),
+            state.capabilities,
+            state.network_state !== 'offline',
+            state.active_space,
+            surface?.surface_id,
+          );
+          router.push(
+            hrefWithKoaliSurface(
+              routeHref(manifest, route),
+              surfaces.length > 1 ? surface?.surface_id ?? null : null,
+            ),
+          );
+        },
+      }}
+      trigger={['click']}
+    >
+      <Button
+        type="text"
+        icon={<AppstoreOutlined />}
+        className="koa-module-selector-button"
+        aria-label={t('shell.module_selector', 'Sélectionner le produit actif')}
+      >
+        {active ? publicLabel(state.active_space, active) : 'Koali Spaces'} <DownOutlined />
+      </Button>
+    </Dropdown>
+  );
+}
+
+
+============================================================
+ SEARCH FOR FALLBACK / WINDOWS / SHELL LOGIC
+============================================================
+
+----- PATTERN: development fallback -----
+
+Path                                                                LineNumber Line
+----                                                                ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\src\lib\development-shell-state.ts        129   reason: 'development fallback; no
+                                                                               authoritative runtime state',
+
+
+----- PATTERN: no authoritative runtime state -----
+
+Path                                                                LineNumber Line
+----                                                                ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\src\lib\development-shell-state.ts        129   reason: 'development fallback; no
+                                                                               authoritative runtime state',
+
+
+----- PATTERN: control socket -----
+
+Path                                             LineNumber Line
+----                                             ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\server\main.mjs         55       'Koali Spaces control socket disabled on Windows;
+                                                            presentation runtime only.',
+
+
+----- PATTERN: win32 -----
+
+Path                                                            LineNumber Line
+----                                                            ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\server\main.mjs                        53   if (process.platform === 'win32') {
+C:\mycode\kOA-Linux\koali-spaces\server\main.mjs                       165   if (control && process.platform !==
+                                                                           'win32') {
+C:\mycode\kOA-Linux\koali-spaces\server\ecosystem\discovery.mjs         20     const key = process.platform === 'win32'
+                                                                           ? resolved.toLowerCase() : resolved;
+C:\mycode\kOA-Linux\koali-spaces\server\ecosystem\discovery.mjs         30   const separator = process.platform ===
+                                                                           'win32' ? ';' : path.delimiter;
+C:\mycode\kOA-Linux\koali-spaces\server\ecosystem\discovery.mjs         59     const key = process.platform === 'win32'
+                                                                           ? dir.toLowerCase() : dir;
+
+
+----- PATTERN: shell-state -----
+
+Path                                                                           LineNumber Line
+----                                                                           ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\src\app\api\global\search\route.ts                     3 import { readServerShellState
+                                                                                          } from
+                                                                                          '@/lib/shell-state.server';
+C:\mycode\kOA-Linux\koali-spaces\src\app\api\global\tasks\route.ts                      3 import { readServerShellState
+                                                                                          } from
+                                                                                          '@/lib/shell-state.server';
+C:\mycode\kOA-Linux\koali-spaces\src\app\api\shell-state\route.ts                       2 import { readServerShellState
+                                                                                          } from
+                                                                                          '@/lib/shell-state.server';
+C:\mycode\kOA-Linux\koali-spaces\src\app\apps\[moduleId]\[[...route]]\page.tsx          3 import { readServerShellState
+                                                                                          } from
+                                                                                          '@/lib/shell-state.server';
+C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-api.ts                                   3 export async function loadShel
+                                                                                          lState():Promise<ShellState>{t
+                                                                                          ry{const r=await fetch('/api/s
+                                                                                          hell-state',{cache:'no-store'}
+                                                                                          );if(!r.ok)throw new Error(Str
+                                                                                          ing(r.status));return await
+                                                                                          r.json();}catch{return {...EMP
+                                                                                          TY,state:'unavailable',reason:
+                                                                                          'local control state
+                                                                                          unavailable'};}}
+C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-state.server.ts                          3 import {
+                                                                                          developmentShellState } from
+                                                                                          './development-shell-state';
+C:\mycode\kOA-Linux\koali-spaces\server\control-server.mjs                             25       if (method === 'GET' &&
+                                                                                          url === '/shell-state')
+                                                                                          return json(res, 200,
+                                                                                          publicState(await
+                                                                                          readState()));
+
+
+----- PATTERN: network_state -----
+
+Path                                                                             LineNumber Line
+----                                                                             ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\HealthOverview.tsx                17         <Descriptions.Item
+                                                                                            label={t('health.network', '
+                                                                                            Réseau')}>{state.network_sta
+                                                                                            te}</Descriptions.Item>
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\HomeOverview.tsx                  14   const online =
+                                                                                            state.network_state !==
+                                                                                            'offline';
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\HomeOverview.tsx                  47
+                                                                                            <Tag>{t('home.network',
+                                                                                            'Réseau')}:
+                                                                                            {state.network_state}</Tag>
+C:\mycode\kOA-Linux\koali-spaces\src\components\shell\ModuleSelector.tsx                 54
+                                                                                            state.network_state !==
+                                                                                            'offline',
+C:\mycode\kOA-Linux\koali-spaces\src\components\shell\ProductSurfaceSelector.tsx         47
+                                                                                            state.network_state !==
+                                                                                            'offline',
+C:\mycode\kOA-Linux\koali-spaces\src\components\shell\SharedTopBar.tsx                   66   const offline =
+                                                                                            state.network_state ===
+                                                                                            'offline' || state.state
+                                                                                            === 'offline';
+C:\mycode\kOA-Linux\koali-spaces\src\lib\development-shell-state.ts                      93   network_state: 'unknown',
+C:\mycode\kOA-Linux\koali-spaces\src\lib\development-shell-state.ts                     116     offline_policy: {
+                                                                                            shell_available: true, retai
+                                                                                            n_last_validated_definition:
+                                                                                             true, unavailable_module_be
+                                                                                            havior:
+                                                                                            'show_declared_fallback',
+                                                                                            network_state_indicator:
+                                                                                            true, public_cdn_required:
+                                                                                            false, remote_runtime_assets
+                                                                                            _required: false },
+C:\mycode\kOA-Linux\koali-spaces\src\lib\registry.ts                                    236   const online =
+                                                                                            state.network_state !==
+                                                                                            'offline';
+C:\mycode\kOA-Linux\koali-spaces\src\lib\registry.ts                                    272   const online =
+                                                                                            state.network_state !==
+                                                                                            'offline';
+C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-api.ts                                     2 const EMPTY:ShellState={stat
+                                                                                            e:'loading',network_state:'u
+                                                                                            nknown',active_space:null,ac
+                                                                                            tive_theme:null,modules:[],a
+                                                                                            ctive_module_id:null,active_
+                                                                                            route_id:null,capabilities:[
+                                                                                            ],reason:null};
+C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-state.server.ts                            9     network_state:
+                                                                                            'unknown',
+C:\mycode\kOA-Linux\koali-spaces\src\lib\global-providers\execute.server.ts              14     networkState:
+                                                                                            state.network_state,
+C:\mycode\kOA-Linux\koali-spaces\src\lib\global-providers\execute.server.ts              21   if (state.network_state
+                                                                                            === 'offline' &&
+                                                                                            provider.offlineBehavior
+                                                                                            === 'unavailable') return
+                                                                                            false;
+C:\mycode\kOA-Linux\koali-spaces\src\lib\surfaces\resolve-surface.server.ts              98     connectivity:
+                                                                                            state.network_state,
+C:\mycode\kOA-Linux\koali-spaces\src\lib\surfaces\resolve-surface.server.ts             157   const online =
+                                                                                            args.state.network_state
+                                                                                            !== 'offline';
+C:\mycode\kOA-Linux\koali-spaces\src\providers\ShellProvider.tsx                         16   network_state: 'unknown',
+C:\mycode\kOA-Linux\koali-spaces\src\types\contracts.ts                                 154
+                                                                                            network_state_indicator:
+                                                                                            true;
+C:\mycode\kOA-Linux\koali-spaces\src\types\contracts.ts                                 179   network_state: 'online' |
+                                                                                            'offline' | 'unknown';
+C:\mycode\kOA-Linux\koali-spaces\server\control-server.mjs                               29         const next = {
+                                                                                            state: 'ready',
+                                                                                            network_state:
+                                                                                            previous.network_state ??
+                                                                                            'unknown', active_space_id:
+                                                                                            space.space_id,
+                                                                                            active_space: space,
+                                                                                            active_theme:
+                                                                                            request.interface_theme,
+                                                                                            modules, active_module_id:
+                                                                                            activeModule,
+                                                                                            active_route_id:
+                                                                                            activeRoute, capabilities: [
+                                                                                            ...snapshot.capabilities].so
+                                                                                            rt(), reason: null,
+                                                                                            _capability_snapshot:
+                                                                                            snapshot,
+                                                                                            _shell_asset_manifest: reque
+                                                                                            st.shell_asset_manifest,
+                                                                                            _module_asset_manifests: req
+                                                                                            uest.module_asset_manifests,
+                                                                                             _previous_state:
+                                                                                            previous.active_space ?
+                                                                                            stateForRollback(previous)
+                                                                                            : null };
+C:\mycode\kOA-Linux\koali-spaces\server\state-store.mjs                                   6   state: 'unavailable',
+                                                                                            network_state: 'unknown',
+                                                                                            active_space_id: null,
+C:\mycode\kOA-Linux\koali-spaces\server\validation.mjs                                  343   if
+                                                                                            (offline.shell_available
+                                                                                            !== true || offline.retain_l
+                                                                                            ast_validated_definition
+                                                                                            !== true || offline.network_
+                                                                                            state_indicator !== true ||
+                                                                                            offline.public_cdn_required
+                                                                                            !== false || offline.remote_
+                                                                                            runtime_assets_required !==
+                                                                                            false) throw new
+                                                                                            Error('Space is not
+                                                                                            offline-closed');
+
+
+----- PATTERN: loading -----
+
+Path                                                                         LineNumber Line
+----                                                                         ---------- ----
+C:\mycode\kOA-Linux\koali-spaces\src\app\globals.css                                245 .koali-application-loading {
+C:\mycode\kOA-Linux\koali-spaces\src\app\loading.tsx                                  1 export default function
+                                                                                        Loading() {
+C:\mycode\kOA-Linux\koali-spaces\src\app\loading.tsx                                  4       <h2>Loading interface</h2>
+C:\mycode\kOA-Linux\koali-spaces\src\app\loading.tsx                                  5       <p>Loading the validated
+                                                                                        local Space and its admitted
+                                                                                        presentation contributions.</p>
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\SearchSurface.tsx             22   const [loading, setLoading] =
+                                                                                        useState(false);
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\SearchSurface.tsx             32     setLoading(true);
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\SearchSurface.tsx             38       setLoading(false);
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\SearchSurface.tsx             48         loading={loading}
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\SearchSurface.tsx             53         loading={loading}
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\TasksSurface.tsx              23   const [loading, setLoading] =
+                                                                                        useState(true);
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\TasksSurface.tsx              32       .finally(() => { if
+                                                                                        (!cancelled) setLoading(false);
+                                                                                        });
+C:\mycode\kOA-Linux\koali-spaces\src\components\global\TasksSurface.tsx              39       loading={loading}
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx         42     setRenderState('loading');
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx         72     setRenderState('loading');
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx        110       <div className="koali-appl
+                                                                                        ication-frame-wrap"
+                                                                                        aria-busy={renderState ===
+                                                                                        'loading'}>
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx        112           <div className="koali-
+                                                                                        application-loading"
+                                                                                        aria-live="polite">
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx        114
+                                                                                        <span>{t('surface.loading',
+                                                                                        'Chargement de
+                                                                                        {label}').replace('{label}', des
+                                                                                        criptor.presentation.label)}</sp
+                                                                                        an>
+C:\mycode\kOA-Linux\koali-spaces\src\components\surfaces\ApplicationHost.tsx        118           <div className="koali-
+                                                                                        application-loading"
+                                                                                        role="alert">
+C:\mycode\kOA-Linux\koali-spaces\src\lib\shell-api.ts                                 2 const EMPTY:ShellState={state:'l
+                                                                                        oading',network_state:'unknown',
+                                                                                        active_space:null,active_theme:n
+                                                                                        ull,modules:[],active_module_id:
+                                                                                        null,active_route_id:null,capabi
+                                                                                        lities:[],reason:null};
+C:\mycode\kOA-Linux\koali-spaces\src\lib\surfaces\types.ts                           14   render: 'idle' | 'resolving'
+                                                                                        | 'loading' | 'ready' | 'error';
+C:\mycode\kOA-Linux\koali-spaces\src\providers\ShellProvider.tsx                     15   state: 'loading',
+C:\mycode\kOA-Linux\koali-spaces\src\types\contracts.ts                               4   | 'loading'
+
+
+============================================================
+ FINAL AUTOMATIC CHECKS
+============================================================
+[CONFIRMED] Koali is serving the development fallback state.
+[CONFIRMED] Only space_home is projected into the Shell.
+[INFO] Server Shell state is NOT loading; if browser still displays 'Shell: loading', client hydration/state propagation is independently faulty.
+
+============================================================
+ END
+============================================================
+Diagnostic file:
+C:\mycode\kOA-Linux\koali-spaces\.koali-dev\diagnostics\koali-diagnostic-20260918-160428.txt

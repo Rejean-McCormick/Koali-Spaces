@@ -1,0 +1,713 @@
+{
+  "state": "degraded",
+  "network_state": "online",
+  "active_space_id": "default_space",
+  "active_space": {
+    "space_id": "default_space",
+    "title": "Default Space",
+    "version": "1.0.0",
+    "default_module_id": "space_home",
+    "module_instances": [
+      {
+        "module_id": "space_home",
+        "manifest_ref": "global-widgets.json",
+        "enabled": true,
+        "required": true,
+        "order": 0,
+        "public_label": "Home"
+      },
+      {
+        "module_id": "konnaxion",
+        "manifest_ref": "development-owner:konnaxion",
+        "enabled": true,
+        "required": false,
+        "order": 10,
+        "public_label": "Konnaxion"
+      },
+      {
+        "module_id": "orgo",
+        "manifest_ref": "development-owner:orgo",
+        "enabled": true,
+        "required": false,
+        "order": 20,
+        "public_label": "Orgo"
+      },
+      {
+        "module_id": "semantik_architect",
+        "manifest_ref": "development-owner:semantik_architect",
+        "enabled": true,
+        "required": false,
+        "order": 30,
+        "public_label": "SemantiK Architect"
+      },
+      {
+        "module_id": "koa_mediatheque",
+        "manifest_ref": "development-owner:koa_mediatheque",
+        "enabled": true,
+        "required": false,
+        "order": 40,
+        "public_label": "Médiathèque kOA"
+      }
+    ],
+    "global_topbar": [],
+    "appearance": {
+      "theme_ref": "themes/default.json",
+      "density": "comfortable",
+      "design_system_id": "koali.ant5",
+      "theme_version": "1.0.0"
+    },
+    "appearance_policy": {
+      "default_mode": "system",
+      "default_accent": "forest",
+      "default_density": "comfortable",
+      "default_surface_style": "outlined",
+      "allowed_modes": [
+        "system",
+        "light",
+        "dark"
+      ],
+      "allowed_accents": [
+        "forest",
+        "ocean",
+        "slate",
+        "earth",
+        "plum"
+      ],
+      "allowed_densities": [
+        "compact",
+        "comfortable",
+        "touch"
+      ],
+      "allowed_surface_styles": [
+        "minimal",
+        "outlined",
+        "elevated"
+      ],
+      "allow_module_accent": true
+    },
+    "offline_policy": {
+      "shell_available": true,
+      "retain_last_validated_definition": true,
+      "unavailable_module_behavior": "show_declared_fallback",
+      "network_state_indicator": true,
+      "public_cdn_required": false,
+      "remote_runtime_assets_required": false
+    },
+    "authority_boundary": {
+      "presentation_only": true,
+      "may_grant_capabilities": false,
+      "contains_business_state": false,
+      "contains_executable_extension": false
+    }
+  },
+  "active_theme": {
+    "theme_id": "koa_spaces.default",
+    "version": "1.0.0",
+    "design_system_id": "koali.ant5",
+    "tokens": {
+      "primary_accent": "#1e6864",
+      "primary_accent_id": "forest",
+      "density": "comfortable",
+      "radius_scale": "v1",
+      "spacing_scale": "v1",
+      "typography_scale": "v1",
+      "focus_style": "visible",
+      "surface_family": "neutral"
+    }
+  },
+  "modules": [
+    {
+      "manifest_id": "koa-spaces.global-widgets",
+      "manifest_version": "1.0.0",
+      "module_id": "space_home",
+      "public_name": "Home",
+      "home_route_id": "space_home.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "space_home.home",
+          "module_id": "space_home",
+          "path": "/",
+          "page_ref": "koa-spaces://page/home",
+          "default_label": "Home",
+          "label_key": "space_home.home",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "home"
+          }
+        },
+        {
+          "route_id": "space_home.search",
+          "module_id": "space_home",
+          "path": "/search",
+          "page_ref": "koa-spaces://page/search",
+          "default_label": "Search",
+          "label_key": "space_home.search",
+          "availability": "always",
+          "offline_behavior": "cached_read_only",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "search"
+          }
+        },
+        {
+          "route_id": "space_home.tasks",
+          "module_id": "space_home",
+          "path": "/tasks",
+          "page_ref": "koa-spaces://page/tasks",
+          "default_label": "Tasks",
+          "label_key": "space_home.tasks",
+          "availability": "always",
+          "offline_behavior": "cached_read_only",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "tasks"
+          }
+        },
+        {
+          "route_id": "space_home.offline",
+          "module_id": "space_home",
+          "path": "/offline",
+          "page_ref": "koa-spaces://page/offline",
+          "default_label": "Offline",
+          "label_key": "space_home.offline",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "offline"
+          }
+        },
+        {
+          "route_id": "space_home.health",
+          "module_id": "space_home",
+          "path": "/health",
+          "page_ref": "koa-spaces://page/health",
+          "default_label": "Interface health",
+          "label_key": "space_home.health",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "health"
+          }
+        },
+        {
+          "route_id": "space_home.settings",
+          "module_id": "space_home",
+          "path": "/settings",
+          "page_ref": "koa-spaces://page/settings",
+          "default_label": "Settings",
+          "label_key": "space_home.settings",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "settings"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "space_home",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "space_home.home",
+            "label": "Home",
+            "label_key": "space_home.home",
+            "order": 0,
+            "route_id": "space_home.home"
+          },
+          {
+            "item_id": "space_home.search",
+            "label": "Search",
+            "label_key": "space_home.search",
+            "order": 10,
+            "route_id": "space_home.search"
+          },
+          {
+            "item_id": "space_home.tasks",
+            "label": "Tasks",
+            "label_key": "space_home.tasks",
+            "order": 20,
+            "route_id": "space_home.tasks"
+          },
+          {
+            "item_id": "space_home.system",
+            "label": "System",
+            "label_key": "space_home.system",
+            "order": 30,
+            "children": [
+              {
+                "item_id": "space_home.offline",
+                "label": "Offline",
+                "label_key": "space_home.offline",
+                "order": 0,
+                "route_id": "space_home.offline"
+              },
+              {
+                "item_id": "space_home.health",
+                "label": "Interface health",
+                "label_key": "space_home.health",
+                "order": 10,
+                "route_id": "space_home.health"
+              },
+              {
+                "item_id": "space_home.settings",
+                "label": "Settings",
+                "label_key": "space_home.settings",
+                "order": 20,
+                "route_id": "space_home.settings"
+              }
+            ]
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "Control",
+          "home_route_id": "space_home.home",
+          "navigation_item_ids": [
+            "space_home.home",
+            "space_home.search",
+            "space_home.tasks",
+            "space_home.system"
+          ],
+          "topbar_widget_ids": [
+            "global.search",
+            "global.tasks"
+          ],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": false
+      },
+      "topbar_widgets": [
+        {
+          "widget_id": "global.search",
+          "module_id": null,
+          "scope": "global",
+          "slot": "primary",
+          "kind": "search",
+          "label": "Search",
+          "label_key": "global.search",
+          "priority": 10,
+          "required_capabilities": [],
+          "offline_behavior": "cached_read_only",
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.search"
+          }
+        },
+        {
+          "widget_id": "global.tasks",
+          "module_id": null,
+          "scope": "global",
+          "slot": "secondary",
+          "kind": "action",
+          "label": "Tasks",
+          "label_key": "global.tasks",
+          "priority": 15,
+          "required_capabilities": [],
+          "offline_behavior": "cached_read_only",
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.tasks"
+          }
+        }
+      ],
+      "localization_refs": [
+        "/localization/koali-spaces.fr-CA.json",
+        "/localization/koali-spaces.en.json"
+      ],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": "space_home.home"
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    },
+    {
+      "manifest_id": "koali.dev.konnaxion",
+      "manifest_version": "1.0.0",
+      "module_id": "konnaxion",
+      "public_name": "Konnaxion",
+      "description": "Communauté, délibération et espaces Konnaxion.",
+      "home_route_id": "konnaxion.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "konnaxion.home",
+          "module_id": "konnaxion",
+          "path": "/",
+          "page_ref": "koali-owner://konnaxion/",
+          "default_label": "Konnaxion",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_module_surface",
+            "origin_policy": "registered_local_origin",
+            "entrypoint": "/"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "konnaxion",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "konnaxion.home",
+            "label": "Konnaxion",
+            "order": 0,
+            "route_id": "konnaxion.home"
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "Konnaxion",
+          "home_route_id": "konnaxion.home",
+          "navigation_item_ids": [
+            "konnaxion.home"
+          ],
+          "topbar_widget_ids": [],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": true
+      },
+      "topbar_widgets": [],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": null
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    },
+    {
+      "manifest_id": "koali.dev.orgo",
+      "manifest_version": "1.0.0",
+      "module_id": "orgo",
+      "public_name": "Orgo",
+      "description": "Travail, opérations et coordination Orgo.",
+      "home_route_id": "orgo.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "orgo.home",
+          "module_id": "orgo",
+          "path": "/",
+          "page_ref": "koali-owner://orgo/",
+          "default_label": "Orgo",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_module_surface",
+            "origin_policy": "registered_local_origin",
+            "entrypoint": "/"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "orgo",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "orgo.home",
+            "label": "Orgo",
+            "order": 0,
+            "route_id": "orgo.home"
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "Orgo",
+          "home_route_id": "orgo.home",
+          "navigation_item_ids": [
+            "orgo.home"
+          ],
+          "topbar_widget_ids": [],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": true
+      },
+      "topbar_widgets": [],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": null
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    },
+    {
+      "manifest_id": "koali.dev.semantik_architect",
+      "manifest_version": "1.0.0",
+      "module_id": "semantik_architect",
+      "public_name": "SemantiK Architect",
+      "description": "Conception sémantique et génération Architect.",
+      "home_route_id": "semantik_architect.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "semantik_architect.home",
+          "module_id": "semantik_architect",
+          "path": "/",
+          "page_ref": "koali-owner://semantik_architect/",
+          "default_label": "SemantiK Architect",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_module_surface",
+            "origin_policy": "registered_local_origin",
+            "entrypoint": "/"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "semantik_architect",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "semantik_architect.home",
+            "label": "SemantiK Architect",
+            "order": 0,
+            "route_id": "semantik_architect.home"
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "SemantiK Architect",
+          "home_route_id": "semantik_architect.home",
+          "navigation_item_ids": [
+            "semantik_architect.home"
+          ],
+          "topbar_widget_ids": [],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": true
+      },
+      "topbar_widgets": [],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": null
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    },
+    {
+      "manifest_id": "koali.dev.koa_mediatheque",
+      "manifest_version": "1.0.0",
+      "module_id": "koa_mediatheque",
+      "public_name": "Médiathèque kOA",
+      "description": "Catalogue local de médias et documents kOA.",
+      "home_route_id": "koa_mediatheque.home",
+      "required_capabilities": [],
+      "routes": [
+        {
+          "route_id": "koa_mediatheque.home",
+          "module_id": "koa_mediatheque",
+          "path": "/",
+          "page_ref": "koali-owner://koa_mediatheque/",
+          "default_label": "Médiathèque kOA",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": null,
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_module_surface",
+            "origin_policy": "registered_local_origin",
+            "entrypoint": "/"
+          }
+        }
+      ],
+      "sidebar": {
+        "module_id": "koa_mediatheque",
+        "visible_depth": 2,
+        "items": [
+          {
+            "item_id": "koa_mediatheque.home",
+            "label": "Médiathèque kOA",
+            "order": 0,
+            "route_id": "koa_mediatheque.home"
+          }
+        ]
+      },
+      "default_surface_id": "control",
+      "surface_profiles": [
+        {
+          "surface_id": "control",
+          "label": "Médiathèque kOA",
+          "home_route_id": "koa_mediatheque.home",
+          "navigation_item_ids": [
+            "koa_mediatheque.home"
+          ],
+          "topbar_widget_ids": [],
+          "command_refs": [],
+          "inspector_ref": null
+        }
+      ],
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": true
+      },
+      "topbar_widgets": [],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": null
+      },
+      "authority_boundary": {
+        "presentation_only": true,
+        "may_grant_capabilities": false,
+        "direct_domain_writes": false,
+        "menu_visibility_is_authorization": false
+      }
+    }
+  ],
+  "active_module_id": "space_home",
+  "active_route_id": "space_home.home",
+  "capabilities": [],
+  "reason": "Development ecosystem degraded — SemantiK Architect: degraded (api: fetch failed)",
+  "_development_projection": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-09-18T22:42:37.948Z",
+    "source": "koali-linked-repo-ecosystem",
+    "modules": [
+      {
+        "productId": "konnaxion",
+        "moduleId": "konnaxion",
+        "runtimeState": "ready"
+      },
+      {
+        "productId": "orgo",
+        "moduleId": "orgo",
+        "runtimeState": "ready"
+      },
+      {
+        "productId": "semantik_architect",
+        "moduleId": "semantik_architect",
+        "runtimeState": "degraded"
+      },
+      {
+        "productId": "koa_mediatheque",
+        "moduleId": "koa_mediatheque",
+        "runtimeState": "ready"
+      }
+    ]
+  }
+}

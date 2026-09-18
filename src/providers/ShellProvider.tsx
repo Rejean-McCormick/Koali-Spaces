@@ -11,7 +11,7 @@ import {
 import { loadShellState } from '@/lib/shell-api';
 import type { ShellState } from '@/types/contracts';
 
-const initial: ShellState = {
+const loadingState: ShellState = {
   state: 'loading',
   network_state: 'unknown',
   active_space_id: null,
@@ -24,18 +24,24 @@ const initial: ShellState = {
   reason: null,
 };
 const ShellContext = createContext<{ state: ShellState; refresh: () => Promise<void> }>({
-  state: initial,
+  state: loadingState,
   refresh: async () => undefined,
 });
 
-export function ShellProvider({ children }: PropsWithChildren) {
-  const [state, setState] = useState(initial);
+type ShellProviderProps = PropsWithChildren<{ initialState?: ShellState | null }>;
+
+export function ShellProvider({ children, initialState }: ShellProviderProps) {
+  // The first server render receives the same public state as /api/shell-state.
+  // This avoids presenting a false "loading" shell while client hydration starts.
+  const [state, setState] = useState<ShellState>(() => initialState ?? loadingState);
   const refresh = useCallback(async () => setState(await loadShellState()), []);
+
   useEffect(() => {
     void refresh();
     const id = window.setInterval(() => void refresh(), 5000);
     return () => window.clearInterval(id);
   }, [refresh]);
+
   return <ShellContext.Provider value={{ state, refresh }}>{children}</ShellContext.Provider>;
 }
 

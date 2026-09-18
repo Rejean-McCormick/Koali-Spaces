@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "runtimeRegistrations": [
+    {
+      "registrationId": "konnaxion.web",
+      "moduleId": "konnaxion",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.konnaxion.web",
+      "healthRef": "health.konnaxion.web",
+      "lifecycleProfileRef": "lifecycle.konnaxion.linked-repo",
+      "transportProfileRef": "transport.konnaxion.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "orgo.web",
+      "moduleId": "orgo",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.orgo.web",
+      "healthRef": "health.orgo.web",
+      "lifecycleProfileRef": "lifecycle.orgo.linked-repo",
+      "transportProfileRef": "transport.orgo.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "semantik_architect.web",
+      "moduleId": "semantik_architect",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.semantik_architect.web",
+      "healthRef": "health.semantik_architect.web",
+      "lifecycleProfileRef": "lifecycle.semantik_architect.linked-repo",
+      "transportProfileRef": "transport.semantik_architect.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    },
+    {
+      "registrationId": "koa_mediatheque.web",
+      "moduleId": "koa_mediatheque",
+      "adapter": "web_app",
+      "runtimeRef": "runtime.koa_mediatheque.web",
+      "healthRef": "health.koa_mediatheque.web",
+      "lifecycleProfileRef": "lifecycle.koa_mediatheque.linked-repo",
+      "transportProfileRef": "transport.koa_mediatheque.local",
+      "offlineClass": "local_optional",
+      "embedPolicy": "supported"
+    }
+  ],
+  "presentationPolicies": [
+    {
+      "moduleId": "konnaxion",
+      "accentTokenRef": "module.konnaxion",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "orgo",
+      "accentTokenRef": "module.orgo",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "semantik_architect",
+      "accentTokenRef": "module.semantik_architect",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    },
+    {
+      "moduleId": "koa_mediatheque",
+      "accentTokenRef": "module.koa_mediatheque",
+      "allowedModes": [
+        "framed",
+        "immersive"
+      ],
+      "defaultMode": "framed",
+      "chromeProfile": "minimal"
+    }
+  ],
+  "resolvedTargets": [
+    {
+      "transportProfileRef": "transport.konnaxion.local",
+      "moduleId": "konnaxion",
+      "embedBase": "http://127.0.0.1:4301",
+      "iframeTitle": "Konnaxion",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.orgo.local",
+      "moduleId": "orgo",
+      "embedBase": "http://127.0.0.1:4302",
+      "iframeTitle": "Orgo",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.semantik_architect.local",
+      "moduleId": "semantik_architect",
+      "embedBase": "http://127.0.0.1:4304/semantik_architect",
+      "iframeTitle": "SemantiK Architect",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    },
+    {
+      "transportProfileRef": "transport.koa_mediatheque.local",
+      "moduleId": "koa_mediatheque",
+      "embedBase": "http://127.0.0.1:8501",
+      "iframeTitle": "Médiathèque kOA",
+      "sandboxTokens": [
+        "allow-scripts",
+        "allow-same-origin",
+        "allow-forms",
+        "allow-modals",
+        "allow-popups",
+        "allow-downloads"
+      ],
+      "browserPermissions": [
+        "clipboard-read",
+        "clipboard-write",
+        "fullscreen"
+      ]
+    }
+  ],
+  "runtimeObservations": [
+    {
+      "runtimeRef": "runtime.konnaxion.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "runtimeRef": "runtime.orgo.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "runtimeRef": "runtime.semantik_architect.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "api: fetch failed"
+    },
+    {
+      "runtimeRef": "runtime.koa_mediatheque.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "1 required probe(s) ready"
+    }
+  ],
+  "healthObservations": [
+    {
+      "healthRef": "health.konnaxion.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "healthRef": "health.orgo.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "2 required probe(s) ready"
+    },
+    {
+      "healthRef": "health.semantik_architect.web",
+      "state": "degraded",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "api: fetch failed"
+    },
+    {
+      "healthRef": "health.koa_mediatheque.web",
+      "state": "ready",
+      "observedAt": "2026-09-18T22:42:37.940Z",
+      "reason": "1 required probe(s) ready"
+    }
+  ]
+}

@@ -24,7 +24,7 @@ The repository now contains the Koali Spaces Surface Layer v1.1 specification wi
 - semantic module accent tokens mapped through safe CSS-variable indirection;
 - declarative product `surface_profiles` that project existing routes/navigation/widgets without duplicating product pages;
 - explicit UI portability metadata for standalone + integrated product operation;
-- dynamic production product discovery from admitted manifests, plus a development-only linked-repository catalogue for one-command ecosystem bootstrap;
+- dynamic product discovery from admitted manifests rather than a hard-coded product catalogue;
 - Appearance Authority with Space policy/defaults separated from device-local user preferences;
 - system/light/dark mode, canonical local accents, density and surface style;
 - adaptive shell chrome that omits empty sidebar/Drawer and keeps the healthy topbar quiet;
@@ -48,19 +48,6 @@ pnpm run smoke:runtime
 ```
 
 `validate` includes Surface Layer spec validation. `build` packages the Next standalone runtime and verifies `dist/runtime/server.js`. `smoke:runtime` boots the packaged runtime and checks the principal shell routes.
-
-
-## Ecosystem owner-contract development
-
-`pnpm dev` starts one generic workspace launcher before starting the Koali shell. Koali itself does not know whether an owner application is Django, Nest, Next, Streamlit, Python, or another stack. Each owner repository publishes a root `koali.integration.json` containing its own development commands, embed target, port variables, and required readiness probes.
-
-The current owner contracts cover Konnaxion, Konnaxion Worlds, Orgo, Orgo Worlds, SemantiK Architect, and Médiathèque kOA. Worlds repositories remain selectable sources for the same product identity rather than duplicate shell modules. Kristal Framework, kOA Linux, Koali Control Panel, and kOA Digital Ecosystem remain source/infrastructure links rather than fake application surfaces.
-
-Repository discovery is only a bootstrap mechanism. After the first successful discovery, Koali writes `.koali-dev/workspace.json` and prefers those explicit working-tree links on later runs. No owner source is copied into this repository.
-
-Runtime readiness is contract-driven and conjunctive: every required probe must be ready before the product is marked ready. A healthy frontend with a failed required API therefore becomes `degraded`, not `ready`. The `/ecosystem` page shows owner-contract admission, process state, and individual probes.
-
-Use `pnpm run dev:koali` to start only the Koali shell, `pnpm run ecosystem:workspace` to refresh discovery/runtime projection without process launch, or `KOALI_ECOSYSTEM_AUTOSTART=0 pnpm dev` to link without spawning owner runtimes. See `UPDATE_KS4_OWNER_CONTRACTS.md`.
 
 ## Runtime surface registry
 

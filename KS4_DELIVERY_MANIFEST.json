@@ -1,0 +1,35 @@
+{
+  "delivery": "KS4-owner-contracts",
+  "generated_at": "2026-09-18",
+  "koali_version": "1.1.0",
+  "architecture": {
+    "shell_owns_application_launch_recipes": false,
+    "owner_contract": "koali.integration.json",
+    "workspace_cache": ".koali-dev/workspace.json",
+    "readiness": "all required owner probes must be ready",
+    "worlds_are_source_variants": true,
+    "mediatheque_is_independent_from_kristal": true,
+    "process_probe_binding": true,
+    "autostart_disabled_still_probes": true
+  },
+  "owner_contracts": [
+    "Konnaxion",
+    "Konnaxion_Worlds",
+    "Orgo",
+    "Orgo_Worlds",
+    "SemantiK_Architect",
+    "koa_mediatheque"
+  ],
+  "control_panel": {
+    "managed_dev_stack_products": [
+      "koali-spaces"
+    ],
+    "delegated_action": "ecosystem:ready"
+  },
+  "validation": {
+    "koali_runtime_tests": "47/47",
+    "surface_spec_locks": 154,
+    "bundled_contracts": 16,
+    "control_panel_tests": "84/84"
+  }
+}

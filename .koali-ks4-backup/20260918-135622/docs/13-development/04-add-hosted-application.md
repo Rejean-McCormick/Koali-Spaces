@@ -12,6 +12,3 @@
 8. tester framed -> immersive -> framed sans remount destructif ;
 9. tester unavailable/degraded ;
 10. vérifier que Koali n’a pas copié de business logic.
-
-
-Pour le bootstrap local automatique, Koali ne reçoit que l’identité, l’ordre et les marqueurs de découverte dans `config/ecosystem.catalog.json`. Le repo propriétaire DOIT publier `koali.integration.json` avec ses commandes, variables de ports, surface locale et probes de readiness. Ne jamais placer de recette de lancement applicative ni copier le frontend/backend propriétaire dans Koali.

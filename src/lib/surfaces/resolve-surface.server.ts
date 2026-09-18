@@ -41,7 +41,13 @@ function matchRoutePath(route: RouteContribution, requestedPath: string) {
     if (candidate === requestedPath) {
       return { matchedBase: candidate, canonicalPath: route.path };
     }
-    if (route.deep_link_allowed === false || candidate === '/') continue;
+    if (route.deep_link_allowed === false) continue;
+    // A root local-module route is the owner's deep-link catch-all. Specific
+    // declared routes still win because findRoute() sorts by matched base length.
+    if (candidate === '/' && route.surface?.kind === 'local_module_surface') {
+      return { matchedBase: '/', canonicalPath: requestedPath };
+    }
+    if (candidate === '/') continue;
     if (requestedPath.startsWith(`${candidate}/`)) {
       const suffix = requestedPath.slice(candidate.length);
       return { matchedBase: candidate, canonicalPath: `${route.path === '/' ? '' : route.path}${suffix}` || '/' };

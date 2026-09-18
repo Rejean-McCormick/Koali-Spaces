@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-18T21:11:27.131Z",
+  "products": {
+    "konnaxion": {
+      "base": "C:\\mycode\\Konnaxion\\Konnaxion",
+      "worlds": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
+    },
+    "orgo": {
+      "base": "C:\\mycode\\Orgo\\Orgo",
+      "worlds": "C:\\mycode\\Orgo\\Orgo_Worlds"
+    },
+    "semantik_architect": {
+      "base": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+    },
+    "koa_mediatheque": {
+      "base": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+    }
+  },
+  "sources": {
+    "kristal_framework": "C:\\mycode\\Kristal\\kristal-framework",
+    "koa_linux": "C:\\mycode\\kOA-Linux\\koa-linux",
+    "koali_control_panel": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel",
+    "koa_digital_ecosystem": "C:\\mycode\\kOA\\kOA_Digital_Ecosystem"
+  }
+}

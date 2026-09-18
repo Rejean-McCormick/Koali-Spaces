@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-18T22:42:37.943Z",
+  "discovery": {
+    "discoveredAt": "2026-09-18T21:11:27.130Z",
+    "products": [
+      {
+        "id": "konnaxion",
+        "moduleId": "konnaxion",
+        "publicName": "Konnaxion",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\Konnaxion\\Konnaxion",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\Konnaxion\\Konnaxion"
+          },
+          {
+            "id": "worlds",
+            "path": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Konnaxion",
+        "integrationFile": "C:\\mycode\\Konnaxion\\Konnaxion\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4301"
+      },
+      {
+        "id": "orgo",
+        "moduleId": "orgo",
+        "publicName": "Orgo",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\Orgo\\Orgo",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\Orgo\\Orgo"
+          },
+          {
+            "id": "worlds",
+            "path": "C:\\mycode\\Orgo\\Orgo_Worlds"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Orgo",
+        "integrationFile": "C:\\mycode\\Orgo\\Orgo\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4302"
+      },
+      {
+        "id": "semantik_architect",
+        "moduleId": "semantik_architect",
+        "publicName": "SemantiK Architect",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "SemantiK Architect",
+        "integrationFile": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:4304/semantik_architect"
+      },
+      {
+        "id": "koa_mediatheque",
+        "moduleId": "koa_mediatheque",
+        "publicName": "Médiathèque kOA",
+        "repoFound": true,
+        "repoPath": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque",
+        "selectedVariant": "base",
+        "availableVariants": [
+          {
+            "id": "base",
+            "path": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+          }
+        ],
+        "externallyManaged": false,
+        "integrationReady": true,
+        "integrationOwner": "Médiathèque kOA",
+        "integrationFile": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque\\koali.integration.json",
+        "embedBase": "http://127.0.0.1:8501"
+      }
+    ],
+    "sources": [
+      {
+        "id": "kristal_framework",
+        "publicName": "Kristal Framework",
+        "found": true,
+        "repoPath": "C:\\mycode\\Kristal\\kristal-framework"
+      },
+      {
+        "id": "koa_linux",
+        "publicName": "kOA Linux",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA-Linux\\koa-linux"
+      },
+      {
+        "id": "koali_control_panel",
+        "publicName": "Koali Control Panel",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel"
+      },
+      {
+        "id": "koa_digital_ecosystem",
+        "publicName": "kOA Digital Ecosystem",
+        "found": true,
+        "repoPath": "C:\\mycode\\kOA\\kOA_Digital_Ecosystem"
+      }
+    ]
+  },
+  "runtimes": {
+    "konnaxion": {
+      "state": "ready",
+      "reason": "2 required probe(s) ready",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:8301/health/ready/",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4301/",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    },
+    "orgo": {
+      "state": "ready",
+      "reason": "2 required probe(s) ready",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:4303/health/ready",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4302/",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    },
+    "semantik_architect": {
+      "state": "degraded",
+      "reason": "api: fetch failed",
+      "probes": [
+        {
+          "id": "api",
+          "url": "http://127.0.0.1:8304/health/ready",
+          "required": true,
+          "state": "unreachable",
+          "reason": "fetch failed"
+        },
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:4304/semantik_architect",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    },
+    "koa_mediatheque": {
+      "state": "ready",
+      "reason": "1 required probe(s) ready",
+      "probes": [
+        {
+          "id": "web",
+          "url": "http://127.0.0.1:8501/_stcore/health",
+          "required": true,
+          "state": "ready",
+          "reason": "HTTP 200"
+        }
+      ]
+    }
+  },
+  "processes": {
+    "konnaxion": {
+      "state": "starting",
+      "pids": [
+        27304,
+        42192
+      ],
+      "commands": [
+        {
+          "id": "api",
+          "probeId": "api",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "koali/start-api.ps1",
+            "-Port",
+            "8301"
+          ],
+          "cwd": "C:\\mycode\\Konnaxion\\Konnaxion"
+        },
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "pnpm",
+          "args": [
+            "exec",
+            "next",
+            "dev",
+            "--turbo",
+            "--hostname",
+            "127.0.0.1",
+            "--port",
+            "4301"
+          ],
+          "cwd": "C:\\mycode\\Konnaxion\\Konnaxion\\frontend"
+        }
+      ],
+      "skipped": []
+    },
+    "orgo": {
+      "state": "starting",
+      "pids": [
+        17684
+      ],
+      "commands": [
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "npm",
+          "args": [
+            "exec",
+            "--yes=false",
+            "--",
+            "next",
+            "dev",
+            "-H",
+            "127.0.0.1",
+            "-p",
+            "4302"
+          ],
+          "cwd": "C:\\mycode\\Orgo\\Orgo\\apps\\web"
+        }
+      ],
+      "skipped": [
+        {
+          "id": "api-stack",
+          "reason": "probe api already ready"
+        }
+      ]
+    },
+    "semantik_architect": {
+      "state": "failed",
+      "pids": [
+        14848,
+        17148
+      ],
+      "commands": [
+        {
+          "id": "api",
+          "probeId": "api",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "koali/start-api.ps1",
+            "-Port",
+            "8304"
+          ],
+          "cwd": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"
+        },
+        {
+          "id": "web",
+          "probeId": "web",
+          "command": "npm",
+          "args": [
+            "run",
+            "dev",
+            "--",
+            "--hostname",
+            "127.0.0.1",
+            "--port",
+            "4304"
+          ],
+          "cwd": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect\\architect_frontend"
+        }
+      ],
+      "skipped": [],
+      "reason": "api exited (1)"
+    },
+    "koa_mediatheque": {
+      "state": "starting",
+      "pids": [
+        15376
+      ],
+      "commands": [
+        {
+          "id": "web-windows",
+          "probeId": "web",
+          "command": "pwsh.exe",
+          "args": [
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "Start-KoaGui.ps1",
+            "-HostName",
+            "127.0.0.1",
+            "-Port",
+            "8501"
+          ],
+          "cwd": "C:\\mycode\\kOA_Local_Mediatheque\\koa_mediatheque"
+        }
+      ],
+      "skipped": []
+    }
+  }
+}

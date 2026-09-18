@@ -1,10 +1,10 @@
 {
   "name": "koali-spaces",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev-ecosystem.mjs",
+    "dev": "node server/main.mjs",
     "build": "next build && node scripts/build-interface-assets.mjs && node scripts/package-runtime.mjs && node scripts/validate-runtime-package.mjs",
     "start": "node dist/runtime/server/main.mjs",
     "typecheck": "tsc --noEmit",
@@ -19,12 +19,7 @@
     "check:dependency-lock": "node scripts/check-dependency-lock.mjs",
     "validate:surface-spec": "node scripts/validate-surface-spec.mjs",
     "smoke:runtime": "node scripts/smoke-runtime.mjs",
-    "validate:appearance": "node scripts/validate-appearance-registry.mjs",
-    "dev:koali": "node server/main.mjs",
-    "ecosystem:sync": "node scripts/ecosystem-sync.mjs",
-    "ecosystem:dev": "node scripts/dev-ecosystem.mjs",
-    "ecosystem:workspace": "node scripts/ecosystem-sync.mjs",
-    "ecosystem:ready": "node scripts/ecosystem-ready.mjs"
+    "validate:appearance": "node scripts/validate-appearance-registry.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "5.6.1",

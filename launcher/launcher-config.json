@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "koaliUrl": "http://127.0.0.1:4173/",
+  "startupTimeoutSeconds": 90,
+  "reservedPorts": [4173, 4301, 4302, 4304, 8301, 8304],
+  "safeProcessMarkers": [
+    "\\kOA-Linux\\koali-spaces\\",
+    "\\Konnaxion\\Konnaxion\\frontend\\",
+    "\\Konnaxion\\Konnaxion\\backend\\",
+    "\\SemantiK_Architect\\SemantiK_Architect\\architect_frontend\\",
+    "\\SemantiK_Architect\\SemantiK_Architect\\",
+    "\\Orgo\\Orgo\\apps\\web\\"
+  ]
+}
