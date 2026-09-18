@@ -19,24 +19,12 @@ export default function ModulePageShell({
   children: ReactNode;
 }) {
   return (
-    <section style={{ maxWidth: 1200, margin: '0 auto', padding: 24 }}>
+    <section className="koali-page-shell">
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
-        <div
-          style={{
-            display: 'flex',
-            gap: 16,
-            alignItems: 'flex-start',
-            flexWrap: 'wrap',
-          }}
-        >
-          <div style={{ flex: 1, minWidth: 220 }}>
-            <Title level={2} style={{ marginBottom: 4 }}>
-              {title}
-            </Title>
-
-            {description && (
-              <Paragraph type="secondary">{description}</Paragraph>
-            )}
+        <div className="koali-page-header">
+          <div className="koali-page-heading-copy">
+            <Title level={2} className="koali-page-title">{title}</Title>
+            {description ? <Paragraph type="secondary" className="koali-page-description">{description}</Paragraph> : null}
           </div>
 
           <Space wrap>
@@ -45,13 +33,13 @@ export default function ModulePageShell({
           </Space>
         </div>
 
-        {state !== 'ready' && (
+        {state !== 'ready' ? (
           <Alert
             type={state === 'error' ? 'error' : 'warning'}
             showIcon
             message={`Interface state: ${state}`}
           />
-        )}
+        ) : null}
 
         <div>{children}</div>
       </Space>

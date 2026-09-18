@@ -1,5 +1,5 @@
 {
-  "state": "degraded",
+  "state": "ready",
   "network_state": "online",
   "active_space_id": "default_space",
   "active_space": {
@@ -420,14 +420,7 @@
       "sidebar": {
         "module_id": "konnaxion",
         "visible_depth": 2,
-        "items": [
-          {
-            "item_id": "konnaxion.home",
-            "label": "Konnaxion",
-            "order": 0,
-            "route_id": "konnaxion.home"
-          }
-        ]
+        "items": []
       },
       "default_surface_id": "control",
       "surface_profiles": [
@@ -435,9 +428,7 @@
           "surface_id": "control",
           "label": "Konnaxion",
           "home_route_id": "konnaxion.home",
-          "navigation_item_ids": [
-            "konnaxion.home"
-          ],
+          "navigation_item_ids": [],
           "topbar_widget_ids": [],
           "command_refs": [],
           "inspector_ref": null
@@ -493,14 +484,7 @@
       "sidebar": {
         "module_id": "orgo",
         "visible_depth": 2,
-        "items": [
-          {
-            "item_id": "orgo.home",
-            "label": "Orgo",
-            "order": 0,
-            "route_id": "orgo.home"
-          }
-        ]
+        "items": []
       },
       "default_surface_id": "control",
       "surface_profiles": [
@@ -508,9 +492,7 @@
           "surface_id": "control",
           "label": "Orgo",
           "home_route_id": "orgo.home",
-          "navigation_item_ids": [
-            "orgo.home"
-          ],
+          "navigation_item_ids": [],
           "topbar_widget_ids": [],
           "command_refs": [],
           "inspector_ref": null
@@ -566,14 +548,7 @@
       "sidebar": {
         "module_id": "semantik_architect",
         "visible_depth": 2,
-        "items": [
-          {
-            "item_id": "semantik_architect.home",
-            "label": "SemantiK Architect",
-            "order": 0,
-            "route_id": "semantik_architect.home"
-          }
-        ]
+        "items": []
       },
       "default_surface_id": "control",
       "surface_profiles": [
@@ -581,9 +556,7 @@
           "surface_id": "control",
           "label": "SemantiK Architect",
           "home_route_id": "semantik_architect.home",
-          "navigation_item_ids": [
-            "semantik_architect.home"
-          ],
+          "navigation_item_ids": [],
           "topbar_widget_ids": [],
           "command_refs": [],
           "inspector_ref": null
@@ -639,14 +612,7 @@
       "sidebar": {
         "module_id": "koa_mediatheque",
         "visible_depth": 2,
-        "items": [
-          {
-            "item_id": "koa_mediatheque.home",
-            "label": "Médiathèque kOA",
-            "order": 0,
-            "route_id": "koa_mediatheque.home"
-          }
-        ]
+        "items": []
       },
       "default_surface_id": "control",
       "surface_profiles": [
@@ -654,9 +620,7 @@
           "surface_id": "control",
           "label": "Médiathèque kOA",
           "home_route_id": "koa_mediatheque.home",
-          "navigation_item_ids": [
-            "koa_mediatheque.home"
-          ],
+          "navigation_item_ids": [],
           "topbar_widget_ids": [],
           "command_refs": [],
           "inspector_ref": null
@@ -682,31 +646,65 @@
   "active_module_id": "space_home",
   "active_route_id": "space_home.home",
   "capabilities": [],
-  "reason": "Development ecosystem degraded — SemantiK Architect: degraded (api: fetch failed)",
+  "reason": null,
+  "module_health": [
+    {
+      "module_id": "konnaxion",
+      "product_id": "konnaxion",
+      "state": "ready",
+      "reason": "2 required probe(s) ready",
+      "affects_shell_state": true
+    },
+    {
+      "module_id": "orgo",
+      "product_id": "orgo",
+      "state": "ready",
+      "reason": "2 required probe(s) ready",
+      "affects_shell_state": true
+    },
+    {
+      "module_id": "semantik_architect",
+      "product_id": "semantik_architect",
+      "state": "degraded",
+      "reason": "api: fetch failed",
+      "affects_shell_state": false
+    },
+    {
+      "module_id": "koa_mediatheque",
+      "product_id": "koa_mediatheque",
+      "state": "ready",
+      "reason": "1 required probe(s) ready",
+      "affects_shell_state": true
+    }
+  ],
   "_development_projection": {
-    "schemaVersion": 1,
-    "generatedAt": "2026-09-18T22:42:37.948Z",
+    "schemaVersion": 2,
+    "generatedAt": "2026-09-18T22:51:46.072Z",
     "source": "koali-linked-repo-ecosystem",
     "modules": [
       {
         "productId": "konnaxion",
         "moduleId": "konnaxion",
-        "runtimeState": "ready"
+        "runtimeState": "ready",
+        "affectsShellState": true
       },
       {
         "productId": "orgo",
         "moduleId": "orgo",
-        "runtimeState": "ready"
+        "runtimeState": "ready",
+        "affectsShellState": true
       },
       {
         "productId": "semantik_architect",
         "moduleId": "semantik_architect",
-        "runtimeState": "degraded"
+        "runtimeState": "degraded",
+        "affectsShellState": false
       },
       {
         "productId": "koa_mediatheque",
         "moduleId": "koa_mediatheque",
-        "runtimeState": "ready"
+        "runtimeState": "ready",
+        "affectsShellState": true
       }
     ]
   }

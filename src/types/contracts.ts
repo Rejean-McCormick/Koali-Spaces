@@ -174,6 +174,14 @@ export type InterfaceTheme = {
   };
   framework_mapping?: Record<string, string> | null;
 };
+export type ModuleHealth = {
+  module_id: string;
+  product_id?: string | null;
+  state: string;
+  reason: string | null;
+  affects_shell_state: boolean;
+};
+
 export type ShellState = {
   state: InterfaceState;
   network_state: 'online' | 'offline' | 'unknown';
@@ -185,4 +193,5 @@ export type ShellState = {
   active_route_id: string | null;
   capabilities: string[];
   reason: string | null;
+  module_health?: ModuleHealth[];
 };

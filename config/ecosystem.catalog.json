@@ -2,7 +2,17 @@
   "schemaVersion": 2,
   "scan": {
     "maxDepth": 4,
-    "ignoredDirectories": [".git", ".next", ".venv", "node_modules", "dist", "build", "coverage", ".turbo", ".cache"]
+    "ignoredDirectories": [
+      ".git",
+      ".next",
+      ".venv",
+      "node_modules",
+      "dist",
+      "build",
+      "coverage",
+      ".turbo",
+      ".cache"
+    ]
   },
   "products": [
     {
@@ -16,9 +26,33 @@
       "integrationFile": "koali.integration.json",
       "accentTokenRef": "module.konnaxion",
       "variants": [
-        { "id": "base", "preferred": true, "repoEnv": "KOALI_REPO_KONNAXION", "directoryNames": ["Konnaxion"], "markers": ["frontend/package.json", "backend/manage.py"] },
-        { "id": "worlds", "preferred": false, "repoEnv": "KOALI_REPO_KONNAXION_WORLDS", "directoryNames": ["Konnaxion_Worlds"], "markers": ["Konnaxion_World_Manager.pyw", "frontend/package.json", "backend/manage.py"] }
-      ]
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_KONNAXION",
+          "directoryNames": [
+            "Konnaxion"
+          ],
+          "markers": [
+            "frontend/package.json",
+            "backend/manage.py"
+          ]
+        },
+        {
+          "id": "worlds",
+          "preferred": false,
+          "repoEnv": "KOALI_REPO_KONNAXION_WORLDS",
+          "directoryNames": [
+            "Konnaxion_Worlds"
+          ],
+          "markers": [
+            "Konnaxion_World_Manager.pyw",
+            "frontend/package.json",
+            "backend/manage.py"
+          ]
+        }
+      ],
+      "affectsShellState": true
     },
     {
       "id": "orgo",
@@ -31,9 +65,33 @@
       "integrationFile": "koali.integration.json",
       "accentTokenRef": "module.orgo",
       "variants": [
-        { "id": "base", "preferred": true, "repoEnv": "KOALI_REPO_ORGO", "directoryNames": ["Orgo"], "markers": ["apps/web/package.json", "apps/api/package.json"] },
-        { "id": "worlds", "preferred": false, "repoEnv": "KOALI_REPO_ORGO_WORLDS", "directoryNames": ["Orgo_Worlds"], "markers": ["Orgo_World_Manager.pyw", "apps/web/package.json", "apps/api/package.json"] }
-      ]
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_ORGO",
+          "directoryNames": [
+            "Orgo"
+          ],
+          "markers": [
+            "apps/web/package.json",
+            "apps/api/package.json"
+          ]
+        },
+        {
+          "id": "worlds",
+          "preferred": false,
+          "repoEnv": "KOALI_REPO_ORGO_WORLDS",
+          "directoryNames": [
+            "Orgo_Worlds"
+          ],
+          "markers": [
+            "Orgo_World_Manager.pyw",
+            "apps/web/package.json",
+            "apps/api/package.json"
+          ]
+        }
+      ],
+      "affectsShellState": true
     },
     {
       "id": "semantik_architect",
@@ -45,8 +103,21 @@
       "integrationFile": "koali.integration.json",
       "accentTokenRef": "module.semantik_architect",
       "variants": [
-        { "id": "base", "preferred": true, "repoEnv": "KOALI_REPO_SEMANTIK_ARCHITECT", "directoryNames": ["SemantiK_Architect", "SemantiK Architect"], "markers": ["manage.py", "architect_frontend/package.json"] }
-      ]
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_SEMANTIK_ARCHITECT",
+          "directoryNames": [
+            "SemantiK_Architect",
+            "SemantiK Architect"
+          ],
+          "markers": [
+            "manage.py",
+            "architect_frontend/package.json"
+          ]
+        }
+      ],
+      "affectsShellState": false
     },
     {
       "id": "koa_mediatheque",
@@ -58,14 +129,74 @@
       "integrationFile": "koali.integration.json",
       "accentTokenRef": "module.koa_mediatheque",
       "variants": [
-        { "id": "base", "preferred": true, "repoEnv": "KOALI_REPO_KOA_MEDIATHEQUE", "directoryNames": ["koa_mediatheque", "KOA_MEDIATHEQUE", "koa-mediatheque"], "markers": ["Start-KoaGui.ps1", "06_GUI/koa_mediatheque_gui/app.py"] }
-      ]
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_KOA_MEDIATHEQUE",
+          "directoryNames": [
+            "koa_mediatheque",
+            "KOA_MEDIATHEQUE",
+            "koa-mediatheque"
+          ],
+          "markers": [
+            "Start-KoaGui.ps1",
+            "06_GUI/koa_mediatheque_gui/app.py"
+          ]
+        }
+      ],
+      "affectsShellState": true
     }
   ],
   "sources": [
-    { "id": "kristal_framework", "publicName": "Kristal Framework", "repoEnv": "KOALI_REPO_KRISTAL", "directoryNames": ["kristal-framework"], "markers": ["contract-set.manifest.json", "kristal-release.json"] },
-    { "id": "koa_linux", "publicName": "kOA Linux", "repoEnv": "KOALI_REPO_KOA_LINUX", "directoryNames": ["koa-linux", "kOA-Linux"], "markers": ["Cargo.toml", "docs/01-constitution/00-charter.md"] },
-    { "id": "koali_control_panel", "publicName": "Koali Control Panel", "repoEnv": "KOALI_REPO_CONTROL_PANEL", "directoryNames": ["Koali-Control-Panel"], "markers": ["koali-control.pyw", "koali_control/orchestration.py"] },
-    { "id": "koa_digital_ecosystem", "publicName": "kOA Digital Ecosystem", "repoEnv": "KOALI_REPO_DIGITAL_ECOSYSTEM", "directoryNames": ["kOA_Digital_Ecosystem", "koa-digital-ecosystem"], "markers": ["README.md", "ALIGNEMENT_UPDATED_2026-09-16.md"] }
+    {
+      "id": "kristal_framework",
+      "publicName": "Kristal Framework",
+      "repoEnv": "KOALI_REPO_KRISTAL",
+      "directoryNames": [
+        "kristal-framework"
+      ],
+      "markers": [
+        "contract-set.manifest.json",
+        "kristal-release.json"
+      ]
+    },
+    {
+      "id": "koa_linux",
+      "publicName": "kOA Linux",
+      "repoEnv": "KOALI_REPO_KOA_LINUX",
+      "directoryNames": [
+        "koa-linux",
+        "kOA-Linux"
+      ],
+      "markers": [
+        "Cargo.toml",
+        "docs/01-constitution/00-charter.md"
+      ]
+    },
+    {
+      "id": "koali_control_panel",
+      "publicName": "Koali Control Panel",
+      "repoEnv": "KOALI_REPO_CONTROL_PANEL",
+      "directoryNames": [
+        "Koali-Control-Panel"
+      ],
+      "markers": [
+        "koali-control.pyw",
+        "koali_control/orchestration.py"
+      ]
+    },
+    {
+      "id": "koa_digital_ecosystem",
+      "publicName": "kOA Digital Ecosystem",
+      "repoEnv": "KOALI_REPO_DIGITAL_ECOSYSTEM",
+      "directoryNames": [
+        "kOA_Digital_Ecosystem",
+        "koa-digital-ecosystem"
+      ],
+      "markers": [
+        "README.md",
+        "ALIGNEMENT_UPDATED_2026-09-16.md"
+      ]
+    }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-18T22:42:37.943Z",
+  "updatedAt": "2026-09-18T22:51:46.069Z",
   "discovery": {
-    "discoveredAt": "2026-09-18T21:11:27.130Z",
+    "discoveredAt": "2026-09-18T22:50:49.966Z",
     "products": [
       {
         "id": "konnaxion",
@@ -195,8 +195,8 @@
     "konnaxion": {
       "state": "starting",
       "pids": [
-        27304,
-        42192
+        21364,
+        17772
       ],
       "commands": [
         {
@@ -237,7 +237,7 @@
     "orgo": {
       "state": "starting",
       "pids": [
-        17684
+        43352
       ],
       "commands": [
         {
@@ -268,8 +268,8 @@
     "semantik_architect": {
       "state": "failed",
       "pids": [
-        14848,
-        17148
+        25856,
+        30920
       ],
       "commands": [
         {
@@ -310,7 +310,7 @@
     "koa_mediatheque": {
       "state": "starting",
       "pids": [
-        15376
+        34976
       ],
       "commands": [
         {

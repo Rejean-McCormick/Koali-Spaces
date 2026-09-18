@@ -11,7 +11,9 @@
     "/c",
     "pnpm dev"
   ],
-  "status": "running",
+  "status": "stopped",
   "startedAt": "2026-09-18T22:50:49.704202+00:00",
-  "logFile": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-dev\\launcher\\logs\\launcher-20260918-185042.log"
+  "logFile": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-dev\\launcher\\logs\\launcher-20260918-185042.log",
+  "stoppedAt": "2026-09-18T22:51:47.682831+00:00",
+  "exitCode": 3221225786
 }

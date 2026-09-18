@@ -25,10 +25,13 @@ function runtimeStateFor(product, runtimeStates) {
   return runtimeStates.get(product.id) ?? { state: 'starting', reason: 'runtime has not been observed yet' };
 }
 
+function affectsShellState(product) {
+  return product.affectsShellState !== false;
+}
+
 function buildOwnerManifest(product) {
   const moduleId = product.moduleId;
   const homeRouteId = `${moduleId}.home`;
-  const homeItemId = `${moduleId}.home`;
 
   return {
     manifest_id: `koali.dev.${moduleId}`,
@@ -56,22 +59,19 @@ function buildOwnerManifest(product) {
         entrypoint: '/',
       },
     }],
+    // Hosted applications own their internal navigation. Koali intentionally
+    // does not duplicate a one-item sidebar around an embedded product.
     sidebar: {
       module_id: moduleId,
       visible_depth: 2,
-      items: [{
-        item_id: homeItemId,
-        label: product.publicName,
-        order: 0,
-        route_id: homeRouteId,
-      }],
+      items: [],
     },
     default_surface_id: 'control',
     surface_profiles: [{
       surface_id: 'control',
       label: product.publicName,
       home_route_id: homeRouteId,
-      navigation_item_ids: [homeItemId],
+      navigation_item_ids: [],
       topbar_widget_ids: [],
       command_refs: [],
       inspector_ref: null,
@@ -94,15 +94,29 @@ function buildOwnerManifest(product) {
   };
 }
 
-function projectionReason(discovery, runtimeStates) {
-  const issues = [];
-  for (const product of discovery.products) {
+function buildModuleHealth(admittedProducts, runtimeStates) {
+  return admittedProducts.map((product) => {
     const runtime = runtimeStateFor(product, runtimeStates);
-    if (runtime.state === 'ready') continue;
-    const detail = runtime.reason ? ` (${runtime.reason})` : '';
-    issues.push(`${product.publicName}: ${runtime.state}${detail}`);
-  }
-  return issues.length ? `Development ecosystem degraded — ${issues.join('; ')}` : null;
+    return {
+      module_id: product.moduleId,
+      product_id: product.id,
+      state: runtime.state,
+      reason: runtime.reason ?? null,
+      affects_shell_state: affectsShellState(product),
+    };
+  });
+}
+
+function blockingProjectionReason(moduleHealth, productsByModule) {
+  const issues = moduleHealth.filter((item) => item.affects_shell_state && item.state !== 'ready');
+  if (!issues.length) return null;
+  const details = issues.map((item) => {
+    const product = productsByModule.get(item.module_id);
+    const label = product?.publicName ?? item.module_id;
+    const detail = item.reason ? ` (${item.reason})` : '';
+    return `${label}: ${item.state}${detail}`;
+  });
+  return `Development ecosystem degraded — ${details.join('; ')}`;
 }
 
 export async function readDevelopmentShellBase(appRoot) {
@@ -112,8 +126,12 @@ export async function readDevelopmentShellBase(appRoot) {
 
 /**
  * Compile the developer orchestration view into the canonical presentation
- * contract consumed by /api/shell-state.  Repository paths, process commands,
+ * contract consumed by /api/shell-state. Repository paths, process commands,
  * credentials and other orchestration details are deliberately excluded.
+ *
+ * KS4.4 distinguishes shell-critical products from optional products. An
+ * optional owner runtime can be degraded without putting the whole Koali shell
+ * into degraded state; its module remains visible with its own health status.
  */
 export async function buildDevelopmentShellState({ appRoot, discovery, runtimeStates = new Map() }) {
   const state = clone(await readDevelopmentShellBase(appRoot));
@@ -141,21 +159,25 @@ export async function buildDevelopmentShellState({ appRoot, discovery, runtimeSt
   state.modules = [...baseModules, ...ownerModules];
   state.network_state = normalizedNetworkState();
 
-  const reason = projectionReason(discovery, runtimeStates);
+  const moduleHealth = buildModuleHealth(discovery.products, runtimeStates);
+  const productsByModule = new Map(discovery.products.map((product) => [product.moduleId, product]));
+  const reason = blockingProjectionReason(moduleHealth, productsByModule);
   state.state = reason ? 'degraded' : 'ready';
   state.reason = reason;
+  state.module_health = moduleHealth;
 
   // Internal evidence is intentionally removed from the public API by
   // shell-state.server.ts. It makes the on-disk development projection easy
   // to diagnose without leaking repository paths or process commands.
   state._development_projection = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     source: 'koali-linked-repo-ecosystem',
     modules: admittedProducts.map((product) => ({
       productId: product.id,
       moduleId: product.moduleId,
       runtimeState: runtimeStateFor(product, runtimeStates).state,
+      affectsShellState: affectsShellState(product),
     })),
   };
 

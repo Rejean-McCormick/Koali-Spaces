@@ -1,12 +1,14 @@
 'use client';
 
 import {
+  CheckCircleOutlined,
   DisconnectOutlined,
+  InfoCircleOutlined,
   MenuOutlined,
   SearchOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Button, Space, Typography } from 'antd';
+import { Badge, Button, Space, Typography } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
 import type { RefObject } from 'react';
 import {
@@ -18,6 +20,7 @@ import {
   publicLabel,
   visibleTopbarWidgets,
 } from '@/lib/registry';
+import { optionalModuleIssues } from '@/lib/module-health';
 import { hrefWithKoaliSurface } from '@/lib/shell-navigation-state';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
@@ -33,9 +36,6 @@ function WidgetAction({ widget, activeSurfaceId, activeModuleId }: { widget: Top
     : null;
   const label = t(widget.label_key, widget.label);
 
-  // Projection-bound widgets become renderable once the GlobalProjectionRuntime
-  // supplies their typed value. KS-2 deliberately keeps missing projection data
-  // invisible rather than presenting a misleading static value.
   if (widget.projection_ref) return null;
   if (widget.kind === 'status' && widget.activation.kind === 'none') {
     return <Typography.Text className={widget.compact_only ? 'koa-widget-compact-only' : undefined} type="secondary">{label}</Typography.Text>;
@@ -59,28 +59,49 @@ function WidgetAction({ widget, activeSurfaceId, activeModuleId }: { widget: Top
   );
 }
 
-function ShellAttentionIndicator() {
+function ShellStatusIndicators() {
   const { state } = useShell();
   const { t } = useLocalization();
   const router = useRouter();
   const offline = state.network_state === 'offline' || state.state === 'offline';
   const attention = offline || ['degraded', 'unavailable', 'error'].includes(state.state);
-  if (!attention) return null;
+  const optionalIssues = optionalModuleIssues(state);
 
-  const label = offline
-    ? t('network.offline', 'Hors ligne')
-    : t('shell.attention_required', 'État dégradé');
   return (
-    <Button
-      type="text"
-      size="small"
-      className="koa-shell-attention"
-      icon={offline ? <DisconnectOutlined /> : <WarningOutlined />}
-      onClick={() => router.push('/health')}
-      aria-label={t('shell.open_health', 'Ouvrir l’état de l’interface')}
-    >
-      {label}
-    </Button>
+    <Space size="small" className="koa-shell-status-group">
+      {optionalIssues.length ? (
+        <Button
+          type="text"
+          size="small"
+          className="koa-optional-module-attention"
+          icon={<InfoCircleOutlined />}
+          onClick={() => router.push('/health')}
+        >
+          {optionalIssues.length === 1
+            ? t('shell.one_optional_issue', '1 module optionnel')
+            : t('shell.optional_issues', '{count} modules optionnels').replace('{count}', String(optionalIssues.length))}
+        </Button>
+      ) : null}
+
+      {attention ? (
+        <Button
+          type="text"
+          size="small"
+          className="koa-shell-attention"
+          icon={offline ? <DisconnectOutlined /> : <WarningOutlined />}
+          onClick={() => router.push('/health')}
+          aria-label={t('shell.open_health', 'Ouvrir l’état de l’interface')}
+        >
+          {offline ? t('network.offline', 'Hors ligne') : t('shell.attention_required', 'État dégradé')}
+        </Button>
+      ) : (
+        <span className="koa-shell-ready" aria-label={t('shell.ready', 'Koali prêt')}>
+          <Badge status="success" />
+          <CheckCircleOutlined />
+          <span>{t('shell.ready', 'Koali prêt')}</span>
+        </span>
+      )}
+    </Space>
   );
 }
 
@@ -113,7 +134,7 @@ export default function SharedTopBar({
         />
       ) : null}
       <div className="koa-context-title">
-        <Typography.Text strong>
+        <Typography.Text strong className="koa-context-title-text">
           {manifest ? publicLabel(state.active_space, manifest) : state.active_space?.title ?? 'Koali Spaces'}
         </Typography.Text>
         <ProductSurfaceSelector activeSurfaceId={activeSurfaceId} />
@@ -121,9 +142,7 @@ export default function SharedTopBar({
       <div className="koa-topbar-widgets">
         {widgets.map((widget) => <WidgetAction key={widget.widget_id} widget={widget} activeSurfaceId={activeSurfaceId} activeModuleId={manifest?.module_id ?? null} />)}
       </div>
-      <Space size="small">
-        <ShellAttentionIndicator />
-      </Space>
+      <ShellStatusIndicators />
     </header>
   );
 }

@@ -287,3 +287,275 @@ body { min-height: 100vh; }
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Koali KS4.4 — product shell finish */
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.koa-frame {
+  grid-template-columns: 272px minmax(0, 1fr);
+}
+
+.koa-module-selector {
+  padding: 0 10px;
+  box-shadow: 1px 0 0 var(--koali-color-border-secondary);
+}
+
+.koa-module-selector-button {
+  width: 100%;
+  height: 44px;
+  padding-inline: 10px !important;
+  border-radius: 10px !important;
+  text-align: start;
+}
+
+.koa-module-selector-button:hover {
+  background: var(--koali-color-bg-subtle) !important;
+}
+
+.koa-module-selector-content {
+  width: 100%;
+}
+
+.koa-module-selector-label {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 650;
+}
+
+.koa-module-selector-chevron {
+  color: var(--koali-color-text-secondary);
+  font-size: 11px;
+}
+
+.koa-module-dropdown-item {
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.koa-module-dropdown-item > span:nth-child(2) {
+  flex: 1;
+}
+
+.koa-module-optional-label {
+  color: var(--koali-color-text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.koa-topbar-region {
+  position: relative;
+  z-index: 4;
+}
+
+.koa-topbar {
+  padding-inline: 20px;
+}
+
+.koa-context-title-text {
+  font-size: 15px;
+}
+
+.koa-shell-status-group {
+  flex: 0 0 auto;
+}
+
+.koa-shell-ready {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--koali-color-border-secondary);
+  border-radius: 999px;
+  color: var(--koali-color-text-secondary);
+  background: var(--koali-color-bg-subtle);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.koa-optional-module-attention,
+.koa-shell-attention {
+  border-radius: 999px !important;
+  background: var(--koali-color-bg-subtle) !important;
+}
+
+.koa-sider {
+  padding: 10px 8px;
+}
+
+.koa-sider .ant-menu {
+  border-inline-end: 0 !important;
+  background: transparent !important;
+}
+
+.koa-sider .ant-menu-item,
+.koa-sider .ant-menu-submenu-title {
+  margin-inline: 0;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.koa-content {
+  overflow: hidden;
+}
+
+.koa-main-surface {
+  background:
+    radial-gradient(circle at 85% 0%, color-mix(in srgb, var(--koali-accent) 5%, transparent), transparent 30%),
+    var(--koali-color-bg-layout);
+}
+
+.koali-page-shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 36px) clamp(4px, 1vw, 12px) 56px;
+}
+
+.koali-page-header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.koali-page-heading-copy {
+  flex: 1;
+  min-width: min(100%, 260px);
+}
+
+.koali-page-title.ant-typography {
+  margin: 0 0 4px !important;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: -.025em;
+}
+
+.koali-page-description.ant-typography {
+  margin: 0 !important;
+  max-width: 720px;
+  font-size: 15px;
+}
+
+.koali-home-overview {
+  width: 100%;
+}
+
+.koali-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.koali-section-heading .ant-typography {
+  margin-bottom: 2px !important;
+}
+
+.koali-module-card {
+  height: 100%;
+  min-height: 190px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+
+.koali-module-card:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--koali-accent) 26%, transparent);
+  border-color: var(--koali-accent);
+}
+
+.koali-module-card .ant-card-body {
+  min-height: 190px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.koali-module-card-header,
+.koali-module-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.koali-module-card-title {
+  font-size: 16px;
+}
+
+.koali-module-card-description.ant-typography {
+  flex: 1;
+  margin: 14px 0 8px !important;
+  min-height: 44px;
+}
+
+.koali-module-card-reason {
+  display: block;
+  margin: -2px 0 10px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.koali-module-card-footer {
+  padding-top: 10px;
+  border-top: 1px solid var(--koali-color-border-secondary);
+}
+
+.koali-module-card-footer .ant-btn-link {
+  padding-inline: 4px;
+}
+
+.koali-home-summary {
+  padding-top: 2px;
+}
+
+.koali-application-host {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), var(--koali-surface-shadow);
+}
+
+.koali-surface-context-bar {
+  min-height: 48px;
+  padding-inline: 14px 8px;
+}
+
+@media (max-width: 900px) {
+  .koa-frame {
+    grid-template-columns: 232px minmax(0, 1fr);
+  }
+
+  .koa-shell-ready span:last-child,
+  .koa-optional-module-attention span:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .koa-frame { display: block; }
+  .koa-topbar { padding-inline: 10px; }
+  .koali-page-shell { padding-top: 18px; }
+  .koali-module-card { min-height: 164px; }
+  .koali-module-card .ant-card-body { min-height: 164px; padding: 16px; }
+  .koa-shell-ready { padding-inline: 8px; }
+}
