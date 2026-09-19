@@ -170,25 +170,25 @@
     {
       "runtimeRef": "runtime.konnaxion.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "2 required probe(s) ready"
     },
     {
       "runtimeRef": "runtime.orgo.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "2 required probe(s) ready"
     },
     {
       "runtimeRef": "runtime.semantik_architect.web",
       "state": "degraded",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "api: fetch failed"
     },
     {
       "runtimeRef": "runtime.koa_mediatheque.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "1 required probe(s) ready"
     }
   ],
@@ -196,25 +196,25 @@
     {
       "healthRef": "health.konnaxion.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "2 required probe(s) ready"
     },
     {
       "healthRef": "health.orgo.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "2 required probe(s) ready"
     },
     {
       "healthRef": "health.semantik_architect.web",
       "state": "degraded",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "api: fetch failed"
     },
     {
       "healthRef": "health.koa_mediatheque.web",
       "state": "ready",
-      "observedAt": "2026-09-19T19:58:26.587Z",
+      "observedAt": "2026-09-19T20:26:42.082Z",
       "reason": "1 required probe(s) ready"
     }
   ]

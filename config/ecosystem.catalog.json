@@ -94,32 +94,6 @@
       "affectsShellState": true
     },
     {
-      "id": "semantik_architect",
-      "moduleId": "semantik_architect",
-      "publicName": "SemantiK Architect",
-      "description": "Conception sémantique et génération Architect.",
-      "order": 30,
-      "urlEnv": "KOALI_SEMANTIK_ARCHITECT_URL",
-      "integrationFile": "koali.integration.json",
-      "accentTokenRef": "module.semantik_architect",
-      "variants": [
-        {
-          "id": "base",
-          "preferred": true,
-          "repoEnv": "KOALI_REPO_SEMANTIK_ARCHITECT",
-          "directoryNames": [
-            "SemantiK_Architect",
-            "SemantiK Architect"
-          ],
-          "markers": [
-            "manage.py",
-            "architect_frontend/package.json"
-          ]
-        }
-      ],
-      "affectsShellState": false
-    },
-    {
       "id": "koa_mediatheque",
       "moduleId": "koa_mediatheque",
       "publicName": "Médiathèque kOA",
