@@ -92,5 +92,18 @@
   "shell.active_module": "Active module",
   "shell.surface_selector": "Select product surface",
   "shell.attention_required": "Degraded state",
-  "shell.open_health": "Open interface health"
+  "shell.open_health": "Open interface health",
+  "home.applications": "Applications",
+  "home.no_applications": "No application is admitted in this Space.",
+  "home.open_application": "Open",
+  "home.status_starting": "Starting",
+  "home.status_degraded": "Degraded",
+  "home.status_unavailable": "Unavailable",
+  "home.status_unknown": "Unknown state",
+  "home.offline_attention": "Offline mode: only surfaces declared locally available remain accessible.",
+  "surface.embed_error_title": "The application could not be displayed",
+  "surface.embed_error_description": "The admitted surface reported a loading error. Koali keeps the same origin and leaves runtime control to its owner.",
+  "shell.optional": "optional",
+  "shell.one_optional_issue": "1 optional module",
+  "shell.optional_issues": "{count} optional modules"
 }

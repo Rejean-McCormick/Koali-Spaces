@@ -75,6 +75,8 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
   const hostStyle = {
     '--koali-surface-accent': accentCssValue(descriptor.presentation.accentTokenRef),
   } as CSSProperties;
+  const frameLoading = renderState === 'loading' && !frameLoaded;
+  const frameErrored = renderState === 'error' && !frameLoaded;
 
   return (
     <section
@@ -88,42 +90,43 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
       {/* Keep this node mounted while immersive so focus can return to the exact
           parent-owned trigger after exit. CSS hides it visually in immersive mode. */}
       <div className="koali-surface-context-bar" aria-hidden={immersive}>
-        <Typography.Text strong>{descriptor.presentation.label}</Typography.Text>
-        <Space size="small">
-          <Button type="text" icon={<ReloadOutlined />} onClick={retryFrame}>
-            {t('surface.retry', 'Réessayer')}
+        <Typography.Text strong ellipsis>{descriptor.presentation.label}</Typography.Text>
+        {descriptor.presentation.immersiveAllowed ? (
+          <Button
+            type="text"
+            icon={<ExpandOutlined />}
+            onClick={(event) => enterImmersive(descriptor.moduleId, event.currentTarget)}
+          >
+            {t('surface.immersive', 'Immersif')}
           </Button>
-          {descriptor.presentation.immersiveAllowed ? (
-            <Button
-              type="text"
-              icon={<ExpandOutlined />}
-              onClick={(event) => enterImmersive(descriptor.moduleId, event.currentTarget)}
-            >
-              {t('surface.immersive', 'Immersif')}
-            </Button>
-          ) : null}
-        </Space>
+        ) : null}
       </div>
 
       {descriptor.status.runtime === 'degraded' ? <SurfaceStatusView descriptor={descriptor} /> : null}
 
-      <div className="koali-application-frame-wrap" aria-busy={renderState === 'loading'}>
-        {!frameLoaded && !loadTimedOut ? (
+      <div className="koali-application-frame-wrap" aria-busy={frameLoading}>
+        {frameLoading ? (
           <div className="koali-application-loading" aria-live="polite">
             <Spin />
             <span>{t('surface.loading', 'Chargement de {label}').replace('{label}', descriptor.presentation.label)}</span>
           </div>
         ) : null}
-        {loadTimedOut && !frameLoaded ? (
+        {frameErrored ? (
           <div className="koali-application-loading" role="alert">
             <Space direction="vertical" size="middle" style={{ maxWidth: 520 }}>
               <Alert
                 type="warning"
                 showIcon
-                message={t('surface.timeout_title', 'Le chargement de l’application a expiré')}
-                description={t('surface.timeout_description', 'La cible admise n’a pas terminé son chargement dans le délai borné. Koali ne change jamais automatiquement d’origine ou de fournisseur.')}
+                message={loadTimedOut
+                  ? t('surface.timeout_title', 'Le chargement de l’application a expiré')
+                  : t('surface.embed_error_title', 'L’application n’a pas pu être affichée')}
+                description={loadTimedOut
+                  ? t('surface.timeout_description', 'La cible admise n’a pas terminé son chargement dans le délai borné. Koali ne change jamais automatiquement d’origine ou de fournisseur.')
+                  : t('surface.embed_error_description', 'La surface admise a signalé une erreur de chargement. Koali conserve la même origine et laisse le contrôle du runtime à son propriétaire.')}
               />
-              <Button icon={<ReloadOutlined />} onClick={retryFrame}>{t('surface.retry_application', 'Réessayer l’application')}</Button>
+              <Button icon={<ReloadOutlined />} onClick={retryFrame}>
+                {t('surface.retry_application', 'Réessayer l’application')}
+              </Button>
             </Space>
           </div>
         ) : null}
@@ -143,6 +146,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
           }}
           onError={() => {
             loadedRef.current = false;
+            setLoadTimedOut(false);
             setFrameLoaded(false);
             setRenderState('error');
           }}

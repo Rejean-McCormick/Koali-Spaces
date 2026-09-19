@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-18T22:51:46.069Z",
+  "updatedAt": "2026-09-19T19:58:26.592Z",
   "discovery": {
-    "discoveredAt": "2026-09-18T22:50:49.966Z",
+    "discoveredAt": "2026-09-19T19:45:28.252Z",
     "products": [
       {
         "id": "konnaxion",
@@ -15,10 +15,6 @@
           {
             "id": "base",
             "path": "C:\\mycode\\Konnaxion\\Konnaxion"
-          },
-          {
-            "id": "worlds",
-            "path": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
           }
         ],
         "externallyManaged": false,
@@ -38,10 +34,6 @@
           {
             "id": "base",
             "path": "C:\\mycode\\Orgo\\Orgo"
-          },
-          {
-            "id": "worlds",
-            "path": "C:\\mycode\\Orgo\\Orgo_Worlds"
           }
         ],
         "externallyManaged": false,
@@ -195,8 +187,8 @@
     "konnaxion": {
       "state": "starting",
       "pids": [
-        21364,
-        17772
+        27352,
+        41800
       ],
       "commands": [
         {
@@ -237,7 +229,7 @@
     "orgo": {
       "state": "starting",
       "pids": [
-        43352
+        29408
       ],
       "commands": [
         {
@@ -268,8 +260,8 @@
     "semantik_architect": {
       "state": "failed",
       "pids": [
-        25856,
-        30920
+        39216,
+        23216
       ],
       "commands": [
         {
@@ -310,7 +302,7 @@
     "koa_mediatheque": {
       "state": "starting",
       "pids": [
-        34976
+        38928
       ],
       "commands": [
         {

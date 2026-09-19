@@ -1,0 +1,26 @@
+# Build/dependency output
+.next/
+node_modules/
+dist/
+coverage/
+
+# Koali local runtime / diagnostics / backups
+.koali-dev/
+.levelupdiag/
+.koali-ks4-backup/
+
+# Python caches/environments
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Local temporary output
+*.log
+*.tmp
+*.temp
+*.bak
+*.backup

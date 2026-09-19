@@ -1,7 +1,43 @@
+# JavaScript / Next.js build output
 .next/
 node_modules/
 dist/
 coverage/
+
+# Local environment overrides
 .env.local
+.env.*.local
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Koali local runtime / diagnostics / backups
+.koali-dev/
+.levelupdiag/
+.koali-ks4-backup/
+
+# Local logs and temporary/editor output
 *.log
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+
+# IDE and OS metadata
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
 GitSink.bat

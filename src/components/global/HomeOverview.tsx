@@ -1,50 +1,47 @@
 'use client';
 
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { Alert, Badge, Button, Card, Col, Row, Space, Tag, Typography, type BadgeProps } from 'antd';
-import type { KeyboardEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { Alert, Card, Col, Row, Tag, Typography } from 'antd';
+import Link from 'next/link';
 import { admittedModules, effectiveHomeRouteId, publicLabel, routeHref, safeRoute } from '@/lib/registry';
 import { moduleHealthFor, moduleIsReady } from '@/lib/module-health';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 
-function healthPresentation(value: string): { status: BadgeProps['status']; color: string; label: string } {
-  if (value === 'ready') return { status: 'success', color: 'success', label: 'Prêt' };
-  if (value === 'starting') return { status: 'processing', color: 'processing', label: 'Démarrage' };
-  if (value === 'degraded') return { status: 'warning', color: 'warning', label: 'Dégradé' };
-  if (value === 'missing' || value === 'unreachable' || value === 'failed') return { status: 'error', color: 'error', label: 'Indisponible' };
-  return { status: 'default', color: 'default', label: value || 'Inconnu' };
+function healthColor(value: string) {
+  if (value === 'starting') return 'processing';
+  if (value === 'degraded') return 'warning';
+  if (value === 'missing' || value === 'unreachable' || value === 'failed') return 'error';
+  return 'default';
 }
 
 export default function HomeOverview() {
   const { state } = useShell();
   const { t } = useLocalization();
-  const router = useRouter();
-  const modules = admittedModules(state);
+  const modules = admittedModules(state).filter((manifest) => manifest.module_id !== 'space_home');
   const online = state.network_state !== 'offline';
-  const readyCount = modules.filter((manifest) => moduleIsReady(moduleHealthFor(state, manifest.module_id))).length;
+  const attentionMessage = state.reason ?? (!online
+    ? t('home.offline_attention', 'Mode hors ligne : seules les surfaces déclarées disponibles localement restent accessibles.')
+    : null);
 
-  const openFromKeyboard = (event: KeyboardEvent, href: string) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      router.push(href);
+  const healthLabel = (value: string) => {
+    if (value === 'starting') return t('home.status_starting', 'Démarrage');
+    if (value === 'degraded') return t('home.status_degraded', 'Dégradé');
+    if (value === 'missing' || value === 'unreachable' || value === 'failed') {
+      return t('home.status_unavailable', 'Indisponible');
     }
+    return t('home.status_unknown', 'État inconnu');
   };
 
   return (
-    <Space direction="vertical" size="large" className="koali-home-overview">
-      {state.reason ? <Alert type="warning" showIcon message={state.reason} /> : null}
-      <div>
-        <div className="koali-section-heading">
-          <div>
-            <Typography.Title level={4}>{t('home.available_modules', 'Modules disponibles')}</Typography.Title>
-            <Typography.Text type="secondary">
-              {readyCount}/{modules.length} {t('home.modules_ready', 'modules prêts')}
-            </Typography.Text>
-          </div>
-        </div>
+    <div className="koali-home-overview">
+      {attentionMessage ? <Alert type="warning" showIcon message={attentionMessage} className="koali-home-attention" /> : null}
 
+      <div className="koali-section-heading">
+        <Typography.Title level={4}>{t('home.applications', 'Applications')}</Typography.Title>
+      </div>
+
+      {modules.length ? (
         <Row gutter={[16, 16]}>
           {modules.map((manifest) => {
             const route = safeRoute(
@@ -56,67 +53,50 @@ export default function HomeOverview() {
             );
             const href = routeHref(manifest, route);
             const health = moduleHealthFor(state, manifest.module_id);
-            const presentation = healthPresentation(health.state);
-            const optional = !health.affects_shell_state && manifest.module_id !== 'space_home';
+            const healthy = moduleIsReady(health);
 
             return (
               <Col xs={24} sm={12} xl={8} key={manifest.module_id}>
-                <Card
-                  className={`koali-module-card is-${health.state}`}
-                  hoverable
-                  role="link"
-                  tabIndex={0}
-                  onClick={() => router.push(href)}
-                  onKeyDown={(event) => openFromKeyboard(event, href)}
+                <Link
+                  href={href}
+                  className="koali-module-card-link"
+                  aria-label={`${t('home.open_application', 'Ouvrir')} ${publicLabel(state.active_space, manifest)}`}
                 >
-                  <div className="koali-module-card-header">
-                    <Space size="small">
-                      <Badge status={presentation.status} />
+                  <Card className={`koali-module-card is-${health.state}`} hoverable>
+                    <div className="koali-module-card-header">
                       <Typography.Text strong className="koali-module-card-title">
                         {publicLabel(state.active_space, manifest)}
                       </Typography.Text>
-                    </Space>
-                    <Tag color={presentation.color}>{presentation.label}</Tag>
-                  </div>
+                      {!healthy ? <Tag color={healthColor(health.state)}>{healthLabel(health.state)}</Tag> : null}
+                    </div>
 
-                  <Typography.Paragraph type="secondary" className="koali-module-card-description">
-                    {manifest.description ?? t('home.surface_description', 'Surface d’interface admise dans le Space actif.')}
-                  </Typography.Paragraph>
+                    <Typography.Paragraph type="secondary" className="koali-module-card-description">
+                      {manifest.description ?? t('home.surface_description', 'Surface d’interface admise dans le Space actif.')}
+                    </Typography.Paragraph>
 
-                  {health.reason && !moduleIsReady(health) ? (
-                    <Typography.Text type="secondary" className="koali-module-card-reason">
-                      {health.reason}
-                    </Typography.Text>
-                  ) : null}
+                    {health.reason && !healthy ? (
+                      <Typography.Text type="secondary" className="koali-module-card-reason">
+                        {health.reason}
+                      </Typography.Text>
+                    ) : null}
 
-                  <div className="koali-module-card-footer">
-                    <Typography.Text type="secondary">
-                      {optional ? t('home.optional_module', 'Module optionnel') : t('home.shell_module', 'Module Koali')}
-                    </Typography.Text>
-                    <Button
-                      type="link"
-                      icon={<ArrowRightOutlined />}
-                      iconPosition="end"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        router.push(href);
-                      }}
-                    >
-                      {t('home.open_module', 'Ouvrir')}
-                    </Button>
-                  </div>
-                </Card>
+                    <div className="koali-module-card-footer">
+                      <span className="koali-module-card-cta">
+                        {t('home.open_application', 'Ouvrir')}
+                        <ArrowRightOutlined aria-hidden />
+                      </span>
+                    </div>
+                  </Card>
+                </Link>
               </Col>
             );
           })}
         </Row>
-      </div>
-
-      <Space wrap className="koali-home-summary">
-        <Tag color={state.state === 'ready' ? 'success' : 'warning'}>{t('home.shell', 'Shell')}: {state.state}</Tag>
-        <Tag color={state.network_state === 'online' ? 'success' : 'default'}>{t('home.network', 'Réseau')}: {state.network_state}</Tag>
-        <Tag>{t('home.capabilities', 'Capabilities projetées')}: {state.capabilities.length}</Tag>
-      </Space>
-    </Space>
+      ) : (
+        <Typography.Text type="secondary">
+          {t('home.no_applications', 'Aucune application n’est admise dans ce Space.')}
+        </Typography.Text>
+      )}
+    </div>
   );
 }

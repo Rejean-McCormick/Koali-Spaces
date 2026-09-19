@@ -1,14 +1,13 @@
 'use client';
 
 import {
-  CheckCircleOutlined,
   DisconnectOutlined,
   InfoCircleOutlined,
   MenuOutlined,
   SearchOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Badge, Button, Space, Typography } from 'antd';
+import { Button, Space, Typography } from 'antd';
 import { usePathname, useRouter } from 'next/navigation';
 import type { RefObject } from 'react';
 import {
@@ -25,6 +24,7 @@ import { hrefWithKoaliSurface } from '@/lib/shell-navigation-state';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 import type { TopbarWidget } from '@/types/contracts';
+import ModuleSelector from './ModuleSelector';
 import ProductSurfaceSelector from './ProductSurfaceSelector';
 
 function WidgetAction({ widget, activeSurfaceId, activeModuleId }: { widget: TopbarWidget; activeSurfaceId: string | null; activeModuleId: string | null }) {
@@ -67,6 +67,8 @@ function ShellStatusIndicators() {
   const attention = offline || ['degraded', 'unavailable', 'error'].includes(state.state);
   const optionalIssues = optionalModuleIssues(state);
 
+  if (!optionalIssues.length && !attention) return null;
+
   return (
     <Space size="small" className="koa-shell-status-group">
       {optionalIssues.length ? (
@@ -94,13 +96,7 @@ function ShellStatusIndicators() {
         >
           {offline ? t('network.offline', 'Hors ligne') : t('shell.attention_required', 'État dégradé')}
         </Button>
-      ) : (
-        <span className="koa-shell-ready" aria-label={t('shell.ready', 'Koali prêt')}>
-          <Badge status="success" />
-          <CheckCircleOutlined />
-          <span>{t('shell.ready', 'Koali prêt')}</span>
-        </span>
-      )}
+      ) : null}
     </Space>
   );
 }
@@ -133,6 +129,9 @@ export default function SharedTopBar({
           aria-label={t('shell.open_navigation', 'Ouvrir la navigation du module')}
         />
       ) : null}
+      <div className="koa-mobile-module-selector">
+        <ModuleSelector compact />
+      </div>
       <div className="koa-context-title">
         <Typography.Text strong className="koa-context-title-text">
           {manifest ? publicLabel(state.active_space, manifest) : state.active_space?.title ?? 'Koali Spaces'}

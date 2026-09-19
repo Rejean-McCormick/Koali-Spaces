@@ -1,14 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-18T22:50:49.968Z",
+  "updatedAt": "2026-09-19T19:45:28.255Z",
   "products": {
     "konnaxion": {
-      "base": "C:\\mycode\\Konnaxion\\Konnaxion",
-      "worlds": "C:\\mycode\\Konnaxion\\Konnaxion_Worlds"
+      "base": "C:\\mycode\\Konnaxion\\Konnaxion"
     },
     "orgo": {
-      "base": "C:\\mycode\\Orgo\\Orgo",
-      "worlds": "C:\\mycode\\Orgo\\Orgo_Worlds"
+      "base": "C:\\mycode\\Orgo\\Orgo"
     },
     "semantik_architect": {
       "base": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect"

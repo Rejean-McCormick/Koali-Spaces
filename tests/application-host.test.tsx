@@ -48,6 +48,14 @@ describe('ApplicationHost', () => {
     expect(host).toHaveAttribute('data-render-state', 'ready');
   });
 
+  it('keeps retry chrome hidden while healthy and exposes recovery after an embed error', () => {
+    const view = render(<SurfaceModeProvider><ApplicationHost descriptor={descriptor} /></SurfaceModeProvider>);
+    const frame = view.getByTitle('Demo app');
+    expect(view.queryByRole('button', { name: /réessayer|retry/i })).not.toBeInTheDocument();
+    fireEvent.error(frame);
+    expect(view.getByRole('button', { name: /réessayer l.application|retry application/i })).toBeInTheDocument();
+  });
+
   it('binds the semantic accent token through a safe CSS variable indirection', () => {
     const view = render(<SurfaceModeProvider><ApplicationHost descriptor={descriptor} /></SurfaceModeProvider>);
     const host = view.container.querySelector('.koali-application-host') as HTMLElement;

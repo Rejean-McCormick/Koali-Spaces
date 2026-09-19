@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "launcherPid": 20912,
-  "rootPid": 7556,
-  "rootCreationDate": "2026-09-18T18:50:48.85907-04:00",
+  "launcherPid": 29004,
+  "rootPid": 33596,
+  "rootCreationDate": "2026-09-19T15:45:24.617762-04:00",
   "repoRoot": "C:\\mycode\\kOA-Linux\\koali-spaces",
   "command": [
     "cmd.exe",
@@ -12,6 +12,6 @@
     "pnpm dev"
   ],
   "status": "running",
-  "startedAt": "2026-09-18T22:50:49.704202+00:00",
-  "logFile": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-dev\\launcher\\logs\\launcher-20260918-185042.log"
+  "startedAt": "2026-09-19T19:45:25.360340+00:00",
+  "logFile": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-dev\\launcher\\logs\\launcher-20260919-154518.log"
 }

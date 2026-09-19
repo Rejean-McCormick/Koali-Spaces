@@ -18,15 +18,15 @@ import { hrefWithKoaliSurface } from '@/lib/shell-navigation-state';
 import { useLocalization } from '@/providers/LocalizationProvider';
 import { useShell } from '@/providers/ShellProvider';
 
-function badgeStatus(value: string): BadgeProps['status'] {
-  if (value === 'ready') return 'success';
+function attentionBadgeStatus(value: string): BadgeProps['status'] | null {
+  if (value === 'ready') return null;
   if (value === 'starting') return 'processing';
   if (value === 'degraded') return 'warning';
   if (value === 'missing' || value === 'unreachable' || value === 'failed') return 'error';
   return 'default';
 }
 
-export default function ModuleSelector() {
+export default function ModuleSelector({ compact = false }: { compact?: boolean }) {
   const { state } = useShell();
   const { t } = useLocalization();
   const router = useRouter();
@@ -34,23 +34,31 @@ export default function ModuleSelector() {
   const modules = admittedModules(state);
   const active = activeManifest(state, pathname) ?? modules[0] ?? null;
   const activeHealth = active ? moduleHealthFor(state, active.module_id) : null;
+  const activeAttention = activeHealth ? attentionBadgeStatus(activeHealth.state) : null;
 
   if (modules.length <= 1) {
     return (
-      <div className="koa-module-identity" aria-label={t('shell.active_module', 'Module actif')}>
+      <div
+        className={`koa-module-identity ${compact ? 'is-compact' : ''}`}
+        aria-label={t('shell.active_module', 'Module actif')}
+      >
         <AppstoreOutlined aria-hidden />
-        <Typography.Text strong>{active ? publicLabel(state.active_space, active) : 'Koali Spaces'}</Typography.Text>
+        <Typography.Text strong ellipsis>
+          {active ? publicLabel(state.active_space, active) : 'Koali Spaces'}
+        </Typography.Text>
+        {activeAttention ? <Badge status={activeAttention} /> : null}
       </div>
     );
   }
 
   const items = modules.map((manifest) => {
     const health = moduleHealthFor(state, manifest.module_id);
+    const attention = attentionBadgeStatus(health.state);
     return {
       key: manifest.module_id,
       label: (
         <span className="koa-module-dropdown-item">
-          <Badge status={badgeStatus(health.state)} />
+          {attention ? <Badge status={attention} /> : <span className="koa-module-status-spacer" aria-hidden />}
           <span>{publicLabel(state.active_space, manifest)}</span>
           {!health.affects_shell_state && manifest.module_id !== 'space_home' ? (
             <span className="koa-module-optional-label">{t('shell.optional', 'optionnel')}</span>
@@ -90,12 +98,12 @@ export default function ModuleSelector() {
     >
       <Button
         type="text"
-        className="koa-module-selector-button"
+        className={`koa-module-selector-button ${compact ? 'is-compact' : ''}`}
         aria-label={t('shell.module_selector', 'Sélectionner le produit actif')}
       >
         <Space size="small" className="koa-module-selector-content">
           <AppstoreOutlined />
-          {activeHealth ? <Badge status={badgeStatus(activeHealth.state)} /> : null}
+          {activeAttention ? <Badge status={activeAttention} /> : null}
           <span className="koa-module-selector-label">{active ? publicLabel(state.active_space, active) : 'Koali Spaces'}</span>
           <DownOutlined className="koa-module-selector-chevron" />
         </Space>
