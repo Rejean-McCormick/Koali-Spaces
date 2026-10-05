@@ -24,6 +24,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
   const [renderState, setRenderState] = useState<RenderState>(descriptor.status.render);
   const [reloadKey, setReloadKey] = useState(0);
   const loadedRef = useRef(false);
+  const erroredRef = useRef(false);
   const defaultMode = descriptor.presentation.defaultMode ?? 'framed';
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
       return;
     }
     loadedRef.current = false;
+    erroredRef.current = false;
     setFrameLoaded(false);
     setLoadTimedOut(false);
     setRenderState('loading');
@@ -67,6 +69,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
   const immersive = mode === 'immersive';
   const retryFrame = () => {
     loadedRef.current = false;
+    erroredRef.current = false;
     setFrameLoaded(false);
     setLoadTimedOut(false);
     setRenderState('loading');
@@ -139,6 +142,10 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
           allow={descriptor.target.browserPermissions.join('; ')}
           referrerPolicy="no-referrer"
           onLoad={() => {
+            // Some iframe/browser paths can emit a late load after an error.
+            // Recovery remains explicit: once errored, only retryFrame may
+            // clear the error for this embed attempt.
+            if (erroredRef.current) return;
             loadedRef.current = true;
             setLoadTimedOut(false);
             setFrameLoaded(true);
@@ -146,6 +153,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
           }}
           onError={() => {
             loadedRef.current = false;
+            erroredRef.current = true;
             setLoadTimedOut(false);
             setFrameLoaded(false);
             setRenderState('error');

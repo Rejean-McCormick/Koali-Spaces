@@ -54,6 +54,9 @@ describe('ApplicationHost', () => {
     expect(view.queryByRole('button', { name: /réessayer|retry/i })).not.toBeInTheDocument();
     fireEvent.error(frame);
     expect(view.getByRole('button', { name: /réessayer l.application|retry application/i })).toBeInTheDocument();
+    // A late iframe load must not silently erase an explicit embed failure.
+    fireEvent.load(frame);
+    expect(view.getByRole('button', { name: /réessayer l.application|retry application/i })).toBeInTheDocument();
   });
 
   it('binds the semantic accent token through a safe CSS variable indirection', () => {
