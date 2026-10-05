@@ -1,15 +1,82 @@
-name: koali-spaces-ci
-on: [push, pull_request]
+name: Koali Spaces CI
+
+"on":
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: koali-spaces-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    name: validate-build-smoke
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: corepack enable
-      - run: pnpm run check:dependency-lock
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run validate
-      - run: pnpm run build
-      - run: pnpm run smoke:runtime
+      - name: Check out source
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+
+      - name: Provision Node 20
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "20"
+
+      - name: Activate declared pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare pnpm@10.20.0 --activate
+          pnpm --version
+
+      - name: Check dependency lock contract
+        run: pnpm run check:dependency-lock
+
+      - name: Install from frozen lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Koali Spaces validation
+        run: pnpm run validate
+
+      - name: Build packaged runtime
+        run: pnpm run build
+
+      - name: Smoke packaged runtime
+        run: pnpm run smoke:runtime
+
+      - name: Record exact qualification subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-evidence
+          {
+            echo "Koali-Spaces=$(git rev-parse HEAD)"
+            echo "runner=${{ runner.os }}/${{ runner.arch }}"
+            echo "node=$(node --version)"
+            echo "pnpm=$(pnpm --version)"
+            echo "pnpm-lock.sha256=$(sha256sum pnpm-lock.yaml | awk '{print $1}')"
+          } | tee ci-evidence/qualification.txt
+
+      - name: Upload Koali Spaces evidence
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: koali-spaces-${{ github.sha }}
+          path: |
+            ci-evidence/
+            dist/runtime/
+          if-no-files-found: warn
+          retention-days: 30
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
