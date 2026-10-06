@@ -5,6 +5,7 @@ import { discoverEcosystem, writeWorkspaceHints } from '../server/ecosystem/disc
 import { probeProduct } from '../tools/workspace-launcher/manifest-runner.mjs';
 import { atomicWriteJson, buildSurfaceRuntimeRegistry, writeEcosystemStatus } from '../server/ecosystem/runtime-state.mjs';
 import { writeDevelopmentShellState } from '../server/ecosystem/shell-state-compiler.mjs';
+import { qualifySources } from '../server/ecosystem/source-qualification.mjs';
 
 const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const stateRoot = path.resolve(process.env.KOALI_SPACES_STATE_ROOT || path.join(appRoot, '.koali-dev', 'state'));
@@ -16,13 +17,26 @@ const deadline = Date.now() + timeoutMs;
 const catalog = await readEcosystemCatalog();
 const discovery = await discoverEcosystem({ appRoot, catalog, workspacePath });
 await writeWorkspaceHints(workspacePath, discovery);
+const sourceStates = await qualifySources(discovery);
+const requiredForBootstrap = (product) => product.requiredForBootstrap === true;
+const requiredProducts = discovery.products.filter(requiredForBootstrap);
 
 for (const product of discovery.products) {
   if (!product.repoFound && !product.externallyManaged) {
-    console.error(`[koali:ready] ${product.publicName}: repository missing`);
-    process.exitCode = 2;
+    const level = requiredForBootstrap(product) ? 'error' : 'warn';
+    console[level](`[koali:ready] ${product.publicName}: repository missing${requiredForBootstrap(product) ? '' : ' (optional)'}`);
+    if (requiredForBootstrap(product)) process.exitCode = 2;
   } else if (!product.integrationReady) {
-    console.error(`[koali:ready] ${product.publicName}: owner integration contract unavailable (${product.discoveryReason ?? 'unknown'})`);
+    const level = requiredForBootstrap(product) ? 'error' : 'warn';
+    console[level](`[koali:ready] ${product.publicName}: owner integration contract unavailable (${product.discoveryReason ?? 'unknown'})${requiredForBootstrap(product) ? '' : ' (optional)'}`);
+    if (requiredForBootstrap(product)) process.exitCode = 2;
+  }
+}
+for (const source of discovery.sources) {
+  if (source.requiredForBootstrap !== true) continue;
+  const state = sourceStates.get(source.id);
+  if (state?.state !== 'ready') {
+    console.error(`[koali:ready] ${source.publicName}: ${state?.state ?? 'unknown'} — ${state?.reason ?? 'qualification unavailable'}`);
     process.exitCode = 2;
   }
 }
@@ -36,18 +50,18 @@ while (Date.now() <= deadline) {
   }));
   lastStates = states;
   await atomicWriteJson(registryPath, buildSurfaceRuntimeRegistry(discovery, states));
-  await writeEcosystemStatus(stateRoot, discovery, states, new Map());
-  await writeDevelopmentShellState(stateRoot, appRoot, discovery, states);
-  const pending = discovery.products.filter((product) => states.get(product.id)?.state !== 'ready');
+  await writeEcosystemStatus(stateRoot, discovery, states, new Map(), sourceStates);
+  await writeDevelopmentShellState(stateRoot, appRoot, discovery, states, sourceStates);
+  const pending = requiredProducts.filter((product) => states.get(product.id)?.state !== 'ready');
   if (pending.length === 0) {
-    console.log(`[koali:ready] all ${discovery.products.length} owner product(s) ready`);
+    console.log(`[koali:ready] Koali shell ready; ${requiredProducts.length} required owner product(s) ready`);
     process.exit(0);
   }
   console.log(`[koali:ready] waiting: ${pending.map((product) => `${product.publicName}=${states.get(product.id)?.state ?? 'unknown'}`).join(', ')}`);
   await new Promise((resolve) => setTimeout(resolve, pollMs));
 }
 
-for (const product of discovery.products) {
+for (const product of requiredProducts) {
   const state = lastStates.get(product.id);
   if (state?.state !== 'ready') console.error(`[koali:ready] ${product.publicName}: ${state?.state ?? 'unknown'} — ${state?.reason ?? 'no observation'}`);
 }

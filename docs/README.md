@@ -33,7 +33,8 @@ Koali Spaces ne possède pas les données métier, permissions, workflows ou ide
 7. `04-shell/00-global-shell.md`
 8. `06-surface-layer/README.md` pour le rendu et l’hébergement d’applications
 9. `06-surface-layer/AI_READ_ORDER.md` avant tout changement non trivial de Surface Layer
-10. sections spécialisées selon le travail demandé
+10. `11-integrations/09-linked-snapshot-components.md` pour la liaison du snapshot non-diagnostic et la règle Kristal référence-seulement
+11. sections spécialisées selon le travail demandé
 
 ## Statut documentaire
 

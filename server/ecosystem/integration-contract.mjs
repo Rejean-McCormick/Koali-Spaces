@@ -95,8 +95,13 @@ function validateRaw(raw, expectedProductId, filePath) {
   if (!raw.productId || raw.productId !== expectedProductId) {
     throw new Error(`${filePath}: productId must be ${expectedProductId}`);
   }
-  if (!raw.surface || typeof raw.surface.embedBase !== 'string') {
-    throw new Error(`${filePath}: surface.embedBase is required`);
+  if (!raw.surface || typeof raw.surface !== 'object' || Array.isArray(raw.surface)) {
+    throw new Error(`${filePath}: surface is required`);
+  }
+  const mode = raw.surface.mode ?? 'web';
+  if (!['web', 'headless'].includes(mode)) throw new Error(`${filePath}: surface.mode must be web or headless`);
+  if (mode === 'web' && typeof raw.surface.embedBase !== 'string') {
+    throw new Error(`${filePath}: surface.embedBase is required for web products`);
   }
   if (!Array.isArray(raw.processes)) throw new Error(`${filePath}: processes must be an array`);
   if (!Array.isArray(raw.probes) || raw.probes.length === 0) throw new Error(`${filePath}: probes must contain at least one probe`);
@@ -112,7 +117,11 @@ export async function readIntegrationContract(repoPath, product, fileName = 'koa
     productId: product.id,
     moduleId: product.moduleId,
   });
-  const embedBase = assertResolvedEmbedBase(interpolate(raw.surface.embedBase, variables));
+  const surfaceMode = raw.surface.mode ?? 'web';
+  const embedBase = surfaceMode === 'web'
+    ? assertResolvedEmbedBase(interpolate(raw.surface.embedBase, variables))
+    : '';
+
 
   const processes = raw.processes
     .filter(activeOnPlatform)
@@ -163,6 +172,7 @@ export async function readIntegrationContract(repoPath, product, fileName = 'koa
     filePath,
     productId: product.id,
     owner: raw.owner ?? product.publicName,
+    surfaceMode,
     embedBase,
     variables,
     processes,

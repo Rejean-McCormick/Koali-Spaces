@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "productId": "orgo_worlds",
+  "owner": "Orgo Worlds",
+  "variables": {
+    "webPort": {
+      "type": "port",
+      "env": "KOALI_ORGO_WORLDS_PORT",
+      "default": 3100
+    },
+    "apiPort": {
+      "type": "port",
+      "env": "KOALI_ORGO_WORLDS_API_PORT",
+      "default": 4100
+    }
+  },
+  "surface": {
+    "embedBase": "http://127.0.0.1:${webPort}/worlds"
+  },
+  "processes": [
+    {
+      "id": "api",
+      "cwd": ".",
+      "command": "npm",
+      "shell": {
+        "win32": true,
+        "default": false
+      },
+      "args": [
+        "run",
+        "dev:api"
+      ],
+      "env": {
+        "ORGO_WORLDS_API_PORT": "${apiPort}"
+      },
+      "probeId": "api"
+    },
+    {
+      "id": "web",
+      "cwd": ".",
+      "command": "npm",
+      "shell": {
+        "win32": true,
+        "default": false
+      },
+      "args": [
+        "exec",
+        "--yes=false",
+        "--",
+        "next",
+        "dev",
+        "apps/web",
+        "-H",
+        "127.0.0.1",
+        "-p",
+        "${webPort}"
+      ],
+      "env": {
+        "PORT": "${webPort}",
+        "NEXT_PUBLIC_ORGO_WORLDS_API": "http://127.0.0.1:${apiPort}/api"
+      },
+      "probeId": "web"
+    }
+  ],
+  "probes": [
+    {
+      "id": "api",
+      "url": "http://127.0.0.1:${apiPort}/api/runtime",
+      "required": true,
+      "statuses": [
+        200
+      ],
+      "timeoutMs": 2500
+    },
+    {
+      "id": "web",
+      "url": "http://127.0.0.1:${webPort}/worlds",
+      "required": true,
+      "statuses": [
+        200,
+        307,
+        308
+      ],
+      "timeoutMs": 2500
+    }
+  ]
+}

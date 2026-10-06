@@ -154,37 +154,55 @@ class Launcher:
                 "Koali's .next\\trace is still locked. A stale Node/Next process is probably still alive."
             ) from exc
 
-    def _check_docker(self) -> None:
-        docker = shutil.which("docker.exe") or shutil.which("docker")
-        if not docker:
-            self.log("Docker CLI not found. Orgo may start degraded.")
-            self._message_box("Koali Launcher", "Docker CLI was not found. Koali will start, but Orgo may be degraded.")
+    def _bootstrap_workspace(self) -> None:
+        if os.environ.get('KOALI_SKIP_BOOTSTRAP', '').lower() in {'1', 'true', 'yes', 'on'}:
+            self.log('Workspace bootstrap skipped by KOALI_SKIP_BOOTSTRAP.')
             return
-        try:
-            completed = subprocess.run(
-                [docker, "info", "--format", "{{.ServerVersion}}"],
-                check=False,
-                capture_output=True,
-                text=True,
-                timeout=5,
-                creationflags=CREATE_NO_WINDOW,
-            )
-        except Exception as exc:
-            self.log(f"Docker status check failed: {exc}")
-            return
-        if completed.returncode == 0:
-            self.log(f"Docker ready (server {completed.stdout.strip() or 'unknown'}).")
+        script = self.repo_root / 'scripts' / 'bootstrap-koali.ps1'
+        if not script.is_file():
+            raise RuntimeError(f'Koali bootstrap script is missing: {script}')
+        powershell = shutil.which('powershell.exe') or shutil.which('powershell')
+        if not powershell:
+            raise RuntimeError('Windows PowerShell is required for Koali bootstrap.')
+        self.log('Bootstrapping Koali workspace dependencies and managed Python runtimes.')
+        kwargs = {
+            'cwd': str(self.repo_root),
+            'env': os.environ.copy(),
+            'creationflags': CREATE_NO_WINDOW,
+        }
+        if self.console:
+            kwargs.update(stdout=None, stderr=None, stdin=None)
         else:
-            self.log("Docker Desktop is not ready. Orgo may start degraded.")
-            self._message_box("Koali Launcher", "Docker Desktop is not ready. Koali will start, but Orgo may be degraded.")
+            kwargs.update(stdout=self._log_handle, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
+        completed = subprocess.run([powershell, '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', str(script)], check=False, **kwargs)
+        if completed.returncode != 0:
+            raise RuntimeError(f'Koali workspace bootstrap failed with code {completed.returncode}. See {self.log_file}')
+        self.log('Workspace bootstrap completed.')
+
 
     def _command(self) -> list[str]:
-        # Use cmd.exe for .cmd shims on Windows; this is reliable for pnpm/corepack.
+        # The bootstrap provisions pnpm inside Koali's writable state directory.
+        # Prefer it over Corepack so a normal Windows user never needs to write
+        # shims under C:\Program Files\nodejs.
+        local_pnpm = (
+            self.repo_root
+            / ".koali-dev"
+            / "bootstrap"
+            / "tools"
+            / "pnpm"
+            / "node_modules"
+            / ".bin"
+            / ("pnpm.cmd" if os.name == "nt" else "pnpm")
+        )
+        if local_pnpm.is_file():
+            if os.name == "nt":
+                return ["cmd.exe", "/d", "/s", "/c", f'"{local_pnpm}" dev']
+            return [str(local_pnpm), "dev"]
         if shutil.which("pnpm.cmd") or shutil.which("pnpm.exe") or shutil.which("pnpm"):
             return ["cmd.exe", "/d", "/s", "/c", "pnpm dev"] if os.name == "nt" else ["pnpm", "dev"]
         if shutil.which("corepack.cmd") or shutil.which("corepack.exe") or shutil.which("corepack"):
             return ["cmd.exe", "/d", "/s", "/c", "corepack pnpm dev"] if os.name == "nt" else ["corepack", "pnpm", "dev"]
-        raise RuntimeError("Neither pnpm nor corepack is available on PATH.")
+        raise RuntimeError("Koali-local pnpm is missing and neither pnpm nor Corepack is available on PATH.")
 
     def _write_session(self, pid: int, command: list[str], status: str = "running") -> None:
         process_info = get_process(pid)
@@ -236,7 +254,7 @@ class Launcher:
                 "They were not terminated:\n" + joined
             )
         self._clean_koali_next_trace()
-        self._check_docker()
+        self._bootstrap_workspace()
 
     def launch(self) -> int:
         self.prepare()

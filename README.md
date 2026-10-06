@@ -54,7 +54,7 @@ pnpm run smoke:runtime
 
 `pnpm dev` starts one generic workspace launcher before starting the Koali shell. Koali itself does not know whether an owner application is Django, Nest, Next, Streamlit, Python, or another stack. Each owner repository publishes a root `koali.integration.json` containing its own development commands, embed target, port variables, and required readiness probes.
 
-The current owner contracts cover Konnaxion, Konnaxion Worlds, Orgo, Orgo Worlds, SemantiK Architect, and Médiathèque kOA. Worlds repositories remain selectable sources for the same product identity rather than duplicate shell modules. Kristal Framework, kOA Linux, Koali Control Panel, and kOA Digital Ecosystem remain source/infrastructure links rather than fake application surfaces.
+The integrated workspace owner contracts cover Orgo, Orgo Worlds, SemantiK Architect, Médiathèque kOA, Konfid, and Kor. Médiathèque keeps its engine separate from the sibling `mediatheque-blank` data instance. Interaction Kernel, SemantiK Runtime Orchestrator, kOA Linux, Koali Control Panel, and kOA Digital Ecosystem remain protocol/infrastructure/source links rather than fake application surfaces. Kristal Framework remains reference-only.
 
 Repository discovery is only a bootstrap mechanism. After the first successful discovery, Koali writes `.koali-dev/workspace.json` and prefers those explicit working-tree links on later runs. No owner source is copied into this repository.
 

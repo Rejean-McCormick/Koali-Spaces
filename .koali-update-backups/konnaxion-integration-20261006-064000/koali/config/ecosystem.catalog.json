@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 2,
+  "scan": {
+    "maxDepth": 4,
+    "ignoredDirectories": [
+      ".git",
+      ".next",
+      ".venv",
+      "node_modules",
+      "dist",
+      "build",
+      "coverage",
+      ".turbo",
+      ".cache"
+    ]
+  },
+  "products": [
+    {
+      "id": "orgo",
+      "moduleId": "orgo",
+      "publicName": "Orgo",
+      "description": "Travail, opérations et coordination Orgo.",
+      "order": 20,
+      "urlEnv": "KOALI_ORGO_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.orgo",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_ORGO",
+          "directoryNames": [
+            "Orgo"
+          ],
+          "markers": [
+            "apps/web/package.json",
+            "apps/api/package.json"
+          ]
+        }
+      ],
+      "affectsShellState": true,
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "orgo_worlds",
+      "moduleId": "orgo_worlds",
+      "publicName": "Orgo Worlds",
+      "description": "Exploration et gestion des mondes Orgo, intégrée comme application Koali distincte.",
+      "order": 25,
+      "urlEnv": "KOALI_ORGO_WORLDS_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.orgo",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_ORGO_WORLDS",
+          "directoryNames": [
+            "Orgo_Worlds"
+          ],
+          "markers": [
+            "Orgo_World_Manager.pyw",
+            "package.json",
+            "apps/api/src/orgo/adapters/inbound/http/worlds.controller.ts",
+            "apps/web/pages/worlds.tsx"
+          ]
+        }
+      ],
+      "affectsShellState": true,
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "semantik_architect",
+      "moduleId": "semantik_architect",
+      "publicName": "SemantiK Architect",
+      "description": "Service sémantique local SemantiK Architect; capacité Koali sans faux frontend.",
+      "order": 30,
+      "urlEnv": "KOALI_SEMANTIK_ARCHITECT_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.semantik_architect",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_SEMANTIK_ARCHITECT",
+          "directoryNames": [
+            "SemantiK_Architect",
+            "semantik-architect"
+          ],
+          "markers": [
+            "pyproject.toml",
+            "src/semantik_architect/__init__.py"
+          ]
+        }
+      ],
+      "affectsShellState": false,
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "koa_mediatheque",
+      "moduleId": "koa_mediatheque",
+      "publicName": "Médiathèque kOA",
+      "description": "Bibliothèque locale kOA; moteur partagé supervisé par Koali avec instance de contenu sœur séparée.",
+      "order": 35,
+      "urlEnv": "KOALI_KOA_MEDIATHEQUE_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.koa_mediatheque",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_KOA_MEDIATHEQUE",
+          "directoryNames": [
+            "mediatheque",
+            "Mediatheque"
+          ],
+          "markers": [
+            "pyproject.toml",
+            "06_GUI/koa_mediatheque_gui/app.py",
+            "koali.integration.json"
+          ]
+        }
+      ],
+      "affectsShellState": true,
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "konfid",
+      "moduleId": "konfid",
+      "publicName": "Konfid",
+      "description": "Plan de contrôle sécurité/autorisation local utilisé comme service Koali.",
+      "order": 40,
+      "urlEnv": "KOALI_KONFID_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.konfid",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_KONFID",
+          "directoryNames": [
+            "konfid",
+            "Konfid"
+          ],
+          "markers": [
+            "pyproject.toml",
+            "src/konfid/app.py",
+            "src/konfid/api.py"
+          ]
+        }
+      ],
+      "affectsShellState": false,
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "kor",
+      "moduleId": "kor",
+      "publicName": "Kor",
+      "description": "Boundary humain/mobile Kor; service local supervisé par Koali, UI Android conservée propriétaire.",
+      "order": 50,
+      "urlEnv": "KOALI_KOR_URL",
+      "integrationFile": "koali.integration.json",
+      "accentTokenRef": "module.kor",
+      "variants": [
+        {
+          "id": "base",
+          "preferred": true,
+          "repoEnv": "KOALI_REPO_KOR",
+          "directoryNames": [
+            "kor",
+            "Kor"
+          ],
+          "markers": [
+            "pyproject.toml",
+            "src/kor_service/app.py",
+            "android/settings.gradle.kts"
+          ]
+        }
+      ],
+      "affectsShellState": false,
+      "requiredForBootstrap": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "koa_mediatheque_blank_instance",
+      "publicName": "Médiathèque Blank Instance",
+      "repoEnv": "KOALI_REPO_KOA_MEDIATHEQUE_INSTANCE",
+      "directoryNames": [
+        "mediatheque-blank"
+      ],
+      "markers": [
+        "mediatheque.instance.toml",
+        "01_DB",
+        "02_STORAGE"
+      ],
+      "kind": "local_data_instance",
+      "integrationMode": "qualified_sibling_instance",
+      "referenceOnly": false,
+      "description": "Instance locale vierge et persistante utilisée par le moteur Médiathèque; données séparées du code du moteur.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "instance-config",
+            "kind": "file",
+            "path": "mediatheque.instance.toml"
+          },
+          {
+            "id": "sqlite-schema",
+            "kind": "command",
+            "cwd": ".",
+            "command": {
+              "win32": "..\\mediatheque\\.venv\\Scripts\\python.exe",
+              "default": "../mediatheque/.venv/bin/python"
+            },
+            "args": [
+              "-c",
+              "import sqlite3; from pathlib import Path; p=Path('01_DB/koa_mediatheque.sqlite'); assert p.is_file(), 'database missing'; c=sqlite3.connect(p); r=c.execute(\"select value from schema_meta where key='schema_version'\").fetchone(); c.close(); assert r and r[0], 'schema_version missing'; print('schema_version='+str(r[0]))"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "kristal_framework",
+      "publicName": "Kristal Framework",
+      "repoEnv": "KOALI_REPO_KRISTAL",
+      "directoryNames": [
+        "Kristal-Framework",
+        "kristal-framework"
+      ],
+      "markers": [
+        "README.md",
+        "schemas/v8/kristall-query-request.schema.json",
+        "spec/v5/00-overview/what-is-kristal-v5.md"
+      ],
+      "kind": "reference",
+      "integrationMode": "reference_only",
+      "referenceOnly": true,
+      "description": "Référence contractuelle et théorique uniquement; aucune théorie Kristal n’est importée dans Koali."
+    },
+    {
+      "id": "koa_linux",
+      "publicName": "kOA Linux",
+      "repoEnv": "KOALI_REPO_KOA_LINUX",
+      "directoryNames": [
+        "koa-linux",
+        "kOA-Linux"
+      ],
+      "markers": [
+        "Cargo.toml",
+        "docs/01-constitution/00-charter.md"
+      ],
+      "kind": "platform",
+      "integrationMode": "qualified_platform_authority",
+      "referenceOnly": false,
+      "description": "Autorité de composition plateforme, profils, admission et release.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "charter",
+            "kind": "file",
+            "path": "docs/01-constitution/00-charter.md"
+          },
+          {
+            "id": "cli",
+            "kind": "command",
+            "cwd": ".",
+            "command": {
+              "win32": ".venv\\Scripts\\koa.exe",
+              "default": ".venv/bin/koa"
+            },
+            "args": [
+              "--help"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "koali_control_panel",
+      "publicName": "Koali Control Panel",
+      "repoEnv": "KOALI_REPO_CONTROL_PANEL",
+      "directoryNames": [
+        "Koali-Control-Panel"
+      ],
+      "markers": [
+        "koali-control.pyw",
+        "koali_control/orchestration.py"
+      ],
+      "kind": "orchestration",
+      "integrationMode": "qualified_orchestration",
+      "referenceOnly": false,
+      "description": "Orchestration de développement; ne possède pas la composition de présentation Koali Spaces.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "self-test",
+            "kind": "command",
+            "cwd": ".",
+            "command": {
+              "win32": ".venv\\Scripts\\python.exe",
+              "default": ".venv/bin/python"
+            },
+            "args": [
+              "koali-control.pyw",
+              "--self-test"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "koa_digital_ecosystem",
+      "publicName": "kOA Digital Ecosystem",
+      "repoEnv": "KOALI_REPO_DIGITAL_ECOSYSTEM",
+      "directoryNames": [
+        "kOA_Digital_Ecosystem",
+        "koa-digital-ecosystem"
+      ],
+      "markers": [
+        "README.md",
+        "docs/1-Overview/index.md"
+      ],
+      "kind": "system_map",
+      "integrationMode": "qualified_inventory",
+      "referenceOnly": false,
+      "description": "Carte canonique de l’écosystème et inventaire des frontières.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "overview",
+            "kind": "file",
+            "path": "docs/1-Overview/index.md"
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "interaction_kernel",
+      "publicName": "Interaction Kernel",
+      "repoEnv": "KOALI_REPO_INTERACTION_KERNEL",
+      "directoryNames": [
+        "interaction_kernel",
+        "Interaction-Kernel"
+      ],
+      "markers": [
+        "README.md",
+        "contracts/schemas/envelope.schema.json",
+        "runtime/python/pyproject.toml"
+      ],
+      "kind": "protocol",
+      "integrationMode": "qualified_protocol_runtime",
+      "referenceOnly": false,
+      "description": "Protocole d’interopérabilité versionné; Koali le référence sans absorber l’état des participants.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "envelope-schema",
+            "kind": "file",
+            "path": "contracts/schemas/envelope.schema.json"
+          },
+          {
+            "id": "python-runtime",
+            "kind": "command",
+            "cwd": "runtime/python",
+            "command": {
+              "win32": ".venv\\Scripts\\python.exe",
+              "default": ".venv/bin/python"
+            },
+            "args": [
+              "-c",
+              "import interaction_kernel; print(\"interaction-kernel runtime ready\")"
+            ],
+            "timeoutMs": 15000
+          },
+          {
+            "id": "typescript-orgo-adapter",
+            "kind": "command",
+            "cwd": "runtime/typescript",
+            "command": {
+              "win32": "npm.cmd",
+              "default": "npm"
+            },
+            "args": [
+              "run",
+              "typecheck:adapter"
+            ],
+            "timeoutMs": 30000
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    },
+    {
+      "id": "semantik_runtime_orchestrator",
+      "publicName": "SemantiK Runtime Orchestrator",
+      "repoEnv": "KOALI_REPO_SEMANTIK_RUNTIME_ORCHESTRATOR",
+      "directoryNames": [
+        "SemantiK_Runtime_Orchestrator",
+        "semantik-runtime-orchestrator"
+      ],
+      "markers": [
+        "pyproject.toml",
+        "src/semantik_runtime_orchestrator/__init__.py"
+      ],
+      "kind": "release_runtime",
+      "integrationMode": "qualified_release_runtime",
+      "referenceOnly": false,
+      "description": "Séquençage de release/activation des RuntimeSets SemantiK; pas une surface Koali autonome.",
+      "qualification": {
+        "checks": [
+          {
+            "id": "cli",
+            "kind": "command",
+            "cwd": ".",
+            "command": {
+              "win32": ".venv\\Scripts\\semantik-runtime-orchestrator.exe",
+              "default": ".venv/bin/semantik-runtime-orchestrator"
+            },
+            "args": [
+              "--version"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      },
+      "requiredForBootstrap": true
+    }
+  ]
+}

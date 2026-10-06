@@ -15,6 +15,7 @@ export function buildSurfaceRuntimeRegistry(discovery, runtimeStates = new Map()
   const observedAt = new Date().toISOString();
 
   for (const product of discovery.products) {
+    if (product.surfaceMode === 'headless' || product.integration?.surfaceMode === 'headless') continue;
     const runtimeRef = `runtime.${product.id}.web`;
     const healthRef = `health.${product.id}.web`;
     const transportProfileRef = `transport.${product.id}.local`;
@@ -85,7 +86,7 @@ export async function writeSurfaceRuntimeRegistry(stateRoot, discovery, runtimeS
   return filePath;
 }
 
-export async function writeEcosystemStatus(stateRoot, discovery, runtimeStates = new Map(), processStates = new Map()) {
+export async function writeEcosystemStatus(stateRoot, discovery, runtimeStates = new Map(), processStates = new Map(), sourceStates = new Map()) {
   const value = {
     schemaVersion: 1,
     updatedAt: new Date().toISOString(),
@@ -103,6 +104,8 @@ export async function writeEcosystemStatus(stateRoot, discovery, runtimeStates =
         integrationReady: product.integrationReady,
         integrationOwner: product.integration?.owner ?? null,
         integrationFile: product.integration?.filePath ?? null,
+        surfaceMode: product.surfaceMode ?? product.integration?.surfaceMode ?? null,
+        presentationReady: Boolean(product.presentationReady),
         embedBase: product.embedBase,
       })),
       sources: discovery.sources.map((source) => ({
@@ -110,6 +113,11 @@ export async function writeEcosystemStatus(stateRoot, discovery, runtimeStates =
         publicName: source.publicName,
         found: source.found,
         repoPath: source.path,
+        kind: source.kind ?? 'source',
+        integrationMode: source.integrationMode ?? 'linked_source',
+        referenceOnly: Boolean(source.referenceOnly),
+        description: source.description ?? null,
+        qualification: sourceStates.get(source.id) ?? null,
       })),
     },
     runtimes: Object.fromEntries([...runtimeStates.entries()]),

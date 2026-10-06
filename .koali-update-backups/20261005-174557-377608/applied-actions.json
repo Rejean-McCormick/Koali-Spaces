@@ -1,0 +1,227 @@
+[
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\CHECK_KOALI.cmd",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\README.md",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\README.md"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\RUN_KOALI_ECOSYSTEM.cmd",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\RUN_KOALI_ECOSYSTEM.cmd"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\START_KOALI.cmd",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\STOP_KOALI.cmd",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\STOP_KOALI.cmd"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\config\\development-shell-state.base.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\config\\development-shell-state.base.json"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\config\\ecosystem.catalog.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\config\\ecosystem.catalog.json"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\docs\\11-integrations\\09-linked-snapshot-components.md",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\docs\\11-integrations\\10-koa-mediatheque.md",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\docs\\README.md",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\docs\\README.md"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\launcher\\koali_launcher.py",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\launcher\\koali_launcher.py"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\launcher\\launcher-config.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\launcher\\launcher-config.json"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\scripts\\bootstrap-koali.ps1",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\scripts\\dev-ecosystem.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\scripts\\dev-ecosystem.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\scripts\\ecosystem-ready.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\scripts\\ecosystem-ready.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\scripts\\ecosystem-sync.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\scripts\\ecosystem-sync.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\server\\ecosystem\\discovery.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\server\\ecosystem\\discovery.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\server\\ecosystem\\integration-contract.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\server\\ecosystem\\integration-contract.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\server\\ecosystem\\runtime-state.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\server\\ecosystem\\runtime-state.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\server\\ecosystem\\shell-state-compiler.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\server\\ecosystem\\shell-state-compiler.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\server\\ecosystem\\source-qualification.mjs",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\src\\app\\api\\ecosystem\\status\\route.ts",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\src\\app\\ecosystem\\page.tsx",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\src\\components\\global\\EcosystemOverview.tsx",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\src\\components\\global\\EcosystemOverview.tsx"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\src\\lib\\ecosystem-status.server.ts",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\src\\lib\\ecosystem-status.server.ts"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\src\\lib\\surfaces\\shell-page-registry.ts",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\src\\lib\\surfaces\\shell-page-registry.ts"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\tests-runtime\\ecosystem-discovery.test.mjs",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\koali\\tests-runtime\\ecosystem-discovery.test.mjs"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\tests-runtime\\ecosystem-linked-snapshot.test.mjs",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\koali-spaces\\tests-runtime\\source-qualification.test.mjs",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\docs\\README.md",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA-Linux\\Koali-Control-Panel\\docs\\README.md"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\docs\\koali-linked-ecosystem.md",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali-control.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali-control.json"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali-control.pyw",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali-control.pyw"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali_control\\config.py",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA-Linux\\Koali-Control-Panel\\koali_control\\config.py"
+  },
+  {
+    "target": "C:\\mycode\\kOA-Linux\\Koali-Control-Panel\\tests\\test_stabilization_workflow.py",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA-Linux\\Koali-Control-Panel\\tests\\test_stabilization_workflow.py"
+  },
+  {
+    "target": "C:\\mycode\\Orgo\\Orgo\\koali.integration.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\Orgo\\Orgo\\koali.integration.json"
+  },
+  {
+    "target": "C:\\mycode\\Orgo\\Orgo\\scripts\\koali-local-stack.mjs",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\Orgo\\Orgo_Worlds\\koali.integration.json",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\SemantiK_Architect\\SemantiK_Architect\\koali.integration.json",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\Konfid\\konfid\\koali.integration.json",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\Kor\\kor\\koali.integration.json",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\Kor\\kor\\scripts\\koali_service.py",
+    "existedBefore": false,
+    "backup": null
+  },
+  {
+    "target": "C:\\mycode\\kOA_Mediatheque\\mediatheque\\koali.integration.json",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA_Mediatheque\\mediatheque\\koali.integration.json"
+  },
+  {
+    "target": "C:\\mycode\\kOA_Mediatheque\\mediatheque-blank\\Initialize.ps1",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA_Mediatheque\\mediatheque-blank\\Initialize.ps1"
+  },
+  {
+    "target": "C:\\mycode\\kOA_Mediatheque\\mediatheque-blank\\Start.ps1",
+    "existedBefore": true,
+    "backup": "C:\\mycode\\kOA-Linux\\koali-spaces\\.koali-update-backups\\20261005-174557-377608\\mycode\\kOA_Mediatheque\\mediatheque-blank\\Start.ps1"
+  }
+]

@@ -483,12 +483,24 @@ class KoaliSpacesConsole(tk.Tk):
     # ---------- tools ----------
 
     def pnpm_prefix(self) -> list[str]:
+        local_pnpm = (
+            self.repo()
+            / ".koali-dev"
+            / "bootstrap"
+            / "tools"
+            / "pnpm"
+            / "node_modules"
+            / ".bin"
+            / ("pnpm.cmd" if os.name == "nt" else "pnpm")
+        )
+        if local_pnpm.is_file():
+            return [str(local_pnpm)]
         if shutil.which("pnpm"):
             return ["pnpm"]
         if shutil.which("corepack"):
             return ["corepack", "pnpm"]
         raise ConsoleError(
-            "Neither pnpm nor Corepack is available. Install a Node.js toolchain with Corepack/pnpm."
+            "Koali-local pnpm is missing and neither pnpm nor Corepack is available."
         )
 
     def pnpm(self, *args: str, required: bool = True) -> CommandResult:
@@ -507,14 +519,9 @@ class KoaliSpacesConsole(tk.Tk):
             ["corepack", "--version"], required=False, capture_only=True
         )
 
-        if try_enable and corepack.returncode == 0:
-            enabled = self.run_command(["corepack", "enable"], required=False)
-            if enabled.returncode != 0:
-                self.emit(
-                    "log",
-                    "[WARN] corepack enable failed; continuing with the available pnpm/Corepack runner.",
-                    "warn",
-                )
+        # Do not run `corepack enable` here. On Windows it can try to write
+        # shims into Program Files and require elevation. The normal Koali
+        # bootstrap provisions a repository-local pnpm instead.
 
         expected = self.expected_pnpm()
         version = self.run_command(
@@ -525,7 +532,8 @@ class KoaliSpacesConsole(tk.Tk):
                 f"pnpm {expected} required by package.json; active version is {version or 'unknown'}."
             )
 
-        runner = "pnpm" if shutil.which("pnpm") else "corepack pnpm"
+        prefix = self.pnpm_prefix()
+        runner = str(prefix[0]) if len(prefix) == 1 else " ".join(prefix)
         self.emit(
             "tools",
             f"Tools: Node {node.output.strip()} | pnpm {version} via {runner}",

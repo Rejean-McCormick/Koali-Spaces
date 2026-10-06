@@ -29,10 +29,28 @@
       "default_accent": "forest",
       "default_density": "comfortable",
       "default_surface_style": "outlined",
-      "allowed_modes": ["system", "light", "dark"],
-      "allowed_accents": ["forest", "ocean", "slate", "earth", "plum"],
-      "allowed_densities": ["compact", "comfortable", "touch"],
-      "allowed_surface_styles": ["minimal", "outlined", "elevated"],
+      "allowed_modes": [
+        "system",
+        "light",
+        "dark"
+      ],
+      "allowed_accents": [
+        "forest",
+        "ocean",
+        "slate",
+        "earth",
+        "plum"
+      ],
+      "allowed_densities": [
+        "compact",
+        "comfortable",
+        "touch"
+      ],
+      "allowed_surface_styles": [
+        "minimal",
+        "outlined",
+        "elevated"
+      ],
       "allow_module_accent": true
     },
     "offline_policy": {
@@ -86,8 +104,15 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": null,
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "home" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "home"
+          }
         },
         {
           "route_id": "space_home.search",
@@ -101,8 +126,15 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": "space_home.home",
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "search" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "search"
+          }
         },
         {
           "route_id": "space_home.tasks",
@@ -116,8 +148,15 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": "space_home.home",
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "tasks" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "tasks"
+          }
         },
         {
           "route_id": "space_home.offline",
@@ -131,8 +170,37 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": "space_home.home",
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "offline" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "offline"
+          }
+        },
+        {
+          "route_id": "space_home.ecosystem",
+          "module_id": "space_home",
+          "path": "/ecosystem",
+          "page_ref": "koa-spaces://page/ecosystem",
+          "default_label": "Écosystème",
+          "label_key": "space_home.ecosystem",
+          "availability": "always",
+          "offline_behavior": "available",
+          "deep_link_allowed": true,
+          "safe_fallback_route_id": "space_home.home",
+          "aliases": [],
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "ecosystem"
+          }
         },
         {
           "route_id": "space_home.health",
@@ -146,8 +214,15 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": "space_home.home",
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "health" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "health"
+          }
         },
         {
           "route_id": "space_home.settings",
@@ -161,26 +236,76 @@
           "deep_link_allowed": true,
           "safe_fallback_route_id": "space_home.home",
           "aliases": [],
-          "capability_policy": { "required_capabilities": [], "denied_behavior": "access_denied" },
-          "surface": { "kind": "local_shell_page", "origin_policy": "same_origin", "entrypoint": "settings" }
+          "capability_policy": {
+            "required_capabilities": [],
+            "denied_behavior": "access_denied"
+          },
+          "surface": {
+            "kind": "local_shell_page",
+            "origin_policy": "same_origin",
+            "entrypoint": "settings"
+          }
         }
       ],
       "sidebar": {
         "module_id": "space_home",
         "visible_depth": 2,
         "items": [
-          { "item_id": "space_home.home", "label": "Home", "label_key": "space_home.home", "order": 0, "route_id": "space_home.home" },
-          { "item_id": "space_home.search", "label": "Search", "label_key": "space_home.search", "order": 10, "route_id": "space_home.search" },
-          { "item_id": "space_home.tasks", "label": "Tasks", "label_key": "space_home.tasks", "order": 20, "route_id": "space_home.tasks" },
+          {
+            "item_id": "space_home.home",
+            "label": "Home",
+            "label_key": "space_home.home",
+            "order": 0,
+            "route_id": "space_home.home"
+          },
+          {
+            "item_id": "space_home.search",
+            "label": "Search",
+            "label_key": "space_home.search",
+            "order": 10,
+            "route_id": "space_home.search"
+          },
+          {
+            "item_id": "space_home.tasks",
+            "label": "Tasks",
+            "label_key": "space_home.tasks",
+            "order": 20,
+            "route_id": "space_home.tasks"
+          },
           {
             "item_id": "space_home.system",
             "label": "System",
             "label_key": "space_home.system",
             "order": 30,
             "children": [
-              { "item_id": "space_home.offline", "label": "Offline", "label_key": "space_home.offline", "order": 0, "route_id": "space_home.offline" },
-              { "item_id": "space_home.health", "label": "Interface health", "label_key": "space_home.health", "order": 10, "route_id": "space_home.health" },
-              { "item_id": "space_home.settings", "label": "Settings", "label_key": "space_home.settings", "order": 20, "route_id": "space_home.settings" }
+              {
+                "item_id": "space_home.offline",
+                "label": "Offline",
+                "label_key": "space_home.offline",
+                "order": 0,
+                "route_id": "space_home.offline"
+              },
+              {
+                "item_id": "space_home.ecosystem",
+                "label": "Écosystème",
+                "label_key": "space_home.ecosystem",
+                "order": 5,
+                "route_id": "space_home.ecosystem"
+              },
+              {
+                "item_id": "space_home.health",
+                "label": "Interface health",
+                "label_key": "space_home.health",
+                "order": 10,
+                "route_id": "space_home.health"
+              },
+              {
+                "item_id": "space_home.settings",
+                "label": "Settings",
+                "label_key": "space_home.settings",
+                "order": 20,
+                "route_id": "space_home.settings"
+              }
             ]
           }
         ]
@@ -191,13 +316,24 @@
           "surface_id": "control",
           "label": "Control",
           "home_route_id": "space_home.home",
-          "navigation_item_ids": ["space_home.home", "space_home.search", "space_home.tasks", "space_home.system"],
-          "topbar_widget_ids": ["global.search", "global.tasks"],
+          "navigation_item_ids": [
+            "space_home.home",
+            "space_home.search",
+            "space_home.tasks",
+            "space_home.system"
+          ],
+          "topbar_widget_ids": [
+            "global.search",
+            "global.tasks"
+          ],
           "command_refs": [],
           "inspector_ref": null
         }
       ],
-      "ui_portability": { "integrated_supported": true, "standalone_supported": false },
+      "ui_portability": {
+        "integrated_supported": true,
+        "standalone_supported": false
+      },
       "topbar_widgets": [
         {
           "widget_id": "global.search",
@@ -210,7 +346,10 @@
           "priority": 10,
           "required_capabilities": [],
           "offline_behavior": "cached_read_only",
-          "activation": { "kind": "route", "route_id": "space_home.search" }
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.search"
+          }
         },
         {
           "widget_id": "global.tasks",
@@ -223,11 +362,20 @@
           "priority": 15,
           "required_capabilities": [],
           "offline_behavior": "cached_read_only",
-          "activation": { "kind": "route", "route_id": "space_home.tasks" }
+          "activation": {
+            "kind": "route",
+            "route_id": "space_home.tasks"
+          }
         }
       ],
-      "localization_refs": ["/localization/koali-spaces.fr-CA.json", "/localization/koali-spaces.en.json"],
-      "offline_behavior": { "module_state": "available", "fallback_route_id": "space_home.home" },
+      "localization_refs": [
+        "/localization/koali-spaces.fr-CA.json",
+        "/localization/koali-spaces.en.json"
+      ],
+      "offline_behavior": {
+        "module_state": "available",
+        "fallback_route_id": "space_home.home"
+      },
       "authority_boundary": {
         "presentation_only": true,
         "may_grant_capabilities": false,

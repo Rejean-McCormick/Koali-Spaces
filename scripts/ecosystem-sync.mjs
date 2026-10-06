@@ -5,6 +5,7 @@ import { discoverEcosystem, publicDiscovery, writeWorkspaceHints } from '../serv
 import { probeProduct } from '../tools/workspace-launcher/manifest-runner.mjs';
 import { atomicWriteJson, buildSurfaceRuntimeRegistry, writeEcosystemStatus } from '../server/ecosystem/runtime-state.mjs';
 import { writeDevelopmentShellState } from '../server/ecosystem/shell-state-compiler.mjs';
+import { qualifySources } from '../server/ecosystem/source-qualification.mjs';
 
 const appRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const stateRoot = path.resolve(process.env.KOALI_SPACES_STATE_ROOT || path.join(appRoot, '.koali-dev', 'state'));
@@ -14,6 +15,7 @@ const catalog = await readEcosystemCatalog();
 const discovery = await discoverEcosystem({ appRoot, catalog, workspacePath });
 await writeWorkspaceHints(workspacePath, discovery);
 const runtimeStates = new Map();
+const sourceStates = await qualifySources(discovery);
 
 for (const product of discovery.products) {
   if (!product.repoFound && !product.externallyManaged) {
@@ -23,6 +25,6 @@ for (const product of discovery.products) {
   }
 }
 await atomicWriteJson(registryPath, buildSurfaceRuntimeRegistry(discovery, runtimeStates));
-await writeEcosystemStatus(stateRoot, discovery, runtimeStates, new Map());
-await writeDevelopmentShellState(stateRoot, appRoot, discovery, runtimeStates);
+await writeEcosystemStatus(stateRoot, discovery, runtimeStates, new Map(), sourceStates);
+await writeDevelopmentShellState(stateRoot, appRoot, discovery, runtimeStates, sourceStates);
 console.log(JSON.stringify({ ...publicDiscovery(discovery), stateRoot, registryPath }, null, 2));

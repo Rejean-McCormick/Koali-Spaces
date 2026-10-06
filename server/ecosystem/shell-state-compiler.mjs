@@ -29,6 +29,28 @@ function affectsShellState(product) {
   return product.affectsShellState !== false;
 }
 
+function isPresentationProduct(product) {
+  if (product.surfaceMode === 'headless' || product.integration?.surfaceMode === 'headless') return false;
+  return product.presentationReady !== false;
+}
+
+function ecosystemCapabilities(discovery, runtimeStates, sourceStates) {
+  const values = [];
+  for (const product of discovery.products ?? []) {
+    if (product.integrationReady && (product.repoFound || product.externallyManaged)) {
+      values.push(`koali.ecosystem.product.${product.id}.linked`);
+    }
+    if (runtimeStates.get(product.id)?.state === 'ready') values.push(`koali.ecosystem.product.${product.id}.ready`);
+  }
+  for (const source of discovery.sources ?? []) {
+    if (source.found) values.push(`koali.ecosystem.source.${source.id}.linked`);
+    const state = sourceStates.get(source.id)?.state;
+    if (state === 'ready') values.push(`koali.ecosystem.source.${source.id}.ready`);
+    if (state === 'reference') values.push(`koali.ecosystem.source.${source.id}.reference`);
+  }
+  return values;
+}
+
 function buildOwnerManifest(product) {
   const moduleId = product.moduleId;
   const homeRouteId = `${moduleId}.home`;
@@ -133,10 +155,10 @@ export async function readDevelopmentShellBase(appRoot) {
  * optional owner runtime can be degraded without putting the whole Koali shell
  * into degraded state; its module remains visible with its own health status.
  */
-export async function buildDevelopmentShellState({ appRoot, discovery, runtimeStates = new Map() }) {
+export async function buildDevelopmentShellState({ appRoot, discovery, runtimeStates = new Map(), sourceStates = new Map() }) {
   const state = clone(await readDevelopmentShellBase(appRoot));
   const admittedProducts = discovery.products
-    .filter((product) => product.integrationReady && (product.repoFound || product.externallyManaged))
+    .filter((product) => isPresentationProduct(product) && product.integrationReady && (product.repoFound || product.externallyManaged))
     .sort((left, right) => (left.order ?? 0) - (right.order ?? 0));
 
   const baseInstances = state.active_space?.module_instances ?? [];
@@ -158,8 +180,9 @@ export async function buildDevelopmentShellState({ appRoot, discovery, runtimeSt
   };
   state.modules = [...baseModules, ...ownerModules];
   state.network_state = normalizedNetworkState();
+  state.capabilities = [...new Set([...(state.capabilities ?? []), ...ecosystemCapabilities(discovery, runtimeStates, sourceStates)])].sort();
 
-  const moduleHealth = buildModuleHealth(discovery.products, runtimeStates);
+  const moduleHealth = buildModuleHealth(admittedProducts, runtimeStates);
   const productsByModule = new Map(discovery.products.map((product) => [product.moduleId, product]));
   const reason = blockingProjectionReason(moduleHealth, productsByModule);
   state.state = reason ? 'degraded' : 'ready';
@@ -184,8 +207,8 @@ export async function buildDevelopmentShellState({ appRoot, discovery, runtimeSt
   return state;
 }
 
-export async function writeDevelopmentShellState(stateRoot, appRoot, discovery, runtimeStates = new Map()) {
-  const state = await buildDevelopmentShellState({ appRoot, discovery, runtimeStates });
+export async function writeDevelopmentShellState(stateRoot, appRoot, discovery, runtimeStates = new Map(), sourceStates = new Map()) {
+  const state = await buildDevelopmentShellState({ appRoot, discovery, runtimeStates, sourceStates });
   const filePath = path.join(stateRoot, 'active-state.json');
   await atomicWriteJson(filePath, state);
   return filePath;

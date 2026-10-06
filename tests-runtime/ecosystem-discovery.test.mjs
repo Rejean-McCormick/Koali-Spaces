@@ -214,3 +214,42 @@ test('generic launcher does not duplicate a process whose mapped readiness probe
     await new Promise((resolve) => web.close(resolve));
   }
 });
+
+
+test('discovers Médiathèque engine as an independent owner surface with a sibling data instance', async () => {
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'koali-media-'));
+  const appRoot = path.join(temp, 'mycode', 'kOA-Linux', 'koali-spaces');
+  const engine = path.join(temp, 'mycode', 'kOA_Mediatheque', 'mediatheque');
+  const instance = path.join(temp, 'mycode', 'kOA_Mediatheque', 'mediatheque-blank');
+  await fs.mkdir(appRoot, { recursive: true });
+  await touch(path.join(engine, 'pyproject.toml'));
+  await touch(path.join(engine, '06_GUI/koa_mediatheque_gui/app.py'));
+  await fs.mkdir(path.join(instance, '01_DB'), { recursive: true });
+  await fs.mkdir(path.join(instance, '02_STORAGE'), { recursive: true });
+  await touch(path.join(instance, 'mediatheque.instance.toml'));
+  await fs.writeFile(path.join(engine, 'koali.integration.json'), JSON.stringify({
+    schemaVersion: 1, productId: 'koa_mediatheque', owner: 'Médiathèque kOA',
+    variables: { webPort: { type: 'port', default: 8501 } },
+    surface: { embedBase: 'http://127.0.0.1:${webPort}' },
+    processes: [], probes: [{ id: 'web', url: 'http://127.0.0.1:${webPort}/_stcore/health', required: true, statuses: [200] }],
+  }, null, 2));
+  const mediaCatalog = {
+    schemaVersion: 2, scan: { maxDepth: 4, ignoredDirectories: ['node_modules', '.git'] },
+    products: [{
+      id: 'koa_mediatheque', moduleId: 'koa_mediatheque', publicName: 'Médiathèque kOA', description: '', order: 35,
+      integrationFile: 'koali.integration.json', accentTokenRef: 'module.koa_mediatheque',
+      variants: [{ id: 'base', preferred: true, directoryNames: ['mediatheque'], markers: ['pyproject.toml', '06_GUI/koa_mediatheque_gui/app.py', 'koali.integration.json'] }],
+    }],
+    sources: [{ id: 'koa_mediatheque_blank_instance', publicName: 'Médiathèque Blank Instance', directoryNames: ['mediatheque-blank'], markers: ['mediatheque.instance.toml', '01_DB', '02_STORAGE'] }],
+  };
+  try {
+    const found = await discoverEcosystem({ appRoot, catalog: mediaCatalog });
+    assert.equal(found.products[0].repoFound, true);
+    assert.equal(found.products[0].integrationReady, true);
+    assert.equal(found.products[0].moduleId, 'koa_mediatheque');
+    assert.equal(found.sources[0].found, true);
+    assert.notEqual(found.products[0].repoPath, found.sources[0].path);
+  } finally {
+    await fs.rm(temp, { recursive: true, force: true });
+  }
+});

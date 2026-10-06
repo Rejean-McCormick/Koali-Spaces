@@ -4,6 +4,7 @@ export const LOCAL_SHELL_PAGE_ROUTES = Object.freeze({
   'space_home.tasks': '/tasks',
   'space_home.offline': '/offline',
   'space_home.health': '/health',
+  'space_home.ecosystem': '/ecosystem',
   'space_home.settings': '/settings',
 } as const);
 

@@ -14,6 +14,8 @@ export type PublicEcosystemStatus = {
     selectedVariant: string | null;
     availableVariants: string[];
     externallyManaged: boolean;
+    surfaceMode: 'web' | 'headless' | null;
+    presentationReady: boolean;
     embedBase: string;
     runtime: {
       state: string;
@@ -22,7 +24,20 @@ export type PublicEcosystemStatus = {
     } | null;
     process: { state: string; reason?: string; processCount: number } | null;
   }>;
-  sources: Array<{ id: string; publicName: string; found: boolean }>;
+  sources: Array<{
+    id: string;
+    publicName: string;
+    found: boolean;
+    kind: string;
+    integrationMode: string;
+    referenceOnly: boolean;
+    description: string | null;
+    qualification: {
+      state: string;
+      reason?: string;
+      checks: Array<{ id: string; state: string; reason?: string; detail?: string }>;
+    } | null;
+  }>;
   reason?: string;
 };
 
@@ -52,14 +67,14 @@ export async function readPublicEcosystemStatus(): Promise<PublicEcosystemStatus
           selectedVariant: product.selectedVariant == null ? null : String(product.selectedVariant),
           availableVariants: Array.isArray(product.availableVariants) ? product.availableVariants.map((variant: any) => String(variant.id)) : [],
           externallyManaged: Boolean(product.externallyManaged),
+          surfaceMode: product.surfaceMode === 'web' || product.surfaceMode === 'headless' ? product.surfaceMode : null,
+          presentationReady: Boolean(product.presentationReady),
           embedBase: String(product.embedBase ?? ''),
           runtime: runtime ? {
             state: String(runtime.state),
             ...(runtime.reason ? { reason: String(runtime.reason) } : {}),
             probes: Array.isArray(runtime.probes) ? runtime.probes.map((probe: any) => ({
-              id: String(probe.id),
-              state: String(probe.state),
-              required: Boolean(probe.required),
+              id: String(probe.id), state: String(probe.state), required: Boolean(probe.required),
               ...(probe.reason ? { reason: String(probe.reason) } : {}),
             })) : [],
           } : null,
@@ -70,7 +85,20 @@ export async function readPublicEcosystemStatus(): Promise<PublicEcosystemStatus
           } : null,
         };
       }),
-      sources: (raw.discovery?.sources ?? []).map((source: any) => ({ id: String(source.id), publicName: String(source.publicName), found: Boolean(source.found) })),
+      sources: (raw.discovery?.sources ?? []).map((source: any) => ({
+        id: String(source.id), publicName: String(source.publicName), found: Boolean(source.found),
+        kind: String(source.kind ?? 'source'), integrationMode: String(source.integrationMode ?? 'linked_source'),
+        referenceOnly: Boolean(source.referenceOnly), description: source.description == null ? null : String(source.description),
+        qualification: source.qualification ? {
+          state: String(source.qualification.state ?? 'unknown'),
+          ...(source.qualification.reason ? { reason: String(source.qualification.reason) } : {}),
+          checks: Array.isArray(source.qualification.checks) ? source.qualification.checks.map((check: any) => ({
+            id: String(check.id), state: String(check.state),
+            ...(check.reason ? { reason: String(check.reason) } : {}),
+            ...(check.detail ? { detail: String(check.detail) } : {}),
+          })) : [],
+        } : null,
+      })),
     };
   } catch (error) {
     return { state: 'unavailable', updatedAt: null, products: [], sources: [], reason: error instanceof Error ? error.message : 'ecosystem status unavailable' };

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "koaliUrl": "http://127.0.0.1:4173/",
+  "startupTimeoutSeconds": 240,
+  "reservedPorts": [
+    3100,
+    4100,
+    4173,
+    4301,
+    4302,
+    4303,
+    4304,
+    8301,
+    8304,
+    8305,
+    8501,
+    55432
+  ],
+  "safeProcessMarkers": [
+    "\\kOA-Linux\\koali-spaces\\",
+    "\\SemantiK_Architect\\SemantiK_Architect\\",
+    "\\Orgo\\Orgo\\apps\\web\\",
+    "\\Konfid\\konfid\\",
+    "\\Kor\\kor\\",
+    "\\Orgo\\Orgo\\apps\\api\\",
+    "\\\\Orgo\\\\Orgo_Worlds\\\\",
+    "\\\\SemantiK_Architect\\\\SemantiK_Architect\\\\",
+    "\\\\Konfid\\\\konfid\\\\",
+    "\\\\Kor\\\\kor\\\\",
+    "\\kOA_Mediatheque\\mediatheque\\",
+    "\\\\kOA_Mediatheque\\\\mediatheque\\\\"
+  ],
+  "safe_project_markers": []
+}
