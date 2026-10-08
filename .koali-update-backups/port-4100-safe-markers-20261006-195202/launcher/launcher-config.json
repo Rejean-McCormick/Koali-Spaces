@@ -23,10 +23,14 @@
     "\\Konfid\\konfid\\",
     "\\Kor\\kor\\",
     "\\Orgo\\Orgo\\apps\\api\\",
-    "\\Orgo\\Orgo_Worlds\\",
+    "\\\\Orgo\\\\Orgo_Worlds\\\\",
+    "\\\\SemantiK_Architect\\\\SemantiK_Architect\\\\",
+    "\\\\Konfid\\\\konfid\\\\",
+    "\\\\Kor\\\\kor\\\\",
     "\\kOA_Mediatheque\\mediatheque\\",
-    "\\Konnaxion\\Konnaxion\\frontend\\",
-    "\\Konnaxion\\Konnaxion\\backend\\"
+    "\\\\kOA_Mediatheque\\\\mediatheque\\\\",
+    "\\\\Konnaxion\\\\Konnaxion\\\\frontend\\\\",
+    "\\\\Konnaxion\\\\Konnaxion\\\\backend\\\\"
   ],
   "safe_project_markers": []
 }
