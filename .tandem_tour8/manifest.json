@@ -1,0 +1,19 @@
+{
+  "label": "KOALI SPACES",
+  "suite": "spaces",
+  "backup_id": "koali_spaces_tour8",
+  "root_markers": [
+    "server/ecosystem/source-qualification.mjs",
+    "config/ecosystem.catalog.json"
+  ],
+  "files": {
+    "server/ecosystem/source-qualification.mjs": {
+      "base_sha256": "98b3c5a0ebdbb36c729da380d85aa2952be1a78891044a49746d256538244475",
+      "sha256": "0ffaf571fdf9f471305fa0d94379109952660d4efbbc28ea2bcced5eda848894"
+    },
+    "tests-runtime/source-qualification.test.mjs": {
+      "base_sha256": "4efe74a1d1ff6954aa5bfc48ab6e67cbd26fdf5bb7ebd213c9747844f88352cb",
+      "sha256": "e561eb5a7eaf9e989dec0ad62d2eb46d5d42f5f390ffa19398257f52cf6fa654"
+    }
+  }
+}
