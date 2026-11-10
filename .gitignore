@@ -61,3 +61,6 @@ htmlcov/
 *.backup-*
 *.backup_*
 ZmartZnap.pyw
+
+# Past deployment/installer backups may contain private host configuration.
+.koali-update-backups/

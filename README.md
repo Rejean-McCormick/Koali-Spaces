@@ -1,5 +1,7 @@
 # Koali Spaces reference implementation
 
+> **Branch 08 target-system alignment:** see [docs/11-integrations/BRANCH08_CONTROL_PANEL_READINESS.md](docs/11-integrations/BRANCH08_CONTROL_PANEL_READINESS.md) for verified local interoperability tests, explicit authority boundaries, and unresolved deployment gates. This note does not confer release or host permissions.
+
 Reference implementation of the independently versioned Koali Spaces experience layer. The kOA integration protocol identifier remains `koa_spaces`; the public product name is **Koali Spaces**.
 
 Koali Spaces composes validated Space definitions and product/module interface manifests into a responsive Ant Design shell. It is an optional **integrated composition host**, not the mandatory runtime of product user interfaces. A product can remain independently runnable while contributing routes, surface profiles, navigation, widgets, commands and contextual-inspector references to Koali Spaces. Koali Spaces owns presentation and experience composition only: it does not acquire owner business data, workflow, authorization, identity, or internal application UI authority.
