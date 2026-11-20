@@ -121,8 +121,8 @@ test('Konnaxion is a required owner surface and Konnaxion_Worlds remains a separ
 
 test('launcher reserves non-conflicting Konnaxion ports and recognizes its process tree', async () => {
   const launcher = JSON.parse(await fs.readFile(path.join(root, 'launcher', 'launcher-config.json'), 'utf8'));
-  assert.equal(launcher.reservedPorts.includes(4301), true);
-  assert.equal(launcher.reservedPorts.includes(8302), true);
+  assert.equal(launcher.reservedPorts.includes(21134), true);
+  assert.equal(launcher.reservedPorts.includes(21135), true);
   assert.equal(launcher.safeProcessMarkers.some((item) => item.toLowerCase().includes('konnaxion')), true);
 });
 
@@ -130,5 +130,5 @@ test('launcher reserves non-conflicting Konnaxion ports and recognizes its proce
 test('Orgo Worlds no longer reserves a standalone web port in Koali', async () => {
   const launcher = JSON.parse(await fs.readFile(path.join(root, 'launcher', 'launcher-config.json'), 'utf8'));
   assert.equal(launcher.reservedPorts.includes(3100), false);
-  assert.equal(launcher.reservedPorts.includes(4100), true);
+  assert.equal(launcher.reservedPorts.includes(21113), true);
 });

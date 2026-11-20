@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "koaliUrl": "http://127.0.0.1:4173/",
+  "koaliUrl": "http://127.0.0.1:21170/",
   "startupTimeoutSeconds": 240,
   "reservedPorts": [
-    4100,
-    4173,
-    4301,
-    4302,
-    4303,
+    21113,
+    21170,
+    21134,
+    21114,
+    21115,
     4304,
     8301,
-    8302,
+    21135,
     8304,
     8305,
     8501,
-    55432
+    21116
   ],
   "safeProcessMarkers": [
     "\\kOA-Linux\\koali-spaces\\",
