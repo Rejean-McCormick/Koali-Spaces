@@ -23,6 +23,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
   const [loadTimedOut, setLoadTimedOut] = useState(false);
   const [renderState, setRenderState] = useState<RenderState>(descriptor.status.render);
   const [reloadKey, setReloadKey] = useState(0);
+  const frameRef = useRef<HTMLIFrameElement>(null);
   const loadedRef = useRef(false);
   const erroredRef = useRef(false);
   const defaultMode = descriptor.presentation.defaultMode ?? 'framed';
@@ -32,8 +33,11 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
   }, [descriptor.moduleId, defaultMode, setSurface]);
 
   const embedSrc = descriptor.target?.embedSrc;
+  const canEmbed = descriptor.status.access !== 'blocked' &&
+    (descriptor.status.runtime === 'ready' || descriptor.status.runtime === 'degraded');
   useEffect(() => {
-    if (!embedSrc) {
+    const frame = frameRef.current;
+    if (!canEmbed || !embedSrc || !frame) {
       setRenderState('idle');
       return;
     }
@@ -48,13 +52,22 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
         setRenderState('error');
       }
     }, EMBED_LOAD_TIMEOUT_MS);
-    return () => window.clearTimeout(timer);
-  }, [embedSrc, reloadKey]);
+    const onFrameError = () => {
+      window.clearTimeout(timer);
+      loadedRef.current = false;
+      erroredRef.current = true;
+      setLoadTimedOut(false);
+      setFrameLoaded(false);
+      setRenderState('error');
+    };
+    frame.addEventListener('error', onFrameError);
+    return () => {
+      window.clearTimeout(timer);
+      frame.removeEventListener('error', onFrameError);
+    };
+  }, [canEmbed, embedSrc, reloadKey]);
 
-  if (
-    descriptor.status.access === 'blocked' ||
-    (descriptor.status.runtime !== 'ready' && descriptor.status.runtime !== 'degraded')
-  ) {
+  if (!canEmbed) {
     return <SurfaceStatusView descriptor={descriptor} onRetry={() => router.refresh()} />;
   }
 
@@ -135,6 +148,7 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
         ) : null}
         <iframe
           key={reloadKey}
+          ref={frameRef}
           className="koali-application-frame"
           src={descriptor.target.embedSrc}
           title={descriptor.target.iframeTitle}
@@ -150,13 +164,6 @@ export default function ApplicationHost({ descriptor }: { descriptor: SurfaceDes
             setLoadTimedOut(false);
             setFrameLoaded(true);
             setRenderState('ready');
-          }}
-          onError={() => {
-            loadedRef.current = false;
-            erroredRef.current = true;
-            setLoadTimedOut(false);
-            setFrameLoaded(false);
-            setRenderState('error');
           }}
         />
       </div>
