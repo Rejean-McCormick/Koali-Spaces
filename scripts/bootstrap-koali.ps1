@@ -256,8 +256,8 @@ function Ensure-KonnaxionBackend([string]$Repo, [string]$WorldsRepo) {
   # Mirror the proven Capsule Manager deployment path locally: the sibling
   # Konnaxion_Worlds repository owns the immutable World/Universe seed packs,
   # while Konnaxion owns the database and host-domain import adapters.
-  $worldSeedRoot = Join-Path $WorldsRepo 'seed-data\worlds'
-  $universeSeedRoot = Join-Path $WorldsRepo 'seed-data\universes'
+  $universeSeedRoot = Join-Path $WorldsRepo 'universes'
+  $worldSeedRoot = $universeSeedRoot
   $universeManifest = Join-Path $universeSeedRoot 'konvergence-koali\universe.yaml'
   if (-not (Test-Path $worldSeedRoot)) { throw "Konnaxion World seed root missing: $worldSeedRoot" }
   if (-not (Test-Path $universeManifest)) { throw "Konvergence Koali Universe Pack missing: $universeManifest" }
@@ -281,23 +281,40 @@ function Ensure-KonnaxionBackend([string]$Repo, [string]$WorldsRepo) {
     $env:KONNAXION_UNIVERSE_SEED_ROOT = $universeSeedRoot
     $env:KONNAXION_WORLD_BUILD_CONCURRENCY = '2'
 
-    Write-Host "[Koali bootstrap] konnaxion-universe: applying konvergence-koali@$packVersion..."
-    Invoke-Native $python @('manage.py','migrate','--noinput') $backend
-    Invoke-Native $python @(
-      'manage.py',
-      'worlds_apply_universe',
-      'konvergence-koali',
-      '--pack-version',
-      $packVersion,
-      '--local-workers',
-      '2',
-      '--promote'
-    ) $backend
-    # KOALI_TARGETED_KONVERGENCE_HEALTH_V1
-    $koaliTargetHealth = Join-Path $Repo 'koali\verify-konvergence-worlds.py'
-    if (-not (Test-Path $koaliTargetHealth)) { throw "Konnaxion targeted health helper missing: $koaliTargetHealth" }
-    Invoke-Native $python @($koaliTargetHealth) $backend
-    Add-Event 'konnaxion-universe' 'ready' "konvergence-koali@$packVersion applied, promoted, and healthy"
+    $testProfile = $env:KOALI_KX_TEST_PROFILE -ceq '1'
+    $savedDatabase = $env:DATABASE_URL
+    $savedWorldsDatabase = $env:KONNAXION_WORLDS_DATABASE_URL
+    $savedRedis = $env:REDIS_URL
+    try {
+      if ($testProfile) {
+        . (Join-Path $Repo 'koali\Use-KoaliKonnaxionTest.ps1')
+        Set-KoaliKonnaxionTestEnvironment -Python $python -Backend $backend
+      }
+      Write-Host "[Koali bootstrap] konnaxion-universe: applying konvergence-koali@$packVersion..."
+      Invoke-Native $python @('manage.py','migrate','--noinput') $backend
+      Invoke-Native $python @(
+        'manage.py',
+        'worlds_apply_universe',
+        'konvergence-koali',
+        '--pack-version',
+        $packVersion,
+        '--local-workers',
+        '2',
+        '--promote'
+      ) $backend
+      # KOALI_TARGETED_KONVERGENCE_HEALTH_V1
+      $koaliTargetHealth = Join-Path $Repo 'koali\verify-konvergence-worlds.py'
+      if (-not (Test-Path $koaliTargetHealth)) { throw "Konnaxion targeted health helper missing: $koaliTargetHealth" }
+      Invoke-Native $python @($koaliTargetHealth) $backend
+      Add-Event 'konnaxion-universe' 'ready' "konvergence-koali@$packVersion applied, promoted, and healthy"
+    }
+    finally {
+      if ($testProfile) {
+        $env:DATABASE_URL = $savedDatabase
+        $env:KONNAXION_WORLDS_DATABASE_URL = $savedWorldsDatabase
+        $env:REDIS_URL = $savedRedis
+      }
+    }
   }
 
   Add-Event 'konnaxion-backend' 'ready' 'Python 3.12 environment and local dependencies ready'
